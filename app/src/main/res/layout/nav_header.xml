@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/purple_200"
+    android:padding="16dp"
+    android:id="@+id/nav_header_layout">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/img_nav_header"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_nav_header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/img_nav_header"
+        android:text="Nguyễn Quốc Dũng"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call me Dunno"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:id="@+id/tv_nav_header_des"
+        android:layout_toEndOf="@id/img_nav_header"
+        android:layout_below="@id/tv_nav_header_name"/>
+
+</RelativeLayout>
