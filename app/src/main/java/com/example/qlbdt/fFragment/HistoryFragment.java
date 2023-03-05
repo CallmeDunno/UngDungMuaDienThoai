@@ -13,18 +13,14 @@ import com.example.qlbdt.R;
 
 public class HistoryFragment extends Fragment {
 
-    TextView textView;
+
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-
-        textView = view.findViewById(R.id.tvhistory);
-
-        Toast.makeText(getActivity(), "Hehe", Toast.LENGTH_SHORT).show();
-        
+//        kien's commit
         return view;
     }
 }
