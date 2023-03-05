@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/purple_200"
+    android:background="@color/color_main"
     android:padding="16dp"
     android:id="@+id/nav_header_layout">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_nav_header"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/img_nav_header"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_logo_app" />
 
     <TextView
         android:id="@+id/tv_nav_header_name"
@@ -20,20 +20,20 @@
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/img_nav_header"
         android:text="Nguyễn Quốc Dũng"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tv_nav_header_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Call me Dunno"
-        android:textColor="@color/white"
+        android:layout_below="@id/tv_nav_header_name"
         android:layout_marginStart="16dp"
-        android:textStyle="italic"
-        android:textSize="16sp"
-        android:id="@+id/tv_nav_header_des"
         android:layout_toEndOf="@id/img_nav_header"
-        android:layout_below="@id/tv_nav_header_name"/>
+        android:text="Call me Dunno"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
 </RelativeLayout>

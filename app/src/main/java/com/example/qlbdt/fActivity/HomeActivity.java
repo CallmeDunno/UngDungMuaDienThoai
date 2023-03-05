@@ -9,15 +9,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fEnum.EStatusFragment;
 import com.example.qlbdt.fFragment.AccountFragment;
+import com.example.qlbdt.fFragment.HistoryFragment;
 import com.example.qlbdt.fFragment.HomeFragment;
-import com.example.qlbdt.fFragment.PhoneFragment;
+import com.example.qlbdt.fFragment.SearchFragment;
+import com.example.qlbdt.fFragment.SupportFragment;
+import com.example.qlbdt.fFragment.TutorialFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -61,10 +63,10 @@ public class HomeActivity extends AppCompatActivity {
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_HOME.getStatusFragment();
                         }
                         break;
-                    case R.id.nav_menu_item_phone:
-                        if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_PHONE.getStatusFragment()){
-                            ReplaceFragment(new PhoneFragment());
-                            FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_PHONE.getStatusFragment();
+                    case R.id.nav_menu_item_search:
+                        if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_SEARCH.getStatusFragment()){
+                            ReplaceFragment(new SearchFragment());
+                            FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_SEARCH.getStatusFragment();
                         }
                         break;
                     case R.id.nav_menu_item_account:
@@ -73,9 +75,23 @@ public class HomeActivity extends AppCompatActivity {
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_ACCOUNT.getStatusFragment();
                         }
                         break;
-                    case R.id.nav_menu_item_exit:
-                        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                        finish();
+                    case R.id.nav_menu_item_history:
+                        if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_HISTORY.getStatusFragment()){
+                            ReplaceFragment(new HistoryFragment());
+                            FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_HISTORY.getStatusFragment();
+                        }
+                        break;
+                    case R.id.nav_menu_item_support:
+                        if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_SUPPORT.getStatusFragment()){
+                            ReplaceFragment(new SupportFragment());
+                            FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_SUPPORT.getStatusFragment();
+                        }
+                        break;
+                    case R.id.nav_menu_item_tutorial:
+                        if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_TUTORIAL.getStatusFragment()){
+                            ReplaceFragment(new TutorialFragment());
+                            FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_TUTORIAL.getStatusFragment();
+                        }
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);

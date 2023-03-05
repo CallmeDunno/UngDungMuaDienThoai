@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
+import com.example.qlbdt.fEnum.EStringQuery;
 import com.example.qlbdt.fInterface.IDatabase;
 
 public class MyDatabase extends SQLiteOpenHelper implements IDatabase {
@@ -18,7 +19,12 @@ public class MyDatabase extends SQLiteOpenHelper implements IDatabase {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+        sqLiteDatabase.execSQL(EStringQuery.CreateTableBrand.getQuery());
+        sqLiteDatabase.execSQL(EStringQuery.CreateTableSmartphone.getQuery());
+        sqLiteDatabase.execSQL(EStringQuery.CreateTableSmartphoneDetail.getQuery());
+        sqLiteDatabase.execSQL(EStringQuery.CreateTableImageDetail.getQuery());
+        sqLiteDatabase.execSQL(EStringQuery.CreateTablePerson.getQuery());
+        sqLiteDatabase.execSQL(EStringQuery.CreateTableHistory.getQuery());
     }
 
     @Override

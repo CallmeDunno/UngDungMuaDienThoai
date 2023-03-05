@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/nav_toolbar"
-                android:background="@color/purple_200"
+                android:background="@color/color_main"
                 android:theme="@style/Theme.AppCompat.Light" />
 
         </com.google.android.material.appbar.AppBarLayout>

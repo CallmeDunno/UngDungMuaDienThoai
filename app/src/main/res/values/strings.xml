@@ -2,9 +2,15 @@
     <string name="app_name">Quản lý bán điện thoại</string>
 
     <string name="open_drawer">Open Navigation Drawer </string>
-    <string name="close_drawer">Quản Navigation Drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="close_drawer">Close Navigation Drawer</string>
+
+    <!-- item name nav -->
+    <string name="Home">Trang chủ</string>
+    <string name="Find">Tìm kiếm</string>
+    <string name="Account">Tài khoản</string>
+    <string name="History">Lịch sử mua hàng</string>
+    <string name="Support">Hỗ trợ</string>
+    <string name="Tutorial">Hướng dẫn</string>
 
 
 </resources>
