@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quản lý bán điện thoại</string>
+    <string name="app_name">Ứng dụng mua điện thoại</string>
 
     <string name="open_drawer">Open Navigation Drawer </string>
     <string name="close_drawer">Close Navigation Drawer</string>
@@ -11,6 +11,5 @@
     <string name="History">Lịch sử mua hàng</string>
     <string name="Support">Hỗ trợ</string>
     <string name="Tutorial">Hướng dẫn</string>
-
 
 </resources>
