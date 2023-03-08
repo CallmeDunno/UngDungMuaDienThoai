@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".fFragment.SearchFragment">
 
-    <TextView
+    <GridView
+
+        android:id="@+id/gv_fragment_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:textSize="40sp" />
+        android:layout_height="match_parent"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"/>
 
 </RelativeLayout>
