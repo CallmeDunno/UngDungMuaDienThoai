@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.fDatabase.MyDatabase;
 import com.example.qlbdt.fEnum.EStatusFragment;
 import com.example.qlbdt.fFragment.AccountFragment;
 import com.example.qlbdt.fFragment.HistoryFragment;
@@ -29,10 +30,13 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private int FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_HOME.getStatusFragment();
 
+    public static MyDatabase database;
+
     private void init(){
         drawerLayout = findViewById(R.id.nav_drawer);
         toolbar = findViewById(R.id.nav_toolbar);
         navigationView = findViewById(R.id.nav_view);
+        database = new MyDatabase(HomeActivity.this, "MuaBanDienThoai.sqlite", null, 1);
     }
 
     @Override
