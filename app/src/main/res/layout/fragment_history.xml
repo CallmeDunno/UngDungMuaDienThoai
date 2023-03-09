@@ -6,16 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".fFragment.HistoryFragment">
 
-    <TextView
-        android:id="@+id/tvhistory"
-        android:layout_width="378dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/History"
-        android:textSize="40sp"
+    <ListView
+        android:id="@+id/lvHistoryKien"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
