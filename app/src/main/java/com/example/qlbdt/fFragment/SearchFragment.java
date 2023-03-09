@@ -1,10 +1,12 @@
 package com.example.qlbdt.fFragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fActivity.HomeActivity;
+import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
 import com.example.qlbdt.fAdapter.GridViewAdapter;
 import com.example.qlbdt.fObject.Smartphone;
 
@@ -45,6 +48,16 @@ public class SearchFragment extends Fragment {
 
         gridViewAdapter = new GridViewAdapter(getContext(), R.layout.custom_grid_view, smartphones);
         gridView.setAdapter(gridViewAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
+                String strName = smartphones.get(i).getName();
+                intent.putExtra("NameSmartphone", strName);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
