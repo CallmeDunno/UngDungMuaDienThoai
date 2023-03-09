@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.qlbdt">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,14 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".fActivity.SplashScreenActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".fActivity.AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".fActivity.HomeActivity"
-            android:exported="true" >
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,10 +29,21 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".fActivity.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fActivity.HomeActivity"
+            android:exported="false" >
+
+
+
+        </activity>
 
         <activity
             android:name=".fActivity.RegisterAccountActivity"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".fActivity.LoginActivity"
             android:exported="false" />

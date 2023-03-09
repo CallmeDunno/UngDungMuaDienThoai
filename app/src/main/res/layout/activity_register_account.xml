@@ -1,176 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fActivity.RegisterAccountActivity">
 
-    <LinearLayout
-        android:id="@+id/layout_linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_boder_gray"
-        android:orientation="horizontal"
-        android:weightSum="10">
-
-        <ImageView
-            android:id="@+id/img_arrow_left"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:src="@drawable/ic_arrow_back"
-            android:background="@drawable/bg_white_boder_gray"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="8"
-            android:layout_marginStart="10dp"
-            android:padding="8dp"
-            android:text="Register an account"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
-    </LinearLayout>
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/layout_linear"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:fillViewport="true"
+        android:scrollbars="horizontal">
 
-        <TextView
-            android:id="@+id/tv_label_create_acc"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:text="Create an account"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="35sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_label_username_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_create_acc"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:text="Username:"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:src="@drawable/logo_splash" />
 
-        <EditText
-            android:id="@+id/edt_username_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_username_ca"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edt_selector"
-            android:hint="Enter username"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
 
-        <TextView
-            android:id="@+id/tv_label_warning_1_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_username_ca"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:text="Can't be left blank"
-            android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/tv_label_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="Xin chào!"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/tv_label_password_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_warning_1_ca"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:text="Password:"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_label_welcome_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_label_welcome"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Vui lòng nhập thông tin của bạn để sử dụng ứng dụng."
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="italic" />
 
-        <EditText
-            android:id="@+id/edt_password_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_password_ca"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edt_selector"
-            android:hint="Enter password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_label_username_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_welcome_2"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Họ và tên (Bắt buộc):"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_label_warning_2_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_password_ca"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:text="Can't be left blank"
-            android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/edt_username_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_username_ca"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edt_selector"
+                    android:hint="Nhập họ và tên"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_label_cf_password_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_warning_2_ca"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:text="Confirm password:"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_label_warning_1_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_username_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Không được để trống ô này!"
+                    android:textColor="#FF0000"
+                    android:textStyle="italic"
+                    android:visibility="invisible" />
 
-        <EditText
-            android:id="@+id/edt_cf_password_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_cf_password_ca"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edt_selector"
-            android:hint="Confirm password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_label_phone_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_warning_1_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Số điện thoại (Bắt buộc):"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_label_warning_3_ca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_cf_password_ca"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:text="Can't be left blank"
-            android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/edt_phone_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_phone_ca"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edt_selector"
+                    android:hint="Nhập số điện thoại"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_warning_3_ca"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/btn_selector"
-            android:padding="16dp"
-            android:text="Register" />
+                <TextView
+                    android:id="@+id/tv_label_warning_2_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_phone_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Không được để trống ô này!"
+                    android:textColor="#FF0000"
+                    android:textStyle="italic"
+                    android:visibility="invisible" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_label_warning_regex_1_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_phone_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Vui lòng nhập đúng định dạng số điện thoại 10 số!"
+                    android:textColor="#FF0000"
+                    android:textStyle="italic"
+                    android:visibility="invisible" />
 
+                <TextView
+                    android:id="@+id/tv_label_email_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_warning_2_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Nhập Email (Bắt buộc):"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-</RelativeLayout>
+                <EditText
+                    android:id="@+id/edt_email_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_email_ca"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edt_selector"
+                    android:hint="Nhập email"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_label_warning_3_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_email_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Không được để trống ô này!"
+                    android:textColor="#FF0000"
+                    android:textStyle="italic"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tv_label_warning_regex_2_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_email_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Vui lòng nhập đúng định dạng email!"
+                    android:textColor="#FF0000"
+                    android:textStyle="italic"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tv_label_address_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_warning_3_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Nhập địa chỉ (Bắt buộc):"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_address_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_address_ca"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edt_selector"
+                    android:hint="Nhập địa chỉ"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_label_warning_4_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_address_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Không được để trống ô này!"
+                    android:textColor="#FF0000"
+                    android:textStyle="italic"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tv_label_avt_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_label_warning_4_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Chọn ảnh đại diện (Không bắt buộc):"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/img_avt_user_ca"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/tv_label_avt_ca"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/user" />
+
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_avt_user_ca"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/btn_selector"
+                    android:padding="16dp"
+                    android:text="Xác nhận." />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
