@@ -65,8 +65,8 @@ public class GridViewAdapter extends BaseAdapter {
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         viewHolder.img_cus_gv.setImageBitmap(bitmap);
         viewHolder.tv_name_cus_gv.setText(smartphoneList.get(i).getName());
-        viewHolder.tv_price_cus_gv.setText(smartphoneList.get(i).getPrice() + " VND");
-        viewHolder.tv_quantity_cus_gv.setText(String.valueOf(smartphoneList.get(i).getQuantity()));
+        viewHolder.tv_price_cus_gv.setText("Giá: " + smartphoneList.get(i).getPrice() + " VND");
+        viewHolder.tv_quantity_cus_gv.setText("Số lượng: " + smartphoneList.get(i).getQuantity());
 
         return view;
     }

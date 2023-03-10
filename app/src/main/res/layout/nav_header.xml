@@ -24,16 +24,4 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_nav_header_des"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_nav_header_name"
-        android:layout_marginStart="16dp"
-        android:layout_toEndOf="@id/img_nav_header"
-        android:text="Call me Dunno"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="italic" />
-
 </RelativeLayout>
