@@ -65,36 +65,42 @@ public class HomeActivity extends AppCompatActivity {
                         if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_HOME.getStatusFragment()){
                             ReplaceFragment(new HomeFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_HOME.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.Home);
                         }
                         break;
                     case R.id.nav_menu_item_search:
                         if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_SEARCH.getStatusFragment()){
                             ReplaceFragment(new SearchFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_SEARCH.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.Find);
                         }
                         break;
                     case R.id.nav_menu_item_account:
                         if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_ACCOUNT.getStatusFragment()){
                             ReplaceFragment(new AccountFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_ACCOUNT.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.Account);
                         }
                         break;
                     case R.id.nav_menu_item_history:
                         if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_HISTORY.getStatusFragment()){
                             ReplaceFragment(new HistoryFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_HISTORY.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.History);
                         }
                         break;
                     case R.id.nav_menu_item_support:
                         if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_SUPPORT.getStatusFragment()){
                             ReplaceFragment(new SupportFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_SUPPORT.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.Support);
                         }
                         break;
                     case R.id.nav_menu_item_tutorial:
                         if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_TUTORIAL.getStatusFragment()){
                             ReplaceFragment(new TutorialFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_TUTORIAL.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.Tutorial);
                         }
                         break;
                 }

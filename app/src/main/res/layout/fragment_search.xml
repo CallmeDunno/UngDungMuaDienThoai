@@ -7,6 +7,10 @@
     android:layout_margin="10dp"
     tools:context=".fFragment.SearchFragment">
 
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <GridView
         android:id="@+id/gv_fragment_search"
         android:layout_width="match_parent"

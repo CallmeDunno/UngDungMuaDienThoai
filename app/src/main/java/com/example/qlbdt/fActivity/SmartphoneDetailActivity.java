@@ -120,7 +120,7 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
                 SendNoti(name);
 
                 Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 String orderTime = dateFormat.format(calendar.getTime());
 
                 String queryGetIDsmp = String.format("SELECT SmartphoneDetail.smartphone_detail_id " +
