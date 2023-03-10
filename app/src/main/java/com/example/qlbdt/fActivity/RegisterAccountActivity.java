@@ -45,6 +45,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
     private final int MY_CODE_REQUEST_FOLDER = 100;
     private MyDatabase database;
+
     private void init() {
         edt_name = findViewById(R.id.edt_username_ca);
         edt_phone = findViewById(R.id.edt_phone_ca);
