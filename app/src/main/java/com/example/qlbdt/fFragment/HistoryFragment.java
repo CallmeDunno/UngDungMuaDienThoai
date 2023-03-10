@@ -31,13 +31,22 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-        Cursor c =  HomeActivity.database.SelectData("select * \n" +
-                "from History h join Person p on p.idPerson = h.idHistory join SmartphoneDetails smd on smd.idDetails = h.idDetails " +
-                "join SmartPhone sp on sp.idSmartPhone = smd.idSmartPhone");
         historyArrayList = new ArrayList<>();
-        historyArrayList.add(new History(1, "10:00:00","vàng","Iphone 13 promax","12.000.000"));
-        listAdapter = new HistoryAdapter(getActivity(), historyArrayList);
         lstHistory = view.findViewById(R.id.lvHistoryKien);
+        Cursor c =  HomeActivity.database.SelectData("select h.history_id, h.orderTime, smd.color, sp.name, sp.price, sp.avartar" +
+                "from History h join Person p on p.person_id = h.person_id join SmartphoneDetail smd on smd.smartphone_detail_id = h.smartphone_detail_id " +
+                "join Smartphone sp on sp.smartphone_id = smd.smartphone_id");
+        while(c.moveToNext()){
+            int id = c.getInt(0);
+            String orderTime = c.getString(1);
+            String color = c.getString(2);
+            String nameSmartPhone = c.getString(3);
+            String price = c.getString(4);
+            byte[] avatar = c.getBlob(5);
+            History history = new History(id,orderTime,color,nameSmartPhone,price,avatar);
+            historyArrayList.add(history);
+        }
+        listAdapter = new HistoryAdapter(getActivity(), historyArrayList);
         lstHistory.setAdapter(listAdapter);
         return view;
     }

@@ -52,9 +52,9 @@ public class HistoryAdapter extends BaseAdapter {
             v = inflater.inflate(R.layout.item_lv_history_kien, null);
             //        set ảnh cho sản phẩm
             ImageView imgProduct = v.findViewById(R.id.imgProduct_kien);
-//            byte[] image = histories.get(i).getImgSmartPhone();
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-//            imgProduct.setImageBitmap(bitmap);
+            byte[] image = histories.get(i).getImgSmartPhone();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            imgProduct.setImageBitmap(bitmap);
 
 
             //        set tên sản phẩm
