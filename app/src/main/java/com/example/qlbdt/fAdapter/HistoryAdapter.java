@@ -66,10 +66,10 @@ public class HistoryAdapter extends BaseAdapter {
             colorProduct.setText(histories.get(i).getColor());
 
             TextView priceProduct = v.findViewById(R.id.priceProduct_kien);
-            priceProduct.setText(histories.get(i).getPriceSmartPhone());
+            priceProduct.setText(histories.get(i).getPriceSmartPhone() + " VND");
 
             TextView orderTime = v.findViewById(R.id.ordertime_kien);
-            orderTime.setText(histories.get(i).getOrderTime());
+            orderTime.setText("Ngày mua: "+histories.get(i).getOrderTime());
         }
         return v;
     }

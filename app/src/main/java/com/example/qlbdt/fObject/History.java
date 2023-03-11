@@ -1,7 +1,5 @@
 package com.example.qlbdt.fObject;
 
-import java.util.Date;
-
 public class History {
     private int id;
     private String orderTime;
@@ -15,7 +13,21 @@ public class History {
     private String priceSmartPhone;
     private String quantitySmartPhone;
     private byte[] imgSmartPhone;
+    private String brandName;
+    private String des;
 
+    public History(int id, String orderTime, String color, String nameCustomer, byte[] avatar, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone, String brandName, String des) {
+        this.id =  id;
+        this.orderTime = orderTime;
+        this.color = color;
+        this.nameCustomer = nameCustomer;
+        this.avatar = avatar;
+        this.nameSmartPhone = nameSmartPhone;
+        this.priceSmartPhone = priceSmartPhone;
+        this.imgSmartPhone = imgSmartPhone;
+        this.brandName = brandName;
+        this.des = des;
+    }
 
     public History(int id, String orderTime, String color, String nameCustomer, String phoneNumber, String email, String address, byte[] avatar, String nameSmartPhone, String priceSmartPhone, String quantitySmartPhone, byte[] imgSmartPhone) {
         this.id = id;
@@ -35,14 +47,8 @@ public class History {
     public History() {
     }
 
-    public History(int id, String orderTime, String color, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone) {
-        this.id = id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-        this.imgSmartPhone = imgSmartPhone;
-    }
+
+
 
     public History(int id, String orderTime, String color, String nameSmartPhone, String priceSmartPhone) {
         this.id = id;
@@ -146,5 +152,21 @@ public class History {
 
     public void setImgSmartPhone(byte[] imgSmartPhone) {
         this.imgSmartPhone = imgSmartPhone;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
     }
 }
