@@ -33,7 +33,6 @@ public class SupportFragment extends Fragment {
         supportAdapter = new SupportAdapter(getActivity(),R.layout.member_support, lstSupport);
         listViewSupport.setAdapter(supportAdapter);
 
-
         return view;
     }
 }

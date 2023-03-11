@@ -10,7 +10,8 @@
         android:id="@+id/img_cus_gv"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/logo_splash" />
+        android:src="@drawable/logo_splash"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/tv_name_cus_gv"
