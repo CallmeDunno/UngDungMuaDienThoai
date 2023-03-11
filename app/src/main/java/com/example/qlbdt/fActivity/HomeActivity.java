@@ -9,8 +9,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
@@ -24,6 +28,8 @@ import com.example.qlbdt.fFragment.TutorialFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
+
+    TextView tv_nav_header_name;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -55,6 +61,13 @@ public class HomeActivity extends AppCompatActivity {
 
         ReplaceFragment(new HomeFragment());
         navigationView.getMenu().findItem(R.id.nav_menu_item_home).setChecked(true);
+
+        View headerView = navigationView.getHeaderView(0);
+        tv_nav_header_name = headerView.findViewById(R.id.tv_nav_header_name);
+        String queryNameUser = "SELECT name FROM Person";
+        Cursor c = database.SelectData(queryNameUser);
+        c.moveToFirst();
+        tv_nav_header_name.setText(c.getString(0));
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
