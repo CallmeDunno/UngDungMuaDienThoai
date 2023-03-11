@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:background="@drawable/bg_white_corner_16"
+
+
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/dialogTitleHistory_kien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_main_corner_16_top"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Thông tin chi tiết"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCloseDialogHistory_kien"
+        android:layout_width="94dp"
+        android:layout_height="41dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_blue_corner_10"
+        android:text="Đóng"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarUserDialog_kien"
+        app:layout_constraintVertical_bias="0.455" />
+
+    <Button
+        android:id="@+id/btnReBuyDialogHistory_kien"
+        android:layout_width="94dp"
+        android:layout_height="41dp"
+
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_blue_corner_10"
+        android:text="Mua lại"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btnCloseDialogHistory_kien"
+        app:layout_constraintTop_toBottomOf="@+id/avatarUserDialog_kien"
+        app:layout_constraintVertical_bias="0.432" />
+
+    <ImageView
+        android:id="@+id/imgProductDialog_kien"
+        android:layout_width="315dp"
+        android:layout_height="168dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_white_corner_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogTitleHistory_kien"
+        app:srcCompat="@drawable/apple_iphone_14_promax" />
+
+    <TextView
+        android:id="@+id/nameProductDialog_kien"
+        android:layout_width="256dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="tên sản phẩm"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgProductDialog_kien" />
+
+    <TextView
+        android:id="@+id/orderTimeProductDialog_kien"
+        android:layout_width="198dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="left"
+        android:text="Ngày mua"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desProductDialog_kien" />
+
+    <TextView
+        android:id="@+id/nameUserDialog_kien"
+        android:layout_width="219dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="user"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/avatarUserDialog_kien"
+        app:layout_constraintTop_toBottomOf="@+id/priceProductDialog_kien" />
+
+    <TextView
+        android:id="@+id/brandProductDialog_kien"
+        android:layout_width="127dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="right"
+        android:text="Hãng"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameProductDialog_kien" />
+
+    <TextView
+        android:id="@+id/colorProductDialog_kien"
+        android:layout_width="202dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+        android:text="Màu sắc"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameProductDialog_kien" />
+
+    <TextView
+        android:id="@+id/priceProductDialog_kien"
+        android:layout_width="139dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="right"
+        android:text="Giá"
+        android:textColor="#EA3E3E"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desProductDialog_kien" />
+
+    <ImageView
+        android:id="@+id/avatarUserDialog_kien"
+        android:layout_width="94dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/boder_blue_circle"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderTimeProductDialog_kien"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/desProductDialog_kien"
+        android:layout_width="338dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Des"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brandProductDialog_kien" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
