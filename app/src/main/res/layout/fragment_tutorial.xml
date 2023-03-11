@@ -3,12 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fFragment.TutorialFragment">
 
     <TextView
+        android:id="@+id/tvSkipOanh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="16dp"
+        android:layout_alignParentEnd="true"
+        />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager_Oanh"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tvSkipOanh"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_bottomOanh"
+        />
+    <RelativeLayout
+        android:id="@+id/layout_bottomOanh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Tutorial"
-        android:textSize="40sp" />
+        android:layout_alignParentBottom="true">
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/circleindicator_Oanh"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="30dp"
+            app:ci_drawable="@drawable/bg_circle_tutor"
+            android:layout_marginStart="10dp"
+            />
+        <LinearLayout
+            android:id="@+id/layout_nextOanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textSize="20sp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/black"
+                />
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_next" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
