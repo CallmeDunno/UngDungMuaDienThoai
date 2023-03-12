@@ -51,7 +51,6 @@
                 android:id="@+id/img_avt_smp_detail"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
@@ -116,7 +115,9 @@
                     <TextView
                         android:id="@+id/tv_cpu_smp_detail"
                         android:text="CPU"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
                 </TableRow>
 

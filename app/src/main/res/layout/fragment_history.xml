@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/lvHistoryKien"
-        android:layout_width="420dp"
-        android:layout_height="734dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:dividerHeight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
