@@ -1,39 +1,37 @@
 package com.example.qlbdt.fFragment;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fActivity.HomeActivity;
-import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
-import com.example.qlbdt.fAdapter.GridViewAdapter;
+import com.example.qlbdt.fAdapter.SmartphoneSearchAdapter;
 import com.example.qlbdt.fObject.Smartphone;
 
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
 
-    GridView gridView;
+    RecyclerView recyclerView;
     ArrayList<Smartphone> smartphones;
-    GridViewAdapter gridViewAdapter;
+    SmartphoneSearchAdapter searchAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
-        gridView = view.findViewById(R.id.gv_fragment_search);
+        recyclerView = view.findViewById(R.id.rcv_fragment_search);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
         smartphones = new ArrayList<>();
-
         smartphones.clear();
         Cursor c = HomeActivity.database.SelectData("SELECT * FROM Smartphone");
         while (c.moveToNext()){
@@ -45,18 +43,18 @@ public class SearchFragment extends Fragment {
             smartphones.add(smartphone);
         }
 
-        gridViewAdapter = new GridViewAdapter(getContext(), R.layout.custom_grid_view, smartphones);
-        gridView.setAdapter(gridViewAdapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
-                String strName = smartphones.get(i).getName();
-                intent.putExtra("NameSmartphone", strName);
-                startActivity(intent);
-            }
-        });
+        searchAdapter = new SmartphoneSearchAdapter(getContext(), smartphones);
+        recyclerView.setAdapter(searchAdapter);
+//
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
+//                String strName = smartphones.get(i).getName();
+//                intent.putExtra("NameSmartphone", strName);
+//                startActivity(intent);
+//            }
+//        });
 
         return view;
     }
