@@ -1,5 +1,6 @@
 package com.example.qlbdt.fFragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fActivity.HomeActivity;
+import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
 import com.example.qlbdt.fAdapter.SmartphoneSearchAdapter;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Smartphone;
 
 import java.util.ArrayList;
@@ -43,18 +46,15 @@ public class SearchFragment extends Fragment {
             smartphones.add(smartphone);
         }
 
-        searchAdapter = new SmartphoneSearchAdapter(getContext(), smartphones);
+        searchAdapter = new SmartphoneSearchAdapter(getContext(), smartphones, new IRecyclerViewOnClick() {
+            @Override
+            public void onClickItemSmartphone(Smartphone smartphone) {
+                Intent intent = new Intent(getContext(), SmartphoneDetailActivity.class);
+                intent.putExtra("NameSmartphone", smartphone.getName());
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(searchAdapter);
-//
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
-//                String strName = smartphones.get(i).getName();
-//                intent.putExtra("NameSmartphone", strName);
-//                startActivity(intent);
-//            }
-//        });
 
         return view;
     }

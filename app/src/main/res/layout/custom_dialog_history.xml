@@ -54,8 +54,8 @@
 
     <ImageView
         android:id="@+id/imgProductDialog_kien"
-        android:layout_width="match_parent"
-        android:layout_height="168dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogTitleHistory_kien"
-        android:src="@drawable/iphone12_xanh_duong" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/nameProductDialog_kien"
