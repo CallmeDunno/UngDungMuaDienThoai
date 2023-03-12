@@ -44,12 +44,6 @@ public class History {
         this.imgSmartPhone = imgSmartPhone;
     }
 
-    public History() {
-    }
-
-
-
-
     public History(int id, String orderTime, String color, String nameSmartPhone, String priceSmartPhone) {
         this.id = id;
         this.orderTime = orderTime;
