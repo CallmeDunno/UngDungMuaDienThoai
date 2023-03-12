@@ -1,14 +1,16 @@
 package com.example.qlbdt.fObject;
 
+import java.util.Comparator;
+
 public class Smartphone {
     private String name;
-    private String price;
+    private Price price;
     private int quantity;
     private byte[] avatar;
 
     public Smartphone(String name, String price, int quantity, byte[] avatar) {
         this.name = name;
-        this.price = price;
+        this.price = new Price(price);
         this.quantity = quantity;
         this.avatar = avatar;
     }
@@ -22,11 +24,11 @@ public class Smartphone {
     }
 
     public String getPrice() {
-        return price;
+        return price.toString();
     }
 
     public void setPrice(String price) {
-        this.price = price;
+        this.price = new Price(price);
     }
 
     public int getQuantity() {
@@ -43,5 +45,26 @@ public class Smartphone {
 
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public static class NameOrder implements Comparator<Smartphone> {
+        @Override
+        public int compare(Smartphone a, Smartphone b) {
+            return a.getName().compareTo(b.getName());
+        }
+    }
+
+    public static class PriceOrderAsc implements Comparator<Smartphone>{
+        @Override
+        public int compare(Smartphone a, Smartphone b) {
+            return a.getPrice().compareTo(b.getPrice());
+        }
+    }
+
+    public static class PriceOrderDesc implements Comparator<Smartphone>{
+        @Override
+        public int compare(Smartphone a, Smartphone b) {
+            return b.getPrice().compareTo(a.getPrice());
+        }
     }
 }

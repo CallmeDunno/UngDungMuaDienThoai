@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="10dp"
     tools:context=".fFragment.SearchFragment">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#EFEFEF">
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_white_corner_bot_r_l_16">
 
         <androidx.appcompat.widget.SearchView
+            android:background="@drawable/bg_white_corner_16"
+            android:id="@+id/sv_fragment_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/sv_fragment_search"
-            android:layout_marginBottom="10dp"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="10dp"
+            app:queryHint="Tìm kiếm điện thoại"
+            app:searchIcon="@drawable/ic_search" />
 
-    </androidx.cardview.widget.CardView>
+        <Spinner
+            android:id="@+id/sp_sort_fragment_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sv_fragment_search"
+            android:layout_marginStart="10dp" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_fragment_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rcv_fragment_search"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp" />
 
 </LinearLayout>

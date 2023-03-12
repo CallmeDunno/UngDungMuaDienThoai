@@ -50,6 +50,4 @@ public class Support implements Serializable {
         this.mailSp = mailSp;
     }
 
-
-
 }
