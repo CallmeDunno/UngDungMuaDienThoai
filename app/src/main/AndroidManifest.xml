@@ -33,9 +33,6 @@
         <activity
             android:name=".fActivity.HomeActivity"
             android:exported="false" >
-
-
-
         </activity>
 
         <activity
