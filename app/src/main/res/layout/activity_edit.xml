@@ -4,7 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fFragment.AccountFragment">
+    tools:context=".fActivity.EditActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/linear_ll"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back_30"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:text="Edit Profile"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_done"
+            android:layout_alignParentRight="true"/>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -29,11 +60,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meo Meo"
-            android:textColor="#00FDCC"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"/>
+            android:text="Change Photo"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_marginTop="8dp"/>
 
         <View
             android:layout_width="match_parent"
@@ -202,26 +232,5 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <Button
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:background="@drawable/edt_selector"
-            android:text="Edit Profile"
-            android:id="@+id/btn_edit_QA"
-            android:gravity="center"
-            android:textColor="#00FDCC"
-            android:textSize="18dp"
-            android:drawableLeft="@drawable/ic_edit"
-            android:paddingLeft="10dp"/>
-
-    </LinearLayout>
 
 </LinearLayout>
