@@ -21,6 +21,8 @@ import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
 import com.example.qlbdt.fOther.Notification;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class SmartphoneDetailActivity extends AppCompatActivity {
@@ -116,6 +118,20 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SendNoti(name);
+
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String orderTime = dateFormat.format(calendar.getTime());
+
+                String queryGetIDsmp = String.format("SELECT SmartphoneDetail.smartphone_detail_id " +
+                        "FROM SmartphoneDetail JOIN Smartphone ON SmartphoneDetail.smartphone_id = Smartphone.smartphone_id " +
+                        "WHERE name = '%s'", name);
+                Cursor cursorIDsmp = database.SelectData(queryGetIDsmp);
+                cursorIDsmp.moveToFirst();
+                int id_smp = cursorIDsmp.getInt(0);
+
+                String insertHistory = String.format("INSERT INTO History VALUES(NULL, '%s', %d, 1)", orderTime, id_smp);
+                database.QueryDatabase(insertHistory);
             }
         });
         builder.setNeutralButton("Không, tôi không muốn mua", new DialogInterface.OnClickListener() {

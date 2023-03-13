@@ -7,11 +7,14 @@
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable-v24/bg_gradient_blue_white.xml" value="0.2575" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_alpha_05_corner_16.xml" value="0.137" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_boder_16.xml" value="0.1365" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_corner_10.xml" value="0.1535" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_corner_16.xml" value="0.1365" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_gradient_blue_white.xml" value="0.2575" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_gray_corner_16.xml" value="0.1365" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_white_boder_gray.xml" value="0.209" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_white_corner_16.xml" value="0.1365" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_white_corner_bot_r_l_16.xml" value="0.112" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/boder_blue_circle.xml" value="0.1535" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/boder_blue_corner_16.xml" value="0.1365" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/boder_gray_corner_16.xml" value="0.1365" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/btn_selector.xml" value="0.1855" />
@@ -22,12 +25,13 @@
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/ic_support.xml" value="0.132" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/font/akaya_telivigala.xml" value="0.3046875" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_admin.xml" value="0.1897644927536232" />
-        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_home.xml" value="0.1897644927536232" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_register_account.xml" value="0.264" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_smartphone_detail.xml" value="0.264" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_splash_screen.xml" value="0.21240942028985507" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/custom_dialog_history.xml" value="0.4" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/custom_grid_view.xml" value="0.2078804347826087" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/fragment_account.xml" value="0.27447916666666666" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/fragment_history.xml" value="0.27447916666666666" />
@@ -36,6 +40,8 @@
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/fragment_search.xml" value="0.223731884057971" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/fragment_support.xml" value="0.223731884057971" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/fragment_tutorial.xml" value="0.1" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/item_lv_history_kien.xml" value="0.1056533827618165" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/item_rcv_search_fragment.xml" value="0.22530996152201796" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/nav_header.xml" value="0.2604166666666667" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/menu/nav_menu_item.xml" value="0.1" />
       </map>

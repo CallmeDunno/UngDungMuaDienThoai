@@ -240,6 +240,7 @@
             android:layout_height="50dp"
             android:background="@drawable/edt_selector"
             android:text="Edit Profile"
+            android:id="@+id/btn_edit_QA"
             android:gravity="center"
             android:textColor="#00FDCC"
             android:textSize="18dp"
