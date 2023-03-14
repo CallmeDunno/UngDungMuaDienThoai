@@ -8,11 +8,14 @@ public class Smartphone {
     private int quantity;
     private byte[] avatar;
 
-    public Smartphone(String name, String price, int quantity, byte[] avatar) {
+    private String brand_name;
+
+    public Smartphone(String name, String price, int quantity, byte[] avatar, String brand_name) {
         this.name = name;
         this.price = new Price(price);
         this.quantity = quantity;
         this.avatar = avatar;
+        this.brand_name = brand_name;
     }
 
     public String getName() {
@@ -45,6 +48,14 @@ public class Smartphone {
 
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public String getBrand_name() {
+        return brand_name;
+    }
+
+    public void setBrand_name(String brand_name) {
+        this.brand_name = brand_name;
     }
 
     public static class NameOrder implements Comparator<Smartphone> {

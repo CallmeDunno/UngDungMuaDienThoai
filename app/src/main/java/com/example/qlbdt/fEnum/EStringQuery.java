@@ -8,7 +8,7 @@ public enum EStringQuery {
             "name VARCHAR(200) NOT NULL," +
             "price VARCHAR(200) NOT NULL," +
             "quantity INTEGER NOT NULL," +
-            "avartar BLOB NOT NULL," +
+            "avatar BLOB NOT NULL," +
             "brand_id INTEGER," +
             "FOREIGN KEY (brand_id) REFERENCES Brand(brand_id)" +
             ")"),

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
+import com.example.qlbdt.fFragment.SearchFragment;
 import com.example.qlbdt.fOther.Notification;
 
 import java.text.SimpleDateFormat;
@@ -84,7 +85,7 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
     private void SetContentSmartphoneDetail(String name) {
         tv_label_smp_detail.setText(name);
         tv_name_smp_detail.setText(name);
-        String querySmartphoneDetail = String.format("SELECT Brand.name, Smartphone.price, Smartphone.avartar, SmartphoneDetail.description, " +
+        String querySmartphoneDetail = String.format("SELECT Brand.name, Smartphone.price, Smartphone.avatar, SmartphoneDetail.description, " +
                 "SmartphoneDetail.CPU, SmartphoneDetail.RAM, SmartphoneDetail.ROM, SmartphoneDetail.color, SmartphoneDetail.battery, " +
                 "SmartphoneDetail.weight, SmartphoneDetail.warrantyPeriod " +
                 "FROM Smartphone JOIN SmartphoneDetail ON Smartphone.smartphone_id = SmartphoneDetail.smartphone_id " +
@@ -123,15 +124,20 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 String orderTime = dateFormat.format(calendar.getTime());
 
-                String queryGetIDsmp = String.format("SELECT SmartphoneDetail.smartphone_detail_id " +
+                String queryGetIDsmp = String.format("SELECT SmartphoneDetail.smartphone_detail_id, Smartphone.quantity " +
                         "FROM SmartphoneDetail JOIN Smartphone ON SmartphoneDetail.smartphone_id = Smartphone.smartphone_id " +
                         "WHERE name = '%s'", name);
                 Cursor cursorIDsmp = database.SelectData(queryGetIDsmp);
                 cursorIDsmp.moveToFirst();
                 int id_smp = cursorIDsmp.getInt(0);
+                int quantity_smp = cursorIDsmp.getInt(1);
 
                 String insertHistory = String.format("INSERT INTO History VALUES(NULL, '%s', %d, 1)", orderTime, id_smp);
                 database.QueryDatabase(insertHistory);
+
+                quantity_smp -= 1;
+                String updateQuantitySmartphone = String.format("UPDATE Smartphone SET quantity = %d WHERE name = '%s'", quantity_smp, name);
+                database.QueryDatabase(updateQuantitySmartphone);
             }
         });
         builder.setNeutralButton("Không, tôi không muốn mua", new DialogInterface.OnClickListener() {

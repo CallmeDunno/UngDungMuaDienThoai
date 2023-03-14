@@ -3,12 +3,14 @@ package com.example.qlbdt.fFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -34,9 +36,9 @@ public class SearchFragment extends Fragment {
 
     SearchView searchView;
 
-    Spinner sp_sort;
-    ArrayList<String> sort;
-    ArrayAdapter adapterSort;
+    Spinner sp_sort, sp_brand;
+    ArrayList<String> sort, brand;
+    ArrayAdapter adapterSort, adapterBrand;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,26 +50,15 @@ public class SearchFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         smartphones = new ArrayList<>();
-        smartphones.clear();
-        Cursor c = HomeActivity.database.SelectData("SELECT * FROM Smartphone");
-        while (c.moveToNext()){
-            String n = c.getString(1);
-            String p = c.getString(2);
-            int q = c.getInt(3);
-            byte[] a = c.getBlob(4);
-            Smartphone smartphone = new Smartphone(n, p, q, a);
-            smartphones.add(smartphone);
-        }
-
-        searchAdapter = new SmartphoneSearchAdapter(getContext(), new IRecyclerViewOnClick() {
+        searchAdapter = new SmartphoneSearchAdapter(getActivity(), new IRecyclerViewOnClick() {
             @Override
             public void onClickItemSmartphone(Smartphone smartphone) {
-                Intent intent = new Intent(getContext(), SmartphoneDetailActivity.class);
+                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
                 intent.putExtra("NameSmartphone", smartphone.getName());
                 startActivity(intent);
             }
         });
-        searchAdapter.setData(smartphones);
+        LoadData();
         recyclerView.setAdapter(searchAdapter);
         //endregion
 
@@ -88,6 +79,7 @@ public class SearchFragment extends Fragment {
         });
         //endregion
 
+        //region Sort
         sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
         sort = new ArrayList<>();
         sort.add("Sắp xếp theo mặc định");
@@ -101,19 +93,16 @@ public class SearchFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 List<Smartphone> smpOld = smartphones;
                 switch (sort.get(i)){
-                    case "Sắp xếp theo mặc định":
-                        searchAdapter.setDataChanged(smpOld);
-                        break;
                     case "Sắp xếp theo tên sản phẩm":
-                        Collections.sort(smartphones, new Smartphone.NameOrder());
+                        Collections.sort(smpOld, new Smartphone.NameOrder());
                         searchAdapter.setDataChanged(smartphones);
                         break;
                     case "Sắp xếp theo giá tăng dần":
-                        Collections.sort(smartphones, new Smartphone.PriceOrderAsc());
+                        Collections.sort(smpOld, new Smartphone.PriceOrderAsc());
                         searchAdapter.setDataChanged(smartphones);
                         break;
                     case "Sắp xếp theo giá giảm dần":
-                        Collections.sort(smartphones, new Smartphone.PriceOrderDesc());
+                        Collections.sort(smpOld, new Smartphone.PriceOrderDesc());
                         searchAdapter.setDataChanged(smartphones);
                         break;
                 }
@@ -124,8 +113,65 @@ public class SearchFragment extends Fragment {
 
             }
         });
+        //endregion
 
+        //region Brand
+        sp_brand = view.findViewById(R.id.sp_brand_fragment_search);
+        brand = new ArrayList<>();
+        brand.add("Hãng");
+        String queryBrand = "SELECT name FROM Brand";
+        Cursor cursorBrand = HomeActivity.database.SelectData(queryBrand);
+        while (cursorBrand.moveToNext()){
+            String str = cursorBrand.getString(0);
+            brand.add(str);
+        }
+        adapterBrand = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, brand);
+        sp_brand.setAdapter(adapterBrand);
+        sp_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String strBrand = brand.get(i);
+                if (!strBrand.equals("Hãng")){
+                    List<Smartphone> list = new ArrayList<>();
+                    for (Smartphone s : smartphones){
+                        if (s.getBrand_name().equals(strBrand)){
+                            list.add(s);
+                        }
+                    }
+                    searchAdapter.setDataChanged(list);
+                } else {
+                    searchAdapter.setDataChanged(smartphones);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        //endregion
 
         return view;
+    }
+
+    private void LoadData(){
+        smartphones.clear();
+        Cursor c = HomeActivity.database.SelectData("SELECT Brand.name, Smartphone.name, Smartphone.price, Smartphone.quantity, Smartphone.avatar FROM Smartphone JOIN Brand ON Smartphone.brand_id = Brand.brand_id");
+        while (c.moveToNext()){
+            String nb = c.getString(0);
+            String n = c.getString(1);
+            String p = c.getString(2);
+            int q = c.getInt(3);
+            byte[] a = c.getBlob(4);
+            Smartphone smartphone = new Smartphone(n, p, q, a, nb);
+            smartphones.add(smartphone);
+        }
+        searchAdapter.setData(smartphones);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LoadData();
     }
 }
