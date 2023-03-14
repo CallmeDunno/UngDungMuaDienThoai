@@ -24,16 +24,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/logo"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meo Meo"
-            android:textColor="#00FDCC"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"/>
+            android:src="@drawable/logo"
+            android:id="@+id/avatar_QA"/>
 
         <View
             android:layout_width="match_parent"
@@ -70,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/name_QA"
             android:layout_marginLeft="100dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
@@ -110,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/phone_QA"
             android:layout_marginLeft="55dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
@@ -150,6 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/address_QA"
             android:layout_marginLeft="115dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
@@ -190,6 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/email_QA"
             android:layout_marginLeft="140dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
