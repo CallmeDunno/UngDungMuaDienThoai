@@ -94,7 +94,7 @@
                 <TableRow>
 
                     <TextView
-                        android:text="Hãng sản xuất:"
+                        android:text="Hãng:"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -113,11 +113,15 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:id="@+id/tv_cpu_smp_detail"
                         android:text="CPU"
                         android:textSize="24sp"
                         android:maxLines="1"
                         android:ellipsize="end"/>
+
+
 
                 </TableRow>
 
@@ -180,7 +184,7 @@
                 <TableRow>
 
                     <TextView
-                        android:text="Trọng lượng:"
+                        android:text="Cân nặng:"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -217,6 +221,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
         android:orientation="horizontal">
 
         <Button

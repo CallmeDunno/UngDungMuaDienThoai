@@ -48,7 +48,7 @@ public class HistoryFragment extends Fragment {
          * Author: NTKIEN (11-03-2023)
          * */
         Cursor c =  HomeActivity.database.SelectData("select History.history_id, History.orderTime, SmartphoneDetail.color, " +
-                "Smartphone.name, Smartphone.price, Smartphone.avartar, Brand.name, SmartphoneDetail.description, Person.avatar, Person.name " +
+                "Smartphone.name, Smartphone.price, Smartphone.avatar, Brand.name, SmartphoneDetail.description, Person.avatar, Person.name " +
                 "from History join Person on Person.person_id = History.person_id join SmartphoneDetail on SmartphoneDetail.smartphone_detail_id = History.smartphone_detail_id " +
                 "join Smartphone on Smartphone.smartphone_id = SmartphoneDetail.smartphone_id join Brand on Brand.brand_id = Smartphone.brand_id");
         while(c.moveToNext()){

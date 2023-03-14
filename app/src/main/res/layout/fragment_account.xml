@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meo Meo"
+            android:text="Meo meo"
             android:layout_marginLeft="100dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
@@ -190,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
-            android:layout_marginLeft="140dp"
+            android:layout_marginStart="140dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
@@ -213,14 +213,14 @@
         <Button
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:background="@drawable/edt_selector"
+            android:background="@drawable/btn_selector"
             android:text="Edit Profile"
             android:id="@+id/btn_edit_QA"
             android:gravity="center"
-            android:textColor="#00FDCC"
-            android:textSize="18dp"
-            android:drawableLeft="@drawable/ic_edit"
-            android:paddingLeft="10dp"/>
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_edit"
+            android:paddingStart="10dp"/>
 
     </LinearLayout>
 

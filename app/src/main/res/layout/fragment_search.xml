@@ -14,22 +14,42 @@
         android:background="@drawable/bg_white_corner_bot_r_l_16">
 
         <androidx.appcompat.widget.SearchView
-            android:background="@drawable/bg_white_corner_16"
             android:id="@+id/sv_fragment_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_white_corner_bot_r_l_16"
             app:queryHint="Tìm kiếm điện thoại"
             app:searchIcon="@drawable/ic_search" />
 
-        <Spinner
-            android:id="@+id/sp_sort_fragment_search"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sv_fragment_search"
-            android:layout_marginStart="10dp" />
+            android:layout_below="@id/sv_fragment_search"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Spinner
+                android:id="@+id/sp_sort_fragment_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"/>
+
+            <Spinner
+                android:id="@+id/sp_brand_fragment_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
