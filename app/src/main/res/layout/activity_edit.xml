@@ -17,7 +17,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_arrow_back_30"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back_QA"/>
 
         <TextView
             android:layout_weight="1"
@@ -33,7 +34,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_done"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:id="@+id/done_edit_QA"/>
 
     </LinearLayout>
 
@@ -55,12 +57,14 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo"
+            android:id="@+id/avatar_edit_QA"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Change Photo"
+            android:id="@+id/change_photo_QA"
             android:textColor="@color/black"
             android:textSize="15dp"
             android:layout_marginTop="8dp"/>
@@ -96,13 +100,14 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meo Meo"
             android:layout_marginLeft="100dp"
-            android:textSize="18dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:text="Meo Meo"
+            android:id="@+id/name_edit_QA"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18dp" />
     </LinearLayout>
 
     <View
@@ -136,10 +141,11 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/phone_edit_QA"
             android:layout_marginLeft="55dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
@@ -176,10 +182,11 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/address_edit_QA"
             android:layout_marginLeft="115dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
@@ -216,10 +223,11 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:id="@+id/email_edit_QA"
             android:layout_marginLeft="140dp"
             android:textSize="18dp"
             android:textColor="@android:color/darker_gray"/>
