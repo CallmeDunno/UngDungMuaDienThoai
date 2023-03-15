@@ -43,7 +43,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     ImageView img_avt;
     Button btn_confirm;
 
-    private final int MY_CODE_REQUEST_FOLDER = 100;
+    public static final int MY_CODE_REQUEST_FOLDER = 100;
     private MyDatabase database;
 
     private void init() {
@@ -72,44 +72,62 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
         //region Insert Data
         database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Apple')");
-        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Samsung')");
-        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Oppo')");
+        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Samsung')"); //2
+        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Oppo')"); //3
         database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Nokia')");
-        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Vivo')");
+        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Vivo')"); //5
         database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Xiaomi')");
+        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Realme')"); //7
+        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'TCL')"); //8
+        database.QueryDatabase("INSERT INTO Brand VALUES(NULL, 'Itel')"); //9
 
-        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 13 Pro Max", "31490000", 153,
+        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 13 Pro Max", "31.490.000", 153,
                 R.drawable.apple_iphone_13_pro_max, 1);
-        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 14 Pro Max", "26490000", 98,
+        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 14 Pro Max", "26.490.000", 98,
                 R.drawable.apple_iphone_14_promax, 1);
-        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 11", "11990000", 32,
+        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 11", "11.990.000", 32,
                 R.drawable.iphone_11, 1);
-        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 12", "18490000", 54,
+        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 12", "18.490.000", 54,
                 R.drawable.iphone12_xanh_duong, 1);
-        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 14 Plus", "23090000", 121,
+        database.InsertSmartphone(RegisterAccountActivity.this, "iPhone 14 Plus", "23.090.000", 121,
                 R.drawable.iphone_14_plus, 1);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Nokia G11", "2690000", 31,
+        database.InsertSmartphone(RegisterAccountActivity.this, "Nokia G11", "2.690.000", 31,
                 R.drawable.nokia_g11, 4);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Oppo Find X5 Pro", "24990000", 146,
+        database.InsertSmartphone(RegisterAccountActivity.this, "Oppo Find X5 Pro", "24.990.000", 146,
                 R.drawable.oppo_find_x5_pro, 3);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Oppo Reno8 Pro 5G", "17590000", 253
+        database.InsertSmartphone(RegisterAccountActivity.this, "Oppo Reno8 Pro 5G", "17.590.000", 253
                 , R.drawable.oppo_reno8_pro, 3);
         database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy Z Fold3 5G",
-                "32990000", 195, R.drawable.samsung_galaxy_z_fold_3_5g, 2);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy S20 FE", "9490000",
+                "32.990.000", 195, R.drawable.samsung_galaxy_z_fold_3_5g, 2);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy S20 FE", "9.490.000",
                 31, R.drawable.samsung_galaxy_s20_fe_green, 2);
         database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy S23 Ultra 5G",
-                "41990000", 257, R.drawable.samsung_galaxy_s23_sltra_plus, 2);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy Z Flip4", "19990000"
+                "41.990.000", 257, R.drawable.samsung_galaxy_s23_sltra_plus, 2);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy Z Flip4", "19.990.000"
                 , 184, R.drawable.samsung_galaxy_zflip4_5g, 2);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Vivo V25 Pro 5G", "13290000", 43,
+        database.InsertSmartphone(RegisterAccountActivity.this, "Vivo V25 Pro 5G", "13.290.000", 43,
                 R.drawable.vivo_v25_pro_5g, 5);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Vivo Y21", "3290000", 52,
+        database.InsertSmartphone(RegisterAccountActivity.this, "Vivo Y21", "3.290.000", 52,
                 R.drawable.vivo_y21, 5);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Xiaomi 12T Pro 5G", "14090000", 57,
+        database.InsertSmartphone(RegisterAccountActivity.this, "Xiaomi 12T Pro 5G", "14.090.000", 57,
                 R.drawable.xiaomi_12t_pro, 6);
-        database.InsertSmartphone(RegisterAccountActivity.this, "Xiaomi Redmi Note 11", "4390000", 64,
-                R.drawable.xiaomi_redmi_note_11, 6);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Xiaomi Redmi Note 11", "4.390.000", 64, R.drawable.xiaomi_redmi_note_11, 6);
+
+        database.InsertSmartphone(RegisterAccountActivity.this, "OPPO A55", "3.690.000", 54, R.drawable.oppo_a55, 3);
+        database.InsertSmartphone(RegisterAccountActivity.this, "OPPO A77s", "6.290.000", 376, R.drawable.oppo_a77s, 3);
+        database.InsertSmartphone(RegisterAccountActivity.this, "OPPO A95", "5.490.000", 43, R.drawable.oppo_a95, 3);
+        database.InsertSmartphone(RegisterAccountActivity.this, "OPPO A16", "2.790.000", 53, R.drawable.oppo_a16, 3);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Vivo Y02", "2.790.000", 51, R.drawable.vivo_y02, 5);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Vivo Y33s", "5.140.000", 43, R.drawable.vivo_y33s, 5);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Realme 10", "6.790.000", 64, R.drawable.realme_10, 7);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Realme C35", "3.590.000", 76, R.drawable.realme_c35, 7);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Realme C33", "3.090.000", 76, R.drawable.realme_c33, 7);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy A14 5G", "5.190.000", 65, R.drawable.samsung_galaxy_a14, 2);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Samsung Galaxy A03s", "2.990.000", 17, R.drawable.samsung_galaxy_a03s, 2);
+        database.InsertSmartphone(RegisterAccountActivity.this, "TCL 30+", "3.190.000", 87, R.drawable.tcl_30_plus, 8);
+        database.InsertSmartphone(RegisterAccountActivity.this, "TCL 30 SE", "2.540.000", 85, R.drawable.tcl_30_se, 8);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Itel L6502", "1.890.000", 32, R.drawable.itel_i6502, 9);
+        database.InsertSmartphone(RegisterAccountActivity.this, "Itel L6006", "1.690.000", 64, R.drawable.itel_i6006, 9);
 
         database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " +
                         "'Apple A15 Bionic', '6GB', '1TB', 'Xanh nhạt', '4352mAh', '240g', '12 tháng', '1')",
@@ -165,6 +183,21 @@ public class RegisterAccountActivity extends AppCompatActivity {
         database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " +
                         "'Snapdragon 680', '6GB', '128GB', 'Xanh dương đậm', '5000mAh', '179g', '12 tháng', '16')",
                 EDesSmartphoneDetail.DES_XM_N11.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Helio G35', '4GB', '64GB', 'Xanh lá', '5000mAh', '192g', '12 tháng', '17')", EDesSmartphoneDetail.DES_Oppo_A55.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'Snapdragon 680', '8GB', '128GB', 'Đen', '5000mAh', '192g', '12 tháng', '18')", EDesSmartphoneDetail.DES_Oppo_A77s.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'Snapdragon 662', '8GB', '128GB', 'Bạc', '5000mAh', '192g', '12 tháng', '19')", EDesSmartphoneDetail.DES_Oppo_A95.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Helio G35', '3GB', '32GB', 'Bạc', '5000mAh', '192g', '12 tháng', '20')", EDesSmartphoneDetail.DES_Oppo_A16.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek MT6762', '2GB', '32GB', 'Xanh tím', '5000mAh', '192g', '12 tháng', '21')", EDesSmartphoneDetail.DES_VV_Y02.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Helio G80', '8GB', '128GB', 'Xanh hồng', '5000mAh', '192g', '12 tháng', '22')", EDesSmartphoneDetail.DES_VV_Y33s.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Helio G99', '8GB', '256GB', 'Trắng', '5000mAh', '192g', '12 tháng', '23')", EDesSmartphoneDetail.DES_RM_10.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'Unisoc T616', '4GB', '64GB', 'Xanh ngọc', '5000mAh', '192g', '12 tháng', '24')", EDesSmartphoneDetail.DES_RM_C35.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'Unisoc Tiger T612', '3GB', '32GB', 'Xanh', '5000mAh', '192g', '12 tháng', '25')", EDesSmartphoneDetail.DES_RM_C33.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Dimensity 700', '4GB', '128GB', 'Đen', '5000mAh', '192g', '12 tháng', '26')", EDesSmartphoneDetail.DES_SS_A14.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek MT6765', '4GB', '64GB', 'Đen', '5000mAh', '192g', '12 tháng', '27')", EDesSmartphoneDetail.DES_SS_A03s.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Helio G37', '4GB', '128GB', 'Xanh dương', '5000mAh', '192g', '12 tháng', '28')", EDesSmartphoneDetail.DES_TCL_30p.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'MediaTek Helio G25', '4GB', '128GB', 'Xám', '5000mAh', '192g', '12 tháng', '29')", EDesSmartphoneDetail.DES_TCL_30se.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'Spreadtrum SC9832E', '3GB', '32GB', 'Đen', '5000mAh', '192g', '12 tháng', '30')", EDesSmartphoneDetail.DES_ITEL_L6502.getDes()));
+        database.QueryDatabase(String.format("INSERT INTO SmartphoneDetail VALUES(NULL, '%s', " + "'Spreadtrum SC9832E', '2GB', '32GB', 'Tím', '5000mAh', '192g', '12 tháng', '31')", EDesSmartphoneDetail.DES_ITEL_L6006.getDes()));
         //endregion
 
         ActivityResultLauncher<Intent> activityPickerResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),

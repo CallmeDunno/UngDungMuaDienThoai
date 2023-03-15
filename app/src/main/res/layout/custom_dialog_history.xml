@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:background="@drawable/bg_white_corner_16"
-
-
     android:paddingBottom="10dp">
 
     <TextView
@@ -28,25 +26,23 @@
         android:id="@+id/btnCloseDialogHistory_kien"
         android:layout_width="94dp"
         android:layout_height="41dp"
-
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_blue_corner_10"
+        android:background="@drawable/btn_selector2"
         android:text="Đóng"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarUserDialog_kien"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintVertical_bias="0.101" />
 
     <Button
         android:id="@+id/btnReBuyDialogHistory_kien"
         android:layout_width="94dp"
         android:layout_height="41dp"
-
         android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/bg_blue_corner_10"
+        android:background="@drawable/btn_selector"
         android:text="Mua lại"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,18 +50,20 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnCloseDialogHistory_kien"
         app:layout_constraintTop_toBottomOf="@+id/avatarUserDialog_kien"
-        app:layout_constraintVertical_bias="0.432" />
+        app:layout_constraintVertical_bias="0.086" />
 
     <ImageView
         android:id="@+id/imgProductDialog_kien"
-        android:layout_width="315dp"
-        android:layout_height="168dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/bg_white_corner_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogTitleHistory_kien"
-        app:srcCompat="@drawable/apple_iphone_14_promax" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/nameProductDialog_kien"
@@ -99,8 +97,8 @@
         android:id="@+id/nameUserDialog_kien"
         android:layout_width="219dp"
         android:layout_height="32dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="nguười dùng"
         android:textSize="15sp"
@@ -146,14 +144,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/desProductDialog_kien" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatarUserDialog_kien"
-        android:layout_width="94dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/boder_blue_circle"
         android:padding="16dp"
+        app:civ_border_color="@color/color_main"
+        app:civ_border_width="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderTimeProductDialog_kien"
         tools:srcCompat="@tools:sample/avatars" />

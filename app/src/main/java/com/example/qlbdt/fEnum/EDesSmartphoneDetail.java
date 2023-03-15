@@ -32,7 +32,24 @@ public enum EDesSmartphoneDetail {
     DES_XM_12Tpro ("Cuối cùng Xiaomi 12T Pro 5G cũng đã chính thức lộ diện trên thị trường sau " +
             "hàng loạt thông tin rò rỉ về thông số, đúng như dự đoán thì độ phân giải trên camera của phiên bản này được nhà sản xuất nâng cấp lên đến 200 MP, giúp máy trở thành thiết bị có khả năng ghi hình sắc nét thuộc top đầu giới smartphone, đi kèm với đó là màn hình chất lượng cùng bộ vi xử lý mạnh mẽ xứng tầm flagship."),
     DES_XM_N11 ("Redmi Note 11 (6GB/128GB) vừa được Xiaomi cho ra mắt, được xem là chiếc " +
-            "smartphone có giá tầm trung ấn tượng, với 1 cấu hình mạnh, cụm camera xịn sò, pin khỏe, sạc nhanh mà giá lại rất phải chăng.");
+            "smartphone có giá tầm trung ấn tượng, với 1 cấu hình mạnh, cụm camera xịn sò, pin khỏe, sạc nhanh mà giá lại rất phải chăng."),
+    DES_Oppo_A55 ("OPPO cho ra mắt OPPO A55 4G chiếc smartphone giá rẻ tầm trung có thiết kế đẹp mắt, cấu hình khá ổn, cụm camera chất lượng và dung lượng pin ấn tượng, mang đến một lựa chọn trải nghiệm thú vị vừa túi tiền cho người tiêu dùng."),
+    DES_Oppo_A77s ("OPPO vừa cho ra mắt mẫu điện thoại tầm trung mới với tên gọi OPPO A77s, máy sở hữu màn hình lớn, thiết kế đẹp mắt, hiệu năng ổn định cùng khả năng mở rộng RAM lên đến 8 GB vô cùng nổi bật trong phân khúc."),
+    DES_Oppo_A95 ("Bên cạnh phiên bản 5G, OPPO còn bổ sung phiên bản OPPO A95 4G với giá thành phải chăng tập trung vào thiết kế năng động, sạc nhanh và hiệu năng đa nhiệm ấn tượng sẽ giúp cho cuộc sống của bạn thêm phần hấp dẫn, ngập tràn niềm vui."),
+    DES_Oppo_A16 ("OPPO A16 - sản phẩm giá rẻ đến từ nhà OPPO, đây là một chiếc điện thoại cân bằng ở mọi khía cạnh trong tầm giá, máy có thiết kế đẹp mắt, sử dụng CPU gaming đến từ MediaTek cùng viên pin siêu trâu."),
+    DES_VV_Y02 ("Nhà Vivo vừa tung ra thị thường một mẫu smartphone vào dịp cuối năm 2022 với mức giá bán dễ tiếp cận, Vivo Y02 được xem là cái tên sẽ lấn át được nhiều đối thủ trong phân khúc khi sở hữu màn hình lớn, pin trâu cùng con chip Helio P22 có hiệu năng ổn định."),
+    DES_VV_Y33s ("Vivo Y33s - chiếc điện thoại này có thiết kế khá tương đồng với các sản phẩm tầm trung mà Vivo cho ra mắt gần đây. Ở phiên bản màu đen được phủ một lớp tráng gương sáng bóng, vào một số trường hợp nó có thể trở thành một chiếc gương soi tiện lợi, tuy nhiên khi sử dụng sẽ bị lưu lại vân tay khá rõ ràng."),
+    DES_RM_10 ("Realme 10 có thể xem là một trong những mẫu smartphone đáng mong đợi nhất trong dịp đầu năm 2023 với nhiều điểm nổi bật, một số điểm đáng chú ý có thể kể đến như: Tấm nền Super AMOLED, camera siêu độ phân giải 50 MP đi kèm con chip Helio G99 mạnh mẽ."),
+    DES_RM_C35 ("Điện thoại Realme C35 thuộc phân khúc giá rẻ được nhà Realme cho ra mắt với thiết kế trẻ trung, dung lượng pin lớn cùng camera hỗ trợ nhiều tính năng. Đây sẽ là thiết bị liên lạc, giải trí và làm việc ổn định,… cho các nhu cầu sử dụng của bạn."),
+    DES_RM_C33 ("Trong tháng 10/2022, Realme C33 (3GB/32GB) là cái tên thu hút được nhiều sự chú ý trên các diễn đàn công nghệ, sở hữu trên máy là một thiết kế hợp xu hướng đi kèm với màn hình to rõ giúp bạn có thể sử dụng các tác vụ giải trí được tốt hơn."),
+    DES_SS_A14 ("Samsung Galaxy A14 5G có thể là chiếc smartphone đầu tiên của năm 2023 được nhà sản xuất đến từ Hàn Quốc phát hành chính thức ở Việt Nam. Máy nổi bật với lối thiết kế trẻ trung, màn hình kích thước lớn và camera chính có độ phân giải lên tới 50 MP."),
+    DES_SS_A03s ("Nhằm đem đến cho người dùng thêm sự lựa chọn trong phân khúc, Samsung đã cho ra mắt thêm một chiếc điện thoại giá rẻ với tên gọi Galaxy A03s. So với người tiền nhiệm Galaxy A02s, thiết bị sẽ có một số nâng cấp mới, đây hứa hẹn sẽ là sản phẩm đáng để bạn trải nghiệm."),
+    DES_TCL_30p ("TCL 30+ là một cái tên khá mới mẻ trên thị trường điện thoại di động, sở hữu một mức giá không quá cao nhưng lại trang bị bên trong nhiều thông số kỹ thuật ấn tượng. Nổi bật trong đó có thể kể đến như camera 50 MP và con chip gaming của nhà MediaTek."),
+    DES_TCL_30se ("Cuối cùng thì chiếc điện thoại TCL 30 SE cũng đã chính thức kinh doanh tại thị trường Việt Nam vào tháng 09/2022 với một mức giá bán phải chăng, nhằm chiếm được cảm tình của phần đông người dùng điện thoại thì hãng trang bị cho máy khá nhiều thông số nổi bật để bạn có thể trải nghiệm các tác vụ hàng ngày tốt hơn.\n" +
+            "MediaTek Helio G25"),
+    DES_ITEL_L6502 ("Sở hữu một smartphone có ngoại hình đẹp với cấu hình tốt, giá rẻ không còn là điều không tưởng với Itel L6502, một phiên bản đẹp, giá tốt đến từ Itel đã sẵn sàng cho bạn trải nghiệm."),
+    DES_ITEL_L6006 ("Itel L6006 đến từ thương hiệu Itel phù hợp với những ai đang tìm kiếm cho mình một chiếc smartphone giá rẻ với cấu hình ổn định, được trang bị đầy đủ các tính năng thông dụng và có giá thành phải chăng.\n" +
+            "Spreadtrum SC9832E");
 
     public String getDes() {
         return des;
