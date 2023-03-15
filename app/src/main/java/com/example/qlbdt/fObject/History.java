@@ -16,6 +16,8 @@ public class History {
     private String brandName;
     private String des;
 
+
+
     public History(int id, String orderTime, String color, String nameCustomer, byte[] avatar, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone, String brandName, String des) {
         this.id =  id;
         this.orderTime = orderTime;
