@@ -10,194 +10,189 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#00FDCC"
-        android:layout_below="@id/linear_ll"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"/>
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="15dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/logo"
-            android:id="@+id/avatar_QA"/>
+        <ImageView
+            android:id="@+id/avatar_QA"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/logo" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#00FDCC"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="#00FDCC" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_person"/>
+            android:src="@drawable/ic_person" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="Full Name"
-            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:text="Họ và tên"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp"/>
+            android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meo Meo"
             android:id="@+id/name_QA"
-            android:layout_marginLeft="100dp"
-            android:textSize="18dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="73dp"
+            android:text="Meo Meo"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_smartphone"/>
+            android:src="@drawable/ic_smartphone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="Phone Number"
-            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:text="Số điện thoại"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp"/>
+            android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meo Meo"
             android:id="@+id/phone_QA"
-            android:layout_marginLeft="55dp"
-            android:textSize="18dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:text="Meo Meo"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_location"/>
+            android:src="@drawable/ic_location" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="Address"
-            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:text="Địa chỉ"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp"/>
+            android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meo Meo"
             android:id="@+id/address_QA"
-            android:layout_marginLeft="115dp"
-            android:textSize="18dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="91dp"
+            android:text="Meo Meo"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_email"/>
+            android:src="@drawable/ic_email" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginStart="5dp"
             android:text="Email"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp"/>
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/email_QA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="99dp"
             android:text="Meo Meo"
-            android:layout_marginStart="140dp"
-            android:id="@+id/email_QA"
-            android:textSize="18dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -207,16 +202,16 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_edit_QA"
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:background="@drawable/btn_selector"
-            android:text="Edit Profile"
-            android:id="@+id/btn_edit_QA"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:drawableStart="@drawable/ic_edit"
-            android:paddingStart="10dp"/>
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="Edit Profile"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

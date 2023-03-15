@@ -2,11 +2,14 @@ package com.example.qlbdt.fFragment;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +22,7 @@ import com.example.qlbdt.fActivity.HomeActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
-    private CircleImageView avatar;
+    private ImageView avatar;
     private TextView name, phoneNum, address, email;
     private Button btn_edit;
 
@@ -45,6 +48,10 @@ public class AccountFragment extends Fragment {
         String dc = c.getString(2);
         String mail = c.getString(3);
 
+        byte[] image = c.getBlob(4);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        avatar.setImageBitmap(bitmap);
+
         name.setText(ten);
         phoneNum.setText(sdt);
         address.setText(dc);
@@ -60,6 +67,7 @@ public class AccountFragment extends Fragment {
                 bundle.putString("phone", sdt);
                 bundle.putString("address", dc);
                 bundle.putString("email", mail);
+                bundle.putByteArray("avatar", image);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
