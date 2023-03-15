@@ -29,7 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView tv_nav_header_name;
+    TextView tv_nav_header_name, tv_nav_header_phone, tv_nav_header_addr;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -64,11 +64,14 @@ public class HomeActivity extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
         tv_nav_header_name = headerView.findViewById(R.id.tv_nav_header_name);
-        String queryNameUser = "SELECT name FROM Person";
+        tv_nav_header_phone = headerView.findViewById(R.id.tv_nav_header_phone);
+        tv_nav_header_addr = headerView.findViewById(R.id.tv_nav_header_addr);
+        String queryNameUser = "SELECT name, phone, address FROM Person";
         Cursor c = database.SelectData(queryNameUser);
         c.moveToFirst();
         tv_nav_header_name.setText(c.getString(0));
-
+        tv_nav_header_phone.setText("SĐT: " + c.getString(1));
+        tv_nav_header_addr.setText("Địa chỉ: " + c.getString(2));
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

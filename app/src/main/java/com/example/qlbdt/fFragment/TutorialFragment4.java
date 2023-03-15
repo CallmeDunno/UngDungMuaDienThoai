@@ -19,7 +19,7 @@ public class TutorialFragment4 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mView = inflater.inflate(R.layout.fragment_tutorial4, container, false);
         btn_getStart = mView.findViewById(R.id.btn_getStartOanh);
         btn_getStart.setOnClickListener(new View.OnClickListener() {

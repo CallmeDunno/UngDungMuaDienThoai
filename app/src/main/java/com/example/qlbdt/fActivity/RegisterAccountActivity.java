@@ -43,7 +43,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     ImageView img_avt;
     Button btn_confirm;
 
-    private final int MY_CODE_REQUEST_FOLDER = 100;
+    public static final int MY_CODE_REQUEST_FOLDER = 100;
     private MyDatabase database;
 
     private void init() {

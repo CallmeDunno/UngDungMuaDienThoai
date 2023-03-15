@@ -53,8 +53,8 @@ public class HomeFragment extends Fragment {
 
     List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
-        list.add(new Photo(R.drawable.avt_dung));
         list.add(new Photo(R.drawable.avt_kien));
+        list.add(new Photo(R.drawable.avt_dung));
         list.add(new Photo(R.drawable.avt_oanh));
         list.add(new Photo(R.drawable.avt_qa));
         list.add(new Photo(R.drawable.avt_tuan));
