@@ -1,6 +1,7 @@
 package com.example.qlbdt.fObject;
 
 public class Price implements Comparable<Price>{
+
     private int millions, thousands, inits;
 
     public Price(String price) {

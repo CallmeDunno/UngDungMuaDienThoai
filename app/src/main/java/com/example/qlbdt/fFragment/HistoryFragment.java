@@ -1,6 +1,7 @@
 package com.example.qlbdt.fFragment;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fActivity.HomeActivity;
+import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
 import com.example.qlbdt.fAdapter.HistoryAdapter;
 import com.example.qlbdt.fObject.History;
 
@@ -167,6 +169,17 @@ public class HistoryFragment extends Fragment {
             public void onClick(View view) {
 //                ẩn dialog
                 dialog.dismiss();
+            }
+        });
+
+        Button btnRebuy = dialog.findViewById(R.id.btnReBuyDialogHistory_kien);
+        btnRebuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                ẩn dialogb
+                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
+                intent.putExtra("NameSmartphone", history.getNameSmartPhone());
+                startActivity(intent);
             }
         });
 
