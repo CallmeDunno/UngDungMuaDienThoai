@@ -75,11 +75,11 @@ public class HomeFragment extends Fragment {
 
     List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
-        list.add(new Photo(R.drawable.avt_kien));
-        list.add(new Photo(R.drawable.avt_dung));
-        list.add(new Photo(R.drawable.avt_oanh));
-        list.add(new Photo(R.drawable.avt_qa));
-        list.add(new Photo(R.drawable.avt_tuan));
+        list.add(new Photo(R.drawable.banner1));
+        list.add(new Photo(R.drawable.banner2));
+        list.add(new Photo(R.drawable.banner3));
+        list.add(new Photo(R.drawable.banner4));
+        list.add(new Photo(R.drawable.banner5));
         return list;
     }
 
