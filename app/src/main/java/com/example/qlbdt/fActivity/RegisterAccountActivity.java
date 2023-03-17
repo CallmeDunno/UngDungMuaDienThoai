@@ -243,6 +243,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
                     String phone = edt_phone.getText().toString().trim();
                     String email = edt_email.getText().toString().trim();
                     String address = edt_addr.getText().toString().trim();
+
                     BitmapDrawable bitmapDrawable = (BitmapDrawable) img_avt.getDrawable(); //lấy hình từ imageView
                     //chuyển từ bitmapDrawable -> bitmap
                     Bitmap bitmap = bitmapDrawable.getBitmap();

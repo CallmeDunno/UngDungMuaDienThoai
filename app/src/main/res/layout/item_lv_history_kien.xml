@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="16dp"
-    android:background="@drawable/btn_selector2">
+    android:background="@drawable/btn_selector2"
+    app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/nameProduct_kien"
@@ -45,8 +45,8 @@
 
         <TextView
             android:id="@+id/ordertime_kien"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
             android:text="Ngày mua"
@@ -59,7 +59,7 @@
         <TextView
             android:id="@+id/priceProduct_kien"
             android:layout_width="112dp"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
             android:text="Giá"

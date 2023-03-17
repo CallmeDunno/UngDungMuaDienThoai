@@ -21,6 +21,7 @@ import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
 import com.example.qlbdt.fFragment.SearchFragment;
 import com.example.qlbdt.fOther.Notification;
+import com.jsibbold.zoomage.ZoomageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,7 +29,8 @@ import java.util.Date;
 
 public class SmartphoneDetailActivity extends AppCompatActivity {
 
-    ImageView img_back, img_avt;
+    ImageView img_back;
+    ZoomageView img_avt;
     TextView tv_name_smp_detail, tv_price_smp_detail, tv_des_smp_detail, tv_brand_name_smp_detail,
             tv_cpu_smp_detail, tv_ram_smp_detail, tv_rom_smp_detail, tv_color_smp_detail, tv_battery_smp_detail, tv_weight_smp_detail,
             tv_wp_smp_detail, tv_label_smp_detail;
