@@ -1,5 +1,6 @@
 package com.example.qlbdt.fFragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -16,9 +17,10 @@ import android.view.ViewGroup;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fActivity.HomeActivity;
+import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
 import com.example.qlbdt.fAdapter.PhotoAdapter;
 import com.example.qlbdt.fAdapter.SmartPhoneHomeAdapter;
-import com.example.qlbdt.fObject.Phone;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Photo;
 import com.example.qlbdt.fObject.Smartphone;
 
@@ -62,7 +64,14 @@ public class HomeFragment extends Fragment {
         //Commit 17/3
 
         rcvPhone = view.findViewById(R.id.rcv_phone);
-        mSmartPhoneHomeAdapter = new SmartPhoneHomeAdapter(getActivity());
+        mSmartPhoneHomeAdapter = new SmartPhoneHomeAdapter(getActivity(), new IRecyclerViewOnClick() {
+            @Override
+            public void onClickItemSmartphone(Smartphone smartphone) {
+                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
+                intent.putExtra("NameSmartphone", smartphone.getName());
+                startActivity(intent);
+            }
+        });
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
         rcvPhone.setLayoutManager(gridLayoutManager);
@@ -83,15 +92,15 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
-    private List<Phone> getListPhone(){
-        List<Phone> list = new ArrayList<>();
+    private List<Smartphone> getListPhone(){
+        List<Smartphone> list = new ArrayList<>();
         Cursor c = HomeActivity.database.SelectData("SELECT Smartphone.name, Smartphone.price, Smartphone.quantity, Smartphone.avatar FROM Smartphone");
         while (c.moveToNext()){
             String n = c.getString(0);
             String p = c.getString(1);
             int q = c.getInt(2);
             byte[] a = c.getBlob(3);
-            Phone phone = new Phone(a, n, p, q);
+            Smartphone phone = new Smartphone(n, p, q, a);
             list.add(phone);
         }
         return list;

@@ -10,25 +10,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fFragment.HomeFragment;
-import com.example.qlbdt.fObject.Phone;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
+import com.example.qlbdt.fObject.Smartphone;
 
 
 import java.util.List;
 
-public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAdapter.PhoneViewHolder> {
+public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAdapter.PhoneViewHolder>{
 
     private Context mContext;
-    private List<Phone> mListPhone;
+    private List<Smartphone> mListPhone;
+    private IRecyclerViewOnClick iRecyclerViewOnClick;
 
-    public SmartPhoneHomeAdapter(Context mContext) {
+    public SmartPhoneHomeAdapter(Context mContext, IRecyclerViewOnClick iRecyclerViewOnClick) {
         this.mContext = mContext;
+        this.iRecyclerViewOnClick = iRecyclerViewOnClick;
     }
 
-    public void setData(List<Phone> list){
+    public void setData(List<Smartphone> list){
         this.mListPhone = list;
         notifyDataSetChanged();
     }
@@ -42,16 +45,22 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
 
     @Override
     public void onBindViewHolder(@NonNull PhoneViewHolder holder, int position) {
-        Phone phone = mListPhone.get(position);
+        Smartphone phone = mListPhone.get(position);
         if (phone == null){
             return;
         }
-        byte[] image = phone.getResouceImage();
+        byte[] image = phone.getAvatar();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         holder.imgPhone.setImageBitmap(bitmap);
         holder.tvPhone.setText(phone.getName());
         holder.tvPrice.setText("Giá: " + phone.getPrice());
         holder.tvQuantity.setText("Số lượng: "+phone.getQuantity());
+        holder.cv_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iRecyclerViewOnClick.onClickItemSmartphone(phone);
+            }
+        });
     }
 
     @Override
@@ -68,10 +77,11 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         private TextView tvPhone;
         private TextView tvPrice;
         private TextView tvQuantity;
+        private CardView cv_item;
 
         public PhoneViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            cv_item = itemView.findViewById(R.id.cardview_tuan);
             imgPhone = itemView.findViewById(R.id.img_phone);
             tvPhone = itemView.findViewById(R.id.tv_phone);
             tvPrice = itemView.findViewById(R.id.tv_price);

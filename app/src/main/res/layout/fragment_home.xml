@@ -29,8 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:layout_alignBottom="@id/viewpager_tuan"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="right"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="6dp"
                 app:ci_drawable="@drawable/bg_white_circle_tutor" />
