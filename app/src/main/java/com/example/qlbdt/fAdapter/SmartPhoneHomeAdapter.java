@@ -1,5 +1,8 @@
 package com.example.qlbdt.fAdapter;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +21,10 @@ import java.util.List;
 
 public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAdapter.PhoneViewHolder> {
 
-    private HomeFragment mContext;
+    private Context mContext;
     private List<Phone> mListPhone;
 
-    public SmartPhoneHomeAdapter(HomeFragment mContext) {
+    public SmartPhoneHomeAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -43,11 +46,12 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         if (phone == null){
             return;
         }
-
-        holder.imgPhone.setImageResource(phone.getResouceImage());
+        byte[] image = phone.getResouceImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        holder.imgPhone.setImageBitmap(bitmap);
         holder.tvPhone.setText(phone.getName());
-        holder.tvPrice.setText(phone.getPrice());
-        holder.tvQuantity.setText(""+phone.getQuantity());
+        holder.tvPrice.setText("Giá: " + phone.getPrice());
+        holder.tvQuantity.setText("Số lượng: "+phone.getQuantity());
     }
 
     @Override
