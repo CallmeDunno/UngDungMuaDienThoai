@@ -1,5 +1,6 @@
 package com.example.qlbdt.fFragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.fActivity.HomeActivity;
 import com.example.qlbdt.fAdapter.PhotoAdapter;
 import com.example.qlbdt.fAdapter.SmartPhoneHomeAdapter;
 import com.example.qlbdt.fObject.Phone;
 import com.example.qlbdt.fObject.Photo;
+import com.example.qlbdt.fObject.Smartphone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,13 +62,14 @@ public class HomeFragment extends Fragment {
         //Commit 17/3
 
         rcvPhone = view.findViewById(R.id.rcv_phone);
-        mSmartPhoneHomeAdapter = new SmartPhoneHomeAdapter(this);
+        mSmartPhoneHomeAdapter = new SmartPhoneHomeAdapter(getActivity());
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
         rcvPhone.setLayoutManager(gridLayoutManager);
 
         mSmartPhoneHomeAdapter.setData(getListPhone());
         rcvPhone.setAdapter(mSmartPhoneHomeAdapter);
+
         return view;
     }
 
@@ -76,37 +80,21 @@ public class HomeFragment extends Fragment {
         list.add(new Photo(R.drawable.avt_oanh));
         list.add(new Photo(R.drawable.avt_qa));
         list.add(new Photo(R.drawable.avt_tuan));
-
         return list;
     }
 
     private List<Phone> getListPhone(){
         List<Phone> list = new ArrayList<>();
-        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
-
-        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
-
-        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
-
-        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
-        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
-
-
-
-
-
-        return  list;
+        Cursor c = HomeActivity.database.SelectData("SELECT Smartphone.name, Smartphone.price, Smartphone.quantity, Smartphone.avatar FROM Smartphone");
+        while (c.moveToNext()){
+            String n = c.getString(0);
+            String p = c.getString(1);
+            int q = c.getInt(2);
+            byte[] a = c.getBlob(3);
+            Phone phone = new Phone(a, n, p, q);
+            list.add(phone);
+        }
+        return list;
     }
 
     private void autoSlideImages(){

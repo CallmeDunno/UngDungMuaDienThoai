@@ -1,23 +1,23 @@
 package com.example.qlbdt.fObject;
 
 public class Phone {
-    private int resouceImage;
+    private byte[] resouceImage;
     private String name;
     private String price;
     private int quantity;
 
-    public Phone(int resouceImage, String name, String price, int quantity) {
+    public Phone(byte[] resouceImage, String name, String price, int quantity) {
         this.resouceImage = resouceImage;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public int getResouceImage() {
+    public byte[] getResouceImage() {
         return resouceImage;
     }
 
-    public void setResouceImage(int resouceImage) {
+    public void setResouceImage(byte[] resouceImage) {
         this.resouceImage = resouceImage;
     }
 
