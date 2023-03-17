@@ -3,6 +3,8 @@ package com.example.qlbdt.fFragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
@@ -13,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fAdapter.PhotoAdapter;
+import com.example.qlbdt.fAdapter.SmartPhoneHomeAdapter;
+import com.example.qlbdt.fObject.Phone;
 import com.example.qlbdt.fObject.Photo;
 
 import java.util.ArrayList;
@@ -31,6 +35,9 @@ public class HomeFragment extends Fragment {
     /*
     * 12/3 Tuan commit
     * */
+
+    private RecyclerView rcvPhone;
+    private SmartPhoneHomeAdapter mSmartPhoneHomeAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +55,17 @@ public class HomeFragment extends Fragment {
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
         autoSlideImages();
+
+        //Commit 17/3
+
+        rcvPhone = view.findViewById(R.id.rcv_phone);
+        mSmartPhoneHomeAdapter = new SmartPhoneHomeAdapter(this);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
+        rcvPhone.setLayoutManager(gridLayoutManager);
+
+        mSmartPhoneHomeAdapter.setData(getListPhone());
+        rcvPhone.setAdapter(mSmartPhoneHomeAdapter);
         return view;
     }
 
@@ -60,6 +78,35 @@ public class HomeFragment extends Fragment {
         list.add(new Photo(R.drawable.avt_tuan));
 
         return list;
+    }
+
+    private List<Phone> getListPhone(){
+        List<Phone> list = new ArrayList<>();
+        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
+
+        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
+
+        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
+
+        list.add(new Phone(R.drawable.avt_dung, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_kien, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_oanh, "Phone 1", "20002", 2000));
+        list.add(new Phone(R.drawable.avt_tuan, "Phone 1", "20002", 2000));
+
+
+
+
+
+        return  list;
     }
 
     private void autoSlideImages(){
