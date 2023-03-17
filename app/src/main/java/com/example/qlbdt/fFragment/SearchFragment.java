@@ -82,7 +82,6 @@ public class SearchFragment extends Fragment {
         //region Sort
         sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
         sort = new ArrayList<>();
-        sort.add("Sắp xếp theo mặc định");
         sort.add("Sắp xếp theo tên sản phẩm");
         sort.add("Sắp xếp theo giá tăng dần");
         sort.add("Sắp xếp theo giá giảm dần");

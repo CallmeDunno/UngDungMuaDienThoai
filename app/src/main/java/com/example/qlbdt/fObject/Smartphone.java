@@ -10,6 +10,13 @@ public class Smartphone {
 
     private String brand_name;
 
+    public Smartphone(String name, String price, int quantity, byte[] avatar) {
+        this.name = name;
+        this.price = new Price(price);
+        this.quantity = quantity;
+        this.avatar = avatar;
+    }
+
     public Smartphone(String name, String price, int quantity, byte[] avatar, String brand_name) {
         this.name = name;
         this.price = new Price(price);
