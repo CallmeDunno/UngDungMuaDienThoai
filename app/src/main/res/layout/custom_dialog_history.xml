@@ -26,7 +26,7 @@
         android:id="@+id/btnCloseDialogHistory_kien"
         android:layout_width="94dp"
         android:layout_height="41dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/btn_selector2"
         android:text="Đóng"
@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarUserDialog_kien"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintVertical_bias="0.032" />
 
     <Button
         android:id="@+id/btnReBuyDialogHistory_kien"
@@ -50,7 +50,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnCloseDialogHistory_kien"
         app:layout_constraintTop_toBottomOf="@+id/avatarUserDialog_kien"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.019" />
 
     <ImageView
         android:id="@+id/imgProductDialog_kien"
@@ -83,9 +83,9 @@
     <TextView
         android:id="@+id/orderTimeProductDialog_kien"
         android:layout_width="198dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         android:gravity="left"
         android:text="Ngày mua"
         android:textSize="15sp"
@@ -97,14 +97,14 @@
         android:id="@+id/nameUserDialog_kien"
         android:layout_width="219dp"
         android:layout_height="32dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="120dp"
         android:gravity="center"
         android:text="user"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/avatarUserDialog_kien"
-        app:layout_constraintTop_toBottomOf="@+id/priceProductDialog_kien" />
+        app:layout_constraintTop_toBottomOf="@+id/desProductDialog_kien" />
 
     <TextView
         android:id="@+id/brandProductDialog_kien"
@@ -134,8 +134,8 @@
         android:id="@+id/priceProductDialog_kien"
         android:layout_width="139dp"
         android:layout_height="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
         android:gravity="right"
         android:text="Giá"
         android:textColor="#EA3E3E"
@@ -146,26 +146,28 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatarUserDialog_kien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="120dp"
         android:padding="16dp"
         app:civ_border_color="@color/color_main"
         app:civ_border_width="3dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderTimeProductDialog_kien"
+        app:layout_constraintTop_toBottomOf="@+id/desProductDialog_kien"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/desProductDialog_kien"
         android:layout_width="338dp"
         android:layout_height="83dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="Des"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brandProductDialog_kien" />
 
