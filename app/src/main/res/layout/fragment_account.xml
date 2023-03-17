@@ -203,13 +203,14 @@
 
         <Button
             android:id="@+id/btn_edit_QA"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:background="@drawable/btn_selector"
             android:drawableStart="@drawable/ic_edit"
             android:gravity="center"
-            android:paddingStart="10dp"
-            android:text="Edit Profile"
+            android:padding="10dp"
+            android:textAllCaps="false"
+            android:text="Sửa thông tin"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

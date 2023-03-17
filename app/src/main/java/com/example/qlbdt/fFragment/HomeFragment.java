@@ -144,4 +144,10 @@ public class HomeFragment extends Fragment {
             mTimer = null;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSmartPhoneHomeAdapter.setData(getListPhone());
+    }
 }

@@ -12,6 +12,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.fDatabase.MyDatabase;
+import com.example.qlbdt.fObject.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -36,6 +39,7 @@ public class EditActivity extends AppCompatActivity {
     ImageView avatar_edit, back_account, done_edit;
     EditText et_name_edit, et_phoneNum_edit, et_address_edit, et_email_edit;
     TextView tv_change_avt;
+    MyDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,32 +55,30 @@ public class EditActivity extends AppCompatActivity {
         done_edit = findViewById(R.id.done_edit_QA);
         tv_change_avt = findViewById(R.id.change_photo_QA);
 
-        Intent intent = getIntent();
-        if(intent == null){
-            return;
-        }
-        Bundle bundle = intent.getExtras();
-        if(bundle == null){
-            return;
-        }
-        String ten_edit = bundle.getString("name");
-        String sdt_edit = bundle.getString("phone");
-        String dc_edit = bundle.getString("address");
-        String email_edit = bundle.getString("email");
-        byte[] avt_edit = bundle.getByteArray("avatar");
+        database = new MyDatabase(EditActivity.this, "MuaBanDienThoai.sqlite", null, 1);
 
-        et_name_edit.setText(ten_edit);
-        et_phoneNum_edit.setText(sdt_edit);
-        et_address_edit.setText(dc_edit);
-        et_email_edit.setText(email_edit);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(avt_edit, 0, avt_edit.length);
+        String accountquery = "SELECT name, phone, address, email, avatar FROM Person";
+        Cursor c = HomeActivity.database.SelectData(accountquery);
+        c.moveToFirst();
+
+        String ten = c.getString(0);
+        String sdt = c.getString(1);
+        String dc = c.getString(2);
+        String mail = c.getString(3);
+        byte[] image = c.getBlob(4);
+
+        et_name_edit.setText(ten);
+        et_phoneNum_edit.setText(sdt);
+        et_address_edit.setText(dc);
+        et_email_edit.setText(mail);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         avatar_edit.setImageBitmap(bitmap);
 
         ActivityResultLauncher<Intent> activityPickerResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             Uri uri = result.getData().getData();
                             try {
                                 InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -92,8 +94,8 @@ public class EditActivity extends AppCompatActivity {
         tv_change_avt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(EditActivity.this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(EditActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");
                     activityPickerResultLauncher.launch(intent);
@@ -126,11 +128,7 @@ public class EditActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 1, byteArrayOutputStream);
                 byte[] image = byteArrayOutputStream.toByteArray();
 
-                String editquery = String.format("UPDATE Person SET name = '%s', phone = '%s', address = '%s', email = '%s', avatar = '"+image+"' WHERE person_id = 1",
-                        ten_done, sdt_done, dc_done, email_done);
-
-                HomeActivity.database.QueryDatabase(editquery);
-                Toast.makeText(EditActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                database.UpdateUser(new User(ten_done, sdt_done, dc_done, email_done, image));
                 onBackPressed();
             }
         });

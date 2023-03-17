@@ -25,8 +25,8 @@ public class SupportFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_support, container, false);
         listViewSupport = view.findViewById(R.id.lsv_Sp);
         lstSupport = new ArrayList<>();
-        lstSupport.add(new Support(R.drawable.avt_qa,"Nguyễn Quỳnh Anh","09123445667","QuynhAnh@gmail.com"));
         lstSupport.add(new Support(R.drawable.avt_dung,"Nguyễn Quốc Dũng","0923767834","QDung@gmail.com"));
+        lstSupport.add(new Support(R.drawable.avt_qa,"Nguyễn Quỳnh Anh","09123445667","QuynhAnh@gmail.com"));
         lstSupport.add(new Support(R.drawable.avt_oanh,"Hà Hoàng Oanh","0934789221","Oanh@gmail.com"));
         lstSupport.add(new Support(R.drawable.avt_tuan,"Nguyễn Bá Tuấn","051234567","Tuan@gmail.com"));
         lstSupport.add(new Support(R.drawable.avt_kien,"Ngô Trung Kiên","0223876541","NgoKien@gmail.com"));

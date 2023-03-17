@@ -70,6 +70,20 @@ public class MyDatabase extends SQLiteOpenHelper implements IDatabase {
     }
 
     @Override
+    public void UpdateUser(User u) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Person SET name = ?, phone = ?, address = ?, email = ?, avatar = ? WHERE person_id = 1";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindString(1, u.getName());
+        statement.bindString(2, u.getPhone());
+        statement.bindString(3, u.getAddress());
+        statement.bindString(4, u.getEmail());
+        statement.bindBlob(5, u.getAvatar());
+        statement.executeUpdateDelete();
+    }
+
+    @Override
     public void InsertSmartphone(Context context, String name, String price, long quantity, int avatar, long brand_id) {
         InputStream inputStream = context.getResources().openRawResource(avatar);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

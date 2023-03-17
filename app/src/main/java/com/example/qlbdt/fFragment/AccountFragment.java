@@ -39,6 +39,19 @@ public class AccountFragment extends Fragment {
         email = view.findViewById(R.id.email_QA);
         btn_edit = view.findViewById(R.id.btn_edit_QA);
 
+        setData();
+
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), EditActivity.class));
+            }
+        });
+
+        return view;
+    }
+
+    private void setData(){
         String accountquery = "SELECT name, phone, address, email, avatar FROM Person";
         Cursor c = HomeActivity.database.SelectData(accountquery);
         c.moveToFirst();
@@ -47,7 +60,6 @@ public class AccountFragment extends Fragment {
         String sdt = c.getString(1);
         String dc = c.getString(2);
         String mail = c.getString(3);
-
         byte[] image = c.getBlob(4);
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         avatar.setImageBitmap(bitmap);
@@ -56,24 +68,11 @@ public class AccountFragment extends Fragment {
         phoneNum.setText(sdt);
         address.setText(dc);
         email.setText(mail);
-
-        btn_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), EditActivity.class);
-                Bundle bundle = new Bundle();
-               // bundle.putByteArray();
-                bundle.putString("name",ten);
-                bundle.putString("phone", sdt);
-                bundle.putString("address", dc);
-                bundle.putString("email", mail);
-                bundle.putByteArray("avatar", image);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-        return view;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        setData();
+    }
 }

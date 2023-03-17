@@ -49,29 +49,11 @@ public class HistoryFragment extends Fragment {
          * Lấy dữ liệu từ trong db
          * Author: NTKIEN (11-03-2023)
          * */
-        Cursor c =  HomeActivity.database.SelectData("select History.history_id, History.orderTime, SmartphoneDetail.color, " +
-                "Smartphone.name, Smartphone.price, Smartphone.avatar, Brand.name, SmartphoneDetail.description, Person.avatar, Person.name " +
-                "from History join Person on Person.person_id = History.person_id join SmartphoneDetail on SmartphoneDetail.smartphone_detail_id = History.smartphone_detail_id " +
-                "join Smartphone on Smartphone.smartphone_id = SmartphoneDetail.smartphone_id join Brand on Brand.brand_id = Smartphone.brand_id");
-        while(c.moveToNext()){
-            int id = c.getInt(0);
-            String orderTime = c.getString(1);
-            String color = c.getString(2);
-            String nameSmartPhone = c.getString(3);
-            String price = c.getString(4);
-            byte[] imgSmartPhone = c.getBlob(5);
-            String BrandName = c.getString(6);
-            String desSmartPhone = c.getString(7);
-            byte[] avatarUser = c.getBlob(8);
-            String nameUser = c.getString(9);
 
-
-            History history = new History(id,orderTime,color,nameUser,avatarUser,nameSmartPhone,price,imgSmartPhone,BrandName,desSmartPhone);
-            historyArrayList.add(history);
-        }
         listAdapter = new HistoryAdapter(getActivity(), historyArrayList);
         lstHistory.setAdapter(listAdapter);
 
+        getData();
 
         /*
         * Handle khi click vào 1 item nào đó trong listview
@@ -88,6 +70,29 @@ public class HistoryFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void getData(){
+        historyArrayList.clear();
+        Cursor c =  HomeActivity.database.SelectData("select History.history_id, History.orderTime, SmartphoneDetail.color, " +
+                "Smartphone.name, Smartphone.price, Smartphone.avatar, Brand.name, SmartphoneDetail.description, Person.avatar, Person.name " +
+                "from History join Person on Person.person_id = History.person_id join SmartphoneDetail on SmartphoneDetail.smartphone_detail_id = History.smartphone_detail_id " +
+                "join Smartphone on Smartphone.smartphone_id = SmartphoneDetail.smartphone_id join Brand on Brand.brand_id = Smartphone.brand_id");
+        while(c.moveToNext()){
+            int id = c.getInt(0);
+            String orderTime = c.getString(1);
+            String color = c.getString(2);
+            String nameSmartPhone = c.getString(3);
+            String price = c.getString(4);
+            byte[] imgSmartPhone = c.getBlob(5);
+            String BrandName = c.getString(6);
+            String desSmartPhone = c.getString(7);
+            byte[] avatarUser = c.getBlob(8);
+            String nameUser = c.getString(9);
+
+            History history = new History(id,orderTime,color,nameUser,avatarUser,nameSmartPhone,price,imgSmartPhone,BrandName,desSmartPhone);
+            historyArrayList.add(history);
+        }
     }
 
     /*
@@ -168,6 +173,8 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                ẩn dialog
+                getData();
+                listAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
         });
@@ -186,4 +193,5 @@ public class HistoryFragment extends Fragment {
 //        hiển thị dialog
         dialog.show();
     }
+
 }

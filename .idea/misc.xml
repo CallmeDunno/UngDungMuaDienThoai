@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable-v24/bg_blue_alpha_ 0.5_corner_16.xml" value="0.209" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable-v24/bg_gradient_blue_white.xml" value="0.2575" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/background_item_sp.xml" value="0.1525" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_alpha_05_corner_16.xml" value="0.137" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_boder_16.xml" value="0.1365" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_blue_corner_10.xml" value="0.1535" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_circle_tutor.xml" value="0.101" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_gradient_blue_white.xml" value="0.2575" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_gray_corner_16.xml" value="0.1365" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_gray_corner_bot_r_l_16.xml" value="0.234" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_white_boder_gray.xml" value="0.209" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_white_circle_tutor.xml" value="0.101" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/bg_white_corner_16.xml" value="0.1365" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/edt_click.xml" value="0.1365" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/ic_arrow_back.xml" value="0.124" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/ic_arrow_back_50.xml" value="0.124" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/ic_email.xml" value="0.234" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/drawable/ic_support.xml" value="0.132" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/font/akaya_telivigala.xml" value="0.3046875" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/activity_admin.xml" value="0.1897644927536232" />
@@ -52,6 +55,7 @@
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/item_rcv_search_fragment.xml" value="0.22530996152201796" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/layout/nav_header.xml" value="0.2604166666666667" />
         <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/menu/nav_menu_item.xml" value="0.1" />
+        <entry key="..\:/Study/Nam3/Ky_2/LTUDDT/BTL/QLBDT/app/src/main/res/mipmap-anydpi-v26/ic_logo_app.xml" value="0.234" />
       </map>
     </option>
   </component>
