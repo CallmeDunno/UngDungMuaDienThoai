@@ -11,21 +11,14 @@
     <ImageView
         android:layout_width="224dp"
         android:layout_height="462dp"
-        android:src="@drawable/reg_acc_tutorial" />
+        android:src="@drawable/search_tutorial" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Đây là giao diện khi bạn truy cập ứng dụng lần đầu. Hãy điền thông tin của bạn và bấm xác nhận để bắt đầu sử dụng ứng dụng."
-        android:textColor="@color/black"
-        android:textSize="18sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Bấm Skip để đến bước cuối cùng."
+        android:text="Bạn có thể tìm kiếm sản phẩm, sắp xếp sản phẩm theo tên và hãng ở chức năng 'Tìm kiếm'. Bấm vào sản phẩm để có thể xem chi tiết nhé!"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
