@@ -18,6 +18,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +42,7 @@ public class EditActivity extends AppCompatActivity {
     EditText et_name_edit, et_phoneNum_edit, et_address_edit, et_email_edit;
     TextView tv_change_avt;
     MyDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,5 +136,103 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        et_name_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String name = s.toString().trim();
+                if (name.isEmpty()) {
+                    et_name_edit.setError("Họ và tên không được để trống!");
+                } else {
+                    et_name_edit.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        et_phoneNum_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String phoneNumber = s.toString().trim();
+                if (phoneNumber.isEmpty()) {
+                    et_phoneNum_edit.setError("Số điện thoại không được để trống!");
+                } else if (phoneNumber.length() < 10 || phoneNumber.length() > 10) {
+                    et_phoneNum_edit.setError("Số điện thoại phải đủ 10 số!");
+                } else {
+                    et_phoneNum_edit.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        et_address_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String name = s.toString().trim();
+                if (name.isEmpty()) {
+                    et_address_edit.setError("Địa chỉ không được để trống!");
+                } else {
+                    et_address_edit.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        et_email_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String email = s.toString().trim();
+                if (email.isEmpty()) {
+                    et_email_edit.setError("Email không được để trống!");
+                }else if (!isValidEmail(email)) {
+                    et_email_edit.setError("Email không đúng định dạng!");
+                } else {
+                    et_email_edit.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+    private boolean isValidEmail(String email) {
+        // Tạo một Regular Expression để so khớp chuỗi với mẫu email hợp lệ
+        String emailRegex = "^[A-Za-z0-9+_.-]+@gmail\\.com$";
+        // Kiểm tra xem chuỗi có khớp với mẫu email hợp lệ hay không
+        return email.matches(emailRegex);
     }
 }
