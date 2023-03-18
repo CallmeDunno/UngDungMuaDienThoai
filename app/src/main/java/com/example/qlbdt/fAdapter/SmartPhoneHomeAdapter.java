@@ -53,7 +53,7 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         holder.imgPhone.setImageBitmap(bitmap);
         holder.tvPhone.setText(phone.getName());
-        holder.tvPrice.setText("Giá: " + phone.getPrice());
+        holder.tvPrice.setText("Giá: " + phone.getPrice() + " VND");
         holder.tvQuantity.setText("Số lượng: "+phone.getQuantity());
         holder.cv_item.setOnClickListener(new View.OnClickListener() {
             @Override

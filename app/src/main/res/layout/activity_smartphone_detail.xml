@@ -53,6 +53,12 @@
                 android:layout_height="300dp"
                 android:src="@mipmap/ic_launcher" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black" />
+
             <TextView
                 android:id="@+id/tv_name_smp_detail"
                 android:layout_width="match_parent"
@@ -211,7 +217,6 @@
 
             </TableLayout>
 
-
         </LinearLayout>
 
     </ScrollView>
@@ -229,7 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_selector"
-            android:text="Buy now" />
+            android:text="Mua ngay" />
 
     </LinearLayout>
 
