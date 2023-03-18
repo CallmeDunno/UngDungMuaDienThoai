@@ -48,8 +48,7 @@ public enum EDesSmartphoneDetail {
     DES_TCL_30se ("Cuối cùng thì chiếc điện thoại TCL 30 SE cũng đã chính thức kinh doanh tại thị trường Việt Nam vào tháng 09/2022 với một mức giá bán phải chăng, nhằm chiếm được cảm tình của phần đông người dùng điện thoại thì hãng trang bị cho máy khá nhiều thông số nổi bật để bạn có thể trải nghiệm các tác vụ hàng ngày tốt hơn.\n" +
             "MediaTek Helio G25"),
     DES_ITEL_L6502 ("Sở hữu một smartphone có ngoại hình đẹp với cấu hình tốt, giá rẻ không còn là điều không tưởng với Itel L6502, một phiên bản đẹp, giá tốt đến từ Itel đã sẵn sàng cho bạn trải nghiệm."),
-    DES_ITEL_L6006 ("Itel L6006 đến từ thương hiệu Itel phù hợp với những ai đang tìm kiếm cho mình một chiếc smartphone giá rẻ với cấu hình ổn định, được trang bị đầy đủ các tính năng thông dụng và có giá thành phải chăng.\n" +
-            "Spreadtrum SC9832E");
+    DES_ITEL_L6006 ("Itel L6006 đến từ thương hiệu Itel phù hợp với những ai đang tìm kiếm cho mình một chiếc smartphone giá rẻ với cấu hình ổn định, được trang bị đầy đủ các tính năng thông dụng và có giá thành phải chăng.");
 
     public String getDes() {
         return des;
