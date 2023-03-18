@@ -16,13 +16,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/smp_detail_tutorial" />
+            android:src="@drawable/history_tutorial" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/noti_buy_tutorial" />
+            android:src="@drawable/history_detail_tutorial" />
     </LinearLayout>
 
 
@@ -30,17 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Khi bấm vào sản phẩm, bạn sẽ thấy giao diện hiển thị chi tiết của sản phẩm. Chọn BUY NOW để mua sản phẩm, sau khi mua bạn sẽ nhìn thấy thông báo đã mua sản phẩm thành công."
         android:textColor="@color/black"
-        android:textSize="18sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="Nhấn mũi tên trên cùng bên trái để về trang chủ."
-        android:textColor="@color/black"
+        android:text="Chức năng 'Lịch sử mua hàng' sẽ giúp bạn xem lại lịch sử mua sản phẩm của mình. Bấm vào sản phẩm để xem chi tiết đơn mua nhé!"
         android:textSize="18sp" />
 
 </LinearLayout>

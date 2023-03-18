@@ -42,13 +42,13 @@ public class TutorialFragment extends Fragment {
         tvSkipOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewPagerOanh.setCurrentItem(2);
+                viewPagerOanh.setCurrentItem(7);
             }
         });
         layoutNextOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(viewPagerOanh.getCurrentItem()<2){
+                if(viewPagerOanh.getCurrentItem()<7){
                     viewPagerOanh.setCurrentItem(viewPagerOanh.getCurrentItem()+1);
                 }
             }
@@ -61,7 +61,7 @@ public class TutorialFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position==2){
+                if(position==7){
                     tvSkipOanh.setVisibility(View.GONE);
                     layoutBottomOanh.setVisibility(View.GONE);
                 } else {
