@@ -256,7 +256,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
                     database.InsertUser(new User(name, phone, email, address, avatar));
                     Toast.makeText(RegisterAccountActivity.this, "Xin chào, " + name, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterAccountActivity.this, HomeActivity.class));
+                    startActivity(new Intent(RegisterAccountActivity.this, TutorialActivity.class));
                     finish();
                 }
             }

@@ -60,7 +60,7 @@ public class EditActivity extends AppCompatActivity {
 
         database = new MyDatabase(EditActivity.this, "MuaBanDienThoai.sqlite", null, 1);
 
-        String accountquery = "SELECT name, phone, address, email, avatar FROM Person";
+        String accountquery = "SELECT name, phone, email, address, avatar FROM Person";
         Cursor c = HomeActivity.database.SelectData(accountquery);
         c.moveToFirst();
 
@@ -169,7 +169,7 @@ public class EditActivity extends AppCompatActivity {
                 String phoneNumber = s.toString().trim();
                 if (phoneNumber.isEmpty()) {
                     et_phoneNum_edit.setError("Số điện thoại không được để trống!");
-                } else if (phoneNumber.length() < 10 || phoneNumber.length() > 10) {
+                } else if (phoneNumber.length() != 10) {
                     et_phoneNum_edit.setError("Số điện thoại phải đủ 10 số!");
                 } else {
                     et_phoneNum_edit.setError(null);
