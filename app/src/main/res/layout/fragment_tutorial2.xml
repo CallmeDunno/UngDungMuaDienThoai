@@ -9,15 +9,15 @@
     tools:context=".fFragment.TutorialFragment2">
 
     <ImageView
-        android:layout_width="224dp"
-        android:layout_height="462dp"
-        android:src="@drawable/reg_acc_tutorial" />
+        android:layout_width="234dp"
+        android:layout_height="308dp"
+        android:src="@drawable/ic_tutor2" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Đây là giao diện khi bạn truy cập ứng dụng lần đầu. Hãy điền thông tin của bạn và bấm xác nhận để bắt đầu sử dụng ứng dụng."
+        android:text="Chào bạn, bạn đang trong giao diện hướng dẫn sử dụng ứng dụng. Bấm Next để chuyển sang bước tiếp theo."
         android:textColor="@color/black"
         android:textSize="18sp" />
     <TextView
