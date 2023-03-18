@@ -16,31 +16,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QLBDT"
         tools:targetApi="31">
-
+        <activity
+            android:name=".fActivity.TutorialActivity"
+            android:exported="false" />
         <activity
             android:name=".fActivity.SmartphoneDetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".fActivity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".fActivity.HomeActivity"
             android:exported="false" />
-
         <activity
             android:name=".fActivity.RegisterAccountActivity"
             android:exported="false" />
-
         <activity
             android:name=".fActivity.EditActivity"
-            android:exported="false"/>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
