@@ -60,7 +60,7 @@ public class EditActivity extends AppCompatActivity {
 
         database = new MyDatabase(EditActivity.this, "MuaBanDienThoai.sqlite", null, 1);
 
-        String accountquery = "SELECT name, phone, email, address, avatar FROM Person";
+        String accountquery = "SELECT name, phone, address, email, avatar FROM Person";
         Cursor c = HomeActivity.database.SelectData(accountquery);
         c.moveToFirst();
 

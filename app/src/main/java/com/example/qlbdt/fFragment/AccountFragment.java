@@ -52,7 +52,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void setData(){
-        String accountquery = "SELECT name, phone, email, address, avatar FROM Person";
+        String accountquery = "SELECT name, phone, address, email, avatar FROM Person";
         Cursor c = HomeActivity.database.SelectData(accountquery);
         c.moveToFirst();
 
