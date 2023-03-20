@@ -6,7 +6,8 @@ public enum EStatusFragment {
     FRAGMENT_ACCOUNT (2),
     FRAGMENT_HISTORY (3),
     FRAGMENT_SUPPORT (4),
-    FRAGMENT_TUTORIAL (5);
+    FRAGMENT_TUTORIAL (5),
+    FRAGMENT_BASKET (6);
 
     public int getStatusFragment() {
         return statusFragment;

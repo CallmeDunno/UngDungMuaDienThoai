@@ -36,7 +36,11 @@ public enum EStringQuery {
             "smartphone_detail_id INTEGER NOT NULL," +
             "person_id INTEGER NOT NULL," +
             "FOREIGN KEY (smartphone_detail_id) REFERENCES SmartphoneDetail(smartphone_detail_id)," +
-            "FOREIGN KEY (person_id) REFERENCES Person(person_id))");
+            "FOREIGN KEY (person_id) REFERENCES Person(person_id))"),
+    CreateTableBasket ("CREATE TABLE IF NOT EXISTS Basket (basket_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "smartphone_id INTEGER NOT NULL," +
+            "FOREIGN KEY (smartphone_id) REFERENCES Smartphone(smartphone_id)" +
+            ")");
 
     public String getQuery() {
         return query;

@@ -227,14 +227,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="6dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btn_buy_smp_detail"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_selector"
+            android:layout_margin="8dp"
             android:text="Mua ngay" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_add_basket_smp_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_selector2"
+            android:text="Thêm vào giỏ hàng" />
 
     </LinearLayout>
 

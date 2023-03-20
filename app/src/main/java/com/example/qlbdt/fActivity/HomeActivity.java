@@ -20,6 +20,7 @@ import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
 import com.example.qlbdt.fEnum.EStatusFragment;
 import com.example.qlbdt.fFragment.AccountFragment;
+import com.example.qlbdt.fFragment.BasketFragment;
 import com.example.qlbdt.fFragment.HistoryFragment;
 import com.example.qlbdt.fFragment.HomeFragment;
 import com.example.qlbdt.fFragment.SearchFragment;
@@ -96,6 +97,13 @@ public class HomeActivity extends AppCompatActivity {
                             ReplaceFragment(new AccountFragment());
                             FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_ACCOUNT.getStatusFragment();
                             getSupportActionBar().setTitle(R.string.Account);
+                        }
+                        break;
+                    case R.id.nav_menu_item_basket:
+                        if (FRAGMENT_CURRENT != EStatusFragment.FRAGMENT_BASKET.getStatusFragment()){
+                            ReplaceFragment(new BasketFragment());
+                            FRAGMENT_CURRENT = EStatusFragment.FRAGMENT_BASKET.getStatusFragment();
+                            getSupportActionBar().setTitle(R.string.ShoppingBasket);
                         }
                         break;
                     case R.id.nav_menu_item_history:
