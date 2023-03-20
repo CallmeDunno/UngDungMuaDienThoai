@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
@@ -34,7 +35,7 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
     TextView tv_name_smp_detail, tv_price_smp_detail, tv_des_smp_detail, tv_brand_name_smp_detail,
             tv_cpu_smp_detail, tv_ram_smp_detail, tv_rom_smp_detail, tv_color_smp_detail, tv_battery_smp_detail, tv_weight_smp_detail,
             tv_wp_smp_detail, tv_label_smp_detail;
-    Button btn_buy_smp_detail;
+    Button btn_buy_smp_detail, btn_add_basket_smp_detail;
 
     private MyDatabase database;
 
@@ -54,6 +55,7 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
         btn_buy_smp_detail = findViewById(R.id.btn_buy_smp_detail);
         tv_wp_smp_detail = findViewById(R.id.tv_wp_smp_detail);
         tv_label_smp_detail = findViewById(R.id.tv_label_smp_detail);
+        btn_add_basket_smp_detail = findViewById(R.id.btn_add_basket_smp_detail);
     }
 
     @Override
@@ -82,6 +84,22 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
                 ShowDialog(name);
             }
         });
+
+        btn_add_basket_smp_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int index = SetDataBasket(name);
+                database.InsertBasket(index);
+                Toast.makeText(SmartphoneDetailActivity.this, "Đã thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private int SetDataBasket(String name) {
+        String querySmartphone = String.format("SELECT smartphone_id FROM Smartphone WHERE name = '%s'", name);
+        Cursor c = database.SelectData(querySmartphone);
+        c.moveToFirst();
+        return c.getInt(0);
     }
 
     private void SetContentSmartphoneDetail(String name) {

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.example.qlbdt.fEnum.EStringQuery;
 import com.example.qlbdt.fInterface.IDatabase;
+import com.example.qlbdt.fObject.Basket;
 import com.example.qlbdt.fObject.User;
 
 import java.io.ByteArrayOutputStream;
@@ -31,6 +32,7 @@ public class MyDatabase extends SQLiteOpenHelper implements IDatabase {
         sqLiteDatabase.execSQL(EStringQuery.CreateTableSmartphoneDetail.getQuery());
         sqLiteDatabase.execSQL(EStringQuery.CreateTablePerson.getQuery());
         sqLiteDatabase.execSQL(EStringQuery.CreateTableHistory.getQuery());
+        sqLiteDatabase.execSQL(EStringQuery.CreateTableBasket.getQuery());
     }
 
     @Override
@@ -82,6 +84,27 @@ public class MyDatabase extends SQLiteOpenHelper implements IDatabase {
         statement.bindBlob(5, u.getAvatar());
         statement.executeUpdateDelete();
     }
+
+    @Override
+    public void InsertBasket(int indexSmp) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO Basket VALUES(null, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindLong(1, indexSmp);
+        statement.executeInsert();
+    }
+
+    @Override
+    public void DeleteBasket(int index) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "DELETE FROM Basket WHERE basket_id = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindLong(1, index);
+        statement.executeUpdateDelete();
+    }
+
 
     @Override
     public void InsertSmartphone(Context context, String name, String price, long quantity, int avatar, long brand_id) {

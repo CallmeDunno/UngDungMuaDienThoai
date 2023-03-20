@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fFragment.BasketFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/linearlayout_fragment_basket"
+        android:id="@+id/rcv_fragment_basket" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DFDFDF"
+        android:layout_above="@id/linearlayout_fragment_basket" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout_fragment_basket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_count_rcv_fragment_basket" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.qlbdt.fInterface;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.example.qlbdt.fObject.Basket;
 import com.example.qlbdt.fObject.User;
 
 public interface IDatabase {
@@ -10,5 +11,7 @@ public interface IDatabase {
     Cursor SelectData(String query);
     void InsertUser(User u);
     void UpdateUser(User u);
+    void InsertBasket(int indexSmp);
+    void DeleteBasket(int index);
     void InsertSmartphone(Context context, String name, String price, long quantity, int avatar, long brand_id);
 }
