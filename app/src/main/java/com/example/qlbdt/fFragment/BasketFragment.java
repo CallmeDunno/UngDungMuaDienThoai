@@ -25,6 +25,8 @@ import com.example.qlbdt.fActivity.HomeActivity;
 import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
 import com.example.qlbdt.fAdapter.BasketAdapter;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClickBasketItem;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClickDelete;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClickDetail;
 import com.example.qlbdt.fObject.Basket;
 import com.example.qlbdt.fOther.Notification;
 
@@ -52,9 +54,41 @@ public class BasketFragment extends Fragment {
             public void onClickItemBasket(Basket basket, int position) {
                 ShowDialog(basket.getNameSmp(), position);
             }
+        }, new IRecyclerViewOnClickDelete() {
+            @Override
+            public void onClickDetail(int index) {
+                ShowDialogDeleteItem(index);
+            }
+        }, new IRecyclerViewOnClickDetail() {
+            @Override
+            public void onClickDetail(String name) {
+                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
+                intent.putExtra("NameSmartphone", name);
+                startActivity(intent);
+            }
         });
         rcvBasket.setAdapter(adapter);
         return view;
+    }
+
+    private void ShowDialogDeleteItem(int index) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?");
+        builder.setPositiveButton("Tôi đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                HomeActivity.database.DeleteBasket(index);
+                adapter.setList(getList());
+            }
+        });
+        builder.setNeutralButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
     }
 
     private void ShowDialog(String name, int index) {
