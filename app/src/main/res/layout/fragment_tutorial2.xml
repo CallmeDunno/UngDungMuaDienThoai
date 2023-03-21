@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Chào bạn, bạn đang trong giao diện hướng dẫn sử dụng ứng dụng. Bấm Next để chuyển sang bước tiếp theo."
+        android:text="Chào bạn, bạn đang trong giao diện hướng dẫn sử dụng ứng dụng. Bấm 'Tiếp theo' để chuyển sang bước tiếp theo."
         android:textColor="@color/black"
         android:textSize="18sp" />
     <TextView
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="Bấm Skip để đến bước cuối cùng."
+        android:text="Bấm 'Bỏ qua' để đến bước cuối cùng."
         android:textColor="@color/black"
         android:textSize="18sp" />
 
