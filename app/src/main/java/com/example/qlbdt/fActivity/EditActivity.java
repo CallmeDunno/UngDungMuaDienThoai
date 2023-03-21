@@ -131,7 +131,7 @@ public class EditActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 1, byteArrayOutputStream);
                 byte[] image = byteArrayOutputStream.toByteArray();
 
-                database.UpdateUser(new User(ten_done, sdt_done, dc_done, email_done, image));
+                database.UpdateUser(new User(ten_done, sdt_done, email_done, dc_done, image));
                 onBackPressed();
             }
         });
