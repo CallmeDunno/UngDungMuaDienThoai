@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
-import com.example.qlbdt.fFragment.SearchFragment;
 import com.example.qlbdt.fOther.Notification;
 import com.jsibbold.zoomage.ZoomageView;
 
@@ -93,6 +91,7 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
                 Toast.makeText(SmartphoneDetailActivity.this, "Đã thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private int SetDataBasket(String name) {
