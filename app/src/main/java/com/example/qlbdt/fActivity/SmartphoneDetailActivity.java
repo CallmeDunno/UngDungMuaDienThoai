@@ -4,8 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,8 +19,6 @@ import android.widget.Toast;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
-import com.example.qlbdt.fFragment.BasketFragment;
-import com.example.qlbdt.fFragment.SearchFragment;
 import com.example.qlbdt.fOther.Notification;
 import com.jsibbold.zoomage.ZoomageView;
 
