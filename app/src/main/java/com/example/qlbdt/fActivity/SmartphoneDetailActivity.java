@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fDatabase.MyDatabase;
+import com.example.qlbdt.fFragment.BasketFragment;
 import com.example.qlbdt.fFragment.SearchFragment;
 import com.example.qlbdt.fOther.Notification;
 import com.jsibbold.zoomage.ZoomageView;
@@ -93,6 +96,7 @@ public class SmartphoneDetailActivity extends AppCompatActivity {
                 Toast.makeText(SmartphoneDetailActivity.this, "Đã thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private int SetDataBasket(String name) {
