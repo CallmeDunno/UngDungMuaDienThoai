@@ -75,14 +75,14 @@ public class Smartphone {
     public static class PriceOrderAsc implements Comparator<Smartphone>{
         @Override
         public int compare(Smartphone a, Smartphone b) {
-            return a.getPrice().compareTo(b.getPrice());
+            return a.price.compareTo(b.price);
         }
     }
 
     public static class PriceOrderDesc implements Comparator<Smartphone>{
         @Override
         public int compare(Smartphone a, Smartphone b) {
-            return b.getPrice().compareTo(a.getPrice());
+            return b.price.compareTo(a.price);
         }
     }
 }
