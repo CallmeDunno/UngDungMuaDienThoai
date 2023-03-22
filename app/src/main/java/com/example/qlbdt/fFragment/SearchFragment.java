@@ -39,6 +39,8 @@ public class SearchFragment extends Fragment {
     Spinner sp_sort, sp_brand;
     ArrayList<String> sort, brand;
     ArrayAdapter adapterSort, adapterBrand;
+
+    int sortIndex = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,14 +95,17 @@ public class SearchFragment extends Fragment {
                 List<Smartphone> smpOld = smartphones;
                 switch (sort.get(i)){
                     case "Sắp xếp theo tên sản phẩm":
+                        sortIndex = i;
                         Collections.sort(smpOld, new Smartphone.NameOrder());
                         searchAdapter.setDataChanged(smartphones);
                         break;
                     case "Sắp xếp theo giá tăng dần":
+                        sortIndex = i;
                         Collections.sort(smpOld, new Smartphone.PriceOrderAsc());
                         searchAdapter.setDataChanged(smartphones);
                         break;
                     case "Sắp xếp theo giá giảm dần":
+                        sortIndex = i;
                         Collections.sort(smpOld, new Smartphone.PriceOrderDesc());
                         searchAdapter.setDataChanged(smartphones);
                         break;
@@ -136,6 +141,15 @@ public class SearchFragment extends Fragment {
                         if (s.getBrand_name().equals(strBrand)){
                             list.add(s);
                         }
+                    }
+                    if (sortIndex == 0){
+                        Collections.sort(list, new Smartphone.NameOrder());
+                    }
+                    if (sortIndex == 1){
+                        Collections.sort(list, new Smartphone.PriceOrderAsc());
+                    }
+                    if (sortIndex == 2){
+                        Collections.sort(list, new Smartphone.PriceOrderDesc());
                     }
                     searchAdapter.setDataChanged(list);
                 } else {
