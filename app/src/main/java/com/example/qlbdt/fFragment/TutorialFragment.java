@@ -34,7 +34,8 @@ public class TutorialFragment extends Fragment {
         layoutBottomOanh = view.findViewById(R.id.layout_bottomOanh);
         circleIndicatorOanh = view.findViewById(R.id.circleindicator_Oanh);
         layoutNextOanh = view.findViewById(R.id.layout_nextOanh);
-        viewPagerTutorAdapter = new ViewPagerTutorAdapter(getActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        viewPagerTutorAdapter = new ViewPagerTutorAdapter(getActivity().getSupportFragmentManager(),
+                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPagerOanh.setAdapter(viewPagerTutorAdapter);
 
         circleIndicatorOanh.setViewPager(viewPagerOanh);
@@ -42,7 +43,7 @@ public class TutorialFragment extends Fragment {
         tvSkipOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewPagerOanh.setCurrentItem(7);
+                viewPagerOanh.setCurrentItem(8);
             }
         });
         layoutNextOanh.setOnClickListener(new View.OnClickListener() {
