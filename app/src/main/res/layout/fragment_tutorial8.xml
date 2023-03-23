@@ -8,17 +8,31 @@
     android:padding="16dp"
     tools:context=".fFragment.TutorialFragment2">
 
-    <ImageView
-        android:layout_width="224dp"
-        android:layout_height="462dp"
-        android:src="@drawable/support_tutorial" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="408dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/history_tutorial" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/history_detail_tutorial" />
+    </LinearLayout>
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Đừng ngần ngại gọi điện hay gửi email cho đội ngũ hỗ trợ nếu bạn có thắc mắc gì ở chức năng 'Hỗ trợ' bằng cách bấm vào biểu tượng gọi điện hay gửi email."
         android:textColor="@color/black"
+        android:gravity="center"
+        android:text="Chức năng 'Lịch sử mua hàng' sẽ giúp bạn xem lại lịch sử mua sản phẩm của mình. Bấm vào sản phẩm để xem chi tiết đơn mua nhé!"
         android:textSize="18sp" />
 
 </LinearLayout>

@@ -12,6 +12,7 @@ import com.example.qlbdt.fFragment.TutorialFragment5;
 import com.example.qlbdt.fFragment.TutorialFragment6;
 import com.example.qlbdt.fFragment.TutorialFragment7;
 import com.example.qlbdt.fFragment.TutorialFragment8;
+import com.example.qlbdt.fFragment.TutorialFragment9;
 import com.example.qlbdt.fFragment.TutorialFragmentLast;
 
 public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
@@ -38,6 +39,8 @@ public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
             case 6:
                 return new TutorialFragment8();
             case 7:
+                return new TutorialFragment9();
+            case 8:
                 return new TutorialFragmentLast();
             default:
                 return new TutorialFragment2();
@@ -46,6 +49,6 @@ public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 8;
+        return 9;
     }
 }

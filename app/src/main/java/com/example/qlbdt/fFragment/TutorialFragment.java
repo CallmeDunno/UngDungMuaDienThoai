@@ -48,7 +48,7 @@ public class TutorialFragment extends Fragment {
         layoutNextOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(viewPagerOanh.getCurrentItem()<7){
+                if(viewPagerOanh.getCurrentItem()<8){
                     viewPagerOanh.setCurrentItem(viewPagerOanh.getCurrentItem()+1);
                 }
             }
@@ -61,7 +61,7 @@ public class TutorialFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position==7){
+                if(position==8){
                     tvSkipOanh.setVisibility(View.GONE);
                     layoutBottomOanh.setVisibility(View.GONE);
                 } else {
