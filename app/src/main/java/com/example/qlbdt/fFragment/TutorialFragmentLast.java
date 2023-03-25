@@ -20,9 +20,6 @@ public class TutorialFragmentLast extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_tutoriallast, container, false);
-        // Khi nút được nhấp, một Intent được tạo để chuyển hướng người dùng đến HomeActivity và startActivity()
-        // được gọi để hiển thị màn hình chính của ứng dụng.
-        // Sau đó, mView được trả về để hiển thị Fragment này trên màn hình.
         btn_getStart = mView.findViewById(R.id.btn_getStartOanh);
         btn_getStart.setOnClickListener(new View.OnClickListener() {
             @Override
