@@ -16,10 +16,10 @@ import com.example.qlbdt.fFragment.TutorialFragment9;
 import com.example.qlbdt.fFragment.TutorialFragmentLast;
 
 public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
+    //định nghĩa một lớp ViewPagerTutorAdapter kế thừa từ FragmentStatePagerAdapter và cung cấp phương thức getItem và getCount để quản lý các Fragment trong ViewPager.
     public ViewPagerTutorAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -46,9 +46,13 @@ public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
                 return new TutorialFragment2();
         }
     }
-
+    //trong phương thức getItem, tùy vào giá trị position được truyền vào, lớp trả về một đối tượng Fragment tương ứng.
+    // Ví dụ, nếu position là 0, phương thức sẽ trả về một đối tượng TutorialFragment2.
+    // Nếu position là 8, nó sẽ trả về một đối tượng TutorialFragmentLast.
+    // Nếu position không nằm trong khoảng từ 0 đến 8, phương thức sẽ trả về một đối tượng TutorialFragment2.
     @Override
     public int getCount() {
         return 9;
     }
+    //Phương thức getCount đơn giản trả về số lượng Fragment được quản lý, trong trường hợp này là 9.
 }
