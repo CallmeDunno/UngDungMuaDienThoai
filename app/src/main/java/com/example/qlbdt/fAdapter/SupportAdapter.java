@@ -20,7 +20,6 @@ import com.example.qlbdt.R;
 import com.example.qlbdt.fObject.Support;
 
 import java.util.ArrayList;
-
 public class SupportAdapter extends BaseAdapter {
     Activity context;
     int Resource;
@@ -31,6 +30,7 @@ public class SupportAdapter extends BaseAdapter {
         Resource = resource;
         this.objects = objects;
     }
+
     @Override
     public int getCount() {
         return objects.size();
@@ -45,6 +45,7 @@ public class SupportAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return 0;
     }
+
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {

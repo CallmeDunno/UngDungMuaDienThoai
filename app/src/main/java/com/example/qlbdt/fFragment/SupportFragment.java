@@ -21,7 +21,6 @@ public class SupportFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_support, container, false);
         listViewSupport = view.findViewById(R.id.lsv_Sp);
         lstSupport = new ArrayList<>();

@@ -19,7 +19,6 @@ public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
     public ViewPagerTutorAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
