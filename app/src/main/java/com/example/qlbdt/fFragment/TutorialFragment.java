@@ -43,14 +43,14 @@ public class TutorialFragment extends Fragment {
         tvSkipOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewPagerOanh.setCurrentItem(9);
+                viewPagerOanh.setCurrentItem(8);
             }
         });
 
         layoutNextOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(viewPagerOanh.getCurrentItem()<9){
+                if(viewPagerOanh.getCurrentItem()<8){
                     viewPagerOanh.setCurrentItem(viewPagerOanh.getCurrentItem()+1);
                 }
             }

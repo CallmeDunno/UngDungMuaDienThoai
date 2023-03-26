@@ -55,18 +55,17 @@ public class SupportAdapter extends BaseAdapter {
         TextView nameSpOanh = view.findViewById(R.id.nameSpOanh);
         ImageView phoneSpOanh = view.findViewById(R.id.phoneSpOanh);
         ImageView emailSpOanh = view.findViewById(R.id.mailSpOanh);
-        Support support = this.objects.get(i);
+        Support support = objects.get(i);
 
         nameSpOanh.setText(support.getNameSp());
         imageSpOanh.setImageResource(support.getImageSp());
 
-        Support s = objects.get(i);
         phoneSpOanh.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent CallSp = new Intent();
                 CallSp.setAction(Intent.ACTION_DIAL);
-                CallSp.setData(Uri.parse("tel:" + s.getPhoneSp()));
+                CallSp.setData(Uri.parse("tel:" + support.getPhoneSp()));
                 context.startActivity(CallSp);
             }
         });
@@ -74,7 +73,7 @@ public class SupportAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent MailSp = new Intent(Intent.ACTION_SENDTO);
-                MailSp.setData(Uri.parse("mailto:" + s.getMailSp()));
+                MailSp.setData(Uri.parse("mailto:" + support.getMailSp()));
                 try {
                     context.startActivity(MailSp);
                 } catch (ActivityNotFoundException e) {

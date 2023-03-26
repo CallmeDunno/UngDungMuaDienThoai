@@ -15,6 +15,7 @@ import com.example.qlbdt.fFragment.TutorialFragment8;
 import com.example.qlbdt.fFragment.TutorialFragment9;
 import com.example.qlbdt.fFragment.TutorialFragmentLast;
 
+
 public class ViewPagerTutorAdapter extends FragmentStatePagerAdapter {
     public ViewPagerTutorAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
