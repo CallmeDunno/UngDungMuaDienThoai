@@ -42,13 +42,13 @@ public class TutorialActivity extends AppCompatActivity {
         tvSkipOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewPagerOanh.setCurrentItem(7);
+                viewPagerOanh.setCurrentItem(8);
             }
         });
         layoutNextOanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(viewPagerOanh.getCurrentItem()<7){
+                if(viewPagerOanh.getCurrentItem()<8){
                     viewPagerOanh.setCurrentItem(viewPagerOanh.getCurrentItem()+1);
                 }
             }
@@ -61,7 +61,7 @@ public class TutorialActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position==7){
+                if(position==8){
                     tvSkipOanh.setVisibility(View.GONE);
                     layoutBottomOanh.setVisibility(View.GONE);
                 } else {
