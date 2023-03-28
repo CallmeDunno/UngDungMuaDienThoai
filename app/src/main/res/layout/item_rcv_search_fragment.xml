@@ -13,46 +13,49 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/img_avt_rcv_fragment_search"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_margin="8dp"
-            android:id="@+id/img_avt_rcv_fragment_search"
-            android:src="@mipmap/ic_launcher"
-            android:scaleType="centerCrop"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@id/img_avt_rcv_fragment_search"
-            android:orientation="vertical"
-            android:layout_centerVertical="true">
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
                 android:id="@+id/tv_name_rcv_fragment_search"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/Find" />
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/Find"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/tv_price_rcv_fragment_search"
-                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="@string/Find"
                 android:textColor="#FF0000"
-                android:layout_marginBottom="10dp"/>
+                android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_quantity_rcv_fragment_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_quantity_rcv_fragment_search"
-                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/Find"
-                android:layout_marginBottom="10dp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
