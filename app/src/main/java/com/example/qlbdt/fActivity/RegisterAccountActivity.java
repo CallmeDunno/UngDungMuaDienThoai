@@ -254,7 +254,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
                     bitmap.compress(Bitmap.CompressFormat.PNG, 1, byteArrayOutputStream);
                     byte[] avatar = byteArrayOutputStream.toByteArray();
 
-                    database.InsertUser(new User(name, phone, email, address, avatar));
+                    database.InsertUser(new User(name, phone, address,email, avatar));
                     Toast.makeText(RegisterAccountActivity.this, "Xin chào, " + name, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterAccountActivity.this, TutorialActivity.class));
                     finish();
