@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     private CircleIndicator circleIndicator;
     private PhotoAdapter photoAdapter;
     private List<Photo> mListPhoto;
-    private Timer mTimer;
+    private Timer mTimer;  // Sử lý tác vụ sau bao lâu thì chuyển slide
     /*
     * 12/3 Tuan commit
     * */
@@ -49,11 +49,13 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Ánh xạ viewPager và circleIndiacator
         viewPager = view.findViewById(R.id.viewpager_tuan);
         circleIndicator = view.findViewById(R.id.circle_indicator_tuan);
 
+        // khởi tạo photoAdapter
         mListPhoto = getListPhoto();
-        photoAdapter = new PhotoAdapter(this, mListPhoto);
+        photoAdapter = new PhotoAdapter(this, mListPhoto);       // (biến môi trường và mảng dữ liệu)
         viewPager.setAdapter(photoAdapter);
 
         circleIndicator.setViewPager(viewPager);
@@ -73,15 +75,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);  //Số cột muốn hiển thị
         rcvPhone.setLayoutManager(gridLayoutManager);
 
-        mSmartPhoneHomeAdapter.setData(getListPhone());
+        mSmartPhoneHomeAdapter.setData(getListPhone());    //Set dữ liệu cho adapter
         rcvPhone.setAdapter(mSmartPhoneHomeAdapter);
 
         return view;
     }
 
+    // Lấy dữ liệu
     List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
         list.add(new Photo(R.drawable.banner1));
@@ -111,7 +114,7 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // Init timer
+        // Khởi tạo timer
         if (mTimer == null){
             mTimer = new Timer();
         }
@@ -122,20 +125,21 @@ public class HomeFragment extends Fragment {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        int currentItem = viewPager.getCurrentItem();
+                        int currentItem = viewPager.getCurrentItem();   // index trong ViewPager
                         int totalItem = mListPhoto.size() - 1;
                         if (currentItem < totalItem){
                             currentItem ++;
-                            viewPager.setCurrentItem(currentItem);
+                            viewPager.setCurrentItem(currentItem);      // Set current cho ViewPager
                         }else {
-                            viewPager.setCurrentItem(0);
+                            viewPager.setCurrentItem(0);                // Nếu đến ảnh cuối r thì sẽ set về ảnh ban đầu
                         }
                     }
                 });
             }
-        }, 500, 3000);
+        }, 500, 3000);  // (delay 0,5s; xử lý mỗi tác vụ : 3s)
     }
 
+    // Nếu cái activity này k tồn tại thì cần Cancel Timer đi
     @Override
     public void onDestroy() {
         super.onDestroy();

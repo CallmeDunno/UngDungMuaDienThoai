@@ -34,9 +34,9 @@ public class PhotoAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_photo_tuan, container, false);
         ImageView imgPhoto = view.findViewById(R.id.tuan_img_photo);
 
-        Photo photo = mListPhoto.get(position);
-        if (photo != null){
-            Glide.with(mContext).load(photo.getResourceId()).into(imgPhoto);
+        Photo photo = mListPhoto.get(position); // Khai báo
+        if (photo != null){                     // Nếu photo != null thì sẽ set ảnh cho ImageView
+            Glide.with(mContext).load(photo.getResourceId()).into(imgPhoto);    // Sử dụng Glide để load ảnh lên ImageView
         }
         // Add view to viewgroup
         container.addView(view);
