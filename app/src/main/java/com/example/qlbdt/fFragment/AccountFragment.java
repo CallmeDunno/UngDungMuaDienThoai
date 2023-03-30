@@ -27,8 +27,7 @@ public class AccountFragment extends Fragment {
     private Button btn_edit;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
@@ -52,8 +51,11 @@ public class AccountFragment extends Fragment {
     }
 
     private void setData(){
+        //chuỗi SQL query để truy vấn thông tin được lưu trữ trong cơ sở dữ liệu
         String accountquery = "SELECT name, phone, address, email, avatar FROM Person";
+        //thực hiện truy vấn SQL của chuỗi accountquery, trả về đối tượng chứa kết quả của truy vấn được trả về từ csdl
         Cursor c = HomeActivity.database.SelectData(accountquery);
+        //di chuyển con trỏ của đối tượng Cursor đến bản ghi đầu tiên trong kết quả truy vấn
         c.moveToFirst();
 
         String ten = c.getString(0);
@@ -61,9 +63,12 @@ public class AccountFragment extends Fragment {
         String dc = c.getString(2);
         String mail = c.getString(3);
         byte[] image = c.getBlob(4);
+        //chuyển đổi mảng byte chứa dữ liệu hình ảnh thành đối tượng Bitmap để có thể hiển thị hình ảnh
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        avatar.setImageBitmap(bitmap);
+        //hàm decodeByteArray(mảng byte chứa dữ liệu, vị trí bắt đầu đọc dữ liệu, độ dài của mảng)
+        // được sử dụng để giải mã dữ liệu hình ảnh từ mảng byte
 
+        avatar.setImageBitmap(bitmap);
         name.setText(ten);
         phoneNum.setText(sdt);
         address.setText(dc);
