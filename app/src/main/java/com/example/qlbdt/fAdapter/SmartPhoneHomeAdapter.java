@@ -33,7 +33,7 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
 
     public void setData(List<Smartphone> list){
         this.mListPhone = list;
-        notifyDataSetChanged();
+        notifyDataSetChanged();        // gọi là load dữ liệu trong adapter
     }
 
     @NonNull
@@ -43,6 +43,8 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         return new PhoneViewHolder(view);
     }
 
+
+    // Hàm set dữ liệu để hiển thị lên
     @Override
     public void onBindViewHolder(@NonNull PhoneViewHolder holder, int position) {
         Smartphone phone = mListPhone.get(position);
@@ -71,6 +73,8 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         return 0;
     }
 
+
+    // Khai báo thành phần view có trong item_crv_home_tuan
     public class PhoneViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgPhone;
