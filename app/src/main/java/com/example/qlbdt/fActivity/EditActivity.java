@@ -38,7 +38,8 @@ import java.io.InputStream;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditActivity extends AppCompatActivity {
-    ImageView avatar_edit, back_account, done_edit;
+    ImageView back_account, done_edit;
+    CircleImageView avatar_edit;
     EditText et_name_edit, et_phoneNum_edit, et_address_edit, et_email_edit;
     TextView tv_change_avt;
     MyDatabase database;
