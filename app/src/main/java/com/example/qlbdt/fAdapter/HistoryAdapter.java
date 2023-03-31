@@ -19,9 +19,7 @@ import java.util.ArrayList;
 public class HistoryAdapter extends BaseAdapter {
    // ngữ cảnh của ứng dụng
     private Activity context;
-    //    danh sách các contact
     private ArrayList<History> histories;
-
     //    object để phần tích layout
     private LayoutInflater inflater;
 
@@ -61,13 +59,15 @@ public class HistoryAdapter extends BaseAdapter {
             TextView nameProduct = v.findViewById(R.id.nameProduct_kien);
             nameProduct.setText(histories.get(i).getNameSmartPhone());
 
-
+            //        set màu
             TextView colorProduct = v.findViewById(R.id.colorProduct_kien);
             colorProduct.setText(histories.get(i).getColor());
 
+            //        set text giá
             TextView priceProduct = v.findViewById(R.id.priceProduct_kien);
             priceProduct.setText(histories.get(i).getPriceSmartPhone() + " VND");
 
+            //        set text ngày mua
             TextView orderTime = v.findViewById(R.id.ordertime_kien);
             orderTime.setText("Ngày mua: "+histories.get(i).getOrderTime());
         }

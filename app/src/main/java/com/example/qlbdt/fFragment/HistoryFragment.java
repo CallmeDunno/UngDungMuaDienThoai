@@ -45,26 +45,26 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         historyArrayList = new ArrayList<>();
         lstHistory = view.findViewById(R.id.lvHistoryKien);
-        /*
-         * Lấy dữ liệu từ trong db
-         * Author: NTKIEN (11-03-2023)
-         * */
 
         listAdapter = new HistoryAdapter(getActivity(), historyArrayList);
         lstHistory.setAdapter(listAdapter);
 
+        /*
+         * Lấy dữ liệu từ trong db
+         * */
         getData();
 
         /*
-        * Handle khi click vào 1 item nào đó trong listview
+        * Handle khi click vào 1 item nào đó
         * Sau đó thì bắt được vị trí trong mảng array sau đó lấy thông tin hiển thị lên dialog
-        * Author: NTKIEN (11-03-2023)
         * */
         lstHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 selectedid = position;
                 History history = historyArrayList.get(selectedid);
+
+                // hàm hiển thị dialog
                 showDialogHistory(Gravity.CENTER,history );
             }
         });
@@ -72,6 +72,9 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
+    /*
+     * Lấy dữ liệu từ trong db
+     * */
     private void getData(){
         historyArrayList.clear();
         Cursor c =  HomeActivity.database.SelectData("select History.history_id, History.orderTime, SmartphoneDetail.color, " +
@@ -97,7 +100,6 @@ public class HistoryFragment extends Fragment {
 
     /*
      * Hiển thị dialog ở vị trí giữa màn hình
-     * Author: NTKIEN (11-03-2023)
      * */
     private  void showDialogHistory(int gravity, History history){
 //        khởi tạo 1 dialog
@@ -112,7 +114,7 @@ public class HistoryFragment extends Fragment {
         if(window==null){
             return;
         }
-//        nếu != null thì setLayout
+//      setLayout
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 //        có màu trong suốt
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -124,20 +126,16 @@ public class HistoryFragment extends Fragment {
 
         // click ra ngoài thì ẩn dialog
         if(Gravity.CENTER == gravity){
-
             dialog.setCancelable(true);
         }else{
             dialog.setCancelable(false);
         }
-
-//        Khai báo các tp bên trong dialog
-
+//        ánh xạ tp bên trong dialog
 //        img sản phẩm
         ImageView imgProduct = dialog.findViewById(R.id.imgProductDialog_kien);
         byte[] image = history.getImgSmartPhone();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         imgProduct.setImageBitmap(bitmap);
-
 
         //        set tên sản phẩm
         TextView nameProduct = dialog.findViewById(R.id.nameProductDialog_kien);
