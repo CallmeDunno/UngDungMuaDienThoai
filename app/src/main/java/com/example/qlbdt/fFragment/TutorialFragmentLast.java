@@ -26,6 +26,7 @@ public class TutorialFragmentLast extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 getActivity().startActivity(intent);
+                getActivity().finish();
             }
         });
         return mView;
