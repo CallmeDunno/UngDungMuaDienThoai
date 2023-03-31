@@ -22,7 +22,7 @@ import com.example.qlbdt.fActivity.HomeActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
-    private ImageView avatar;
+    private CircleImageView avatar;
     private TextView name, phoneNum, address, email;
     private Button btn_edit;
 
