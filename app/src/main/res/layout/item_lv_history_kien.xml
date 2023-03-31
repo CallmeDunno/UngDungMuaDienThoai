@@ -9,17 +9,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="110dp">
 
         <ImageView
             android:id="@+id/imgProduct_kien"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
+            android:src="@mipmap/ic_launcher"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/ic_launcher" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nameProduct_kien"
@@ -37,36 +37,36 @@
             android:id="@+id/colorProduct_kien"
             android:layout_width="128dp"
             android:layout_height="29dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
             android:text="màu sắc"
             app:layout_constraintStart_toEndOf="@+id/imgProduct_kien"
             app:layout_constraintTop_toBottomOf="@+id/nameProduct_kien" />
 
         <TextView
             android:id="@+id/ordertime_kien"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="149dp"
+            android:layout_height="19dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:text="Ngày mua"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/priceProduct_kien"
-            app:layout_constraintHorizontal_bias="0.027"
+            app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toEndOf="@+id/imgProduct_kien"
             app:layout_constraintTop_toBottomOf="@+id/colorProduct_kien" />
 
         <TextView
             android:id="@+id/priceProduct_kien"
-            android:layout_width="112dp"
-            android:layout_height="wrap_content"
+            android:layout_width="139dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="48dp"
-            android:layout_marginEnd="16dp"
             android:text="Giá"
             android:textColor="#EA3E3E"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/colorProduct_kien"
             app:layout_constraintTop_toBottomOf="@+id/nameProduct_kien" />
 
