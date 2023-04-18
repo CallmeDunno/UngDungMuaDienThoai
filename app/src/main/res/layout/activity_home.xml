@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -25,12 +25,18 @@
                 android:background="@color/color_main"
                 android:theme="@style/Theme.AppCompat.Light" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/nav_graph" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/nav_frame_layout" />
+        </com.google.android.material.appbar.AppBarLayout>
+        
+
 
     </LinearLayout>
 

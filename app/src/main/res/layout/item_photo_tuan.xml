@@ -7,7 +7,7 @@
         android:id="@+id/tuan_img_photo"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:src="@drawable/avt_tuan"
+        android:src="@drawable/logo"
         android:scaleType="centerCrop"/>
 
 </LinearLayout>
