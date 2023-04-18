@@ -1,16 +1,12 @@
 package com.example.qlbdt.fFragment;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -18,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fActivity.HomeActivity;
-import com.example.qlbdt.fActivity.SmartphoneDetailActivity;
 import com.example.qlbdt.fAdapter.SmartphoneSearchAdapter;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Smartphone;
@@ -33,9 +27,7 @@ public class SearchFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Smartphone> smartphones;
     SmartphoneSearchAdapter searchAdapter;
-
     SearchView searchView;
-
     Spinner sp_sort, sp_brand;
     ArrayList<String> sort, brand;
     ArrayAdapter adapterSort, adapterBrand;
@@ -55,9 +47,7 @@ public class SearchFragment extends Fragment {
         searchAdapter = new SmartphoneSearchAdapter(getActivity(), new IRecyclerViewOnClick() {
             @Override
             public void onClickItemSmartphone(Smartphone smartphone) {
-                Intent intent = new Intent(getActivity(), SmartphoneDetailActivity.class);
-                intent.putExtra("NameSmartphone", smartphone.getName());
-                startActivity(intent);
+
             }
         });
         LoadData();
@@ -123,12 +113,7 @@ public class SearchFragment extends Fragment {
         sp_brand = view.findViewById(R.id.sp_brand_fragment_search);
         brand = new ArrayList<>();
         brand.add("Hãng");
-        String queryBrand = "SELECT name FROM Brand";
-        Cursor cursorBrand = HomeActivity.database.SelectData(queryBrand);
-        while (cursorBrand.moveToNext()){
-            String str = cursorBrand.getString(0);
-            brand.add(str);
-        }
+        //data
         adapterBrand = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, brand);
         sp_brand.setAdapter(adapterBrand);
         sp_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -169,16 +154,7 @@ public class SearchFragment extends Fragment {
 
     private void LoadData(){
         smartphones.clear();
-        Cursor c = HomeActivity.database.SelectData("SELECT Brand.name, Smartphone.name, Smartphone.price, Smartphone.quantity, Smartphone.avatar FROM Smartphone JOIN Brand ON Smartphone.brand_id = Brand.brand_id");
-        while (c.moveToNext()){
-            String nb = c.getString(0);
-            String n = c.getString(1);
-            String p = c.getString(2);
-            int q = c.getInt(3);
-            byte[] a = c.getBlob(4);
-            Smartphone smartphone = new Smartphone(n, p, q, a, nb);
-            smartphones.add(smartphone);
-        }
+        //data
         searchAdapter.setData(smartphones);
     }
 
