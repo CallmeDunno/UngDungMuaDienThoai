@@ -1,4 +1,4 @@
-package com.example.qlbdt.fFragment;
+package com.example.qlbdt.fFragment.Home;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +25,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
+
+/**
+ * Dungx
+ * */
 
 public class HomeFragment extends Fragment {
     private ViewPager viewPager;

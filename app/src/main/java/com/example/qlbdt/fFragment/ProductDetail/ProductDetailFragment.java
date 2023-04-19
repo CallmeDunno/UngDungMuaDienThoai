@@ -1,4 +1,4 @@
-package com.example.qlbdt.fFragment;
+package com.example.qlbdt.fFragment.ProductDetail;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,13 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.qlbdt.R;
+
+/***
+ * Hoàng
+ * MVVM
+ * Thiết kế giao diện
+ * */
+
 public class ProductDetailFragment extends Fragment {
 
     @Override
