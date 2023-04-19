@@ -61,10 +61,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);  //Số cột muốn hiển thị
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
         rcvPhone.setLayoutManager(gridLayoutManager);
 
-        mSmartPhoneHomeAdapter.setData(getListPhone());    //Set dữ liệu cho adapter
+        mSmartPhoneHomeAdapter.setData(getListPhone());
         rcvPhone.setAdapter(mSmartPhoneHomeAdapter);
 
         return view;
@@ -72,7 +72,11 @@ public class HomeFragment extends Fragment {
 
     List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
-        //TODO: Slide image
+        list.add(new Photo(R.drawable.banner1));
+        list.add(new Photo(R.drawable.banner2));
+        list.add(new Photo(R.drawable.banner3));
+        list.add(new Photo(R.drawable.banner4));
+        list.add(new Photo(R.drawable.banner5));
         return list;
     }
 
