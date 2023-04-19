@@ -1,4 +1,4 @@
-package com.example.qlbdt.fFragment;
+package com.example.qlbdt.fFragment.Account;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,10 @@ import com.example.qlbdt.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Tùng + Tiến Dũng
+ * */
+
 public class AccountFragment extends Fragment {
     private CircleImageView avatar;
     private TextView name, phoneNum, address, email;
@@ -23,32 +27,8 @@ public class AccountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        avatar = view.findViewById(R.id.avatar_QA);
-        name = view.findViewById(R.id.name_QA);
-        phoneNum = view.findViewById(R.id.phone_QA);
-        address = view.findViewById(R.id.address_QA);
-        email = view.findViewById(R.id.email_QA);
-        btn_edit = view.findViewById(R.id.btn_edit_QA);
-
-        setData();
-
-        btn_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         return view;
     }
 
-    private void setData(){
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setData();
-    }
 }
