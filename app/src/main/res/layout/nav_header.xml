@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Nguyễn Quốc Dũng"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:text="0337987542"
             android:textColor="@color/black"
             android:textStyle="italic"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
             android:text="Lam Thao, Phu Tho"
             android:textColor="@color/black"
             android:textStyle="italic"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
