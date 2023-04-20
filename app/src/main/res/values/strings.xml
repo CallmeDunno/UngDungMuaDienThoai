@@ -4,14 +4,15 @@
     <string name="open_drawer">Open Navigation Drawer </string>
     <string name="close_drawer">Close Navigation Drawer</string>
 
-    <!-- item name nav -->
-    <string name="Home">Trang chủ</string>
-    <string name="Find">Tìm kiếm</string>
-    <string name="Account">Tài khoản</string>
-    <string name="ShoppingBasket">Giỏ hàng</string>
-    <string name="History">Lịch sử mua hàng</string>
-    <string name="Support">Hỗ trợ</string>
-    <string name="Tutorial">Hướng dẫn</string>
+    <string name="Home">Home</string>
+    <string name="Search">Search</string>
+    <string name="Account"> My account</string>
+    <string name="Cart">My cart</string>
+    <string name="History">My history</string>
+    <string name="Support">Support</string>
     <string name="ProductDetail">Thông tin chi tiết</string>
+
+    <string name="TitleHomeFragment">Suggestions for you</string>
+    <string name="SeeMore">See more</string>
 
 </resources>

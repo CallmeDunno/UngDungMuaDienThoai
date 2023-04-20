@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/Find"
+                android:text="@string/Search"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="@string/Find"
+                android:text="@string/Search"
                 android:textColor="#FF0000"
                 android:textSize="16sp" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="@string/Find"
+                android:text="@string/Search"
                 android:textSize="16sp" />
 
         </LinearLayout>

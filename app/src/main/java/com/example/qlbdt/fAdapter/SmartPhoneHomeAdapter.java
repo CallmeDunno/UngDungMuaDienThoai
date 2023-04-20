@@ -1,8 +1,6 @@
 package com.example.qlbdt.fAdapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +15,13 @@ import com.example.qlbdt.R;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Smartphone;
 
-
 import java.util.List;
 
 public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAdapter.PhoneViewHolder>{
 
     private Context mContext;
     private List<Smartphone> mListPhone;
-    private IRecyclerViewOnClick iRecyclerViewOnClick;
+    private final IRecyclerViewOnClick iRecyclerViewOnClick;
 
     public SmartPhoneHomeAdapter(Context mContext, IRecyclerViewOnClick iRecyclerViewOnClick) {
         this.mContext = mContext;
@@ -33,30 +30,24 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
 
     public void setData(List<Smartphone> list){
         this.mListPhone = list;
-        notifyDataSetChanged();        // gọi là load dữ liệu trong adapter
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public PhoneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_home_tuan, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_home, parent, false);
         return new PhoneViewHolder(view);
     }
 
-
-    // Hàm set dữ liệu để hiển thị lên
     @Override
     public void onBindViewHolder(@NonNull PhoneViewHolder holder, int position) {
         Smartphone phone = mListPhone.get(position);
         if (phone == null){
             return;
         }
-        byte[] image = phone.getAvatar();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imgPhone.setImageBitmap(bitmap);
         holder.tvPhone.setText(phone.getName());
-        holder.tvPrice.setText("Giá: " + phone.getPrice() + " VND");
-        holder.tvQuantity.setText("Số lượng: "+phone.getQuantity());
+        holder.tvPrice.setText(phone.getPrice());
         holder.cv_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,8 +65,7 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
     }
 
 
-    // Khai báo thành phần view có trong item_crv_home_tuan
-    public class PhoneViewHolder extends RecyclerView.ViewHolder {
+    public static class PhoneViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgPhone;
         private TextView tvPhone;
@@ -85,11 +75,10 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
 
         public PhoneViewHolder(@NonNull View itemView) {
             super(itemView);
-            cv_item = itemView.findViewById(R.id.cardview_tuan);
+            cv_item = itemView.findViewById(R.id.cardview);
             imgPhone = itemView.findViewById(R.id.img_phone);
             tvPhone = itemView.findViewById(R.id.tv_phone);
             tvPrice = itemView.findViewById(R.id.tv_price);
-            tvQuantity = itemView.findViewById(R.id.tv_quantity);
         }
     }
 }
