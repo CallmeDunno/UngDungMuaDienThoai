@@ -11,7 +11,7 @@
         <item
             android:id="@+id/searchFragment"
             android:icon="@drawable/ic_search"
-            android:title="@string/Find" />
+            android:title="@string/Search" />
 
     </group>
 
@@ -29,7 +29,7 @@
                 <item
                     android:id="@+id/basketFragment"
                     android:icon="@drawable/ic_shopping_basket"
-                    android:title="@string/ShoppingBasket" />
+                    android:title="@string/Cart" />
 
                 <item
                     android:id="@+id/historyFragment"
