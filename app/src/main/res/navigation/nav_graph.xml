@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.example.qlbdt.fFragment.Basket.BasketFragment"
-        android:label="@string/ShoppingBasket"
+        android:label="@string/Cart"
         tools:layout="@layout/fragment_basket" >
         <action
             android:id="@+id/action_basketFragment_to_productDetailFragment"
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.qlbdt.fFragment.Search.SearchFragment"
-        android:label="@string/Find"
+        android:label="@string/Search"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_productDetailFragment"

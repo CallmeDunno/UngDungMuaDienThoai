@@ -1,8 +1,6 @@
 package com.example.qlbdt.fAdapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,9 +56,6 @@ public class SmartphoneSearchAdapter extends RecyclerView.Adapter<SmartphoneSear
         if (smartphone == null){
             return;
         }
-        byte[] image = smartphone.getAvatar();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.img_avt_rcv_fragment_search.setImageBitmap(bitmap);
         holder.tv_name_rcv_fragment_search.setText(smartphone.getName());
         holder.tv_price_rcv_fragment_search.setText("Giá: " + smartphone.getPrice() + " VND");
         holder.tv_quantity_rcv_fragment_search.setText("Số lượng: " + smartphone.getQuantity());
