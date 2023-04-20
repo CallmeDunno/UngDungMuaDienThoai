@@ -17,9 +17,7 @@ import java.util.List;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<List<ProductHome>> listProductHomeLiveData;
-
-    private List<ProductHome> listProductHome;
+    private final MutableLiveData<List<ProductHome>> listProductHomeLiveData;
 
     public HomeViewModel() {
         listProductHomeLiveData = new MutableLiveData<>();
@@ -28,13 +26,14 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void initData() {
-        listProductHome = new ArrayList<>();
+        List<ProductHome> listProductHome = new ArrayList<>();
+        Log.i("HomeFragment", "1" + Thread.currentThread().getName());
 
         String url = "https://firebasestorage.googleapis.com/v0/b/productmanager-ttcm-01.appspot.com/o/apple_iphone_13_pro_max.png?alt=media&token=609e647f-f001-4531-88d3-3e35f8c23b62";
-        listProductHome.add(new ProductHome("iPhone 13 Pro Max", "23.323.000", url));
-        listProductHome.add(new ProductHome("Samsung Galaxy S23 Ultra", "23.323.000", url));
-        listProductHome.add(new ProductHome("a", "23.323.000", url));
-        listProductHome.add(new ProductHome("a", "23.323.000", url));
+        listProductHome.add(new ProductHome("a", "20000", url));
+        listProductHome.add(new ProductHome("a", "20000", url));
+        listProductHome.add(new ProductHome("a", "20000", url));
+        listProductHome.add(new ProductHome("a", "20000", url));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
@@ -43,6 +42,7 @@ public class HomeViewModel extends ViewModel {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Log.i("HomeFragment", "2" + Thread.currentThread().getName());
                         if (task.isSuccessful()){
                             for (QueryDocumentSnapshot doc : task.getResult()){
 
@@ -63,13 +63,15 @@ public class HomeViewModel extends ViewModel {
                                 String weight = doc.toObject(ProductHome.class).getWeight();
 
                                 listProductHome.add(new ProductHome(name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom,  type, weight));
+                                listProductHomeLiveData.postValue(listProductHome);
+                                Log.i("HomeFragment", "3" + Thread.currentThread().getName());
                             }
                         } else {
                             Log.e("HomeFragment", "not data");
                         }
                     }
                 });
-
+        Log.i("HomeFragment", "4" + Thread.currentThread().getName());
         listProductHomeLiveData.setValue(listProductHome);
     }
 
