@@ -76,7 +76,7 @@ public class BasketAdapter extends BaseAdapter {
         textView.setText(arrayListgiohang.get(position).getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         giahang.setText(decimalFormat.format(arrayListgiohang.get(position).getGiasp()) + "Đ");
-        Picasso.get().load(arrayListgiohang.get(position).getHinhsp()).into(imgage);
+    //    Picasso.get().load(arrayListgiohang.get(position).getHinhsp()).into(imgage);
         btntvale.setText(arrayListgiohang.get(position).getSoluongsp() + "");
         int sl = Integer.parseInt(btntvale.getText().toString());
         if(sl >= 10){
