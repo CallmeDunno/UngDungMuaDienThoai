@@ -49,14 +49,6 @@
                 android:textColor="#FF0000"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_quantity_rcv_fragment_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/Find"
-                android:textSize="16sp" />
-
         </LinearLayout>
 
     </RelativeLayout>
