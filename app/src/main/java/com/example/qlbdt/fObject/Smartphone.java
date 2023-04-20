@@ -6,22 +6,19 @@ public class Smartphone {
     private String name;
     private Price price;
     private int quantity;
-    private byte[] avatar;
 
     private String brand_name;
 
-    public Smartphone(String name, String price, int quantity, byte[] avatar) {
+    public Smartphone(String name, String price, int quantity) {
         this.name = name;
         this.price = new Price(price);
         this.quantity = quantity;
-        this.avatar = avatar;
     }
 
     public Smartphone(String name, String price, int quantity, byte[] avatar, String brand_name) {
         this.name = name;
         this.price = new Price(price);
         this.quantity = quantity;
-        this.avatar = avatar;
         this.brand_name = brand_name;
     }
 
@@ -47,14 +44,6 @@ public class Smartphone {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
     }
 
     public String getBrand_name() {
