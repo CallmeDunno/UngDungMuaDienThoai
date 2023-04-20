@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.databinding.FragmentHistoryBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * Sơn
@@ -18,12 +21,13 @@ import com.example.qlbdt.R;
 
 public class HistoryFragment extends Fragment {
 
+    FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-
+        db = FirebaseFirestore.getInstance();
         return view;
     }
 
