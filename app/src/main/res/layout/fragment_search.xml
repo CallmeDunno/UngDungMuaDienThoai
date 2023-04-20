@@ -21,7 +21,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="11dp"
             android:layout_marginBottom="6dp"
-            android:background="@drawable/bg_white_boder_gray"
+            android:background="@drawable/bg_white_border_gray"
             app:iconifiedByDefault="false"
             app:queryHint="Search"
             app:searchIcon="@drawable/ic_search" />

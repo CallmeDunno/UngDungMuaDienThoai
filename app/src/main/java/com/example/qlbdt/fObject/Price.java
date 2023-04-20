@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 
 public class Price implements Comparable<Price>{
 
-    private int millions, thousands, inits;
+    private final int millions;
+    private final int thousands;
+    private final int inits;
 
     public Price(String price) {
         String[] field = price.split("\\.");
@@ -19,18 +21,16 @@ public class Price implements Comparable<Price>{
         if (this.millions > that.millions) return +1;
         if (this.thousands < that.thousands) return -1;
         if (this.thousands > that.thousands) return +1;
-        if (this.inits < that.inits) return -1;
-        if (this.inits > that.inits) return +1;
-        return 0;
+        return Integer.compare(this.inits, that.inits);
     }
 
     @NonNull
     @Override
     public String toString() {
         if (thousands < 100){
-            return millions+".0"+thousands+"."+inits+"00 VND";
+            return millions+".0"+thousands+"."+inits+"00";
         }
-        return millions+"."+thousands+"."+inits+"00 VND";
+        return millions+"."+thousands+"."+inits+"00";
     }
 
 }

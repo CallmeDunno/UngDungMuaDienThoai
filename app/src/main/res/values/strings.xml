@@ -11,10 +11,12 @@
     <string name="History">My history</string>
     <string name="Support">Support</string>
     <string name="ProductDetail">Thông tin chi tiết</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MyInformation">My information</string>
+    <string name="Contact">Contact</string>
 
     <string name="TitleHomeFragment">Suggestions for you</string>
     <string name="SeeMore">See more</string>
+    <string name="Smartphone">Smartphone</string>
+    <string name="Laptop">Laptop</string>
 
 </resources>
