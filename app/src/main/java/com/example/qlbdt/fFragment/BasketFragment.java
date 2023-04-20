@@ -35,7 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BasketFragment extends Fragment {
-
+///
     ListView lvgiohang;
     public static TextView txtthongbao;
     public static TextView txttongtien;
