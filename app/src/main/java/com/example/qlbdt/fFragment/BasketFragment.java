@@ -35,15 +35,13 @@ import java.util.Date;
 import java.util.List;
 
 public class BasketFragment extends Fragment {
-///
+
     ListView lvgiohang;
     public static TextView txtthongbao;
     public static TextView txttongtien;
     Button btnthanhtoan, btnttmua;
     Toolbar toolbargiohang;
     public static BasketAdapter giohangadapterB;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,13 +52,11 @@ public class BasketFragment extends Fragment {
         btnthanhtoan = view.findViewById(R.id.btnttgiohang);
         btnttmua = view.findViewById(R.id.btnttmuahang);
         toolbargiohang = view.findViewById(R.id.toolbargiohang);
-
         giohangadapterB = new BasketAdapter(getActivity(),(ArrayList<Basket>) Basketdatabase.getInstance(getActivity()).iBasketDao().getAll(),this);
         lvgiohang.setAdapter(giohangadapterB);
         CheckData();
         EvenUltil();
         EvenButton();
-
         return view;
     }
 
@@ -81,8 +77,7 @@ public class BasketFragment extends Fragment {
 
     public void EvenUltil(){
         long tongtien = 0;
-
-        for (int i = 0; i<Basketdatabase.getInstance(getActivity()).iBasketDao().getAll().size() ; i++){
+        for (int i = 0; i< Basketdatabase.getInstance(getActivity()).iBasketDao().getAll().size(); i++){
             tongtien += Basketdatabase.getInstance(getActivity()).iBasketDao().getAll().get(i).getGiasp();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
@@ -99,7 +94,6 @@ public class BasketFragment extends Fragment {
             lvgiohang.setVisibility(View.VISIBLE);
         }
     }
-
 
     private void SendNoti(String name) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_logo_app);
