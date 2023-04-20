@@ -1,42 +1,21 @@
 package com.example.qlbdt.fFragment.Home;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "Products")
 public class ProductHome {
-    @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(name = "name")
     private String name;
-    @ColumnInfo(name = "price")
     private String price;
-    @ColumnInfo(name = "image")
     private String image;
-    @ColumnInfo(name = "OS")
     private String OS;
-    @ColumnInfo(name = "battery")
     private String battery;
-    @ColumnInfo(name = "brand")
     private String brand;
-    @ColumnInfo(name = "color")
     private String color;
-    @ColumnInfo(name = "cpu")
     private String cpu;
-    @ColumnInfo(name = "description")
     private String description;
-    @ColumnInfo(name = "quantity")
     private int quantity;
-    @ColumnInfo(name = "ram")
     private String ram;
-    @ColumnInfo(name = "releaseTime")
     private String releaseTime;
-    @ColumnInfo(name = "rom")
     private String rom;
-    @ColumnInfo(name = "type")
     private String type;
-    @ColumnInfo(name = "weight")
     private String weight;
 
     public ProductHome() {

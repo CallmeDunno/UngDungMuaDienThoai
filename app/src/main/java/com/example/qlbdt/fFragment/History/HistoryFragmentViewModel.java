@@ -1,5 +1,8 @@
 package com.example.qlbdt.fFragment.History;
 
+
+public class HistoryFragmentViewModel {
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
