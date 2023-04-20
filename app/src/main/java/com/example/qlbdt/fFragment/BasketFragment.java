@@ -1,15 +1,19 @@
 package com.example.qlbdt.fFragment;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -22,91 +26,80 @@ import com.example.qlbdt.fInterface.IRecyclerViewOnClickBasketItem;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClickDelete;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClickDetail;
 import com.example.qlbdt.fObject.Basket;
+import com.example.qlbdt.fObject.Basketdatabase;
 import com.example.qlbdt.fOther.Notification;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class BasketFragment extends Fragment {
 
-    RecyclerView rcvBasket;
-    BasketAdapter adapter;
-    TextView tv_count_rcv_fragment_basket;
+    ListView lvgiohang;
+    public static TextView txtthongbao;
+    public static TextView txttongtien;
+    Button btnthanhtoan, btnttmua;
+    Toolbar toolbargiohang;
+    public static BasketAdapter giohangadapterB;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_basket, container, false);
-        tv_count_rcv_fragment_basket = view.findViewById(R.id.tv_count_rcv_fragment_basket);
-        rcvBasket = view.findViewById(R.id.rcv_fragment_basket);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        rcvBasket.setLayoutManager(linearLayoutManager);
-        adapter = new BasketAdapter(getList(), new IRecyclerViewOnClickBasketItem() {
-            @Override
-            public void onClickItemBasket(Basket basket, int position) {
-                ShowDialog(basket.getNameSmp(), position);
-            }
-        }, new IRecyclerViewOnClickDelete() {
-            @Override
-            public void onClickDetail(int index) {
-                ShowDialogDeleteItem(index);
-            }
-        }, new IRecyclerViewOnClickDetail() {
-            @Override
-            public void onClickDetail(String name) {
+        lvgiohang = view.findViewById(R.id.listviewgiohang);
+        txtthongbao = view.findViewById(R.id.thongbaogiohang);
+        txttongtien = view.findViewById(R.id.txttongtien);
+        btnthanhtoan = view.findViewById(R.id.btnttgiohang);
+        btnttmua = view.findViewById(R.id.btnttmuahang);
+        toolbargiohang = view.findViewById(R.id.toolbargiohang);
 
-            }
-        });
-        rcvBasket.setAdapter(adapter);
+        giohangadapterB = new BasketAdapter(getActivity(),(ArrayList<Basket>) Basketdatabase.getInstance(getActivity()).iBasketDao().getAll(),this);
+        lvgiohang.setAdapter(giohangadapterB);
+        CheckData();
+        EvenUltil();
+        EvenButton();
+
         return view;
     }
 
-    private void ShowDialogDeleteItem(int index) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Thông báo");
-        builder.setMessage("Bạn chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?");
-        builder.setPositiveButton("Tôi đồng ý", new DialogInterface.OnClickListener() {
+    private void EvenButton() {
+        btnttmua.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                adapter.setList(getList());
-            }
-        });
-        builder.setNeutralButton("Không", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View v) {
 
             }
         });
-        builder.show();
+        btnthanhtoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
-    private void ShowDialog(String name, int index) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Thông báo");
-        builder.setMessage("Bạn thực sự muốn mua sản phẩm này?");
-        builder.setPositiveButton("Tôi đồng ý", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                SendNoti(name);
+    public void EvenUltil(){
+        long tongtien = 0;
 
-
-                adapter.setList(getList());
-            }
-        });
-        builder.setNeutralButton("Không, tôi không muốn mua", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.show();
+        for (int i = 0; i<Basketdatabase.getInstance(getActivity()).iBasketDao().getAll().size() ; i++){
+            tongtien += Basketdatabase.getInstance(getActivity()).iBasketDao().getAll().get(i).getGiasp();
+        }
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        txttongtien.setText(decimalFormat.format(tongtien) + "VND");
+    }
+    private void CheckData(){
+        if(Basketdatabase.getInstance(getActivity()).iBasketDao().getAll().size() <=0){
+            giohangadapterB.notifyDataSetChanged();
+            txtthongbao.setVisibility(View.VISIBLE);
+            lvgiohang.setVisibility(View.INVISIBLE);
+        }else{
+            giohangadapterB.notifyDataSetChanged();
+            txtthongbao.setVisibility(View.INVISIBLE);
+            lvgiohang.setVisibility(View.VISIBLE);
+        }
     }
 
-    private List<Basket> getList() {
-        List<Basket> baskets = new ArrayList<>();
-
-        return baskets;
-    }
 
     private void SendNoti(String name) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_logo_app);
