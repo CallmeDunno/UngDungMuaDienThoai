@@ -6,15 +6,192 @@
     tools:context=".fFragment.ProductDetail.ProductDetailFragment">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearlayout_smp_detail_bottom"
+        android:layout_below="@+id/linearlayout_smp_detail_top"
+        android:padding="8dp"
+        android:scrollbars="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ProductDetail"
-            android:textSize="24sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.jsibbold.zoomage.ZoomageView
+                android:id="@+id/img_avt_smp_detail"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_name_smp_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_price_smp_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Price"
+                android:textColor="#FF0000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_des_smp_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Des"
+                android:textSize="24sp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="24dp"
+                android:stretchColumns="*">
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Hãng:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_brand_name_smp_detail"
+                        android:text="Brand's name"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="CPU:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_cpu_smp_detail"
+                        android:text="CPU"
+                        android:textSize="24sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="RAM:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ram_smp_detail"
+                        android:text="RAM"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="ROM:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rom_smp_detail"
+                        android:text="ROM"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Màu sắc:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_color_smp_detail"
+                        android:text="Color"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Pin:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_battery_smp_detail"
+                        android:text="Battery"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Cân nặng:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_weight_smp_detail"
+                        android:text="Weight"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="TGBH:"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_wp_smp_detail"
+                        android:text="warrantyPeriod"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
 
     </ScrollView>
+
+
 
 </FrameLayout>
