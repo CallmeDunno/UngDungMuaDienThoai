@@ -119,7 +119,6 @@ public class SmartphoneSearchAdapter extends RecyclerView.Adapter<SmartphoneSear
             img_avt_rcv_fragment_search = itemView.findViewById(R.id.img_avt_rcv_fragment_search);
             tv_name_rcv_fragment_search = itemView.findViewById(R.id.tv_name_rcv_fragment_search);
             tv_price_rcv_fragment_search = itemView.findViewById(R.id.tv_price_rcv_fragment_search);
-            tv_quantity_rcv_fragment_search = itemView.findViewById(R.id.tv_quantity_rcv_fragment_search);
         }
     }
 
