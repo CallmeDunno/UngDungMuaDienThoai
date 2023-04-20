@@ -39,6 +39,9 @@ public class ProductHome {
     @ColumnInfo(name = "weight")
     private String weight;
 
+    public ProductHome() {
+    }
+
     public ProductHome(String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
         this.name = name;
         this.price = price;
