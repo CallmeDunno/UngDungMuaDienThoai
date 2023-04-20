@@ -1,5 +1,7 @@
 package com.example.qlbdt.fObject;
 
+import androidx.annotation.NonNull;
+
 public class Price implements Comparable<Price>{
 
     private int millions, thousands, inits;
@@ -22,12 +24,13 @@ public class Price implements Comparable<Price>{
         return 0;
     }
 
+    @NonNull
     @Override
     public String toString() {
         if (thousands < 100){
-            return millions+".0"+thousands+"."+inits+"00";
+            return millions+".0"+thousands+"."+inits+"00 VND";
         }
-        return millions+"."+thousands+"."+inits+"00";
+        return millions+"."+thousands+"."+inits+"00 VND";
     }
 
 }
