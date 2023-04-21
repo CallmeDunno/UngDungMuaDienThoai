@@ -3,23 +3,22 @@ package com.example.qlbdt.fFragment.Home;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.databinding.FragmentHomeBinding;
 import com.example.qlbdt.fAdapter.PhotoAdapter;
+import com.example.qlbdt.fAdapter.SmartPhoneHomeAdapter;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Photo;
 import com.example.qlbdt.fObject.Smartphone;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +32,7 @@ import java.util.TimerTask;
 public class HomeFragment extends Fragment {
     private List<Photo> mListPhoto;
     private Timer mTimer;
-    private ProductHomeAdapter smartphoneAdapter;
-    private ProductHomeAdapter laptopAdapter;
+    private ProductHomeAdapter productHomeAdapter;
     private FragmentHomeBinding binding;
 
     @Override
@@ -55,18 +53,8 @@ public class HomeFragment extends Fragment {
     private void initViewModel() {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
-            List<ProductHome> listSmartphone = new ArrayList<>();
-            List<ProductHome> listLaptop = new ArrayList<>();
-            for (ProductHome p : productHomes){
-                Log.i("HomeFragment", p.getType());
-                if (p.getType().equals("Smartphone")){
-                    listSmartphone.add(p);
-                } else {
-                    listLaptop.add(p);
-                }
-            }
-            smartphoneAdapter.setData(listSmartphone);
-            laptopAdapter.setData(listLaptop);
+            productHomeAdapter.setData(productHomes);
+            productHomeAdapter.setData(productHomes);
         });
     }
 
@@ -75,17 +63,11 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.rcvPhone.setLayoutManager(linearLayoutManager);
         binding.rcvPc.setLayoutManager(linearLayoutManager2);
-        smartphoneAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
+        productHomeAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
             //TODO: Chuyển hướng đến ProductDetail
         });
-        laptopAdapter = new ProductHomeAdapter(getActivity(), new IRecyclerViewOnClick() {
-            @Override
-            public void onClickItemSmartphone(Smartphone smartphone) {
-            //TODO: Chuyển hướng đến ProductDetail
-            }
-        });
-        binding.rcvPhone.setAdapter(smartphoneAdapter);
-        binding.rcvPc.setAdapter(laptopAdapter);
+        binding.rcvPhone.setAdapter(productHomeAdapter);
+        binding.rcvPc.setAdapter(productHomeAdapter);
 
         binding.tvSeeMore1.setOnClickListener(view -> {
             //TODO: Chuyển hướng đến trang điện thoại
@@ -120,7 +102,6 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // Khởi tạo timer
         if (mTimer == null) {
             mTimer = new Timer();
         }
@@ -154,6 +135,5 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 }
