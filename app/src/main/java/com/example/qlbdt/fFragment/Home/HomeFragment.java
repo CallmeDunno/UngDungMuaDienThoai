@@ -8,20 +8,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentHomeBinding;
 import com.example.qlbdt.fAdapter.PhotoAdapter;
+import com.example.qlbdt.fAdapter.SmartPhoneHomeAdapter;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Photo;
+import com.example.qlbdt.fObject.Smartphone;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.annotation.Nullable;
 
 /**
  * Dungx
@@ -100,7 +108,6 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // Khởi tạo timer
         if (mTimer == null) {
             mTimer = new Timer();
         }
@@ -134,6 +141,5 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 }
