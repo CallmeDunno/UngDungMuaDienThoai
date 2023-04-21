@@ -1,176 +1,110 @@
 package com.example.qlbdt.fAdapter;
 
-import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fFragment.BasketFragment;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClickBasketItem;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClickDelete;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClickDetail;
 import com.example.qlbdt.fObject.Basket;
-import com.example.qlbdt.fObject.Basketdatabase;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-public class BasketAdapter extends BaseAdapter {
-    Context context;
-    ArrayList<Basket> arrayListgiohang;
-    private LayoutInflater inflater;
-
-    BasketFragment basketFragment;
-
-    public BasketAdapter(Context context, ArrayList<Basket> arrayListgiohang,BasketFragment basketFragment) {
-        this.context = context;
-        this.arrayListgiohang = arrayListgiohang;
-        this.inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.basketFragment=basketFragment;
+public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>{
+    private Context context;
+    private List<Basket> baskets;
+    private HandleBasketClick click;
+    public BasketAdapter(Context context, HandleBasketClick click){
+        this.context=context;
+        this.click=click;
+    }
+    public void setBasketlist(List<Basket> baskets){
+        this.baskets=baskets;
+        notifyDataSetChanged();
+    }
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.item_rcv_basket_fragment,parent,false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public int getCount() {
-        return arrayListgiohang.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return arrayListgiohang.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        if(v==null) {
-            v = inflater.inflate(R.layout.item_rcv_basket_fragment, null);
-        }
-        TextView textView = v.findViewById(R.id.tenspgh);
-        TextView giahang = v.findViewById(R.id.giagh);
-        ImageView imgage = v.findViewById((R.id.imagegiohang));
-        Button btngiam = v.findViewById(R.id.btgiamsp);
-        Button btntang = v.findViewById(R.id.btntangsp);
-        Button btntvale = v.findViewById(R.id.btnvalue);
-        Button btnxoa = v.findViewById(R.id.btndelete);
-        textView.setText(arrayListgiohang.get(position).getTensp());
+    public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+           holder.tensp.setText(this.baskets.get(position).getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        giahang.setText(decimalFormat.format(arrayListgiohang.get(position).getGiasp()) + "Đ");
-    //    Picasso.get().load(arrayListgiohang.get(position).getHinhsp()).into(imgage);
-        btntvale.setText(arrayListgiohang.get(position).getSoluongsp() + "");
-        int sl = Integer.parseInt(btntvale.getText().toString());
+        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getGiasp()) + "Đ");
+        holder.btnvalue.setText(this.baskets.get(position).getSoluongsp());
+        int sl = Integer.parseInt(holder.btnvalue.getText().toString());
         if(sl >= 10){
-            btntang.setVisibility(View.INVISIBLE);
-            btngiam.setVisibility(View.VISIBLE);
+            holder.btntang.setVisibility(View.INVISIBLE);
+            holder.btngiam.setVisibility(View.VISIBLE);
         }else if(sl <=1){
-            btngiam.setVisibility(View.INVISIBLE);
+            holder.btngiam.setVisibility(View.INVISIBLE);
         }else{
-            btntang.setVisibility(View.VISIBLE);
-            btngiam.setVisibility(View.VISIBLE);
+            holder.btntang.setVisibility(View.VISIBLE);
+            holder.btngiam.setVisibility(View.VISIBLE);
         }
-        btnxoa.setOnClickListener(new View.OnClickListener() {
+        holder.btngiam.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
-                builder.setTitle("Xác nhận xóa sản phẩm");
-                builder.setMessage("Bạn có muốn xóa sản phẩm nảy");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(Basketdatabase.getInstance(context).iBasketDao().getAll().size() <= 0){
-                            basketFragment.txtthongbao.setVisibility(View.VISIBLE);
-                        }else{
-                            Basketdatabase.getInstance(context).iBasketDao().Deletehang(arrayListgiohang.get(position));
-                            BasketFragment.giohangadapterB.notifyDataSetChanged();
-                            basketFragment.EvenUltil();
-                            if(Basketdatabase.getInstance(context).iBasketDao().getAll().size() <= 0){
-                                BasketFragment.txtthongbao.setVisibility(View.VISIBLE);
-                            }else{
-                                basketFragment.txtthongbao.setVisibility(View.INVISIBLE);
-                                basketFragment.giohangadapterB.notifyDataSetChanged();
-                                basketFragment.EvenUltil();
-                            }
-                        }
-                    }
-                });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        BasketFragment.giohangadapterB.notifyDataSetChanged();
-                        basketFragment.EvenUltil();
-                    }
-                });
-                builder.show();
+            public void onClick(View view) {
+                   click.btngiamclick(baskets.get(position));
             }
         });
-        btntang.setOnClickListener(new View.OnClickListener() {
+        holder.btntang.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                int sl = Integer.parseInt(btntvale.getText().toString()) + 1;
-                long slht = Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).getSoluongsp();
-                long giaht = Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).getGiasp();
-                Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).setSoluongsp(sl);
-                long giamoi = (giaht * sl) / slht;
-                Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).setGiasp(giamoi);
-                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                giahang.setText(decimalFormat.format(giamoi) + "Đ");
-                basketFragment.EvenUltil();
-                if(sl > 9){
-                    btntang.setVisibility(View.INVISIBLE);
-                    btngiam.setVisibility(View.VISIBLE);
-                    btntvale.setText(String.valueOf(sl));
-                }else{
-                    btntang.setVisibility(View.VISIBLE);
-                    btngiam.setVisibility(View.VISIBLE);
-                    btntvale.setText(String.valueOf(sl));
-                }
+            public void onClick(View view) {
+                 click.btntangclick(baskets.get(position));
+            }
+        });
+        holder.btnxoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click.btnxoaclick(baskets.get(position));
             }
         });
 
-        btngiam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int sl = Integer.parseInt(btntvale.getText().toString()) - 1;
-                long slht = Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).getSoluongsp();
-                long giaht = Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).getGiasp();
-                Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).setSoluongsp(sl);
-                long giamoi = (giaht * sl) / slht;
-                Basketdatabase.getInstance(context).iBasketDao().getAll().get(position).setGiasp(giamoi);
-                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                giahang.setText(decimalFormat.format(giamoi) + "Đ");
-                basketFragment.EvenUltil();
-                if(sl < 2){
-                    btngiam.setVisibility(View.INVISIBLE);
-                    btntang.setVisibility(View.VISIBLE);
-                    btntvale.setText(String.valueOf(sl));
-                }else{
-                    btntang.setVisibility(View.VISIBLE);
-                    btngiam.setVisibility(View.VISIBLE);
-                    btntvale.setText(String.valueOf(sl));
-                }
-            }
-        });
-        return v;
     }
 
+    @Override
+    public int getItemCount() {
+        if(baskets ==null || baskets.size()==0)
+           return 0;
+        else
+            return baskets.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        ImageView giohang;
+        TextView tensp;
+        TextView giasp;
+        Button btngiam;
+        Button btntang;
+        Button btnvalue;
+        Button btnxoa;
+       public MyViewHolder(View view){
+           super(view);
+           giohang=view.findViewById(R.id.imagegiohang);
+           tensp=view.findViewById(R.id.tenspgh);
+           giasp=view.findViewById(R.id.giagh);
+           btngiam=view.findViewById(R.id.btgiamsp);
+           btntang=view.findViewById(R.id.btntangsp);
+           btnvalue=view.findViewById(R.id.btnvalue);
+           btnxoa=view.findViewById(R.id.btndelete);
+       }
+}
+    public interface HandleBasketClick{
+        void btntangclick(Basket basket);
+        void btngiamclick(Basket basket);
+        void btnxoaclick(Basket basket);
+    }
 }

@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.qlbdt.fObject.Basket;
 
@@ -17,4 +18,6 @@ public interface IBasketDao {
     void Deletehang(Basket basket);
     @Query("Select * from Giohang")
     List<Basket> getAll();
+    @Update
+    void Updatehang(Basket basket);
 }
