@@ -14,32 +14,36 @@ public class BasketViewmodel extends AndroidViewModel {
     private MutableLiveData<List<Basket>> listofbasket;
     private Basketdatabase basketdatabase;
 
-    public BasketViewmodel(Application application){
+    public BasketViewmodel(Application application) {
         super(application);
-        listofbasket =new MutableLiveData<>();
-        basketdatabase=Basketdatabase.getInstance(getApplication().getApplicationContext());
+        listofbasket = new MutableLiveData<>();
+        basketdatabase = Basketdatabase.getInstance(getApplication().getApplicationContext());
     }
-    public MutableLiveData<List<Basket>> getListofbasketobserver(){
+
+    public MutableLiveData<List<Basket>> getListofbasketobserver() {
         return listofbasket;
     }
-    public void Getallbasket(){
-        List<Basket> basketList= basketdatabase.iBasketDao().getAll();
-        if(basketList.size()>0){
+
+    public void Getallbasket() {
+        List<Basket> basketList = basketdatabase.iBasketDao().getAll();
+        if (basketList.size() > 0) {
             listofbasket.postValue(basketList);
-        }
-        else {
+        } else {
             listofbasket.postValue(null);
         }
     }
-    public void Insertbasket(Basket basket){
+
+    public void Insertbasket(Basket basket) {
         basketdatabase.iBasketDao().Inserthang(basket);
         Getallbasket();
     }
-    public void Updatetbasket(Basket basket){
+
+    public void Updatetbasket(Basket basket) {
         basketdatabase.iBasketDao().Updatehang(basket);
         Getallbasket();
     }
-    public void Deletebasket(Basket basket){
+
+    public void Deletebasket(Basket basket) {
         basketdatabase.iBasketDao().Deletehang(basket);
         Getallbasket();
     }
