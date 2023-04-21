@@ -11,11 +11,11 @@
         <item
             android:id="@+id/searchFragment"
             android:icon="@drawable/ic_search"
-            android:title="@string/Find" />
+            android:title="@string/Search" />
 
     </group>
 
-    <item android:title="Thông tin cá nhân">
+    <item android:title="@string/MyInformation">
 
         <menu>
 
@@ -29,7 +29,7 @@
                 <item
                     android:id="@+id/basketFragment"
                     android:icon="@drawable/ic_shopping_basket"
-                    android:title="@string/ShoppingBasket" />
+                    android:title="@string/Cart" />
 
                 <item
                     android:id="@+id/historyFragment"
@@ -42,7 +42,7 @@
 
     </item>
 
-    <item android:title="Liên hệ">
+    <item android:title="@string/Contact">
 
         <menu>
 

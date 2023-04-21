@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import java.util.List;
  * Thiết kế giao diện
  * */
 
+
 public class BasketFragment extends Fragment implements BasketAdapter.HandleBasketClick {
 
     private BasketViewmodel viewmodel;
@@ -42,6 +44,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     private TextView txttongtien;
     private Button btnthanhtoan, btnttmua;
     private BasketAdapter basketAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txttongtien.setText(decimalFormat.format(tongtien) + "VND");
     }
+
     //TODO: KHÔNG XÓA 2 HÀM BÊN DƯỚI
     private void SendNoti(String name) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_logo_app);

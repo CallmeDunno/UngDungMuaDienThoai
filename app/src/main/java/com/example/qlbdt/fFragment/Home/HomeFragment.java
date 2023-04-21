@@ -19,62 +19,75 @@ import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Photo;
 import com.example.qlbdt.fObject.Smartphone;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import me.relex.circleindicator.CircleIndicator;
-
 /**
  * Dungx
- * */
+ */
 
 public class HomeFragment extends Fragment {
-    private ViewPager viewPager;
-    private CircleIndicator circleIndicator;
-    private PhotoAdapter photoAdapter;
     private List<Photo> mListPhoto;
     private Timer mTimer;
-    private RecyclerView rcvPhone;
+    private ProductHomeAdapter productHomeAdapter;
+    private FragmentHomeBinding binding;
 
-    private SmartPhoneHomeAdapter mSmartPhoneHomeAdapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        viewPager = view.findViewById(R.id.viewpager_tuan);
-        circleIndicator = view.findViewById(R.id.circle_indicator_tuan);
-
-        mListPhoto = getListPhoto();
-        photoAdapter = new PhotoAdapter(this, mListPhoto);
-        viewPager.setAdapter(photoAdapter);
-
-        circleIndicator.setViewPager(viewPager);
-        photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-
-        autoSlideImages();
-
-        rcvPhone = view.findViewById(R.id.rcv_phone);
-        mSmartPhoneHomeAdapter = new SmartPhoneHomeAdapter(getActivity(), new IRecyclerViewOnClick() {
-            @Override
-            public void onClickItemSmartphone(Smartphone smartphone) {
-
-            }
-        });
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
-        rcvPhone.setLayoutManager(gridLayoutManager);
-
-        mSmartPhoneHomeAdapter.setData(getListPhone());
-        rcvPhone.setAdapter(mSmartPhoneHomeAdapter);
-
-        return view;
+        return binding.getRoot();
     }
 
-    List<Photo> getListPhoto() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initSlide();
+        initUI();
+        initViewModel();
+    }
+
+    private void initViewModel() {
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
+            productHomeAdapter.setData(productHomes);
+            productHomeAdapter.setData(productHomes);
+        });
+    }
+
+    private void initUI() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        binding.rcvPhone.setLayoutManager(linearLayoutManager);
+        binding.rcvPc.setLayoutManager(linearLayoutManager2);
+        productHomeAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
+            //TODO: Chuyển hướng đến ProductDetail
+        });
+        binding.rcvPhone.setAdapter(productHomeAdapter);
+        binding.rcvPc.setAdapter(productHomeAdapter);
+
+        binding.tvSeeMore1.setOnClickListener(view -> {
+            //TODO: Chuyển hướng đến trang điện thoại
+        });
+
+        binding.tvSeeMore2.setOnClickListener(view -> {
+            //TODO: Chuyển hướng đến trang Laptop
+        });
+    }
+
+    private void initSlide() {
+        mListPhoto = getListPhoto();
+        PhotoAdapter photoAdapter = new PhotoAdapter(this, mListPhoto);
+        binding.viewpager.setAdapter(photoAdapter);
+        binding.circleIndicator.setViewPager(binding.viewpager);
+        photoAdapter.registerDataSetObserver(binding.circleIndicator.getDataSetObserver());
+        autoSlideImages();
+    }
+
+    private List<Photo> getListPhoto() {
         List<Photo> list = new ArrayList<>();
         list.add(new Photo(R.drawable.banner1));
         list.add(new Photo(R.drawable.banner2));
@@ -84,36 +97,26 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
-    private List<Smartphone> getListPhone(){
-        List<Smartphone> list = new ArrayList<>();
-
-        return list;
-    }
-
-    private void autoSlideImages(){
-        if (mListPhoto == null || mListPhoto.isEmpty() || viewPager == null){
+    private void autoSlideImages() {
+        if (mListPhoto == null || mListPhoto.isEmpty()) {
             return;
         }
 
-        // Khởi tạo timer
-        if (mTimer == null){
+        if (mTimer == null) {
             mTimer = new Timer();
         }
 
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        int currentItem = viewPager.getCurrentItem();
-                        int totalItem = mListPhoto.size() - 1;
-                        if (currentItem < totalItem){
-                            currentItem ++;
-                            viewPager.setCurrentItem(currentItem);
-                        }else {
-                            viewPager.setCurrentItem(0);
-                        }
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    int currentItem = binding.viewpager.getCurrentItem();
+                    int totalItem = mListPhoto.size() - 1;
+                    if (currentItem < totalItem) {
+                        currentItem++;
+                        binding.viewpager.setCurrentItem(currentItem);
+                    } else {
+                        binding.viewpager.setCurrentItem(0);
                     }
                 });
             }
@@ -123,7 +126,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mTimer != null){
+        if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
         }
@@ -132,6 +135,5 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mSmartPhoneHomeAdapter.setData(getListPhone());
     }
 }
