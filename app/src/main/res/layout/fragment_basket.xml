@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fFragment.Basket.BasketFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbargiohang"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#b13c2b"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Giỏ Hàng"
-        app:titleTextColor="@color/white" />
-
 
     <LinearLayout
         android:id="@+id/linearlayoutgiohang"
@@ -26,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbargiohang">
+        app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
             android:id="@+id/framlayoutgh"
