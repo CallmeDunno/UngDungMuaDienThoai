@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/color_main"
+    android:background="@drawable/bg_color_main_corner_right_t_16"
     android:padding="16dp"
     android:id="@+id/nav_header_layout">
 

@@ -18,14 +18,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
  * */
 
 public class HistoryFragment extends Fragment {
-
-    FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-        db = FirebaseFirestore.getInstance();
         return view;
     }
 
