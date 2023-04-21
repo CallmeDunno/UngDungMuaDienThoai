@@ -54,6 +54,16 @@ public class History {
         this.priceSmartPhone = priceSmartPhone;
     }
 
+    public History(int id, String orderTime, String color, String nameCustomer, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone) {
+        this.id = id;
+        this.orderTime = orderTime;
+        this.color = color;
+        this.nameCustomer = nameCustomer;
+        this.nameSmartPhone = nameSmartPhone;
+        this.priceSmartPhone = priceSmartPhone;
+        this.imgSmartPhone = imgSmartPhone;
+    }
+
     public int getId() {
         return id;
     }
