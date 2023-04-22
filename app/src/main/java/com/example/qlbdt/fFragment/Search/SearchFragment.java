@@ -1,21 +1,30 @@
 package com.example.qlbdt.fFragment.Search;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fAdapter.SmartPhoneSearchAdapter2;
+import com.example.qlbdt.databinding.FragmentSearchBinding;
+import com.example.qlbdt.fAdapter.PhotoAdapter;
 import com.example.qlbdt.fAdapter.SmartphoneSearchAdapter;
+import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
+import com.example.qlbdt.fObject.Photo;
+import com.example.qlbdt.fObject.Smartphone;
 import com.example.qlbdt.fObject.User2;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -25,6 +34,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.xml.transform.sax.TemplatesHandler;
 
 /**
  * Tiến Dũng
@@ -33,32 +46,30 @@ import java.util.ArrayList;
  * */
 
 public class SearchFragment extends Fragment {
-    RecyclerView recyclerView;
-    ArrayList<User2> user2ArrayList;
-    SmartphoneSearchAdapter searchAdapter;
-    SmartPhoneSearchAdapter2 searchAdapter2;
-    FirebaseFirestore db;
-    Spinner sp_sort, sp_brand;
-    ArrayList<String> sort, brand;
-    ArrayAdapter adapterSort, adapterBrand;
-    private FirebaseFirestore firestore;
+
+    private ProducSearchAdapter producSearchAdapter;
+    private SearchViewModel searchViewModel;
+    private FragmentSearchBinding binding;
+
+    private Spinner sp_sort, sp_brand;
+    private ArrayList<String> sort, brand;
+    private  ArrayAdapter adapterSort, adapterBrand;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentSearchBinding.inflate(inflater,container,false);
+        View view =binding.getRoot();
 
-
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-        recyclerView = view.findViewById(R.id.rcv_fragment_search);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(searchAdapter2);
-        db =FirebaseFirestore.getInstance();
-        user2ArrayList= new ArrayList<User2>();
-        searchAdapter2 = new SmartPhoneSearchAdapter2(user2ArrayList);
-        LoadData();
-
-
+        initUI();
+        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        searchViewModel.getListProductSearchLiveData().observe(getActivity(), new Observer<List<ProductSearch>>() {
+            @Override
+            public void onChanged(List<ProductSearch> productSearches) {
+                producSearchAdapter.setData(productSearches);
+            }
+        });
 
         sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
         sort = new ArrayList<>();
@@ -76,23 +87,22 @@ public class SearchFragment extends Fragment {
 
         return view;
     }
-    private void LoadData(){
-        db.collection("Products").orderBy("name", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error != null){
-                    Log.d( "onEvent: ",error.getMessage());
-                    return;
-                }
-                for (DocumentChange dc : value.getDocumentChanges()){
-                    if (dc.getType() == DocumentChange.Type.ADDED){
-                        user2ArrayList.add(dc.getDocument().toObject(User2.class));
 
-                    }
-                    searchAdapter2.notifyDataSetChanged();
-                }
+
+
+    private void initUI() {
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
+        binding.rcvSearch.setLayoutManager(linearLayoutManager);
+        producSearchAdapter = new ProducSearchAdapter(getActivity(), new IRecyclerViewOnClick() {
+            @Override
+            public void onClickItemSmartphone(Smartphone smartphone) {
+
             }
         });
+
+        binding.rcvSearch.setAdapter(producSearchAdapter);
     }
+
+
 
 }
