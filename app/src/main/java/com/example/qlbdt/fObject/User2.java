@@ -34,8 +34,6 @@ public class User2 {
                 this.price = price;
         }
 
-
-
         private String name;
         private String price;
 
