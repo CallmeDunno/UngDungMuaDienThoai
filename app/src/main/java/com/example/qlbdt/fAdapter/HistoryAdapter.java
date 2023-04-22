@@ -1,7 +1,5 @@
 package com.example.qlbdt.fAdapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +34,6 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         History history = lstHistory.get(position);
         if(history== null) return;
-        byte[] image = history.getImgSmartPhone();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imgProduct.setImageBitmap(bitmap);
         holder.nameProduct.setText(history.getNameSmartPhone());
         holder.colorProduct.setText(history.getColor());
         holder.orderTime.setText(history.getOrderTime());
