@@ -36,7 +36,7 @@ public class HomeViewModel extends ViewModel {
                             String price = doc.toObject(ProductHome.class).getPrice();
                             String image = doc.toObject(ProductHome.class).getImage();
                             //region Tạm thời không dùng đến
-//                                String os = doc.toObject(ProductHome.class).getOS();
+                                String os = doc.toObject(ProductHome.class).getOS();
 //                                String battery = doc.toObject(ProductHome.class).getBattery();
 //                                String brand = doc.toObject(ProductHome.class).getBrand();
 //                                String color = doc.toObject(ProductHome.class).getColor();

@@ -1,108 +1,109 @@
 package com.example.qlbdt.fAdapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClickBasketItem;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClickDelete;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClickDetail;
 import com.example.qlbdt.fObject.Basket;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
-public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketViewHolder> {
-
+public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>{
+    private Context context;
     private List<Basket> baskets;
-    private IRecyclerViewOnClickBasketItem iRecyclerViewOnClickBasketItem;
-    private IRecyclerViewOnClickDelete iRecyclerViewOnClickDelete;
-    private IRecyclerViewOnClickDetail iRecyclerViewOnClickDetail;
-
-    public BasketAdapter(List<Basket> baskets, IRecyclerViewOnClickBasketItem iRecyclerViewOnClickBasketItem
-            , IRecyclerViewOnClickDelete iRecyclerViewOnClickDelete, IRecyclerViewOnClickDetail iRecyclerViewOnClickDetail) {
-        this.baskets = baskets;
-        this.iRecyclerViewOnClickBasketItem = iRecyclerViewOnClickBasketItem;
-        this.iRecyclerViewOnClickDelete = iRecyclerViewOnClickDelete;
-        this.iRecyclerViewOnClickDetail = iRecyclerViewOnClickDetail;
+    private HandleBasketClick click;
+    public BasketAdapter(Context context, HandleBasketClick click){
+        this.context=context;
+        this.click=click;
     }
-
-    public void setList(List<Basket> b){
-        this.baskets = b;
+    public void setBasketlist(List<Basket> baskets){
+        this.baskets=baskets;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
-    public BasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_basket_fragment, parent, false);
-        return new BasketViewHolder(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.item_rcv_basket_fragment,parent,false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BasketViewHolder holder, int position) {
-        Basket basket = baskets.get(position);
-        if (basket == null){
-            return;
+    public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.tensp.setText(this.baskets.get(position).getTensp());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getGiasp()) + "Đ");
+        holder.btnvalue.setText(this.baskets.get(position).getSoluongsp());
+        int sl = Integer.parseInt(holder.btnvalue.getText().toString());
+        if(sl >= 10){
+            holder.btntang.setVisibility(View.INVISIBLE);
+            holder.btngiam.setVisibility(View.VISIBLE);
+        }else if(sl <=1){
+            holder.btngiam.setVisibility(View.INVISIBLE);
+        }else{
+            holder.btntang.setVisibility(View.VISIBLE);
+            holder.btngiam.setVisibility(View.VISIBLE);
         }
-        byte[] image = basket.getImageSmp();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.img_avt_rcv_basket.setImageBitmap(bitmap);
-        holder.tv_brand_name_basket.setText("Hãng: " + basket.getNameBrand());
-        holder.tv_smp_name_basket.setText(basket.getNameSmp());
-        holder.tv_price_basket.setText("Giá: " + basket.getPriceBasket() + " VND");
-        holder.relative_layout_item_basket.setOnClickListener(new View.OnClickListener() {
+        holder.btngiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iRecyclerViewOnClickBasketItem.onClickItemBasket(basket, basket.getIdBasket());
+                click.btngiamclick(baskets.get(position));
             }
         });
-        holder.tv_detail_basket.setOnClickListener(new View.OnClickListener() {
+        holder.btntang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iRecyclerViewOnClickDetail.onClickDetail(basket.getNameSmp());
+                click.btntangclick(baskets.get(position));
             }
         });
-        holder.tv_delete_basket.setOnClickListener(new View.OnClickListener() {
+        holder.btnxoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iRecyclerViewOnClickDelete.onClickDetail(basket.getIdBasket());
+                click.btnxoaclick(baskets.get(position));
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        if (baskets != null){
+        if(baskets ==null || baskets.size()==0)
+            return 0;
+        else
             return baskets.size();
-        }
-        return 0;
     }
 
-    public class BasketViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tv_brand_name_basket, tv_smp_name_basket, tv_price_basket, tv_detail_basket, tv_delete_basket;
-        ImageView img_avt_rcv_basket;
-        RelativeLayout relative_layout_item_basket;
-        public BasketViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tv_brand_name_basket = itemView.findViewById(R.id.tv_brand_name_basket);
-            tv_smp_name_basket = itemView.findViewById(R.id.tv_smp_name_basket);
-            tv_price_basket = itemView.findViewById(R.id.tv_price_basket);
-            tv_detail_basket = itemView.findViewById(R.id.tv_detail_basket);
-            tv_delete_basket = itemView.findViewById(R.id.tv_delete_basket);
-            img_avt_rcv_basket = itemView.findViewById(R.id.img_avt_rcv_basket);
-            relative_layout_item_basket = itemView.findViewById(R.id.relative_layout_item_basket);
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        ImageView giohang;
+        TextView tensp;
+        TextView giasp;
+        Button btngiam;
+        Button btntang;
+        Button btnvalue;
+        Button btnxoa;
+        public MyViewHolder(View view){
+            super(view);
+            giohang=view.findViewById(R.id.imagegiohang);
+            tensp=view.findViewById(R.id.tenspgh);
+            giasp=view.findViewById(R.id.giagh);
+            btngiam=view.findViewById(R.id.btgiamsp);
+            btntang=view.findViewById(R.id.btntangsp);
+            btnvalue=view.findViewById(R.id.btnvalue);
+            btnxoa=view.findViewById(R.id.btndelete);
         }
     }
-
+    public interface HandleBasketClick{
+        void btntangclick(Basket basket);
+        void btngiamclick(Basket basket);
+        void btnxoaclick(Basket basket);
+    }
 }
