@@ -1,9 +1,10 @@
 package com.example.qlbdt.fFragment.Home;
 
+import com.example.qlbdt.fObject.Price;
+
 public class ProductHome {
-    private int id;
     private String name;
-    private String price;
+    private Price price;
     private String image;
     private String OS;
     private String battery;
@@ -23,7 +24,7 @@ public class ProductHome {
 
     public ProductHome(String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
         this.name = name;
-        this.price = price;
+        this.price = new Price(price);
         this.image = image;
         this.OS = OS;
         this.battery = battery;
@@ -41,16 +42,8 @@ public class ProductHome {
 
     public ProductHome(String name, String price, String imageProduct) {
         this.name = name;
-        this.price = price;
+        this.price = new Price(price);
         this.image = imageProduct;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -62,11 +55,11 @@ public class ProductHome {
     }
 
     public String getPrice() {
-        return price;
+        return price.toString();
     }
 
     public void setPrice(String price) {
-        this.price = price;
+        this.price = new Price(price);
     }
 
     public String getImage() {

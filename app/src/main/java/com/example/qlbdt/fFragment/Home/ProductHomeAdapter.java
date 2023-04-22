@@ -2,7 +2,6 @@ package com.example.qlbdt.fFragment.Home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -24,8 +23,9 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         this.iRecyclerViewOnClick = iRecyclerViewOnClick;
     }
 
-    public void setData(List<ProductHome> p){
+    public void setData(List<ProductHome> p) {
         this.productHomes = p;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -38,23 +38,20 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
     @Override
     public void onBindViewHolder(@NonNull ProductHomeViewHolder holder, int position) {
         ProductHome productHome = productHomes.get(position);
-        if (productHome == null){
+        if (productHome == null) {
             return;
         }
         Glide.with(context).load(productHome.getImage()).into(holder.itemBinding.imgPhone);
         holder.itemBinding.tvPhone.setText(productHome.getName());
-        holder.itemBinding.tvPrice.setText(productHome.getPrice());
-        holder.itemBinding.cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Cần chuyển đến trang chi tiết sản phẩm
-            }
+        holder.itemBinding.tvPrice.setText(String.format("%s VND", productHome.getPrice()));
+        holder.itemBinding.cardview.setOnClickListener(view -> {
+            //TODO: Cần chuyển đến trang chi tiết sản phẩm
         });
     }
 
     @Override
     public int getItemCount() {
-        if (productHomes != null){
+        if (productHomes != null) {
             return productHomes.size();
         }
         return 0;
@@ -62,6 +59,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
 
     public static class ProductHomeViewHolder extends RecyclerView.ViewHolder {
         private final ItemRcvHomeBinding itemBinding;
+
         public ProductHomeViewHolder(@NonNull ItemRcvHomeBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;

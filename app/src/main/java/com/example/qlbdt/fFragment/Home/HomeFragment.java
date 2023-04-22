@@ -7,17 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentHomeBinding;
 import com.example.qlbdt.fAdapter.PhotoAdapter;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Photo;
-import com.example.qlbdt.fObject.Smartphone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,44 +25,55 @@ import java.util.TimerTask;
 
 /**
  * Dungx
- * */
+ */
 
 public class HomeFragment extends Fragment {
     private List<Photo> mListPhoto;
     private Timer mTimer;
     private ProductHomeAdapter productHomeAdapter;
-    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
 
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initSlide();
         initUI();
+        initViewModel();
+    }
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getListProductHomeLiveData().observe(getActivity(), new Observer<List<ProductHome>>() {
-            @Override
-            public void onChanged(List<ProductHome> productHomes) {
-                productHomeAdapter.setData(productHomes);
-            }
+    private void initViewModel() {
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
+            productHomeAdapter.setData(productHomes);
+            productHomeAdapter.setData(productHomes);
         });
-
-        return view;
     }
 
     private void initUI() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.rcvPhone.setLayoutManager(linearLayoutManager);
-        productHomeAdapter = new ProductHomeAdapter(getActivity(), new IRecyclerViewOnClick() {
-            @Override
-            public void onClickItemSmartphone(Smartphone smartphone) {
-
-            }
+        binding.rcvPc.setLayoutManager(linearLayoutManager2);
+        productHomeAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
+            //TODO: Chuyển hướng đến ProductDetail
         });
         binding.rcvPhone.setAdapter(productHomeAdapter);
+        binding.rcvPc.setAdapter(productHomeAdapter);
+
+        binding.tvSeeMore1.setOnClickListener(view -> {
+            //TODO: Chuyển hướng đến trang điện thoại
+        });
+
+        binding.tvSeeMore2.setOnClickListener(view -> {
+            //TODO: Chuyển hướng đến trang Laptop
+        });
     }
 
     private void initSlide() {
@@ -85,30 +95,27 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
-    private void autoSlideImages(){
-        if (mListPhoto == null || mListPhoto.isEmpty()){
+    private void autoSlideImages() {
+        if (mListPhoto == null || mListPhoto.isEmpty()) {
             return;
         }
 
         // Khởi tạo timer
-        if (mTimer == null){
+        if (mTimer == null) {
             mTimer = new Timer();
         }
 
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        int currentItem = binding.viewpager.getCurrentItem();
-                        int totalItem = mListPhoto.size() - 1;
-                        if (currentItem < totalItem){
-                            currentItem ++;
-                            binding.viewpager.setCurrentItem(currentItem);
-                        }else {
-                            binding.viewpager.setCurrentItem(0);
-                        }
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    int currentItem = binding.viewpager.getCurrentItem();
+                    int totalItem = mListPhoto.size() - 1;
+                    if (currentItem < totalItem) {
+                        currentItem++;
+                        binding.viewpager.setCurrentItem(currentItem);
+                    } else {
+                        binding.viewpager.setCurrentItem(0);
                     }
                 });
             }
@@ -118,7 +125,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mTimer != null){
+        if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
         }
