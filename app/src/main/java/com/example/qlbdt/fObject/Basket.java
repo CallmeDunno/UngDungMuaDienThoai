@@ -1,57 +1,64 @@
 package com.example.qlbdt.fObject;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "Giohang")
 public class Basket {
+    @PrimaryKey
+    public int idsp;
+    @ColumnInfo
+    public String tensp;
+    public long giasp;
+    public String hinhsp;
+    public int soluongsp;
 
-    private int idBasket;
-    private byte[] imageSmp;
-    private String nameBrand, nameSmp;
-    private Price priceBasket;
-
-    public Basket(int idBasket, byte[] imageSmp, String nameBrand, String nameSmp, String priceBasket) {
-        this.idBasket = idBasket;
-        this.imageSmp = imageSmp;
-        this.nameBrand = nameBrand;
-        this.nameSmp = nameSmp;
-        this.priceBasket = new Price(priceBasket);
+    public Basket(int idsp, String tensp, long giasp, String hinhsp, int soluongsp) {
+        this.idsp = idsp;
+        this.tensp = tensp;
+        this.giasp = giasp;
+        this.hinhsp = hinhsp;
+        this.soluongsp = soluongsp;
     }
 
-    public int getIdBasket() {
-        return idBasket;
+    public int getIdsp() {
+        return idsp;
     }
 
-    public void setIdBasket(int idBasket) {
-        this.idBasket = idBasket;
+    public void setIdsp(int idsp) {
+        this.idsp = idsp;
     }
 
-    public byte[] getImageSmp() {
-        return imageSmp;
+    public String getTensp() {
+        return tensp;
     }
 
-    public void setImageSmp(byte[] imageSmp) {
-        this.imageSmp = imageSmp;
+    public void setTensp(String tensp) {
+        this.tensp = tensp;
     }
 
-    public String getNameBrand() {
-        return nameBrand;
+    public long getGiasp() {
+        return giasp;
     }
 
-    public void setNameBrand(String nameBrand) {
-        this.nameBrand = nameBrand;
+    public void setGiasp(long giasp) {
+        this.giasp = giasp;
     }
 
-    public String getNameSmp() {
-        return nameSmp;
+    public String getHinhsp() {
+        return hinhsp;
     }
 
-    public void setNameSmp(String nameSmp) {
-        this.nameSmp = nameSmp;
+    public void setHinhsp(String hinhsp) {
+        this.hinhsp = hinhsp;
     }
 
-    public String getPriceBasket() {
-        return priceBasket.toString();
+    public int getSoluongsp() {
+        return soluongsp;
     }
 
-    public void setPriceBasket(String priceBasket) {
-        this.priceBasket = new Price(priceBasket);
+    public void setSoluongsp(int soluongsp) {
+        this.soluongsp = soluongsp;
     }
 }

@@ -11,7 +11,7 @@ import com.example.qlbdt.fObject.Basket;
 import java.util.List;
 
 @Dao
-public interface IBasketDAO {
+public interface IBasketDao {
     @Insert
     void Inserthang(Basket basket);
     @Delete
