@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,12 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.qlbdt.R;
 import com.example.qlbdt.fAdapter.HistoryAdapter;
 import com.example.qlbdt.fObject.History;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -31,6 +27,9 @@ import java.util.List;
  * MVVM + Firebase
  * Thiết kế giao diện
  *
+ * - Làm lại cái class object History
+ * - Giao diện sửa lại
+ * - Sử dụng View Binding
  * */
 
 public class HistoryFragment extends Fragment {

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
@@ -30,7 +31,8 @@ import java.util.TimerTask;
 public class HomeFragment extends Fragment {
     private List<Photo> mListPhoto;
     private Timer mTimer;
-    private ProductHomeAdapter productHomeAdapter;
+    private ProductHomeAdapter smartphoneAdapter;
+    private ProductHomeAdapter laptopAdapter;
     private FragmentHomeBinding binding;
 
     @Override
@@ -51,8 +53,21 @@ public class HomeFragment extends Fragment {
     private void initViewModel() {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
-            productHomeAdapter.setData(productHomes);
-            productHomeAdapter.setData(productHomes);
+            List<ProductHome> listSmartphone = new ArrayList<>();
+            List<ProductHome> listLaptop = new ArrayList<>();
+            for (ProductHome p : productHomes){
+                if (p.getType().equals("Smartphone") && listSmartphone.size() < 5){
+                    listSmartphone.add(p);
+                }
+                if (p.getType().equals("Laptop") && listLaptop.size() < 5){
+                    listLaptop.add(p);
+                }
+//                if (listSmartphone.size() == 5 && listLaptop.size() == 5){
+//                    break;
+//                }
+            }
+            smartphoneAdapter.setData(listSmartphone);
+            laptopAdapter.setData(listLaptop);
         });
     }
 
@@ -61,14 +76,17 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.rcvPhone.setLayoutManager(linearLayoutManager);
         binding.rcvPc.setLayoutManager(linearLayoutManager2);
-        productHomeAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
+        smartphoneAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
             //TODO: Chuyển hướng đến ProductDetail
         });
-        binding.rcvPhone.setAdapter(productHomeAdapter);
-        binding.rcvPc.setAdapter(productHomeAdapter);
-
+        laptopAdapter = new ProductHomeAdapter(requireContext(), smartphone -> {
+            //TODO: Chuyển hướng đến ProductDetail
+        });
+        binding.rcvPhone.setAdapter(smartphoneAdapter);
+        binding.rcvPc.setAdapter(laptopAdapter);
         binding.tvSeeMore1.setOnClickListener(view -> {
             //TODO: Chuyển hướng đến trang điện thoại
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_productDetailFragment);
         });
 
         binding.tvSeeMore2.setOnClickListener(view -> {

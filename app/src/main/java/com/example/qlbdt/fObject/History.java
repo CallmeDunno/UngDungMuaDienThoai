@@ -16,42 +16,6 @@ public class History {
     private String brandName;
     private String des;
 
-    public History(int id, String orderTime, String color, String nameCustomer, byte[] avatar, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone, String brandName, String des) {
-        this.id =  id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameCustomer = nameCustomer;
-        this.avatar = avatar;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-        this.imgSmartPhone = imgSmartPhone;
-        this.brandName = brandName;
-        this.des = des;
-    }
-
-    public History(int id, String orderTime, String color, String nameCustomer, String phoneNumber, String email, String address, byte[] avatar, String nameSmartPhone, String priceSmartPhone, String quantitySmartPhone, byte[] imgSmartPhone) {
-        this.id = id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameCustomer = nameCustomer;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.avatar = avatar;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-        this.quantitySmartPhone = quantitySmartPhone;
-        this.imgSmartPhone = imgSmartPhone;
-    }
-
-    public History(int id, String orderTime, String color, String nameSmartPhone, String priceSmartPhone) {
-        this.id = id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-    }
-
     public History() {
     }
 

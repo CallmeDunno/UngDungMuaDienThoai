@@ -28,8 +28,12 @@ import java.util.List;
 
 /**
  * Tuấn
- * Room + MVVM
- * Thiết kế giao diện
+ * Room + MVVM: OK
+ * Thiết kế giao diện: cần sửa lại 1 xíu
+ *
+ * - Đổi tên biến sang tiếng anh
+ * - Kéo những file lên quan đưa vào trong folder Basket
+ * - Sử dụng View Binding
  */
 
 public class BasketFragment extends Fragment implements BasketAdapter.HandleBasketClick {

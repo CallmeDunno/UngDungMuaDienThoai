@@ -25,6 +25,7 @@ public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapte
     }
     public void setData(List<ProductSearch> p){
         this.productSearches = p;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,6 +45,11 @@ public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapte
         holder.itemBinding.tvSearchPhone.setText(productSearch.getName());
         holder.itemBinding.tvSearchPrice.setText(productSearch.getPrice());
 
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ProductSharchViewHolder holder, int position, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
     }
 
     @Override

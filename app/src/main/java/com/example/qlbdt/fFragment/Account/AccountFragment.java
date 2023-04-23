@@ -14,7 +14,7 @@ import com.example.qlbdt.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Tùng + Tiến Dũng
+ * Tiến Dũng
  * */
 
 public class AccountFragment extends Fragment {

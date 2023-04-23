@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -32,6 +31,7 @@ public class LogInFragment extends Fragment {
     LoginViewModel loginViewModel;
     FirebaseAuth mAuth;
     ProgressDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class LogInFragment extends Fragment {
         fragmentTransaction.replace(R.id.frame_layout_login, fragment);
         fragmentTransaction.commit();
     }
+
     private void initData() {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
     }
@@ -78,7 +79,7 @@ public class LogInFragment extends Fragment {
         loginViewModel.getUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                if(isValidated(user)) {
+                if (isValidated(user)) {
                     mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
@@ -102,18 +103,18 @@ public class LogInFragment extends Fragment {
     }
 
     private boolean isValidated(User user) {
-        if(TextUtils.isEmpty(user.getEmail())) {
+        if (TextUtils.isEmpty(user.getEmail())) {
             binding.edtEmail.setError("Email is empty");
             return false;
         }
-        if(TextUtils.isEmpty(user.getPassword())) {
+        if (TextUtils.isEmpty(user.getPassword())) {
             binding.edtPassword.setError("Password is empty");
         }
-        if(!user.isEmailValid()) {
+        if (!user.isEmailValid()) {
             binding.edtEmail.setError("Email is invalid");
             return false;
         }
-        if(!user.isPasswordLengthGreaterThan5()) {
+        if (!user.isPasswordLengthGreaterThan5()) {
             binding.edtPassword.setError("Password is invalid");
         }
         return true;
