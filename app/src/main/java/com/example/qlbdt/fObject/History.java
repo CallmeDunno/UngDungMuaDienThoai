@@ -2,67 +2,28 @@ package com.example.qlbdt.fObject;
 
 public class History {
     private int id;
-    private String orderTime;
-    private String color;
-    private String nameCustomer;
-    private String phoneNumber;
-    private String email;
-    private String address;
-    private byte[] avatar;
+    private String userId;
     private String nameSmartPhone;
     private String priceSmartPhone;
-    private String quantitySmartPhone;
-    private byte[] imgSmartPhone;
+    private int numberOrder;
+    private String imgSmartPhone;
     private String brandName;
-    private String des;
-
-    public History(int id, String orderTime, String color, String nameCustomer, byte[] avatar, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone, String brandName, String des) {
-        this.id =  id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameCustomer = nameCustomer;
-        this.avatar = avatar;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-        this.imgSmartPhone = imgSmartPhone;
-        this.brandName = brandName;
-        this.des = des;
-    }
-
-    public History(int id, String orderTime, String color, String nameCustomer, String phoneNumber, String email, String address, byte[] avatar, String nameSmartPhone, String priceSmartPhone, String quantitySmartPhone, byte[] imgSmartPhone) {
-        this.id = id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameCustomer = nameCustomer;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.avatar = avatar;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-        this.quantitySmartPhone = quantitySmartPhone;
-        this.imgSmartPhone = imgSmartPhone;
-    }
-
-    public History(int id, String orderTime, String color, String nameSmartPhone, String priceSmartPhone) {
-        this.id = id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameSmartPhone = nameSmartPhone;
-        this.priceSmartPhone = priceSmartPhone;
-    }
+    private String color;
+    private String orderTime;
 
     public History() {
     }
 
-    public History(int id, String orderTime, String color, String nameCustomer, String nameSmartPhone, String priceSmartPhone, byte[] imgSmartPhone) {
+    public History(int id, String userId, String nameSmartPhone, String priceSmartPhone, int numberOrder, String imgSmartPhone, String brandName, String color, String orderTime) {
         this.id = id;
-        this.orderTime = orderTime;
-        this.color = color;
-        this.nameCustomer = nameCustomer;
+        this.userId = userId;
         this.nameSmartPhone = nameSmartPhone;
         this.priceSmartPhone = priceSmartPhone;
+        this.numberOrder = numberOrder;
         this.imgSmartPhone = imgSmartPhone;
+        this.brandName = brandName;
+        this.color = color;
+        this.orderTime = orderTime;
     }
 
     public int getId() {
@@ -89,44 +50,12 @@ public class History {
         this.color = color;
     }
 
-    public String getNameCustomer() {
-        return nameCustomer;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setNameCustomer(String nameCustomer) {
-        this.nameCustomer = nameCustomer;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getNameSmartPhone() {
@@ -145,19 +74,19 @@ public class History {
         this.priceSmartPhone = priceSmartPhone;
     }
 
-    public String getQuantitySmartPhone() {
-        return quantitySmartPhone;
+    public int getNumberOrder() {
+        return numberOrder;
     }
 
-    public void setQuantitySmartPhone(String quantitySmartPhone) {
-        this.quantitySmartPhone = quantitySmartPhone;
+    public void setNumberOrder(int numberOrder) {
+        this.numberOrder = numberOrder;
     }
 
-    public byte[] getImgSmartPhone() {
+    public String getImgSmartPhone() {
         return imgSmartPhone;
     }
 
-    public void setImgSmartPhone(byte[] imgSmartPhone) {
+    public void setImgSmartPhone(String imgSmartPhone) {
         this.imgSmartPhone = imgSmartPhone;
     }
 
@@ -167,13 +96,5 @@ public class History {
 
     public void setBrandName(String brandName) {
         this.brandName = brandName;
-    }
-
-    public String getDes() {
-        return des;
-    }
-
-    public void setDes(String des) {
-        this.des = des;
     }
 }
