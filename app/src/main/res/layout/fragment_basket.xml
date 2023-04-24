@@ -28,7 +28,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listviewgiohang"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
 
             <TextView
                 android:id="@+id/thongbaogiohang"
@@ -46,19 +47,21 @@
         android:layout_width="match_parent"
         android:layout_height="69dp"
         android:orientation="vertical"
+
        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="10">
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="18dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
+               android:layout_weight="5"
+                android:layout_width="wrap_content"
                 android:gravity="center"
                 android:text="Total: "
                 android:textColor="@android:color/holo_red_dark"
@@ -66,13 +69,13 @@
 
             <TextView
                 android:id="@+id/txttongtien"
-                android:layout_width="95dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:gravity="center|right"
-                android:text="Value"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+               android:layout_weight="5"
+                android:gravity="center"
+                android:text="0 VND"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="24sp" />
         </LinearLayout>

@@ -41,7 +41,7 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
         holder.tensp.setText(this.baskets.get(position).getBasketName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getBasketValue()) + "Đ");
-        holder.btnvalue.setText(this.baskets.get(position).getBasketQuantity());
+        holder.btnvalue.setText(String.valueOf(this.baskets.get(position).getBasketQuantity()));
         int sl = Integer.parseInt(holder.btnvalue.getText().toString());
         if(sl >= 10){
             holder.btntang.setVisibility(View.INVISIBLE);

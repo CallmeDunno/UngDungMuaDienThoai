@@ -3,7 +3,7 @@ package com.example.qlbdt.fFragment.Basket;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Basket")
+@Entity(tableName = "Basketsp")
 public class Basket {
     @PrimaryKey
     public int idBasket;
@@ -21,7 +21,9 @@ public class Basket {
     }
 
     public Basket() {
+
     }
+
 
     public int getIdBasket() {
         return idBasket;
