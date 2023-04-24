@@ -13,11 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import com.example.qlbdt.fObject.Smartphone;
-import com.example.qlbdt.fObject.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,9 +116,9 @@ public class SmartphoneSearchAdapter extends RecyclerView.Adapter<SmartphoneSear
         public SmartphoneSearchViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cv_fragment_search);
-            img_avt_rcv_fragment_search = itemView.findViewById(R.id.img_avt_rcv_fragment_search);
-            tv_name_rcv_fragment_search = itemView.findViewById(R.id.tv_name_rcv_fragment_search);
-            tv_price_rcv_fragment_search = itemView.findViewById(R.id.tv_price_rcv_fragment_search);
+            img_avt_rcv_fragment_search = itemView.findViewById(R.id.imagesearch);
+            tv_name_rcv_fragment_search = itemView.findViewById(R.id.tv_search_phone);
+            tv_price_rcv_fragment_search = itemView.findViewById(R.id.tv_search_price);
         }
     }
 

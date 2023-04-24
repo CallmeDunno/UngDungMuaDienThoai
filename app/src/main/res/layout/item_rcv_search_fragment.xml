@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_avt_rcv_fragment_search"
+            android:id="@+id/imagesearch"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginStart="8dp"
@@ -27,11 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/img_avt_rcv_fragment_search"
+            android:layout_toEndOf="@id/imagesearch"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_name_rcv_fragment_search"
+                android:id="@+id/tv_search_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -41,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_price_rcv_fragment_search"
+                android:id="@+id/tv_search_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
