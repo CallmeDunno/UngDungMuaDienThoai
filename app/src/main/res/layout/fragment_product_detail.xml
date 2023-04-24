@@ -5,7 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_gradient_blue_white"
-    tools:context=".fFragment.ProductDetail.ProductDetailFragment">
+    tools:context=".fragment.ProductDetail.ProductDetailFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,39 +51,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Name"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/Name"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/tv_price_product_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Price"
+                    android:text="@string/Price"
                     android:textColor="#FF0000"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
                 <TextView
+                    android:layout_marginEnd="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Description"
-                    android:textColor="#FF0000"
+                    android:text="@string/Description"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
                 <TextView
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/tv_des_product_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="des"
+                    android:text="@string/Description"
                     android:textSize="20sp" />
 
                 <TableLayout
@@ -86,19 +94,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="16dp"
                     android:stretchColumns="*">
 
                     <TableRow>
 
                         <TextView
-                            android:text="Brand:"
+                            android:text="@string/Brand"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_brand_product_detail"
-                            android:text="Brand's name"
+                            android:text="@string/Brand"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -106,7 +115,21 @@
                     <TableRow>
 
                         <TextView
-                            android:text="CPU:"
+                            android:text="OS"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_os_product_detail"
+                            android:text="OS"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="CPU"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -118,15 +141,12 @@
                             android:textSize="20sp"
                             android:maxLines="1"
                             android:ellipsize="end"/>
-
-
-
                     </TableRow>
 
                     <TableRow>
 
                         <TextView
-                            android:text="RAM:"
+                            android:text="RAM"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -140,7 +160,7 @@
                     <TableRow>
 
                         <TextView
-                            android:text="ROM:"
+                            android:text="ROM"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -154,13 +174,13 @@
                     <TableRow>
 
                         <TextView
-                            android:text="Màu sắc:"
+                            android:text="@string/Color"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_color_product_detail"
-                            android:text="Color"
+                            android:text="@string/Color"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -168,13 +188,13 @@
                     <TableRow>
 
                         <TextView
-                            android:text="Pin:"
+                            android:text="@string/Battery"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_battery_product_detail"
-                            android:text="Battery"
+                            android:text="@string/Battery"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -182,13 +202,13 @@
                     <TableRow>
 
                         <TextView
-                            android:text="Cân nặng:"
+                            android:text="@string/Weight"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_weight_product_detail"
-                            android:text="Weight"
+                            android:text="@string/Weight"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -196,13 +216,13 @@
                     <TableRow>
 
                         <TextView
-                            android:text="TGBH:"
+                            android:text="@string/ReleaseTime"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tv_wp_product_detail"
-                            android:text="warrantyPeriod"
+                            android:id="@+id/tv_rt_product_detail"
+                            android:text="@string/ReleaseTime"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -233,7 +253,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:textColor="@color/black"
-            android:text="Mua ngay" />
+            android:text="@string/BuyNow"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:layout_weight="1"
@@ -244,7 +265,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_selector2"
-            android:text="Thêm vào giỏ hàng" />
+            android:text="@string/AddToCart"
+            style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 
