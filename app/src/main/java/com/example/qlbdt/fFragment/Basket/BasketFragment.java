@@ -84,7 +84,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     public void EvenUltil(List<Basket> baskets) {
         long tongtien = 0;
         for (int i = 0; i < baskets.size(); i++) {
-            tongtien += baskets.get(i).getGiasp();
+            tongtien += baskets.get(i).getBasketValue();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         binding.txttongtien.setText(String.format("%sVND", decimalFormat.format(tongtien)));
@@ -116,19 +116,19 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
 
     public void btntangclick(Basket basket) {
 
-        int sl = basket.getSoluongsp();
+        int sl = basket.getBasketQuantity();
 
         sl++;
 
-        long slht = basket.getSoluongsp();
+        long slht = basket.getBasketQuantity();
 
-        long giaht = basket.getGiasp();
+        long giaht = basket.getBasketValue();
 
-        basket.setSoluongsp(sl);
+        basket.setBasketQuantity(sl);
 
         long giamoi = (giaht * sl) / slht;
 
-        basket.setGiasp(giamoi);
+        basket.setBasketValue(giamoi);
 
         viewmodel.Updatetbasket(basket);
 
@@ -139,19 +139,19 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
 
     public void btngiamclick(Basket basket) {
 
-        int sl = basket.getSoluongsp();
+        int sl = basket.getBasketQuantity();
 
         sl--;
 
-        long slht = basket.getSoluongsp();
+        long slht = basket.getBasketQuantity();
 
-        long giaht = basket.getGiasp();
+        long giaht = basket.getBasketValue();
 
-        basket.setSoluongsp(sl);
+        basket.setBasketQuantity(sl);
 
         long giamoi = (giaht * sl) / slht;
 
-        basket.setGiasp(giamoi);
+        basket.setBasketValue(giamoi);
 
         viewmodel.Updatetbasket(basket);
 

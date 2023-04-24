@@ -16,7 +16,7 @@ public interface IBasketDao {
     void InsertBasket(Basket basket);
     @Delete
     void DeleteBasket(Basket basket);
-    @Query("Select * from Giohang")
+    @Query("Select * from Basket")
     List<Basket> getAllBasket();
     @Update
     void UpdateBasket(Basket basket);

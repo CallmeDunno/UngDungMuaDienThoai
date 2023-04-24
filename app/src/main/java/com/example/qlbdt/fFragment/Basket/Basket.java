@@ -1,64 +1,65 @@
 package com.example.qlbdt.fFragment.Basket;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Giohang")
+@Entity(tableName = "Basket")
 public class Basket {
     @PrimaryKey
-    public int idsp;
-    @ColumnInfo
-    public String tensp;
-    public long giasp;
-    public String hinhsp;
-    public int soluongsp;
+    public int idBasket;
+    public String BasketName;
+    public long BasketValue;
+    public String BasketImage;
+    public int BasketQuantity;
 
-    public Basket(int idsp, String tensp, long giasp, String hinhsp, int soluongsp) {
-        this.idsp = idsp;
-        this.tensp = tensp;
-        this.giasp = giasp;
-        this.hinhsp = hinhsp;
-        this.soluongsp = soluongsp;
+    public Basket(int idBasket, String basketName, long basketValue, String basketImage, int basketQuantity) {
+        this.idBasket = idBasket;
+        BasketName = basketName;
+        BasketValue = basketValue;
+        BasketImage = basketImage;
+        BasketQuantity = basketQuantity;
     }
 
-    public int getIdsp() {
-        return idsp;
+    public Basket() {
     }
 
-    public void setIdsp(int idsp) {
-        this.idsp = idsp;
+    public int getIdBasket() {
+        return idBasket;
     }
 
-    public String getTensp() {
-        return tensp;
+    public void setIdBasket(int idBasket) {
+        this.idBasket = idBasket;
     }
 
-    public void setTensp(String tensp) {
-        this.tensp = tensp;
+    public String getBasketName() {
+        return BasketName;
     }
 
-    public long getGiasp() {
-        return giasp;
+    public void setBasketName(String basketName) {
+        BasketName = basketName;
     }
 
-    public void setGiasp(long giasp) {
-        this.giasp = giasp;
+    public long getBasketValue() {
+        return BasketValue;
     }
 
-    public String getHinhsp() {
-        return hinhsp;
+    public void setBasketValue(long basketValue) {
+        BasketValue = basketValue;
     }
 
-    public void setHinhsp(String hinhsp) {
-        this.hinhsp = hinhsp;
+    public String getBasketImage() {
+        return BasketImage;
     }
 
-    public int getSoluongsp() {
-        return soluongsp;
+    public void setBasketImage(String basketImage) {
+        BasketImage = basketImage;
     }
 
-    public void setSoluongsp(int soluongsp) {
-        this.soluongsp = soluongsp;
+    public int getBasketQuantity() {
+        return BasketQuantity;
+    }
+
+    public void setBasketQuantity(int basketQuantity) {
+        BasketQuantity = basketQuantity;
     }
 }

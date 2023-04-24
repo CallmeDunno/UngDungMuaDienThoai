@@ -38,10 +38,10 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.tensp.setText(this.baskets.get(position).getTensp());
+        holder.tensp.setText(this.baskets.get(position).getBasketName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getGiasp()) + "Đ");
-        holder.btnvalue.setText(this.baskets.get(position).getSoluongsp());
+        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getBasketValue()) + "Đ");
+        holder.btnvalue.setText(this.baskets.get(position).getBasketQuantity());
         int sl = Integer.parseInt(holder.btnvalue.getText().toString());
         if(sl >= 10){
             holder.btntang.setVisibility(View.INVISIBLE);
