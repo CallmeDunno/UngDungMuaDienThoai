@@ -23,6 +23,13 @@ public class User {
         this.password = password;
     }
 
+    public User(String email, String phonenumber, String dateOfBirth, String address) {
+        this.email = email;
+        this.phonenumber = phonenumber;
+        DateOfBirth = dateOfBirth;
+        this.address = address;
+    }
+
     public String getDateOfBirth() {
         return DateOfBirth;
     }
@@ -70,5 +77,15 @@ public class User {
 
     public boolean isPasswordLengthGreaterThan5() {
         return getPassword().length() > 6;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", DateOfBirth='" + DateOfBirth + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
