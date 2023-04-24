@@ -80,14 +80,12 @@
         android:id="@+id/btnttgiohang"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="82dp"
         android:text="THANH TOÁN GIỎ HÀNG"
-        app:layout_constraintBottom_toTopOf="@+id/btnttmuahang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/btnttmuahang"
@@ -97,7 +95,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnttgiohang" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

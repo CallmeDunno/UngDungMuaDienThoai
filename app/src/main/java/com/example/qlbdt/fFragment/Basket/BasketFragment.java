@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -18,8 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fAdapter.BasketAdapter;
-import com.example.qlbdt.fObject.Basket;
+import com.example.qlbdt.databinding.FragmentBasketBinding;
+import com.example.qlbdt.databinding.FragmentHomeBinding;
 import com.example.qlbdt.fOther.Notification;
 
 import java.text.DecimalFormat;
@@ -35,30 +38,28 @@ import java.util.List;
 public class BasketFragment extends Fragment implements BasketAdapter.HandleBasketClick {
     //Hello
     private BasketViewmodel viewmodel;
-    private RecyclerView lvgiohang;
-    private TextView txtthongbao;
-    private TextView txttongtien;
-    private Button btnthanhtoan, btnttmua;
     private BasketAdapter basketAdapter;
 
+    private FragmentBasketBinding binding;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_basket, container, false);
-        lvgiohang = view.findViewById(R.id.listviewgiohang);
-        txtthongbao = view.findViewById(R.id.thongbaogiohang);
-        txttongtien = view.findViewById(R.id.txttongtien);
-        btnthanhtoan = view.findViewById(R.id.btnttgiohang);
-        btnttmua = view.findViewById(R.id.btnttmuahang);
+        binding = FragmentBasketBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initViewModel();
         initRecycleView();
-        return view;
-    }
 
+    }
     private void initRecycleView() {
-        lvgiohang.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.listviewgiohang.setLayoutManager(new LinearLayoutManager(getActivity()));
         basketAdapter = new BasketAdapter(getActivity(), this);
-        lvgiohang.setAdapter(basketAdapter);
+        binding.listviewgiohang.setAdapter(basketAdapter);
     }
 
     private void initViewModel() {
@@ -67,13 +68,13 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
             @Override
             public void onChanged(List<Basket> baskets) {
                 if (baskets == null) {
-                    txtthongbao.setVisibility(View.VISIBLE);
-                    lvgiohang.setVisibility(View.INVISIBLE);
+                    binding.thongbaogiohang.setVisibility(View.VISIBLE);
+                    binding.listviewgiohang.setVisibility(View.INVISIBLE);
                     EvenUltil(baskets);
                 } else {
                     basketAdapter.setBasketlist(baskets);
-                    txtthongbao.setVisibility(View.INVISIBLE);
-                    lvgiohang.setVisibility(View.VISIBLE);
+                    binding.thongbaogiohang.setVisibility(View.INVISIBLE);
+                    binding.listviewgiohang.setVisibility(View.VISIBLE);
                     EvenUltil(baskets);
                 }
             }
@@ -86,7 +87,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
             tongtien += baskets.get(i).getGiasp();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txttongtien.setText(String.format("%sVND", decimalFormat.format(tongtien)));
+        binding.txttongtien.setText(String.format("%sVND", decimalFormat.format(tongtien)));
     }
 
     //TODO: KHÔNG XÓA 2 HÀM BÊN DƯỚI

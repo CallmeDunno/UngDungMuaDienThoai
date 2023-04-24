@@ -1,4 +1,4 @@
-package com.example.qlbdt.fObject;
+package com.example.qlbdt.fFragment.Basket;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

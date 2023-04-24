@@ -5,9 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.qlbdt.fObject.Basket;
-import com.example.qlbdt.fObject.Basketdatabase;
-
 import java.util.List;
 
 public class BasketViewmodel extends AndroidViewModel {
@@ -23,7 +20,7 @@ public class BasketViewmodel extends AndroidViewModel {
         return listofbasket;
     }
     public void Getallbasket(){
-        List<Basket> basketList= basketdatabase.iBasketDao().getAll();
+        List<Basket> basketList= basketdatabase.iBasketDao().getAllBasket();
         if(basketList.size()>0){
             listofbasket.postValue(basketList);
         }
@@ -32,15 +29,15 @@ public class BasketViewmodel extends AndroidViewModel {
         }
     }
     public void Insertbasket(Basket basket){
-        basketdatabase.iBasketDao().Inserthang(basket);
+        basketdatabase.iBasketDao().InsertBasket(basket);
         Getallbasket();
     }
     public void Updatetbasket(Basket basket){
-        basketdatabase.iBasketDao().Updatehang(basket);
+        basketdatabase.iBasketDao().UpdateBasket(basket);
         Getallbasket();
     }
     public void Deletebasket(Basket basket){
-        basketdatabase.iBasketDao().Deletehang(basket);
+        basketdatabase.iBasketDao().DeleteBasket(basket);
         Getallbasket();
     }
 }

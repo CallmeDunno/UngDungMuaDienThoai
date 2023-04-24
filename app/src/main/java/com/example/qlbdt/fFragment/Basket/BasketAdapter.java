@@ -1,4 +1,4 @@
-package com.example.qlbdt.fAdapter;
+package com.example.qlbdt.fFragment.Basket;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fObject.Basket;
 
 import java.text.DecimalFormat;
 import java.util.List;

@@ -1,12 +1,10 @@
-package com.example.qlbdt.fObject;
+package com.example.qlbdt.fFragment.Basket;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-
-import com.example.qlbdt.fInterface.IBasketDao;
 
 @Database(entities = {Basket.class},version = 1)
 public abstract class Basketdatabase extends RoomDatabase {

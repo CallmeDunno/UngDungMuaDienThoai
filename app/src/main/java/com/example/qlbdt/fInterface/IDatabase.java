@@ -3,7 +3,6 @@ package com.example.qlbdt.fInterface;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.example.qlbdt.fObject.Basket;
 import com.example.qlbdt.fObject.User;
 
 public interface IDatabase {
