@@ -13,7 +13,7 @@
         android:background="@drawable/bg_gray_corner_bot_r_l_16">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/sv_fragment_search"
+            android:id="@+id/search"
             android:layout_width="394dp"
             android:layout_height="63dp"
             android:layout_marginStart="6dp"
@@ -28,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sv_fragment_search"
+            android:layout_below="@id/search"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="8dp"
