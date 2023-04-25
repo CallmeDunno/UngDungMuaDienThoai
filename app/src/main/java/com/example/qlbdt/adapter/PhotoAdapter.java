@@ -10,7 +10,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
-import com.example.qlbdt.fragment.Home.HomeFragment;
+import com.example.qlbdt.fragment.home.HomeFragment;
 import com.example.qlbdt.object.Photo;
 
 import java.util.List;

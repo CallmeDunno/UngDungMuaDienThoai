@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.qlbdt.R;
-import com.example.qlbdt.fragment.LogInPackage.LogInFragment;
+import com.example.qlbdt.fragment.login.LogInFragment;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -3,6 +3,7 @@ package com.example.qlbdt.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,10 +35,28 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         History history = lstHistory.get(position);
         if(history== null) return;
+//        try {
+//            URL url = new URL(history.getImgSmartPhone());
+//            InputStream inputStream = url.openConnection().getInputStream();
+//            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//            holder.imgProduct.setImageBitmap(bitmap);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         holder.nameProduct.setText(history.getNameSmartPhone());
-        holder.colorProduct.setText(history.getColor());
-        holder.orderTime.setText(history.getOrderTime());
+        holder.colorProduct.setText("Màu : "+ history.getColor());
+        holder.orderTime.setText("Thời gian : " + history.getOrderTime());
         holder.priceProduct.setText(history.getPriceSmartPhone() + " VND");
+        holder.numberOrder.setText("x" + history.getNumberOrder());
+        holder.brandName.setText("Hãng : " + history.getBrandName());
+        holder.btnRepurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -49,7 +68,8 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
     public class HistoryViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imgProduct;
-        private TextView nameProduct, colorProduct, orderTime, priceProduct;
+        private TextView nameProduct, colorProduct, orderTime, priceProduct, numberOrder, brandName;
+        private Button btnRepurchase;
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
@@ -57,6 +77,9 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
             colorProduct = itemView.findViewById(R.id.colorProduct);
             orderTime = itemView.findViewById(R.id.ordertime);
             priceProduct = itemView.findViewById(R.id.priceProduct);
+            numberOrder = itemView.findViewById(R.id.numberOrder);
+            brandName = itemView.findViewById(R.id.brandName);
+            btnRepurchase = itemView.findViewById(R.id.btnRepurchase);
         }
     }
 }

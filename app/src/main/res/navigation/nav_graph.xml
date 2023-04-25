@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.qlbdt.fragment.Home.HomeFragment"
+        android:name="com.example.qlbdt.fragment.home.HomeFragment"
         android:label="@string/Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -31,12 +31,12 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.qlbdt.fragment.Account.AccountFragment"
+        android:name="com.example.qlbdt.fragment.account.AccountFragment"
         android:label="@string/Account"
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/basketFragment"
-        android:name="com.example.qlbdt.fragment.Basket.BasketFragment"
+        android:name="com.example.qlbdt.fragment.basket.BasketFragment"
         android:label="@string/Cart"
         tools:layout="@layout/fragment_basket">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.qlbdt.fragment.Search.SearchFragment"
+        android:name="com.example.qlbdt.fragment.search.SearchFragment"
         android:label="@string/Search"
         tools:layout="@layout/fragment_search">
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.qlbdt.fragment.History.HistoryFragment"
+        android:name="com.example.qlbdt.fragment.history.HistoryFragment"
         android:label="@string/History"
         tools:layout="@layout/fragment_history">
         <action
@@ -68,7 +68,7 @@
         tools:layout="@layout/fragment_support" />
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.example.qlbdt.fragment.ProductDetail.ProductDetailFragment"
+        android:name="com.example.qlbdt.fragment.product_detail.ProductDetailFragment"
         android:label="@string/ProductDetail"
         tools:layout="@layout/fragment_product_detail">
         <argument
