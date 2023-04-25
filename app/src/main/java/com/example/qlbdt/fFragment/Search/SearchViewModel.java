@@ -1,6 +1,7 @@
 package com.example.qlbdt.fFragment.Search;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,8 +65,35 @@ public class SearchViewModel extends ViewModel {
                     }
                 });
     }
-
     private void initData() {
+        listProductSearch = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Products")
+                .whereEqualTo("type", "Smartphone")
+                .limit(5)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.e("SearchFragment", "Error getting data", e);
+                            return;
+                        }
+
+                        listProductSearch.clear();
+
+                        for (QueryDocumentSnapshot doc : snapshots) {
+                            String name = doc.toObject(ProductSearch.class).getName();
+                            String price = doc.toObject(ProductSearch.class).getPrice();
+                            String image = doc.toObject(ProductSearch.class).getImage();
+
+                            listProductSearch.add(new ProductSearch(name, price, image));
+                        }
+                        Collections.shuffle(listProductSearch);
+                        listProductSearchLiveData.postValue(listProductSearch);
+                    }
+                });
+    }
+   /* private void initData() {
         listProductSearch = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
@@ -94,7 +123,7 @@ public class SearchViewModel extends ViewModel {
 
         listProductSearchLiveData.setValue(listProductSearch);
 
-    }
+    }*/
 
 
     public MutableLiveData<List<ProductSearch>> getListProductSearchLiveData() {
@@ -122,4 +151,5 @@ public class SearchViewModel extends ViewModel {
                     }
                 });
     }
+
 }

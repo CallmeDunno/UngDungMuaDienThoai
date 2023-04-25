@@ -10,14 +10,17 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -44,6 +47,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,7 +69,7 @@ public class SearchFragment extends Fragment {
     private Spinner sp_sort, sp_brand;
     private ArrayList<String> sort, brand;
     private  ArrayAdapter adapterSort, adapterBrand;
-    private EditText et_search;
+    private TextView et_search;
 
 
     @Override
@@ -84,6 +88,31 @@ public class SearchFragment extends Fragment {
                 producSearchAdapter.setData(productSearches);
             }
         });
+        et_search = view.findViewById(R.id.et_search_fragment_search);
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    searchProducts(et_search.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchProducts(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
         sort = new ArrayList<>();
@@ -92,6 +121,17 @@ public class SearchFragment extends Fragment {
         sort.add("Sắp xếp theo giá giảm dần");
         adapterSort = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sort);
         sp_sort.setAdapter(adapterSort);
+        sp_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         sp_brand = view.findViewById(R.id.sp_brand_fragment_search);
         Brand();
@@ -136,5 +176,21 @@ public class SearchFragment extends Fragment {
         });
 
     }
+    private void searchProducts(String keyword) {
+        // Lấy danh sách sản phẩm từ ViewModel
+        List<ProductSearch> productList = searchViewModel.getListProductSearchLiveData().getValue();
+
+        // Lọc danh sách sản phẩm theo từ khóa tìm kiếm
+        List<ProductSearch> filteredList = new ArrayList<>();
+        for (ProductSearch product : productList) {
+            if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+
+        // Cập nhật danh sách sản phẩm trong Adapter
+        producSearchAdapter.setData(filteredList);
+    }
+
 
 }
