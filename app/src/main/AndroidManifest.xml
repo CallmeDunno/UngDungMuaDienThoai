@@ -20,7 +20,6 @@
         <activity
             android:name=".fActivity.Login.LogInActivity"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".fActivity.SplashScreenActivity"
