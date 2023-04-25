@@ -42,16 +42,16 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         History history = lstHistory.get(position);
         if(history== null) return;
-//        try {
-//            URL url = new URL(history.getImgSmartPhone());
-//            InputStream inputStream = url.openConnection().getInputStream();
-//            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//            holder.imgProduct.setImageBitmap(bitmap);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            URL url = new URL(history.getImgSmartPhone());
+            InputStream inputStream = url.openConnection().getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            holder.imgProduct.setImageBitmap(bitmap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         holder.nameProduct.setText(history.getNameSmartPhone());
         holder.colorProduct.setText("Màu : "+ history.getColor());
         holder.orderTime.setText("Thời gian : " + history.getOrderTime());
