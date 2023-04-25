@@ -8,25 +8,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentBasketBinding;
-import com.example.qlbdt.databinding.FragmentHomeBinding;
 import com.example.qlbdt.fOther.Notification;
 
 import java.text.DecimalFormat;
@@ -45,7 +37,6 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     private BasketAdapter basketAdapter;
 
     private FragmentBasketBinding binding;
-  private int i=4;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +52,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         binding.btnttgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewmodel.Insertbasket(new Basket(1,"Kiski",2000,"1.png",2));
+                viewmodel.Insertbasket(new Basket(1,"Iphone 14 pro max piaro bla",20000000,"1.png",2));
             }
         });
         binding.btnttmuahang.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +68,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         basketAdapter = new BasketAdapter(getActivity(), this);
         binding.listviewgiohang.setAdapter(basketAdapter);
         List<Basket> baskets=BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
-        if(baskets.size()<=0){
+        if(baskets.size() == 0){
             binding.thongbaogiohang.setVisibility(View.VISIBLE);
             binding.listviewgiohang.setVisibility(View.INVISIBLE);
             binding.txttongtien.setText("O VND");

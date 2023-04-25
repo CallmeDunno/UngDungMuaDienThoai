@@ -18,9 +18,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>{
-    private Context context;
+    private final Context context;
     private List<Basket> baskets;
-    private HandleBasketClick click;
+    private final HandleBasketClick click;
     public BasketAdapter(Context context, HandleBasketClick click){
         this.context=context;
         this.click=click;

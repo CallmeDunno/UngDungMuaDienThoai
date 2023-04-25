@@ -23,7 +23,8 @@
         <FrameLayout
             android:id="@+id/framlayoutgh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listviewgiohang"
@@ -36,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="The Basket is Empty"
+                android:text="@string/the_basket_is_empty"
                 android:textSize="20sp" />
         </FrameLayout>
     </LinearLayout>
@@ -52,9 +53,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="horizontal"
-            android:layout_weight="10">
+            android:layout_weight="10"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:id="@+id/textView3"
@@ -63,19 +65,20 @@
                android:layout_weight="5"
                 android:layout_width="wrap_content"
                 android:gravity="center"
-                android:text="Total: "
+                android:text="@string/total"
                 android:textColor="@android:color/holo_red_dark"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:ignore="NestedWeights" />
 
             <TextView
                 android:id="@+id/txttongtien"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                android:layout_weight="5"
                 android:gravity="center"
-                android:text="0 VND"
+                android:text="@string/_0_vnd"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -87,15 +90,15 @@
         android:layout_weight="1"
         android:layout_height="55dp"
 
-        android:text="BASKET CHECKOUT"
-        />
+        android:text="@string/basket_checkout"
+        tools:ignore="VisualLintButtonSize" />
 
     <Button
         android:id="@+id/btnttmuahang"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="55dp"
-        android:text="KEEP BUYING"
-         />
+        android:text="@string/keep_buying"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
