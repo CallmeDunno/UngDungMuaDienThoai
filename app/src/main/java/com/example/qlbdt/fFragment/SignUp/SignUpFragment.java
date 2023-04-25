@@ -131,6 +131,7 @@ public class SignUpFragment extends Fragment {
                                                         Toast.makeText(getActivity(), "Signup successfully", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(getActivity(), HomeActivity.class);
                                                         startActivity(intent);
+                                                        getActivity().finish();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {

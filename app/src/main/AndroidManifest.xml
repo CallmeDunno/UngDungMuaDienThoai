@@ -20,6 +20,7 @@
         <activity
             android:name=".fActivity.Login.LogInActivity"
             android:exported="false">
+
         </activity>
         <activity
             android:name=".fActivity.SplashScreenActivity"
@@ -29,6 +30,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".fActivity.HomeActivity"

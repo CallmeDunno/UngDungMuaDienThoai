@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,29 +22,39 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentLogInBinding;
 import com.example.qlbdt.fActivity.HomeActivity;
+import com.example.qlbdt.fDatabase.UserDatabase;
 import com.example.qlbdt.fFragment.SignUp.SignUpFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class LogInFragment extends Fragment {
     FragmentLogInBinding binding;
     LoginViewModel loginViewModel;
     FirebaseAuth mAuth;
     ProgressDialog progressDialog;
+    ArrayList<String> userNames = new ArrayList<>();
+    UserDatabase userDatabase;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLogInBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(getActivity());
+        userDatabase = new UserDatabase(getContext());
+        userNames = userDatabase.getUserNamesList();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, userNames);
+        binding.edtEmail.setAdapter(adapter);
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +97,8 @@ public class LogInFragment extends Fragment {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                                     startActivity(intent);
-                                    Toast.makeText(getActivity(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                                    loginViewModel.saveCurrentUser(getContext(), user.getEmail());
+                                    getActivity().finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
