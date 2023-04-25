@@ -65,7 +65,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     }
     private void initRecycleView() {
         binding.listviewgiohang.setLayoutManager(new LinearLayoutManager(getActivity()));
-        basketAdapter = new BasketAdapter(getActivity(), this);
+        basketAdapter = new BasketAdapter( this);
         binding.listviewgiohang.setAdapter(basketAdapter);
         List<Basket> baskets=BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
         if(baskets.size() == 0){
