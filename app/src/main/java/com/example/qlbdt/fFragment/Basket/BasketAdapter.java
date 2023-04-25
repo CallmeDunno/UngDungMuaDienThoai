@@ -1,4 +1,4 @@
-package com.example.qlbdt.fAdapter;
+package com.example.qlbdt.fFragment.Basket;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,15 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fObject.Basket;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>{
-    private Context context;
+    private final Context context;
     private List<Basket> baskets;
-    private HandleBasketClick click;
+    private final HandleBasketClick click;
     public BasketAdapter(Context context, HandleBasketClick click){
         this.context=context;
         this.click=click;
@@ -39,10 +38,10 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.tensp.setText(this.baskets.get(position).getTensp());
+        holder.tensp.setText(this.baskets.get(position).getBasketName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getGiasp()) + "Đ");
-        holder.btnvalue.setText(this.baskets.get(position).getSoluongsp());
+        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getBasketValue()) + "Đ");
+        holder.btnvalue.setText(String.valueOf(this.baskets.get(position).getBasketQuantity()));
         int sl = Integer.parseInt(holder.btnvalue.getText().toString());
         if(sl >= 10){
             holder.btntang.setVisibility(View.INVISIBLE);

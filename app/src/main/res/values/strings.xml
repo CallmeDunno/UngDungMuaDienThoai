@@ -18,5 +18,15 @@
     <string name="SeeMore">See more</string>
     <string name="Smartphone">Smartphone</string>
     <string name="Laptop">Laptop</string>
+    <string name="the_basket_is_empty">The Basket is Empty</string>
+    <string name="total">Total:</string>
+    <string name="_0_vnd">0 VND</string>
+    <string name="basket_checkout">BASKET CHECKOUT</string>
+    <string name="keep_buying">KEEP BUYING</string>
+    <string name="textview">TextView</string>
+    <string name="textviewname">TextView</string>
+    <string name="giam">-</string>
+    <string name="tang">+</string>
+
 
 </resources>

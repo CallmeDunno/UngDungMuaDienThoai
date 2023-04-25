@@ -5,25 +5,23 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.qlbdt.fObject.Basket;
-import com.example.qlbdt.fObject.Basketdatabase;
-
 import java.util.List;
 
 public class BasketViewmodel extends AndroidViewModel {
     private MutableLiveData<List<Basket>> listofbasket;
-    private Basketdatabase basketdatabase;
+    private BasketDatabase basketdatabase;
 
     public BasketViewmodel(Application application){
         super(application);
         listofbasket =new MutableLiveData<>();
-        basketdatabase=Basketdatabase.getInstance(getApplication().getApplicationContext());
+        basketdatabase=BasketDatabase.getInstance(getApplication().getApplicationContext());
+
     }
     public MutableLiveData<List<Basket>> getListofbasketobserver(){
         return listofbasket;
     }
     public void Getallbasket(){
-        List<Basket> basketList= basketdatabase.iBasketDao().getAll();
+        List<Basket> basketList= basketdatabase.basketDao().getAllBasket();
         if(basketList.size()>0){
             listofbasket.postValue(basketList);
         }
@@ -32,15 +30,15 @@ public class BasketViewmodel extends AndroidViewModel {
         }
     }
     public void Insertbasket(Basket basket){
-        basketdatabase.iBasketDao().Inserthang(basket);
+        basketdatabase.basketDao().InsertBasket(basket);
         Getallbasket();
     }
     public void Updatetbasket(Basket basket){
-        basketdatabase.iBasketDao().Updatehang(basket);
+        basketdatabase.basketDao().UpdateBasket(basket);
         Getallbasket();
     }
     public void Deletebasket(Basket basket){
-        basketdatabase.iBasketDao().Deletehang(basket);
+        basketdatabase.basketDao().DeleteBasket(basket);
         Getallbasket();
     }
 }
