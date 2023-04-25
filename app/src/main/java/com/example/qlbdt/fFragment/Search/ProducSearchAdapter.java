@@ -25,6 +25,7 @@ public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapte
     }
     public void setData(List<ProductSearch> p){
         this.productSearches = p;
+        notifyDataSetChanged();
     }
 
     @NonNull
