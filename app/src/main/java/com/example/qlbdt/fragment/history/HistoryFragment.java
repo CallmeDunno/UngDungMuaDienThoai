@@ -19,7 +19,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,39 +34,32 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     RecyclerView rcvHistory;
-    List<History> lstHistory;
     HistoryAdapter historyAdapter;
     HistoryFragmentViewModel historyFragmentViewModel;
-    FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        lstHistory = new ArrayList<>();
-        db = FirebaseFirestore.getInstance();
-        db.collection("Histories").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> lst = queryDocumentSnapshots.getDocuments();
-                for(DocumentSnapshot doc:lst){
-                    History history = doc.toObject(History.class);
-                    lstHistory.add(history);
-                }
-                historyFragmentViewModel.setValueLstHistoryLiveData(lstHistory);
-            }
-        });
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         rcvHistory = view.findViewById(R.id.rcvHistory);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         rcvHistory.setLayoutManager(linearLayoutManager);
+        historyAdapter = new HistoryAdapter(requireContext());
+        rcvHistory.setAdapter(historyAdapter);
         historyFragmentViewModel = new ViewModelProvider(this).get(HistoryFragmentViewModel.class);
         historyFragmentViewModel.getLstHistoryLiveData().observe(getViewLifecycleOwner(), new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
-                historyAdapter = new HistoryAdapter(histories);
-                rcvHistory.setAdapter(historyAdapter);
+                historyAdapter.getData(histories);
             }
         });
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (historyAdapter != null){
+            historyAdapter.release();
+        }
+    }
 }

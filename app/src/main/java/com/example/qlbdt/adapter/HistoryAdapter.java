@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
 import com.example.qlbdt.object.History;
 
@@ -17,10 +18,16 @@ import java.util.List;
 
 public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>{
 
+    private Context context;
+
+    public HistoryAdapter(Context context) {
+        this.context = context;
+    }
     private List<History> lstHistory;
 
-    public HistoryAdapter(List<History> lstHistory) {
-        this.lstHistory = lstHistory;
+    public void getData(List<History> histories){
+        this.lstHistory = histories;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,16 +42,7 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         History history = lstHistory.get(position);
         if(history== null) return;
-//        try {
-//            URL url = new URL(history.getImgSmartPhone());
-//            InputStream inputStream = url.openConnection().getInputStream();
-//            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//            holder.imgProduct.setImageBitmap(bitmap);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        Glide.with(context).load(history.getImgSmartPhone()).into(holder.imgProduct);
         holder.nameProduct.setText(history.getNameSmartPhone());
         holder.colorProduct.setText("Màu : "+ history.getColor());
         holder.orderTime.setText("Thời gian : " + history.getOrderTime());
@@ -63,6 +61,10 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
     public int getItemCount() {
         if(lstHistory!= null) return lstHistory.size();
         return 0;
+    }
+
+    public void release(){
+        context = null;
     }
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder{
