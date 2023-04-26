@@ -12,25 +12,21 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_gray_corner_bot_r_l_16">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/et_search"
-        >
-        <EditText
-            android:id="@+id/et_search_fragment_search"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_fragment_search"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Tìm kiếm theo tên" />
-
-    </LinearLayout>
+            android:layout_alignParentEnd="true"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_white_boder_gray"
+            app:iconifiedByDefault="false"
+            app:queryHint="Search"
+            app:searchIcon="@drawable/ic_search" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/et_search"
+            android:layout_below="@id/sv_fragment_search"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="8dp"
