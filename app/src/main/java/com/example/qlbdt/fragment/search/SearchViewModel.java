@@ -7,16 +7,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qlbdt.fragment.home.ProductHome;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class SearchViewModel extends ViewModel {
@@ -38,7 +43,6 @@ public class SearchViewModel extends ViewModel {
         List<String> brandList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -60,8 +64,6 @@ public class SearchViewModel extends ViewModel {
         listProductSearch = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
-                .limit(5)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
@@ -73,11 +75,24 @@ public class SearchViewModel extends ViewModel {
                         listProductSearch.clear();
 
                         for (QueryDocumentSnapshot doc : snapshots) {
-                            String name = doc.toObject(ProductSearch.class).getName();
-                            String price = doc.toObject(ProductSearch.class).getPrice();
-                            String image = doc.toObject(ProductSearch.class).getImage();
+                            String id = doc.getId();
+                            String name = doc.toObject(ProductHome.class).getName();
+                            String price = doc.toObject(ProductHome.class).getPrice();
+                            String image = doc.toObject(ProductHome.class).getImage();
+                            String os = doc.toObject(ProductHome.class).getOS();
+                            String battery = doc.toObject(ProductHome.class).getBattery();
+                            String brand = doc.toObject(ProductHome.class).getBrand();
+                            String color = doc.toObject(ProductHome.class).getColor();
+                            String cpu = doc.toObject(ProductHome.class).getCpu();
+                            String description = doc.toObject(ProductHome.class).getDescription();
+                            int quantity = doc.toObject(ProductHome.class).getQuantity();
+                            String ram = doc.toObject(ProductHome.class).getRam();
+                            String releaseTime = doc.toObject(ProductHome.class).getReleaseTime();
+                            String rom = doc.toObject(ProductHome.class).getRom();
+                            String type = doc.toObject(ProductHome.class).getType();
+                            String weight = doc.toObject(ProductHome.class).getWeight();
 
-                            listProductSearch.add(new ProductSearch(name, price, image));
+                            listProductSearch.add(new ProductSearch(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
                         }
                         Collections.shuffle(listProductSearch);
                         listProductSearchLiveData.postValue(listProductSearch);
@@ -94,7 +109,6 @@ public class SearchViewModel extends ViewModel {
         List<ProductSearch> productList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
                 .whereEqualTo("brand", brand)
                 .get()
                 .addOnCompleteListener(task -> {
@@ -114,7 +128,6 @@ public class SearchViewModel extends ViewModel {
     public void fetchAllProducts() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -130,6 +143,45 @@ public class SearchViewModel extends ViewModel {
                         Log.e("SearchViewModel", "Error fetching all products", task.getException());
                     }
                 });
+    }
+
+
+    public void sortProductListByAscendingPrice() {
+        List<ProductSearch> sortedList = new ArrayList<>(listProductSearch);
+        Collections.sort(sortedList, new Comparator<ProductSearch>() {
+            @Override
+            public int compare(ProductSearch product1, ProductSearch product2) {
+                NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
+                try {
+                    Number number1 = format.parse(product1.getPrice());
+                    Number number2 = format.parse(product2.getPrice());
+                    return Double.compare(number1.doubleValue(), number2.doubleValue());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return 0;
+                }
+            }
+        });
+        listProductSearchLiveData.setValue(sortedList);
+    }
+
+    public void sortProductListByDescendingPrice() {
+        List<ProductSearch> sortedList = new ArrayList<>(listProductSearch);
+        Collections.sort(sortedList, new Comparator<ProductSearch>() {
+            @Override
+            public int compare(ProductSearch product1, ProductSearch product2) {
+                NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
+                try {
+                    Number number1 = format.parse(product1.getPrice());
+                    Number number2 = format.parse(product2.getPrice());
+                    return Double.compare(number2.doubleValue(), number1.doubleValue());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return 0;
+                }
+            }
+        });
+        listProductSearchLiveData.setValue(sortedList);
     }
 
 

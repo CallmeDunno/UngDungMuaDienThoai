@@ -72,23 +72,7 @@ public class SearchFragment extends Fragment {
         });
 
         sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
-        sort = new ArrayList<>();
-        sort.add("Sắp xếp theo tên sản phẩm");
-        sort.add("Sắp xếp theo giá tăng dần");
-        sort.add("Sắp xếp theo giá giảm dần");
-        adapterSort = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sort);
-        sp_sort.setAdapter(adapterSort);
-        sp_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        sort();
 
         sp_brand = view.findViewById(R.id.sp_brand_fragment_search);
         Brand();
@@ -96,6 +80,34 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
+    private void sort() {
+        sort = new ArrayList<>();
+        sort.add("Sắp xếp theo");
+        sort.add("Sắp xếp theo giá tăng dần");
+        sort.add("Sắp xếp theo giá giảm dần");
+        adapterSort = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sort);
+        sp_sort.setAdapter(adapterSort);
+        sp_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        break;
+                    case 1:
+                        searchViewModel.sortProductListByAscendingPrice();
+                        break;
+                    case 2:
+                        searchViewModel.sortProductListByDescendingPrice();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
 
 
     private void initUI() {
@@ -116,13 +128,13 @@ public class SearchFragment extends Fragment {
         searchViewModel.getBrandListLiveData().observe(getViewLifecycleOwner(), brandList -> {
             adapterBrand.clear();
             adapterBrand.addAll(brandList);
-            adapterBrand.add("Tất cả các hãng");
+
         });
         sp_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedBrand = (String) adapterBrand.getItem(i);
-                if (!selectedBrand.equals("Hãng") && !selectedBrand.equals("Tất cả các hãng")) {
+                if (!selectedBrand.equals("Hãng")) {
                     searchViewModel.fetchProductByBrand(selectedBrand);
                 } else {
                     searchViewModel.fetchAllProducts();
@@ -137,14 +149,11 @@ public class SearchFragment extends Fragment {
 
     }
     private void searchProducts(String keyword) {
-        // Fetch all products from the ViewModel
         searchViewModel.fetchAllProducts();
 
-        // Observe changes to the list of products in the ViewModel
         searchViewModel.getListProductSearchLiveData().observe(getViewLifecycleOwner(), new Observer<List<ProductSearch>>() {
             @Override
             public void onChanged(List<ProductSearch> productList) {
-                // Filter the list of products based on the search keyword
                 List<ProductSearch> filteredList = new ArrayList<>();
                 for (ProductSearch product : productList) {
                     if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
@@ -152,12 +161,10 @@ public class SearchFragment extends Fragment {
                     }
                 }
 
-                // Update the RecyclerView with the filtered list of products
                 producSearchAdapter.setData(filteredList);
             }
         });
     }
-
 
 
 }
