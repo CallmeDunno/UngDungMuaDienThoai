@@ -1,7 +1,9 @@
 package com.example.qlbdt.fragment.search;
 
+import com.example.qlbdt.object.Price;
+
 public class ProductSearch {
-    private int id;
+    private String id;
     private String name;
     private String price;
     private String image;
@@ -22,9 +24,10 @@ public class ProductSearch {
         // Required empty constructor for Firestore serialization
     }
 
-    public ProductSearch(String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
+    public ProductSearch(String id, String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
+        this.id = id;
         this.name = name;
-        this.price = price;
+        this.price = String.valueOf(new Price(price));
         this.image = image;
         this.OS = OS;
         this.battery = battery;
@@ -46,11 +49,11 @@ public class ProductSearch {
         this.image = image;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
