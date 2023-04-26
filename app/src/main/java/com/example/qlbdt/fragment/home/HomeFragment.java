@@ -155,6 +155,10 @@ public class HomeFragment extends Fragment {
             mTimer.cancel();
             mTimer = null;
         }
+        if (laptopAdapter != null && smartphoneAdapter != null){
+            laptopAdapter.release();
+            smartphoneAdapter.release();
+        }
     }
 
     @Override

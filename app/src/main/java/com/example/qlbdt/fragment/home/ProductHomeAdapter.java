@@ -15,7 +15,7 @@ import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import java.util.List;
 
 public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.ProductHomeViewHolder> {
-    private final Context context;
+    private Context context;
     private final IRecyclerViewOnClick iRecyclerViewOnClick;
     private List<ProductHome> productHomes;
 
@@ -60,6 +60,10 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
             return productHomes.size();
         }
         return 0;
+    }
+
+    public void release(){
+        context = null;
     }
 
     public static class ProductHomeViewHolder extends RecyclerView.ViewHolder {
