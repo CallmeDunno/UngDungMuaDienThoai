@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,15 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.qlbdt.R;
 import com.example.qlbdt.fAdapter.HistoryAdapter;
 import com.example.qlbdt.fObject.History;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,15 +36,23 @@ public class HistoryFragment extends Fragment {
         rcvHistory = view.findViewById(R.id.rcvHistory);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         rcvHistory.setLayoutManager(linearLayoutManager);
+        historyAdapter = new HistoryAdapter(requireContext());
+        rcvHistory.setAdapter(historyAdapter);
         historyFragmentViewModel = new ViewModelProvider(this).get(HistoryFragmentViewModel.class);
         historyFragmentViewModel.getLstHistoryLiveData().observe(getViewLifecycleOwner(), new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
-                historyAdapter = new HistoryAdapter(histories);
-                rcvHistory.setAdapter(historyAdapter);
+                historyAdapter.getData(histories);
             }
         });
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (historyAdapter != null){
+            historyAdapter.release();
+        }
+    }
 }

@@ -24,7 +24,6 @@ public class HistoryFragmentViewModel extends ViewModel {
 
     private void initData(){
         lstHistory = new ArrayList<>();
-        //lstHistory.add(new History(1,"1","IPhone 14 ProMax","25.000.000",1,"","Apple","Tím","29 Tháng 3 2023"));
         db = FirebaseFirestore.getInstance();
         db.collection("Histories").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
