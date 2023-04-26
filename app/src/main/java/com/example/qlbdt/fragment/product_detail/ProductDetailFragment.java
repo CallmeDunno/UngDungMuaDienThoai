@@ -36,8 +36,11 @@ public class ProductDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         progressDialog = new ProgressDialog(getActivity());
-        binding.btnBuyProductDetail.setOnClickListener(view1 -> {
+        binding.btnBuyProductDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
         });
         binding.btnAddCartProductDetail.setOnClickListener(new View.OnClickListener() {
             @Override
