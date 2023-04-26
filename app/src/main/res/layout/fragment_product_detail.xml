@@ -1,20 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fFragment.ProductDetail.ProductDetailFragment">
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient_blue_white"
+    tools:context=".fragment.product_detail.ProductDetailFragment">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
-        <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_white_corner_16"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@+id/linearlayout_bottom">
+
+        <ScrollView
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:scrollbarSize="0.5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.jsibbold.zoomage.ZoomageView
+                    android:id="@+id/img_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:padding="8dp"
+                    android:src="@drawable/logo_app" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_name_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/Name"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/tv_price_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Price"
+                    android:textColor="#FF0000"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Description"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/tv_des_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Description"
+                    android:textSize="20sp" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:stretchColumns="*">
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="@string/Brand"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_brand_product_detail"
+                            android:text="@string/Brand"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="OS"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_os_product_detail"
+                            android:text="OS"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="CPU"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_cpu_product_detail"
+                            android:text="CPU"
+                            android:textSize="20sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="RAM"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_ram_product_detail"
+                            android:text="RAM"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="ROM"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rom_product_detail"
+                            android:text="ROM"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="@string/Color"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_color_product_detail"
+                            android:text="@string/Color"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="@string/Battery"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_battery_product_detail"
+                            android:text="@string/Battery"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="@string/Weight"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_weight_product_detail"
+                            android:text="@string/Weight"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:text="@string/ReleaseTime"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rt_product_detail"
+                            android:text="@string/ReleaseTime"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_buy_product_detail"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/ProductDetail"
-            android:textSize="24sp" />
+            android:background="@drawable/btn_selector"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black"
+            android:text="@string/BuyNow"
+            style="?android:attr/buttonBarButtonStyle" />
 
-    </ScrollView>
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_add_cart_product_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_selector2"
+            android:text="@string/AddToCart"
+            style="?android:attr/buttonBarButtonStyle" />
 
-</FrameLayout>
+    </LinearLayout>
+
+</RelativeLayout>
