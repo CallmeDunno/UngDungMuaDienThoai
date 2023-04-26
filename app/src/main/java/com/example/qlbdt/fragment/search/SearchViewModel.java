@@ -84,37 +84,6 @@ public class SearchViewModel extends ViewModel {
                     }
                 });
     }
-   /* private void initData() {
-        listProductSearch = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
-                .limit(5)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot doc : task.getResult()){
-
-                                String name = doc.toObject(ProductSearch.class).getName();
-                                String price = doc.toObject(ProductSearch.class).getPrice();
-                                String image = doc.toObject(ProductSearch.class).getImage();
-
-                                listProductSearch.add(new ProductSearch(name, price, image));
-                            }
-                            Collections.shuffle(listProductSearch);
-                            listProductSearchLiveData.postValue(listProductSearch);
-
-                        } else {
-                            Log.e("SearchFragment", "not data");
-                        }
-                    }
-                });
-
-        listProductSearchLiveData.setValue(listProductSearch);
-
-    }*/
 
 
     public MutableLiveData<List<ProductSearch>> getListProductSearchLiveData() {
@@ -142,5 +111,26 @@ public class SearchViewModel extends ViewModel {
                     }
                 });
     }
+    public void fetchAllProducts() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Products")
+                .whereEqualTo("type", "Smartphone")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<ProductSearch> productList = new ArrayList<>();
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String name = doc.toObject(ProductSearch.class).getName();
+                            String price = doc.toObject(ProductSearch.class).getPrice();
+                            String image = doc.toObject(ProductSearch.class).getImage();
+                            productList.add(new ProductSearch(name, price, image));
+                        }
+                        listProductSearchLiveData.setValue(productList);
+                    } else {
+                        Log.e("SearchViewModel", "Error fetching all products", task.getException());
+                    }
+                });
+    }
+
 
 }
