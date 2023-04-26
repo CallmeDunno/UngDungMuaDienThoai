@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.qlbdt.fObject.Basket;
+import com.example.qlbdt.object.Basket;
 
 import java.util.List;
 
