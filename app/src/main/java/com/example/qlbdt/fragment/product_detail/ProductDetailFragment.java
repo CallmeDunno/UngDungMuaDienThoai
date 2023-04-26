@@ -1,6 +1,7 @@
 package com.example.qlbdt.fragment.product_detail;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.bumptech.glide.Glide;
 import com.example.qlbdt.databinding.FragmentProductDetailBinding;
@@ -23,6 +26,8 @@ import com.example.qlbdt.databinding.FragmentProductDetailBinding;
 public class ProductDetailFragment extends Fragment {
     private FragmentProductDetailBinding binding;
     private ProgressDialog progressDialog;
+
+    private Context context;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -53,14 +58,25 @@ public class ProductDetailFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.context = null;
+    }
+
     private void initViewModel() {
-        ProductDetailViewModel productDetailViewModel = new ViewModelProvider(requireActivity()).get(ProductDetailViewModel.class);
+        ProductDetailViewModel productDetailViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ProductDetailViewModel.class);
         String path = ProductDetailFragmentArgs.fromBundle(getArguments()).getDocumentPath();
         productDetailViewModel.setPath(path);
-        productDetailViewModel.getProductHomeMutableLiveData().observe(requireActivity(), productHome -> {
+        productDetailViewModel.getProductHomeMutableLiveData().observe((LifecycleOwner) context, productHome -> {
             if (productHome.getId() != null){
-                progressDialog.dismiss();
-                Glide.with(requireActivity()).load(productHome.getImage()).into(binding.imgProductDetail);
+                Glide.with(context).load(productHome.getImage()).into(binding.imgProductDetail);
                 binding.tvNameProductDetail.setText(productHome.getName());
                 binding.tvPriceProductDetail.setText(String.format("%s VND", productHome.getPrice()));
                 binding.tvDesProductDetail.setText(productHome.getDescription());
@@ -73,6 +89,7 @@ public class ProductDetailFragment extends Fragment {
                 binding.tvBatteryProductDetail.setText(productHome.getBattery());
                 binding.tvWeightProductDetail.setText(productHome.getWeight());
                 binding.tvRtProductDetail.setText(productHome.getReleaseTime());
+                progressDialog.dismiss();
             } else {
                 progressDialog.show();
             }

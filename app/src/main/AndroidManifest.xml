@@ -33,7 +33,6 @@
         <activity
             android:name=".activity.HomeActivity"
             android:exported="false" >
-
         </activity>
     </application>
 
