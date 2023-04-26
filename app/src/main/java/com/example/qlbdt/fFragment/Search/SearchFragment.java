@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment {
     private Spinner sp_sort, sp_brand;
     private ArrayList<String> sort, brand;
     private  ArrayAdapter adapterSort, adapterBrand;
-    private TextView et_search;
+    private SearchView sv_search;
 
 
     @Override
@@ -88,29 +88,18 @@ public class SearchFragment extends Fragment {
                 producSearchAdapter.setData(productSearches);
             }
         });
-        et_search = view.findViewById(R.id.et_search_fragment_search);
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        sv_search = view.findViewById(R.id.sv_fragment_search);
+        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    searchProducts(et_search.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
-        et_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public boolean onQueryTextSubmit(String query) {
+                searchProducts(query);
+                return true;
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchProducts(charSequence.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public boolean onQueryTextChange(String newText) {
+                searchProducts(newText);
+                return true;
             }
         });
 
@@ -159,13 +148,16 @@ public class SearchFragment extends Fragment {
         searchViewModel.getBrandListLiveData().observe(getViewLifecycleOwner(), brandList -> {
             adapterBrand.clear();
             adapterBrand.addAll(brandList);
+            adapterBrand.add("Tất cả các hãng");
         });
         sp_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedBrand = (String) adapterBrand.getItem(i);
-                if (!selectedBrand.equals("Hãng")) {
+                if (!selectedBrand.equals("Hãng") && !selectedBrand.equals("Tất cả các hãng")) {
                     searchViewModel.fetchProductByBrand(selectedBrand);
+                } else {
+                    searchViewModel.fetchAllProducts();
                 }
             }
 
@@ -177,20 +169,27 @@ public class SearchFragment extends Fragment {
 
     }
     private void searchProducts(String keyword) {
-        // Lấy danh sách sản phẩm từ ViewModel
-        List<ProductSearch> productList = searchViewModel.getListProductSearchLiveData().getValue();
+        // Fetch all products from the ViewModel
+        searchViewModel.fetchAllProducts();
 
-        // Lọc danh sách sản phẩm theo từ khóa tìm kiếm
-        List<ProductSearch> filteredList = new ArrayList<>();
-        for (ProductSearch product : productList) {
-            if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                filteredList.add(product);
+        // Observe changes to the list of products in the ViewModel
+        searchViewModel.getListProductSearchLiveData().observe(getViewLifecycleOwner(), new Observer<List<ProductSearch>>() {
+            @Override
+            public void onChanged(List<ProductSearch> productList) {
+                // Filter the list of products based on the search keyword
+                List<ProductSearch> filteredList = new ArrayList<>();
+                for (ProductSearch product : productList) {
+                    if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                        filteredList.add(product);
+                    }
+                }
+
+                // Update the RecyclerView with the filtered list of products
+                producSearchAdapter.setData(filteredList);
             }
-        }
-
-        // Cập nhật danh sách sản phẩm trong Adapter
-        producSearchAdapter.setData(filteredList);
+        });
     }
+
 
 
 }
