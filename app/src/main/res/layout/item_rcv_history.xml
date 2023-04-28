@@ -8,66 +8,110 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
 
         <ImageView
             android:id="@+id/imgProduct"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="28dp"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nameProduct"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:text="Ten san pham"
             android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imgProduct"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/colorProduct"
-            android:layout_width="128dp"
-            android:layout_height="29dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="Mau"
+            android:id="@+id/brandName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Hang"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imgProduct"
             app:layout_constraintTop_toBottomOf="@+id/nameProduct" />
 
         <TextView
+            android:id="@+id/colorProduct"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Mau"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/imgProduct"
+            app:layout_constraintTop_toBottomOf="@+id/brandName" />
+
+        <TextView
             android:id="@+id/ordertime"
-            android:layout_width="149dp"
-            android:layout_height="19dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:text="Thoi gian dat"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/priceProduct"
-            app:layout_constraintHorizontal_bias="0.09"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imgProduct"
             app:layout_constraintTop_toBottomOf="@+id/colorProduct" />
 
         <TextView
             android:id="@+id/priceProduct"
-            android:layout_width="139dp"
+            android:layout_width="150dp"
             android:layout_height="19dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
             android:text="Gia"
-            android:textColor="#EA3E3E"
+            android:textColor="#E43131"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgProduct"
+            app:layout_constraintTop_toBottomOf="@+id/ordertime" />
+
+        <Button
+            android:id="@+id/btnRepurchase"
+            android:layout_width="113dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/color_main"
+            android:text="Mua lại"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/colorProduct"
-            app:layout_constraintTop_toBottomOf="@+id/nameProduct" />
+            app:layout_constraintStart_toEndOf="@+id/priceProduct" />
+
+        <TextView
+            android:id="@+id/numberOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="30dp"
+            android:text="So luong"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
