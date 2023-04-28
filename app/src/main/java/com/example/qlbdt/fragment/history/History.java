@@ -1,4 +1,4 @@
-package com.example.qlbdt.object;
+package com.example.qlbdt.fragment.history;
 
 public class History {
     private int id;
