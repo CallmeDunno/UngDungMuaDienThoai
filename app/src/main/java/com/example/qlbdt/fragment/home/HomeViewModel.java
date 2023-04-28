@@ -11,17 +11,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
-    private final MutableLiveData<List<ProductHome>> listProductHomeLiveData;
-    private List<ProductHome> listProductHome;
+    private final MutableLiveData<List<HomeProduct>> listHomeProductLiveData;
+    private List<HomeProduct> listHomeProduct;
 
     public HomeViewModel() {
-        listProductHomeLiveData = new MutableLiveData<>();
+        listHomeProductLiveData = new MutableLiveData<>();
 
         initData();
     }
 
     public void initData() {
-        listProductHome = new ArrayList<>();
+        listHomeProduct = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
                 .get()
@@ -29,42 +29,32 @@ public class HomeViewModel extends ViewModel {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc : task.getResult()) {
                             String id = doc.getId();
-                            String name = doc.toObject(ProductHome.class).getName();
-                            String price = doc.toObject(ProductHome.class).getPrice();
-                            String image = doc.toObject(ProductHome.class).getImage();
-                            String os = doc.toObject(ProductHome.class).getOS();
-                            String battery = doc.toObject(ProductHome.class).getBattery();
-                            String brand = doc.toObject(ProductHome.class).getBrand();
-                            String color = doc.toObject(ProductHome.class).getColor();
-                            String cpu = doc.toObject(ProductHome.class).getCpu();
-                            String description = doc.toObject(ProductHome.class).getDescription();
-                            int quantity = doc.toObject(ProductHome.class).getQuantity();
-                            String ram = doc.toObject(ProductHome.class).getRam();
-                            String releaseTime = doc.toObject(ProductHome.class).getReleaseTime();
-                            String rom = doc.toObject(ProductHome.class).getRom();
-                            String type = doc.toObject(ProductHome.class).getType();
-                            String weight = doc.toObject(ProductHome.class).getWeight();
+                            String name = doc.toObject(HomeProduct.class).getName();
+                            String price = doc.toObject(HomeProduct.class).getPrice();
+                            String image = doc.toObject(HomeProduct.class).getImage();
+                            String os = doc.toObject(HomeProduct.class).getOS();
+                            String battery = doc.toObject(HomeProduct.class).getBattery();
+                            String brand = doc.toObject(HomeProduct.class).getBrand();
+                            String color = doc.toObject(HomeProduct.class).getColor();
+                            String cpu = doc.toObject(HomeProduct.class).getCpu();
+                            String description = doc.toObject(HomeProduct.class).getDescription();
+                            int quantity = doc.toObject(HomeProduct.class).getQuantity();
+                            String ram = doc.toObject(HomeProduct.class).getRam();
+                            String releaseTime = doc.toObject(HomeProduct.class).getReleaseTime();
+                            String rom = doc.toObject(HomeProduct.class).getRom();
+                            String type = doc.toObject(HomeProduct.class).getType();
+                            String weight = doc.toObject(HomeProduct.class).getWeight();
 
-                            listProductHome.add(new ProductHome(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
+                            listHomeProduct.add(new HomeProduct(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
                         }
-                        Collections.shuffle(listProductHome);
-                        listProductHomeLiveData.postValue(listProductHome);
-                    } else {
-                        showDialogError(); //TODO: Cần biến context để khởi tạo dialog hoặc Toast => Chưa biết cách giải quyết =))
+                        Collections.shuffle(listHomeProduct);
+                        listHomeProductLiveData.postValue(listHomeProduct);
                     }
                 });
-        listProductHomeLiveData.setValue(listProductHome);
+        listHomeProductLiveData.setValue(listHomeProduct);
     }
 
-    /** Method showDialogError
-     * Hiển thị hộp thoại thông báo trong trường hợp lấy dữ liệu từ firebase bị lỗi
-     * Author: Dunno
-     * */
-    private void showDialogError() {
-
-    }
-
-    public MutableLiveData<List<ProductHome>> getListProductHomeLiveData() {
-        return listProductHomeLiveData;
+    public MutableLiveData<List<HomeProduct>> getListHomeProductLiveData() {
+        return listHomeProductLiveData;
     }
 }

@@ -2,15 +2,15 @@ package com.example.qlbdt.fragment.search;
 
 import android.util.Log;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.qlbdt.fragment.home.ProductHome;
-import com.google.firebase.firestore.EventListener;
+import com.example.qlbdt.fragment.home.HomeProduct;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -67,37 +67,33 @@ public class SearchViewModel extends ViewModel {
         listProductSearch = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.e("SearchFragment", "Error getting data", e);
-                            return;
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                String id = doc.getId();
+                                String name = doc.toObject(HomeProduct.class).getName();
+                                String price = doc.toObject(HomeProduct.class).getPrice();
+                                String image = doc.toObject(HomeProduct.class).getImage();
+                                String os = doc.toObject(HomeProduct.class).getOS();
+                                String battery = doc.toObject(HomeProduct.class).getBattery();
+                                String brand = doc.toObject(HomeProduct.class).getBrand();
+                                String color = doc.toObject(HomeProduct.class).getColor();
+                                String cpu = doc.toObject(HomeProduct.class).getCpu();
+                                String description = doc.toObject(HomeProduct.class).getDescription();
+                                int quantity = doc.toObject(HomeProduct.class).getQuantity();
+                                String ram = doc.toObject(HomeProduct.class).getRam();
+                                String releaseTime = doc.toObject(HomeProduct.class).getReleaseTime();
+                                String rom = doc.toObject(HomeProduct.class).getRom();
+                                String type = doc.toObject(HomeProduct.class).getType();
+                                String weight = doc.toObject(HomeProduct.class).getWeight();
+
+                                listProductSearch.add(new ProductSearch(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
+                            }
+                            listProductSearchLiveData.postValue(listProductSearch);
                         }
-
-                        listProductSearch.clear();
-
-                        for (QueryDocumentSnapshot doc : snapshots) {
-                            String id = doc.getId();
-                            String name = doc.toObject(ProductHome.class).getName();
-                            String price = doc.toObject(ProductHome.class).getPrice();
-                            String image = doc.toObject(ProductHome.class).getImage();
-                            String os = doc.toObject(ProductHome.class).getOS();
-                            String battery = doc.toObject(ProductHome.class).getBattery();
-                            String brand = doc.toObject(ProductHome.class).getBrand();
-                            String color = doc.toObject(ProductHome.class).getColor();
-                            String cpu = doc.toObject(ProductHome.class).getCpu();
-                            String description = doc.toObject(ProductHome.class).getDescription();
-                            int quantity = doc.toObject(ProductHome.class).getQuantity();
-                            String ram = doc.toObject(ProductHome.class).getRam();
-                            String releaseTime = doc.toObject(ProductHome.class).getReleaseTime();
-                            String rom = doc.toObject(ProductHome.class).getRom();
-                            String type = doc.toObject(ProductHome.class).getType();
-                            String weight = doc.toObject(ProductHome.class).getWeight();
-
-                            listProductSearch.add(new ProductSearch(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
-                        }
-                        listProductSearchLiveData.postValue(listProductSearch);
                     }
                 });
         listProductSearchLiveData.setValue(listProductSearch);
@@ -116,10 +112,11 @@ public class SearchViewModel extends ViewModel {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String id = doc.getId();
                             String name = doc.toObject(ProductSearch.class).getName();
                             String price = doc.toObject(ProductSearch.class).getPrice();
                             String image = doc.toObject(ProductSearch.class).getImage();
-                            productList.add(new ProductSearch(name, price, image));
+                            productList.add(new ProductSearch(id, name, price, image));
                         }
                         listProductSearchLiveData.postValue(productList);
                     } else {
@@ -136,10 +133,11 @@ public class SearchViewModel extends ViewModel {
                     if (task.isSuccessful()) {
                         List<ProductSearch> productList = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String id = doc.getId();
                             String name = doc.toObject(ProductSearch.class).getName();
                             String price = doc.toObject(ProductSearch.class).getPrice();
                             String image = doc.toObject(ProductSearch.class).getImage();
-                            productList.add(new ProductSearch(name, price, image));
+                            productList.add(new ProductSearch(id, name, price, image));
                         }
                         listProductSearchLiveData.setValue(productList);
                     } else {

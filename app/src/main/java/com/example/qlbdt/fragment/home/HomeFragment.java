@@ -32,8 +32,8 @@ import java.util.TimerTask;
 public class HomeFragment extends Fragment {
     private List<Photo> mListPhoto;
     private Timer mTimer;
-    private ProductHomeAdapter smartphoneAdapter;
-    private ProductHomeAdapter laptopAdapter;
+    private HomeProductAdapter smartphoneAdapter;
+    private HomeProductAdapter laptopAdapter;
     private FragmentHomeBinding binding;
     private ProgressDialog progressDialog;
 
@@ -64,23 +64,23 @@ public class HomeFragment extends Fragment {
         laptopAdapter.setOnClickItem(this::handlePhoneSelect);
     }
 
-    private void handlePhoneSelect(ProductHome productHome) {
+    private void handlePhoneSelect(HomeProduct homeProduct) {
         HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
                 HomeFragmentDirections.actionHomeFragmentToProductDetailFragment();
-        action.setDocumentPath(productHome.getId());
+        action.setDocumentPath(homeProduct.getId());
         Navigation.findNavController(requireView()).navigate(action);
     }
 
     private void initViewModel() {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
+        homeViewModel.getListHomeProductLiveData().observe(requireActivity(), productHomes -> {
             if (productHomes.size() == 0) {
                 progressDialog.show();
             } else {
                 progressDialog.dismiss();
-                List<ProductHome> listSmartphone = new ArrayList<>();
-                List<ProductHome> listLaptop = new ArrayList<>();
-                for (ProductHome p : productHomes) {
+                List<HomeProduct> listSmartphone = new ArrayList<>();
+                List<HomeProduct> listLaptop = new ArrayList<>();
+                for (HomeProduct p : productHomes) {
                     if (p.getType().equals("Smartphone") && listSmartphone.size() < 5) {
                         listSmartphone.add(p);
                     }
@@ -113,8 +113,8 @@ public class HomeFragment extends Fragment {
 
         binding.rcvPhone.setLayoutManager(linearLayoutManager);
 
-        smartphoneAdapter = new ProductHomeAdapter();
-        laptopAdapter = new ProductHomeAdapter();
+        smartphoneAdapter = new HomeProductAdapter();
+        laptopAdapter = new HomeProductAdapter();
 
         binding.rcvPhone.setAdapter(smartphoneAdapter);
         binding.rcvPc.setAdapter(laptopAdapter);

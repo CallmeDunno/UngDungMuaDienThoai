@@ -7,7 +7,7 @@ import com.example.qlbdt.object.Price;
 
 import java.io.Serializable;
 
-public final class ProductHome implements Serializable {
+public final class HomeProduct implements Serializable {
     private String id;
     private String name;
     private Price price;
@@ -25,10 +25,10 @@ public final class ProductHome implements Serializable {
     private String type;
     private String weight;
 
-    public ProductHome() {
+    public HomeProduct() {
     }
 
-    public ProductHome(String id, String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
+    public HomeProduct(String id, String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
         this.id = id;
         this.name = name;
         this.price = new Price(price);
@@ -47,7 +47,7 @@ public final class ProductHome implements Serializable {
         this.weight = weight;
     }
 
-    public ProductHome(String name, String price, String imageProduct, String type) {
+    public HomeProduct(String name, String price, String imageProduct, String type) {
         this.name = name;
         this.price = new Price(price);
         this.image = imageProduct;
@@ -182,16 +182,19 @@ public final class ProductHome implements Serializable {
         this.id = id;
     }
 
-    public static final DiffUtil.ItemCallback<ProductHome> PRODUCT_HOME_DIFF_UTIL = new DiffUtil.ItemCallback<ProductHome>() {
+    public static final DiffUtil.ItemCallback<HomeProduct> HOME_PRODUCT_DIFF_UTIL = new DiffUtil.ItemCallback<HomeProduct>() {
 
         @Override
-        public boolean areItemsTheSame(@NonNull ProductHome oldItem, @NonNull ProductHome newItem) {
+        public boolean areItemsTheSame(@NonNull HomeProduct oldItem, @NonNull HomeProduct newItem) {
             return oldItem.id.equals(newItem.id);
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull ProductHome oldItem, @NonNull ProductHome newItem) {
-            return oldItem.id.equals(newItem.id) && oldItem.type.equals(newItem.type) && oldItem.quantity == newItem.quantity;
+        public boolean areContentsTheSame(@NonNull HomeProduct oldItem, @NonNull HomeProduct newItem) {
+            return oldItem.id.equals(newItem.id)
+                    && oldItem.type.equals(newItem.type)
+                    && oldItem.name.equals(newItem.name)
+                    && oldItem.getPrice().equals(newItem.getPrice());
         }
     };
 }

@@ -1,7 +1,6 @@
 package com.example.qlbdt.fragment.product_detail;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -26,9 +24,7 @@ import com.example.qlbdt.databinding.FragmentProductDetailBinding;
 public class ProductDetailFragment extends Fragment {
     private FragmentProductDetailBinding binding;
     private ProgressDialog progressDialog;
-
-    ProductDetailViewModel productDetailViewModel;
-
+    private ProductDetailViewModel productDetailViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -47,24 +43,17 @@ public class ProductDetailFragment extends Fragment {
 
     private void initData(Bundle arguments) {
         initViewModel();
-        String path = ProductDetailFragmentArgs.fromBundle(getArguments()).getDocumentPath();
+        String path = ProductDetailFragmentArgs.fromBundle(arguments).getDocumentPath();
         productDetailViewModel.setPath(path);
     }
 
     private void initAction() {
-        binding.btnBuyProductDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.btnBuyProductDetail.setOnClickListener(this::handleButtonBuy);
+        binding.btnAddCartProductDetail.setOnClickListener(this::handleButtonAddToCart);
+    }
 
-            }
-        });
-        binding.btnAddCartProductDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
+    private void initViewModel() {
+        productDetailViewModel = new ViewModelProvider((ViewModelStoreOwner) requireContext()).get(ProductDetailViewModel.class);
         productDetailViewModel.getProductHomeMutableLiveData().observe(getViewLifecycleOwner(), productHome -> {
             if (productHome.getId() != null) {
                 Glide.with(requireContext()).load(productHome.getImage()).into(binding.imgProductDetail);
@@ -87,7 +76,12 @@ public class ProductDetailFragment extends Fragment {
         });
     }
 
-    private void initViewModel() {
-        productDetailViewModel = new ViewModelProvider((ViewModelStoreOwner) requireContext()).get(ProductDetailViewModel.class);
+    private void handleButtonAddToCart(View view) {
+
     }
+
+    private void handleButtonBuy(View view) {
+
+    }
+
 }

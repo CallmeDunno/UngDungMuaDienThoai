@@ -9,17 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.qlbdt.databinding.ItemRcvSearchFragmentBinding;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapter.ProductSearchViewHolder> {
+public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdapter.ProductSearchViewHolder> {
     private final Context context;
     private final IRecyclerViewOnClick iRecyclerViewOnClick;
     private List<ProductSearch> productSearches;
 
-    public ProducSearchAdapter(Context context, IRecyclerViewOnClick iRecyclerViewOnClick1) {
+    public ProductSearchAdapter(Context context, IRecyclerViewOnClick iRecyclerViewOnClick1) {
         this.context = context;
         this.iRecyclerViewOnClick = iRecyclerViewOnClick1;
     }

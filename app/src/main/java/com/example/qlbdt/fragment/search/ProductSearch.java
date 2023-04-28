@@ -43,7 +43,8 @@ public class ProductSearch {
         this.weight = weight;
     }
 
-    public ProductSearch(String name, String price, String image) {
+    public ProductSearch(String id, String name, String price, String image) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;

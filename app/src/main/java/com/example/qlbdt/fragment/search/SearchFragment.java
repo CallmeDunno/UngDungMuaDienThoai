@@ -1,7 +1,6 @@
 package com.example.qlbdt.fragment.search;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private ProducSearchAdapter producSearchAdapter;
+    private ProductSearchAdapter productSearchAdapter;
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
     private Spinner sp_sort, sp_brand;
@@ -51,7 +51,7 @@ public class SearchFragment extends Fragment {
         searchViewModel.getListProductSearchLiveData().observe(getActivity(), new Observer<List<ProductSearch>>() {
             @Override
             public void onChanged(List<ProductSearch> productSearches) {
-                producSearchAdapter.setData(productSearches);
+                productSearchAdapter.setData(productSearches);
             }
         });
         sv_search = view.findViewById(R.id.sv_fragment_search);
@@ -111,15 +111,17 @@ public class SearchFragment extends Fragment {
     private void initUI() {
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
         binding.rcvSearch.setLayoutManager(linearLayoutManager);
-        producSearchAdapter = new ProducSearchAdapter(getActivity(), productSearch -> {
-//            SearchFragmentDirections.ActionSearchFragmentToProductDetailFragment action =
-//                    SearchFragmentDirections.actionSearchFragmentToProductDetailFragment();
-//            action.setDocumentPath(productSearch.getId());
-            Log.d("Search", productSearch.getType() + " aaaaa");
-//            Navigation.findNavController(requireView()).navigate(action);
+        productSearchAdapter = new ProductSearchAdapter(getContext(), new IRecyclerViewOnClick() {
+            @Override
+            public void onClickItem(ProductSearch productSearch) {
+                SearchFragmentDirections.ActionSearchFragmentToProductDetailFragment action =
+                        SearchFragmentDirections.actionSearchFragmentToProductDetailFragment();
+                action.setDocumentPath(productSearch.getId());
+                Navigation.findNavController(requireView()).navigate(action);
+            }
         });
 
-        binding.rcvSearch.setAdapter(producSearchAdapter);
+        binding.rcvSearch.setAdapter(productSearchAdapter);
     }
     private void Brand() {
         adapterBrand = new ArrayAdapter<>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -160,7 +162,7 @@ public class SearchFragment extends Fragment {
                     }
                 }
 
-                producSearchAdapter.setData(filteredList);
+                productSearchAdapter.setData(filteredList);
             }
         });
     }
