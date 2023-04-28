@@ -4,41 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.basket.BasketFragment"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    tools:context=".fragment.basket.BasketFragment">
 
+    <LinearLayout
+        android:id="@+id/linearlayoutgiohang"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/linearlayoutgiohang"
+        <FrameLayout
+            android:id="@+id/framlayoutgh"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
 
-            <FrameLayout
-                android:id="@+id/framlayoutgh"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listviewgiohang"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:ignore="UselessParent">
+                android:layout_height="match_parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/listviewgiohang"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/thongbaogiohang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/the_basket_is_empty"
-                    android:textSize="20sp" />
-            </FrameLayout>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/thongbaogiohang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/the_basket_is_empty"
+                android:textSize="20sp" />
+        </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -101,7 +100,5 @@
             android:text="@string/keep_buying"
             tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
