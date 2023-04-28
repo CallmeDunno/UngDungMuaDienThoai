@@ -9,7 +9,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fragment.product_detail.adapter.SupportAdapter;
+import com.example.qlbdt.adapter.SupportAdapter;
 import com.example.qlbdt.object.Support;
 
 import java.util.ArrayList;

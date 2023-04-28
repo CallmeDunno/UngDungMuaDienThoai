@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fragment.product_detail.adapter.HistoryAdapter;
+import com.example.qlbdt.adapter.HistoryAdapter;
 
 import java.util.List;
 

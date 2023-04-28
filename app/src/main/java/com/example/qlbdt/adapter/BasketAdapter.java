@@ -1,4 +1,4 @@
-package com.example.qlbdt.fragment.product_detail.adapter;
+package com.example.qlbdt.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
