@@ -13,16 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.databinding.FragmentBasketBinding;
+import com.example.qlbdt.databinding.ItemRcvBasketFragmentBinding;
+import com.example.qlbdt.databinding.ItemRcvHomeBinding;
+import com.example.qlbdt.fFragment.Home.ProductHomeAdapter;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>{
-    private final Context context;
+    //private final Context context;
     private List<Basket> baskets;
     private final HandleBasketClick click;
-    public BasketAdapter(Context context, HandleBasketClick click){
-        this.context=context;
+
+    public BasketAdapter( HandleBasketClick click){
+       // this.context=context;
         this.click=click;
     }
     public void setBasketlist(List<Basket> baskets){
@@ -32,39 +37,39 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_rcv_basket_fragment,parent,false);
-        return new MyViewHolder(view);
+        ItemRcvBasketFragmentBinding itemRcvBinding = ItemRcvBasketFragmentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new MyViewHolder(itemRcvBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.tensp.setText(this.baskets.get(position).getBasketName());
+        holder.binding.tenspgh.setText(this.baskets.get(position).getBasketName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.giasp.setText(decimalFormat.format(this.baskets.get(position).getBasketValue()) + "Đ");
-        holder.btnvalue.setText(String.valueOf(this.baskets.get(position).getBasketQuantity()));
-        int sl = Integer.parseInt(holder.btnvalue.getText().toString());
+        holder.binding.giagh.setText(decimalFormat.format(this.baskets.get(position).getBasketValue()) + "Đ");
+        holder.binding.btnvalue.setText(String.valueOf(this.baskets.get(position).getBasketQuantity()));
+        int sl = Integer.parseInt(holder.binding.btnvalue.getText().toString());
         if(sl >= 10){
-            holder.btntang.setVisibility(View.INVISIBLE);
-            holder.btngiam.setVisibility(View.VISIBLE);
+            holder.binding.btntangsp.setVisibility(View.INVISIBLE);
+            holder.binding.btgiamsp.setVisibility(View.VISIBLE);
         }else if(sl <=1){
-            holder.btngiam.setVisibility(View.INVISIBLE);
+            holder.binding.btgiamsp.setVisibility(View.INVISIBLE);
         }else{
-            holder.btntang.setVisibility(View.VISIBLE);
-            holder.btngiam.setVisibility(View.VISIBLE);
+            holder.binding.btntangsp.setVisibility(View.VISIBLE);
+            holder.binding.btgiamsp.setVisibility(View.VISIBLE);
         }
-        holder.btngiam.setOnClickListener(new View.OnClickListener() {
+        holder.binding.btgiamsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 click.btngiamclick(baskets.get(position));
             }
         });
-        holder.btntang.setOnClickListener(new View.OnClickListener() {
+        holder.binding.btntangsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 click.btntangclick(baskets.get(position));
             }
         });
-        holder.btnxoa.setOnClickListener(new View.OnClickListener() {
+        holder.binding.btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 click.btnxoaclick(baskets.get(position));
@@ -82,22 +87,10 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        ImageView giohang;
-        TextView tensp;
-        TextView giasp;
-        Button btngiam;
-        Button btntang;
-        Button btnvalue;
-        Button btnxoa;
-        public MyViewHolder(View view){
-            super(view);
-            giohang=view.findViewById(R.id.imagegiohang);
-            tensp=view.findViewById(R.id.tenspgh);
-            giasp=view.findViewById(R.id.giagh);
-            btngiam=view.findViewById(R.id.btgiamsp);
-            btntang=view.findViewById(R.id.btntangsp);
-            btnvalue=view.findViewById(R.id.btnvalue);
-            btnxoa=view.findViewById(R.id.btndelete);
+        private ItemRcvBasketFragmentBinding binding;
+        public MyViewHolder(@NonNull ItemRcvBasketFragmentBinding binding){
+            super(binding.getRoot());
+            this.binding=binding;
         }
     }
     public interface HandleBasketClick{
