@@ -14,7 +14,7 @@ import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 import java.util.Comparator;
 import java.util.List;
 
-public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapter.ProductSharchViewHolder>{
+public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapter.ProductSearchViewHolder> {
     private final Context context;
     private final IRecyclerViewOnClick iRecyclerViewOnClick;
     private List<ProductSearch> productSearches;
@@ -23,50 +23,54 @@ public class ProducSearchAdapter extends RecyclerView.Adapter<ProducSearchAdapte
         this.context = context;
         this.iRecyclerViewOnClick = iRecyclerViewOnClick1;
     }
-    public void setData(List<ProductSearch> p){
+
+    public void setData(List<ProductSearch> p) {
         this.productSearches = p;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ProducSearchAdapter.ProductSharchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemRcvSearchFragmentBinding itemRcvSearchFragmentBinding =ItemRcvSearchFragmentBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
-        return new ProductSharchViewHolder(itemRcvSearchFragmentBinding);
+    public ProductSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemRcvSearchFragmentBinding itemRcvSearchFragmentBinding = ItemRcvSearchFragmentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ProductSearchViewHolder(itemRcvSearchFragmentBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProducSearchAdapter.ProductSharchViewHolder holder, int position) {
-        ProductSearch productSearch =productSearches.get(position);
-        if (productSearch == null){
+    public void onBindViewHolder(@NonNull ProductSearchViewHolder holder, int position) {
+        ProductSearch productSearch = productSearches.get(position);
+        if (productSearch == null) {
             return;
         }
         Glide.with(context).load(productSearch.getImage()).into(holder.itemBinding.imagesearch);
         holder.itemBinding.tvSearchPhone.setText(productSearch.getName());
         holder.itemBinding.tvSearchPrice.setText(productSearch.getPrice());
-
+        holder.itemBinding.cvFragmentSearch.setOnClickListener(view -> iRecyclerViewOnClick.onClickItem(productSearch));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductSharchViewHolder holder, int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull ProductSearchViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
     }
 
     @Override
     public int getItemCount() {
-        if (productSearches != null){
+        if (productSearches != null) {
             return productSearches.size();
         }
         return 0;
     }
-    public static class ProductSharchViewHolder extends RecyclerView.ViewHolder {
+
+    public static class ProductSearchViewHolder extends RecyclerView.ViewHolder {
         private final ItemRcvSearchFragmentBinding itemBinding;
-        public ProductSharchViewHolder(@NonNull  ItemRcvSearchFragmentBinding itemBinding) {
+
+        public ProductSearchViewHolder(@NonNull ItemRcvSearchFragmentBinding itemBinding) {
             super(itemBinding.getRoot());
 
             this.itemBinding = itemBinding;
         }
     }
+
     public static class ProductSearchComparator implements Comparator<ProductSearch> {
 
         @Override

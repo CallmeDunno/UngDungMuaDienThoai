@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
@@ -39,60 +40,18 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initSlide();
-        initUI();
+        initView();
         initViewModel();
+        initAction();
     }
 
-    private void initViewModel() {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
-            if (productHomes.size() == 0){
-                progressDialog.show();
-            } else {
-                progressDialog.dismiss();
-                List<ProductHome> listSmartphone = new ArrayList<>();
-                List<ProductHome> listLaptop = new ArrayList<>();
-                for (ProductHome p : productHomes){
-                    if (p.getType().equals("Smartphone") && listSmartphone.size() < 5){
-                        listSmartphone.add(p);
-                    }
-                    if (p.getType().equals("Laptop") && listLaptop.size() < 5){
-                        listLaptop.add(p);
-                    }
-//                if (listSmartphone.size() == 5 && listLaptop.size() == 5){
-//                    break;
-//                }
-                }
-                smartphoneAdapter.setData(listSmartphone);
-                laptopAdapter.setData(listLaptop);
-            }
-        });
-    }
-
-    private void initUI() {
-
-        progressDialog = new ProgressDialog(requireContext());
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        binding.rcvPhone.setLayoutManager(linearLayoutManager);
-        binding.rcvPc.setLayoutManager(linearLayoutManager2);
-        smartphoneAdapter = new ProductHomeAdapter(getActivity(), smartphone -> {
-            //TODO: Chuyển hướng đến ProductDetail
-        });
-        laptopAdapter = new ProductHomeAdapter(requireContext(), smartphone -> {
-            //TODO: Chuyển hướng đến ProductDetail
-        });
-        binding.rcvPhone.setAdapter(smartphoneAdapter);
-        binding.rcvPc.setAdapter(laptopAdapter);
+    private void initAction() {
         binding.tvSeeMore1.setOnClickListener(view -> {
             //TODO: Chuyển hướng đến trang điện thoại
         });
@@ -100,7 +59,67 @@ public class HomeFragment extends Fragment {
         binding.tvSeeMore2.setOnClickListener(view -> {
             //TODO: Chuyển hướng đến trang Laptop
         });
+
+        smartphoneAdapter.setOnClickItem(this::handlePhoneSelect);
+        laptopAdapter.setOnClickItem(this::handlePhoneSelect);
     }
+
+    private void handlePhoneSelect(ProductHome productHome) {
+        HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
+                HomeFragmentDirections.actionHomeFragmentToProductDetailFragment();
+        action.setDocumentPath(productHome.getId());
+        Navigation.findNavController(requireView()).navigate(action);
+    }
+
+    private void initViewModel() {
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getListProductHomeLiveData().observe(requireActivity(), productHomes -> {
+            if (productHomes.size() == 0) {
+                progressDialog.show();
+            } else {
+                progressDialog.dismiss();
+                List<ProductHome> listSmartphone = new ArrayList<>();
+                List<ProductHome> listLaptop = new ArrayList<>();
+                for (ProductHome p : productHomes) {
+                    if (p.getType().equals("Smartphone") && listSmartphone.size() < 5) {
+                        listSmartphone.add(p);
+                    }
+                    if (p.getType().equals("Laptop") && listLaptop.size() < 5) {
+                        listLaptop.add(p);
+                    }
+                    if (listSmartphone.size() == 5 && listLaptop.size() == 5) {
+                        break;
+                    }
+                }
+                smartphoneAdapter.submitList(listSmartphone);
+                laptopAdapter.submitList(listLaptop);
+            }
+        });
+    }
+
+    private void initView() {
+        initSlide();
+        initRecycleView();
+
+    }
+
+    private void initRecycleView() {
+        progressDialog = new ProgressDialog(requireContext());
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        binding.rcvPc.setLayoutManager(linearLayoutManager2);
+
+        binding.rcvPhone.setLayoutManager(linearLayoutManager);
+
+        smartphoneAdapter = new ProductHomeAdapter();
+        laptopAdapter = new ProductHomeAdapter();
+
+        binding.rcvPhone.setAdapter(smartphoneAdapter);
+        binding.rcvPc.setAdapter(laptopAdapter);
+    }
+
 
     private void initSlide() {
         mListPhoto = getListPhoto();
@@ -149,15 +168,11 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
-        }
-        if (laptopAdapter != null && smartphoneAdapter != null){
-            laptopAdapter.release();
-            smartphoneAdapter.release();
         }
     }
 

@@ -1,77 +1,71 @@
 package com.example.qlbdt.fragment.home;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.qlbdt.databinding.ItemRcvHomeBinding;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
 
-import java.util.List;
+public class ProductHomeAdapter extends ListAdapter<ProductHome, ProductHomeAdapter.ProductHomeViewHolder> {
 
-public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.ProductHomeViewHolder> {
-    private Context context;
-    private final IRecyclerViewOnClick iRecyclerViewOnClick;
-    private List<ProductHome> productHomes;
+    private IClickHomeProduct iClickHomeProduct;
 
-    public ProductHomeAdapter(Context context, IRecyclerViewOnClick iRecyclerViewOnClick) {
-        this.context = context;
-        this.iRecyclerViewOnClick = iRecyclerViewOnClick;
-    }
-
-    public void setData(List<ProductHome> p) {
-        this.productHomes = p;
-        notifyDataSetChanged();
+    public ProductHomeAdapter() {
+        super(ProductHome.PRODUCT_HOME_DIFF_UTIL);
     }
 
     @NonNull
     @Override
     public ProductHomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemRcvHomeBinding itemRcvHomeBinding = ItemRcvHomeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ProductHomeViewHolder(itemRcvHomeBinding);
+        return new ProductHomeViewHolder(itemRcvHomeBinding, iClickHomeProduct);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductHomeViewHolder holder, int position) {
-        ProductHome productHome = productHomes.get(position);
-        if (productHome == null) {
+        if (getItem(position) == null) {
             return;
         }
-        Glide.with(context).load(productHome.getImage()).into(holder.itemBinding.imgPhone);
-        holder.itemBinding.tvPhone.setText(productHome.getName());
-        holder.itemBinding.tvPrice.setText(String.format("%s VND", productHome.getPrice()));
-        holder.itemBinding.cardview.setOnClickListener(view -> {
-            //TODO: Cần chuyển đến trang chi tiết sản phẩm
-            HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
-                    HomeFragmentDirections.actionHomeFragmentToProductDetailFragment();
-            action.setDocumentPath(productHome.getId());
-            Navigation.findNavController(view).navigate(action);
-        });
+
+        holder.bindingData(getItem(position));
+        Log.e("PhongPN","onBindViewHolder: " + getItem(position).getId() + " " + getItem(position).getName());
+
     }
 
-    @Override
-    public int getItemCount() {
-        if (productHomes != null) {
-            return productHomes.size();
-        }
-        return 0;
+    public void setOnClickItem(IClickHomeProduct iClickHomeProduct) {
+        this.iClickHomeProduct = iClickHomeProduct;
     }
 
-    public void release(){
-        context = null;
-    }
 
     public static class ProductHomeViewHolder extends RecyclerView.ViewHolder {
         private final ItemRcvHomeBinding itemBinding;
 
-        public ProductHomeViewHolder(@NonNull ItemRcvHomeBinding itemBinding) {
+        private ProductHome productHome = null;
+
+        public ProductHomeViewHolder(@NonNull ItemRcvHomeBinding itemBinding,
+                                     final IClickHomeProduct iClickHomeProduct) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+
+            itemBinding.getRoot().setOnClickListener(v -> {
+                if (productHome != null) {
+                    iClickHomeProduct.onClickItem(productHome);
+                }
+            });
+        }
+
+        public void bindingData(ProductHome productHome) {
+            Log.i("PhongPN","Bind Data: " + productHome.getId() + " " + productHome.getName());
+            this.productHome = productHome;
+
+            Glide.with(itemView.getContext()).load(productHome.getImage()).into(itemBinding.imgPhone);
+            itemBinding.tvPhone.setText(productHome.getName());
+            itemBinding.tvPrice.setText(String.format("%s VND", productHome.getPrice()));
         }
     }
 }

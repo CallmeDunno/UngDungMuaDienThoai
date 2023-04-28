@@ -1,6 +1,7 @@
 package com.example.qlbdt.fragment.search;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentSearchBinding;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
-import com.example.qlbdt.object.Smartphone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,6 @@ public class SearchFragment extends Fragment {
     private ProducSearchAdapter producSearchAdapter;
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
-
     private Spinner sp_sort, sp_brand;
     private ArrayList<String> sort, brand;
     private  ArrayAdapter adapterSort, adapterBrand;
@@ -113,11 +111,12 @@ public class SearchFragment extends Fragment {
     private void initUI() {
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
         binding.rcvSearch.setLayoutManager(linearLayoutManager);
-        producSearchAdapter = new ProducSearchAdapter(getActivity(), new IRecyclerViewOnClick() {
-            @Override
-            public void onClickItemSmartphone(Smartphone smartphone) {
-
-            }
+        producSearchAdapter = new ProducSearchAdapter(getActivity(), productSearch -> {
+//            SearchFragmentDirections.ActionSearchFragmentToProductDetailFragment action =
+//                    SearchFragmentDirections.actionSearchFragmentToProductDetailFragment();
+//            action.setDocumentPath(productSearch.getId());
+            Log.d("Search", productSearch.getType() + " aaaaa");
+//            Navigation.findNavController(requireView()).navigate(action);
         });
 
         binding.rcvSearch.setAdapter(producSearchAdapter);

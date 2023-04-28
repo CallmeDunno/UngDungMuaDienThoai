@@ -29,16 +29,18 @@ public class SearchViewModel extends ViewModel {
     private MutableLiveData<List<ProductSearch>> listProductSearchLiveData;
     private MutableLiveData<List<String>> brandListLiveData;
     private List<ProductSearch> listProductSearch;
-
+    private String type;
 
     public SearchViewModel() {
         listProductSearchLiveData = new MutableLiveData<>();
         brandListLiveData = new MutableLiveData<>();
         initData();
     }
+
     public LiveData<List<String>> getBrandListLiveData() {
         return brandListLiveData;
     }
+
     public void fetchBrandList() {
         List<String> brandList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -60,6 +62,7 @@ public class SearchViewModel extends ViewModel {
                     }
                 });
     }
+
     private void initData() {
         listProductSearch = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -94,12 +97,11 @@ public class SearchViewModel extends ViewModel {
 
                             listProductSearch.add(new ProductSearch(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
                         }
-                        Collections.shuffle(listProductSearch);
                         listProductSearchLiveData.postValue(listProductSearch);
                     }
                 });
+        listProductSearchLiveData.setValue(listProductSearch);
     }
-
 
     public MutableLiveData<List<ProductSearch>> getListProductSearchLiveData() {
         return listProductSearchLiveData;
@@ -125,6 +127,7 @@ public class SearchViewModel extends ViewModel {
                     }
                 });
     }
+
     public void fetchAllProducts() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
@@ -184,5 +187,7 @@ public class SearchViewModel extends ViewModel {
         listProductSearchLiveData.setValue(sortedList);
     }
 
-
+    public void setType(String type) {
+        this.type = type;
+    }
 }

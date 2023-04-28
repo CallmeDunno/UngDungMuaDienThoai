@@ -1,8 +1,13 @@
 package com.example.qlbdt.fragment.home;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.example.qlbdt.object.Price;
 
-public class ProductHome {
+import java.io.Serializable;
+
+public final class ProductHome implements Serializable {
     private String id;
     private String name;
     private Price price;
@@ -176,4 +181,17 @@ public class ProductHome {
     public void setId(String id) {
         this.id = id;
     }
+
+    public static final DiffUtil.ItemCallback<ProductHome> PRODUCT_HOME_DIFF_UTIL = new DiffUtil.ItemCallback<ProductHome>() {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull ProductHome oldItem, @NonNull ProductHome newItem) {
+            return oldItem.id.equals(newItem.id);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ProductHome oldItem, @NonNull ProductHome newItem) {
+            return oldItem.id.equals(newItem.id) && oldItem.type.equals(newItem.type) && oldItem.quantity == newItem.quantity;
+        }
+    };
 }

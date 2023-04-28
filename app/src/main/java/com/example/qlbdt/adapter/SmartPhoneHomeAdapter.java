@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
-import com.example.qlbdt.object.Smartphone;
+import com.example.qlbdt.fragment.search.ProductSearch;
 
 import java.util.List;
 
 public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAdapter.PhoneViewHolder>{
 
     private Context mContext;
-    private List<Smartphone> mListPhone;
+    private List<ProductSearch> mListPhone;
     private final IRecyclerViewOnClick iRecyclerViewOnClick;
 
     public SmartPhoneHomeAdapter(Context mContext, IRecyclerViewOnClick iRecyclerViewOnClick) {
@@ -28,7 +28,7 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         this.iRecyclerViewOnClick = iRecyclerViewOnClick;
     }
 
-    public void setData(List<Smartphone> list){
+    public void setData(List<ProductSearch> list){
         this.mListPhone = list;
         notifyDataSetChanged();
     }
@@ -42,7 +42,7 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
 
     @Override
     public void onBindViewHolder(@NonNull PhoneViewHolder holder, int position) {
-        Smartphone phone = mListPhone.get(position);
+        ProductSearch phone = mListPhone.get(position);
         if (phone == null){
             return;
         }
@@ -51,7 +51,7 @@ public class SmartPhoneHomeAdapter extends RecyclerView.Adapter<SmartPhoneHomeAd
         holder.cv_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iRecyclerViewOnClick.onClickItemSmartphone(phone);
+                iRecyclerViewOnClick.onClickItem(phone);
             }
         });
     }
