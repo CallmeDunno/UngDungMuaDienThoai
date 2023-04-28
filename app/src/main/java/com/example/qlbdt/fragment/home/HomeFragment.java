@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.adapter.PhotoAdapter;
+import com.example.qlbdt.fragment.product_detail.adapter.PhotoAdapter;
 import com.example.qlbdt.databinding.FragmentHomeBinding;
 import com.example.qlbdt.object.Photo;
 

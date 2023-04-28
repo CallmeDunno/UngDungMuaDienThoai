@@ -1,73 +1,83 @@
 package com.example.qlbdt.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.qlbdt.R;
-import com.google.android.material.navigation.NavigationView;
+import com.example.qlbdt.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
-
-    TextView tv_nav_header_name, tv_nav_header_phone, tv_nav_header_addr;
-
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private Toolbar toolbar;
-
+    private ActivityHomeBinding binding;
     private NavController navController;
-
-    private void init(){
-        drawerLayout = findViewById(R.id.nav_drawer);
-        toolbar = findViewById(R.id.nav_toolbar);
-        navigationView = findViewById(R.id.nav_view);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        init();
+        setSupportActionBar(binding.navToolbar);
 
-        setSupportActionBar(toolbar);
+        initView();
+        initAction();
+    }
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(HomeActivity.this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
-        drawerLayout.addDrawerListener(toggle);
+    private void initAction() {
+        binding.navView.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(menuItem -> {
+            Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+            showExitDialog();
+            return false;
+        });
+    }
+
+    private void showExitDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Exit");
+        dialog.setMessage("Are you sure?");
+        dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+            SharedPreferences.Editor edit = SplashScreenActivity.userDatabase.edit();
+            edit.remove("username");
+            edit.apply();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+            finish();
+        });
+        dialog.setNegativeButton("No", (dialogInterface, i) -> {});
+        dialog.show();
+
+    }
+
+    private void initView() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(HomeActivity.this, binding.navDrawer, binding.navToolbar, R.string.open_drawer, R.string.close_drawer);
+        binding.navDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
         //region  new
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController(navigationView, navController);
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupActionBarWithNavController(this, navController, binding.navDrawer);
         //endregion
-
-        View headerView = navigationView.getHeaderView(0);
-        tv_nav_header_name = headerView.findViewById(R.id.tv_nav_header_name);
-        tv_nav_header_phone = headerView.findViewById(R.id.tv_nav_header_phone);
-        tv_nav_header_addr = headerView.findViewById(R.id.tv_nav_header_addr);
-
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, drawerLayout);
+        return NavigationUI.navigateUp(navController, binding.navDrawer);
     }
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if (binding.navDrawer.isDrawerOpen(GravityCompat.START)) {
+            binding.navDrawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }

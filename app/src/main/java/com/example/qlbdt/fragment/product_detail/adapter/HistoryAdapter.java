@@ -1,4 +1,4 @@
-package com.example.qlbdt.adapter;
+package com.example.qlbdt.fragment.product_detail.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
-import com.example.qlbdt.object.History;
+import com.example.qlbdt.fragment.history.History;
 
 import java.util.List;
 

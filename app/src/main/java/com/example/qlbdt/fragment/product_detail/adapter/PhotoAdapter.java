@@ -1,4 +1,4 @@
-package com.example.qlbdt.adapter;
+package com.example.qlbdt.fragment.product_detail.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

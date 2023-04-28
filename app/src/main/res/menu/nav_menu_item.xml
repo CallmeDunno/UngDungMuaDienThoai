@@ -53,6 +53,11 @@
                     android:icon="@drawable/ic_support"
                     android:title="@string/Support" />
 
+                <item
+                    android:id="@+id/logout"
+                    android:title="Log out"
+                    android:icon="@drawable/ic_exit_to_app" />
+
             </group>
 
         </menu>
