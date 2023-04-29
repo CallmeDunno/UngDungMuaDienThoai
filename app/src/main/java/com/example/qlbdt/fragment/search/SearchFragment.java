@@ -56,8 +56,7 @@ public class SearchFragment extends Fragment {
                 producSearchAdapter.setData(productSearches);
             }
         });
-        sv_search = view.findViewById(R.id.sv_fragment_search);
-        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        binding.svFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchProducts(query);
@@ -70,11 +69,8 @@ public class SearchFragment extends Fragment {
                 return true;
             }
         });
-
-        sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
         sort();
 
-        sp_brand = view.findViewById(R.id.sp_brand_fragment_search);
         Brand();
 
         return view;
@@ -86,8 +82,8 @@ public class SearchFragment extends Fragment {
         sort.add("Sắp xếp theo giá tăng dần");
         sort.add("Sắp xếp theo giá giảm dần");
         adapterSort = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sort);
-        sp_sort.setAdapter(adapterSort);
-        sp_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spSortFragmentSearch.setAdapter(adapterSort);
+        binding.spSortFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
@@ -124,13 +120,13 @@ public class SearchFragment extends Fragment {
     }
     private void Brand() {
         adapterBrand = new ArrayAdapter<>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        sp_brand.setAdapter(adapterBrand);
+        binding.spBrandFragmentSearch.setAdapter(adapterBrand);
         searchViewModel.getBrandListLiveData().observe(getViewLifecycleOwner(), brandList -> {
             adapterBrand.clear();
             adapterBrand.addAll(brandList);
 
         });
-        sp_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spBrandFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedBrand = (String) adapterBrand.getItem(i);
