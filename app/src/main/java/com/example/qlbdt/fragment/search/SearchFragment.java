@@ -12,12 +12,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentSearchBinding;
-import com.example.qlbdt.fInterface.IRecyclerViewOnClick;
-import com.example.qlbdt.object.Smartphone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +29,9 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private ProducSearchAdapter producSearchAdapter;
+    private ProductSearchAdapter productSearchAdapter;
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
-
     private Spinner sp_sort, sp_brand;
     private ArrayList<String> sort, brand;
     private  ArrayAdapter adapterSort, adapterBrand;
@@ -53,7 +51,7 @@ public class SearchFragment extends Fragment {
         searchViewModel.getListProductSearchLiveData().observe(getActivity(), new Observer<List<ProductSearch>>() {
             @Override
             public void onChanged(List<ProductSearch> productSearches) {
-                producSearchAdapter.setData(productSearches);
+                productSearchAdapter.setData(productSearches);
             }
         });
         binding.svFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -109,14 +107,17 @@ public class SearchFragment extends Fragment {
     private void initUI() {
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
         binding.rcvSearch.setLayoutManager(linearLayoutManager);
-        producSearchAdapter = new ProducSearchAdapter(getActivity(), new IRecyclerViewOnClick() {
+        productSearchAdapter = new ProductSearchAdapter(getContext(), new IRecyclerViewOnClick() {
             @Override
-            public void onClickItemSmartphone(Smartphone smartphone) {
-
+            public void onClickItem(ProductSearch productSearch) {
+                SearchFragmentDirections.ActionSearchFragmentToProductDetailFragment action =
+                        SearchFragmentDirections.actionSearchFragmentToProductDetailFragment();
+                action.setDocumentPath(productSearch.getId());
+                Navigation.findNavController(requireView()).navigate(action);
             }
         });
 
-        binding.rcvSearch.setAdapter(producSearchAdapter);
+        binding.rcvSearch.setAdapter(productSearchAdapter);
     }
     private void Brand() {
         adapterBrand = new ArrayAdapter<>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -157,7 +158,7 @@ public class SearchFragment extends Fragment {
                     }
                 }
 
-                producSearchAdapter.setData(filteredList);
+                productSearchAdapter.setData(filteredList);
             }
         });
     }

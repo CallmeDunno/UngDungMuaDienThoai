@@ -1,54 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_header_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
     android:background="@color/color_main"
-    android:padding="16dp"
-    android:id="@+id/nav_header_layout">
+    android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_nav_header"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/logo_app" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_nav_header_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="16dp"
-        android:layout_toEndOf="@id/img_nav_header">
-
-        <TextView
-            android:id="@+id/tv_nav_header_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nguyễn Quốc Dũng"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_nav_header_phone"
-            android:layout_marginTop="6dp"
-            android:text="0337987542"
-            android:textColor="@color/black"
-            android:textStyle="italic"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_nav_header_addr"
-            android:layout_marginTop="6dp"
-            android:text="Lam Thao, Phu Tho"
-            android:textColor="@color/black"
-            android:textStyle="italic"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/img_nav_header"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

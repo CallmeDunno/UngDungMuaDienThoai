@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
-import com.example.qlbdt.object.History;
+import com.example.qlbdt.fragment.history.History;
 
 import java.util.List;
 
