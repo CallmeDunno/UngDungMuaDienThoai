@@ -33,8 +33,8 @@ public class SearchFragment extends Fragment {
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
     private Spinner sp_sort, sp_brand;
-    private ArrayList<String> sort, brand;
-    private  ArrayAdapter adapterSort, adapterBrand;
+    private ArrayList<String> sort, brand,type;
+    private  ArrayAdapter adapterSort, adapterBrand,adaptertype;
     private SearchView sv_search;
 
 
@@ -70,8 +70,38 @@ public class SearchFragment extends Fragment {
         sort();
 
         Brand();
+        type();
 
         return view;
+    }
+
+    private void type(){
+        type = new ArrayList<>();
+        type.add("loại");
+        type.add("Máy Tính");
+        type.add("Điện Thoại");
+        adaptertype = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, type);
+        binding.spTypeFragmentSearch.setAdapter(adaptertype);
+        binding.spTypeFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        break;
+                    case 1:
+                        searchViewModel.typelaptop();
+                        break;
+                    case 2:
+                        searchViewModel.typesmartphone();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void sort() {
@@ -146,8 +176,8 @@ public class SearchFragment extends Fragment {
 
     }
     private void searchProducts(String keyword) {
-        searchViewModel.fetchAllProducts();
-
+        //Nếu muốn search all
+        //searchViewModel.fetchAllProducts();
         searchViewModel.getListProductSearchLiveData().observe(getViewLifecycleOwner(), new Observer<List<ProductSearch>>() {
             @Override
             public void onChanged(List<ProductSearch> productList) {
@@ -162,6 +192,10 @@ public class SearchFragment extends Fragment {
             }
         });
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
+    }
 
 }
