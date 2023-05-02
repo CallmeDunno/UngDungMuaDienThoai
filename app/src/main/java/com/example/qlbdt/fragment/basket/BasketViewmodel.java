@@ -8,8 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 public class BasketViewmodel extends AndroidViewModel {
-    private MutableLiveData<List<Basket>> listofbasket;
-    private BasketDatabase basketdatabase;
+    private final MutableLiveData<List<Basket>> listofbasket;
+    private final BasketDatabase basketdatabase;
 
     public BasketViewmodel(Application application){
         super(application);
