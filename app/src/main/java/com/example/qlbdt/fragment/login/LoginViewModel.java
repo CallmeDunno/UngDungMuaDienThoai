@@ -4,6 +4,7 @@ package com.example.qlbdt.fragment.login;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -86,4 +87,20 @@ public class LoginViewModel extends ViewModel {
         User user = userDatabase.getCurrentUser();
         return user;
     }
+    public LiveData<User> getUser(String email) {
+        MutableLiveData<User> userLiveData = new MutableLiveData<>();
+        firestore.collection("Users")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                        QueryDocumentSnapshot doc = (QueryDocumentSnapshot) task.getResult().getDocuments().get(0);
+                        User user = doc.toObject(User.class);
+                        userLiveData.setValue(user);
+                    }
+                });
+        return userLiveData;
+    }
+
+
 }

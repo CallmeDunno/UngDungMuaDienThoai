@@ -16,24 +16,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingTop="15dp">
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avatar_QA"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/logo" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_email" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#00FDCC" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/email_QA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:text="Meo Meo"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/darker_gray" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,13 +63,13 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_person" />
+            android:src="@drawable/img" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="5dp"
-            android:text="Họ và tên"
+            android:text="Ngày tháng năm sinh"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -60,7 +77,7 @@
             android:id="@+id/name_QA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="73dp"
+            android:layout_marginStart="40dp"
             android:text="Meo Meo"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -100,7 +117,7 @@
             android:id="@+id/phone_QA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
+            android:layout_marginStart="97dp"
             android:text="Meo Meo"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -140,80 +157,11 @@
             android:id="@+id/address_QA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="91dp"
+            android:layout_marginStart="141dp"
             android:text="Meo Meo"
             android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_email" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:text="Email"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/email_QA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="99dp"
-            android:text="Meo Meo"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_edit_QA"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@drawable/btn_selector"
-            android:drawableStart="@drawable/ic_edit"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textAllCaps="false"
-            android:text="Sửa thông tin"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-    </LinearLayout>
 
 </LinearLayout>
