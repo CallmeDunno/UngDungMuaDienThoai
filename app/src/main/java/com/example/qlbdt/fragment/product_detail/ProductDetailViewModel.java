@@ -5,15 +5,19 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qlbdt.fragment.history.History;
 import com.example.qlbdt.fragment.home.HomeProduct;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class ProductDetailViewModel extends ViewModel {
     private final MutableLiveData<HomeProduct> productHomeMutableLiveData;
-    private String path;
+    private String documentPath;
+    private String status = "";
     private HomeProduct homeProduct;
 
     public ProductDetailViewModel() {
@@ -24,7 +28,7 @@ public class ProductDetailViewModel extends ViewModel {
         homeProduct = new HomeProduct();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .document(path)
+                .document(documentPath)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -60,8 +64,34 @@ public class ProductDetailViewModel extends ViewModel {
         return productHomeMutableLiveData;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setDocumentPath(String documentPath) {
+        this.documentPath = documentPath;
         initData();
+    }
+
+    public String pushHistory(String userID, HomeProduct homeProduct, int quantity) {
+
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        String datetimeCurr = simpleDateFormat.format(now.getTime());
+
+        History history = new History(userID,
+                homeProduct.getId(),
+                homeProduct.getPrice(),
+                homeProduct.getImage(),
+                homeProduct.getName(),
+                homeProduct.getBrand(),
+                quantity,
+                datetimeCurr);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Histories")
+                .add(history)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) status = "Done";
+                    else status = "Fail";
+                })
+                .addOnFailureListener(e -> status = e.getMessage());
+        return status;
     }
 }
