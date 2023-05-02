@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentSearchBinding;
 
 import java.util.ArrayList;
@@ -67,15 +66,16 @@ public class SearchFragment extends Fragment {
                 return true;
             }
         });
-        sort();
 
+        sort();
         Brand();
-        type();
+        type(getArguments());
 
         return view;
     }
 
-    private void type(){
+    private void type(Bundle arguments) {
+        String strType = SearchFragmentArgs.fromBundle(arguments).getTypeProduct();
         type = new ArrayList<>();
         type.add("loại");
         type.add("Máy Tính");
@@ -103,6 +103,7 @@ public class SearchFragment extends Fragment {
             }
         });
     }
+
 
     private void sort() {
         sort = new ArrayList<>();

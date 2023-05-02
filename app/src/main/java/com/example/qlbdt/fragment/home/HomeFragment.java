@@ -52,19 +52,25 @@ public class HomeFragment extends Fragment {
     }
 
     private void initAction() {
-        binding.tvSeeMore1.setOnClickListener(view -> {
-            //TODO: Chuyển hướng đến trang điện thoại
+        binding.tvSeeMore1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeFragmentDirections.ActionHomeFragmentToSearchFragment action =
+                        HomeFragmentDirections.actionHomeFragmentToSearchFragment();
+                action.setTypeProduct("Smartphone");
+                Navigation.findNavController(requireView()).navigate(action);
+            }
         });
 
         binding.tvSeeMore2.setOnClickListener(view -> {
             //TODO: Chuyển hướng đến trang Laptop
         });
 
-        smartphoneAdapter.setOnClickItem(this::handlePhoneSelect);
-        laptopAdapter.setOnClickItem(this::handlePhoneSelect);
+        smartphoneAdapter.setOnClickItem(this::handleProductSelect);
+        laptopAdapter.setOnClickItem(this::handleProductSelect);
     }
 
-    private void handlePhoneSelect(HomeProduct homeProduct) {
+    private void handleProductSelect(HomeProduct homeProduct) {
         HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
                 HomeFragmentDirections.actionHomeFragmentToProductDetailFragment();
         action.setDocumentPath(homeProduct.getId());
