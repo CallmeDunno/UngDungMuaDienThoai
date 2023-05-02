@@ -29,7 +29,6 @@ public class SearchViewModel extends ViewModel {
     private MutableLiveData<List<ProductSearch>> listProductSearchLiveData;
     private MutableLiveData<List<String>> brandListLiveData;
     private List<ProductSearch> listProductSearch;
-    private String type;
 
     public SearchViewModel() {
         listProductSearchLiveData = new MutableLiveData<>();
@@ -185,7 +184,47 @@ public class SearchViewModel extends ViewModel {
         listProductSearchLiveData.setValue(sortedList);
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void typelaptop() {
+        List<ProductSearch> productList = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Products")
+                .whereEqualTo("type", "Laptop")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String id = doc.getId();
+                            String name = doc.toObject(ProductSearch.class).getName();
+                            String price = doc.toObject(ProductSearch.class).getPrice();
+                            String image = doc.toObject(ProductSearch.class).getImage();
+                            productList.add(new ProductSearch(id, name, price, image));
+                        }
+                        listProductSearchLiveData.postValue(productList);
+                    } else {
+                        Log.e("SearchViewModel", "Error fetching product list by brand", task.getException());
+                    }
+                });
     }
+    public void typesmartphone() {
+        List<ProductSearch> productList = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Products")
+                .whereEqualTo("type", "Smartphone")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String id = doc.getId();
+                            String name = doc.toObject(ProductSearch.class).getName();
+                            String price = doc.toObject(ProductSearch.class).getPrice();
+                            String image = doc.toObject(ProductSearch.class).getImage();
+                            productList.add(new ProductSearch(id, name, price, image));
+                        }
+                        listProductSearchLiveData.postValue(productList);
+                    } else {
+                        Log.e("SearchViewModel", "Error fetching product list by brand", task.getException());
+                    }
+                });
+    }
+
 }

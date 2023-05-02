@@ -86,4 +86,5 @@ public class LoginViewModel extends ViewModel {
         User user = userDatabase.getCurrentUser();
         return user;
     }
+
 }
