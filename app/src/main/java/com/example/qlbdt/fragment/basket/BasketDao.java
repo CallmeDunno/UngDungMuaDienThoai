@@ -13,7 +13,7 @@ import java.util.List;
 public interface BasketDao {
     @Query("Select * from Basket")
     List<Basket> getAllBasket();
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)//Insert gio hang
     void InsertBasket(Basket basket);
     @Update
     void UpdateBasket(Basket basket);
