@@ -26,8 +26,13 @@
     <string name="Weight">Weight</string>
     <string name="Description">Description</string>
     <string name="Price">Price</string>
+    <string name="Quantity">Quantity</string>
     <string name="Name">Name</string>
     <string name="Battery">Battery</string>
+    <string name="Notification">NOTIFICATION</string>
+    <string name="TotalMoney">Total money</string>
+    <string name="TimeToBuy">Time to Buy</string>
+    <string name="Repurchase">Repurchase</string>
 
     <string name="the_basket_is_empty">The Basket is Empty</string>
     <string name="total">Total:</string>

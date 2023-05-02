@@ -100,7 +100,6 @@ public class HomeFragment extends Fragment {
     private void initView() {
         initSlide();
         initRecycleView();
-
     }
 
     private void initRecycleView() {
@@ -119,7 +118,6 @@ public class HomeFragment extends Fragment {
         binding.rcvPhone.setAdapter(smartphoneAdapter);
         binding.rcvPc.setAdapter(laptopAdapter);
     }
-
 
     private void initSlide() {
         mListPhoto = getListPhoto();
@@ -176,9 +174,4 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
 }
