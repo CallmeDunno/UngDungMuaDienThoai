@@ -19,13 +19,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="15dp">
+        android:paddingTop="30dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar_QA"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@drawable/bg_circle_tutor"/>
+            android:background="@drawable/bg_circle_tutor"
+            android:layout_marginBottom="50dp"/>
 
         <View
             android:layout_width="match_parent"
@@ -62,9 +63,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Meo Meo"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_weight="1"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:background="@null"/>
     </LinearLayout>
 
     <View
@@ -105,7 +108,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_weight="1"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:background="@null"/>
     </LinearLayout>
 
     <View
@@ -138,7 +142,7 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/txtDOB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,7 +150,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_weight="1"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:background="@null"/>
     </LinearLayout>
 
     <View
@@ -187,7 +192,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_weight="1"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:background="@null"/>
     </LinearLayout>
 
     <View
@@ -219,6 +225,37 @@
             android:text="Sửa thông tin"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_button"
+        android:visibility="gone">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnHuy"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textAllCaps="false"
+            android:text="Hủy"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLuu"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/color_main"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textAllCaps="false"
+            android:text="Lưu"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 

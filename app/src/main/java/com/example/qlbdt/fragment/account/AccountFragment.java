@@ -1,11 +1,13 @@
 package com.example.qlbdt.fragment.account;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,14 +42,17 @@ import java.util.Map;
 public class AccountFragment extends Fragment {
 
     FragmentAccountBinding binding;
+
     List<User> users = new ArrayList<>();
     ProgressDialog progressDialog;
+
 
     UserDatabase userDatabase;
     FirebaseAuth mAuth;
     FirebaseUser fbUser;
     FirebaseFirestore firestore;
 
+    Calendar c;
     String id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,21 +72,54 @@ public class AccountFragment extends Fragment {
         setEditable(false);
         binding.txtEmail.setEnabled(false);
         initData();
+
+        binding.txtDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                c = Calendar.getInstance();
+                DatePickerDialog bdDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        binding.txtDOB.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
+                    }
+                }, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
+                bdDialog.show();
+            }
+        });
         binding.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setEditable(true);
+                binding.btnEdit.setVisibility(View.GONE);
+                binding.llButton.setVisibility(View.VISIBLE);
+            }
+        });
+        binding.btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.llButton.setVisibility(View.GONE);
+                binding.btnEdit.setVisibility(View.VISIBLE);
+                setEditable(false);
+                initView(users.get(0));
+            }
+        });
+        binding.btnLuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 String useremail = binding.txtEmail.getText().toString().trim();
                 String userphonenumber = binding.txtSDT.getText().toString().trim();
                 String userdob = binding.txtDOB.getText().toString().trim();
                 String useraddress = binding.txtAddress.getText().toString().trim();
                 updateUser(useremail, userphonenumber, userdob, useraddress);
+                binding.llButton.setVisibility(View.GONE);
+                binding.btnEdit.setVisibility(View.VISIBLE);
+                setEditable(false);
             }
         });
     }
      private void initData() {
         progressDialog.show();
-        users.clear();
+
          firestore.collection("Users")
                  .whereEqualTo("email", userDatabase.getCurrentUserName())
                  .get()
@@ -101,10 +140,7 @@ public class AccountFragment extends Fragment {
                              if(fbUser.getPhotoUrl() != null) {
                                  Glide.with(getContext()).load(fbUser.getPhotoUrl()).into(binding.avatarQA);
                              }
-                             binding.txtEmail.setText(users.get(0).getEmail());
-                             binding.txtDOB.setText(users.get(0).getDateOfBirth());
-                             binding.txtAddress.setText(users.get(0).getAddress());
-                             binding.txtSDT.setText(users.get(0).getPhonenumber());
+                             initView(users.get(0));
                              progressDialog.dismiss();
                          } else {
                              Log.d("oam-failed", "null");
@@ -123,9 +159,9 @@ public class AccountFragment extends Fragment {
                 .update(user)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
-                        Log.d("oam", "updated");
+                        Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                     } else {
-                        Log.d("oam", "unupdated");
+                        Toast.makeText(getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
      }
@@ -134,6 +170,13 @@ public class AccountFragment extends Fragment {
         binding.txtDOB.setEnabled(editable);
         binding.txtAddress.setEnabled(editable);
         binding.txtSDT.setEnabled(editable);
+     }
+
+     private void initView(User currentuser) {
+         binding.txtEmail.setText(currentuser.getEmail());
+         binding.txtDOB.setText(currentuser.getDateOfBirth());
+         binding.txtAddress.setText(currentuser.getAddress());
+         binding.txtSDT.setText(currentuser.getPhonenumber());
      }
 
 }
