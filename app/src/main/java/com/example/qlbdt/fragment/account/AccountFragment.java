@@ -37,18 +37,13 @@ import java.util.Map;
  */
 
 public class AccountFragment extends Fragment {
-
     FragmentAccountBinding binding;
-
     List<User> users = new ArrayList<>();
     ProgressDialog progressDialog;
-
-
     UserDatabase userDatabase;
     FirebaseAuth mAuth;
     FirebaseUser fbUser;
     FirebaseFirestore firestore;
-
     Calendar c;
     String id;
 
@@ -88,14 +83,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setEditable(true);
-                binding.btnEdit.setVisibility(View.GONE);
+                binding.btnEdit.setVisibility(View.INVISIBLE);
                 binding.llButton.setVisibility(View.VISIBLE);
             }
         });
         binding.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.llButton.setVisibility(View.GONE);
+                binding.llButton.setVisibility(View.INVISIBLE);
                 binding.btnEdit.setVisibility(View.VISIBLE);
                 setEditable(false);
                 initView(users.get(0));
@@ -109,7 +104,7 @@ public class AccountFragment extends Fragment {
                 String userdob = binding.txtDOB.getText().toString().trim();
                 String useraddress = binding.txtAddress.getText().toString().trim();
                 updateUser(useremail, userphonenumber, userdob, useraddress);
-                binding.llButton.setVisibility(View.GONE);
+                binding.llButton.setVisibility(View.INVISIBLE);
                 binding.btnEdit.setVisibility(View.VISIBLE);
                 setEditable(false);
             }
