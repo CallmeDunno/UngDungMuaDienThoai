@@ -12,18 +12,24 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.qlbdt.activity.HomeActivity;
 import com.example.qlbdt.database.UserDatabase;
+import com.example.qlbdt.fragment.home.HomeProduct;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class LoginViewModel extends ViewModel {
     ArrayList<String> usernames;
@@ -45,6 +51,7 @@ public class LoginViewModel extends ViewModel {
 
         userDatabase = new UserDatabase(context);
         usernames = userDatabase.getUserNamesList();
+        userDatabase.saveCurrentUserName(UserEmail);
 
         for(int i = 0; i < usernames.size(); i++)
         {
@@ -59,17 +66,20 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    public void setSignUpUser(String Useremail, String UserPassword) {
+    public void setSignUpUser(Context context, String Useremail, String UserPassword) {
         if (userMutableLiveData == null) {
             userMutableLiveData = new MutableLiveData<>();
         }
+        userDatabase = new UserDatabase(context);
         userMutableLiveData.setValue(new User(Useremail, UserPassword));
+        userDatabase.saveCurrentUserName(Useremail);
     }
 
-    public void setGoogleUser(String Useremail, String Userphonenumber) {
+    public void setGoogleUser(Context context, String Useremail, String Userphonenumber) {
         if (userMutableLiveData == null) {
             userMutableLiveData = new MutableLiveData<>();
         }
+        userDatabase = new UserDatabase(context);
         firestore.collection("Users")
                 .whereEqualTo("email", Useremail)
                 .get()
@@ -103,12 +113,34 @@ public class LoginViewModel extends ViewModel {
                     });
         }
         userMutableLiveData.setValue(new User(Useremail));
+        userDatabase.saveCurrentUserName(Useremail);
         }
 
-    public MutableLiveData<User> getUser() {
-        if (userMutableLiveData == null) {
-            userMutableLiveData = new MutableLiveData<>();
-        }
-        return userMutableLiveData;
+//    public User getCurrentUser(Context context) {
+//        userDatabase = new UserDatabase(context);
+//        List<User> users = new ArrayList<>();
+//        firestore.collection("Users")
+//                .whereEqualTo("email", userDatabase.getCurrentUserName())
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()) {
+//                        for (QueryDocumentSnapshot doc : task.getResult()) {
+//                            String email = doc.toObject(User.class).getEmail();
+//                            String phonenumber = doc.toObject(User.class).getPhonenumber();
+//                            String dob = doc.toObject(User.class).getDateOfBirth();
+//                            String address = doc.toObject(User.class).getAddress();
+//                            users.add(new User(email, phonenumber, dob, address));
+//                        }
+//
+//                    }
+//                }
+//                });
+//    }
+
+    public void clearUser(Context context) {
+        userDatabase = new UserDatabase(context);
+        userDatabase.clearCurrentUser();
     }
 }

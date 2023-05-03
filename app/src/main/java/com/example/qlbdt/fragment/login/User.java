@@ -9,6 +9,8 @@ public class User {
     private String address;
     private String password;
 
+    public User() {
+    }
 
     public User(String email, String password) {
         this.email = email;
@@ -27,10 +29,11 @@ public class User {
         this.password = password;
     }
 
+
     public User(String email, String phonenumber, String dateOfBirth, String address) {
         this.email = email;
         this.phonenumber = phonenumber;
-        DateOfBirth = dateOfBirth;
+        this.DateOfBirth = dateOfBirth;
         this.address = address;
     }
 

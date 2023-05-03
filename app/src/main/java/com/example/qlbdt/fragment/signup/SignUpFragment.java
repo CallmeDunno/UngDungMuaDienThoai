@@ -125,7 +125,7 @@ public class SignUpFragment extends Fragment {
                                         public void onSuccess(DocumentReference documentReference) {
                                             progressDialog.dismiss();
                                             Toast.makeText(getActivity(), "Signup successfully", Toast.LENGTH_SHORT).show();
-                                            loginViewModel.setSignUpUser(email, password);
+                                            loginViewModel.setSignUpUser(getContext(), email, password);
                                             Intent intent = new Intent(getActivity(), HomeActivity.class);
                                             startActivity(intent);
                                             getActivity().finish();

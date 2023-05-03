@@ -52,8 +52,6 @@ public class LogInFragment extends Fragment {
     ProgressDialog progressDialog;
     ArrayList<String> userNames = new ArrayList<>();
     UserDatabase userDatabase;
-
-
     private GoogleSignInClient client;
 
     @Override
@@ -209,7 +207,7 @@ public class LogInFragment extends Fragment {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if(task.isSuccessful()) {
-                        loginViewModel.setGoogleUser(task.getResult().getUser().getEmail(),
+                        loginViewModel.setGoogleUser(getContext(), task.getResult().getUser().getEmail(),
                                 task.getResult().getUser().getPhoneNumber());
                         Toast.makeText(getContext(), "successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getActivity(), HomeActivity.class));
