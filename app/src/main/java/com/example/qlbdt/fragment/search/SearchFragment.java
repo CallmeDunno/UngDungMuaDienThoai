@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -15,8 +17,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.qlbdt.R;
 import com.example.qlbdt.databinding.FragmentSearchBinding;
+import com.example.qlbdt.fragment.home.TypeProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
  * Tiến Dũng
  * MVVM + Firebase
  * Thiết kế giao diện
- * */
+ */
 
 public class SearchFragment extends Fragment {
 
@@ -33,16 +35,21 @@ public class SearchFragment extends Fragment {
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
     private Spinner sp_sort, sp_brand;
-    private ArrayList<String> sort, brand;
-    private  ArrayAdapter adapterSort, adapterBrand;
+    private ArrayList<String> sort, brand, type;
+    private ArrayAdapter adapterSort, adapterBrand, adaptertype;
     private SearchView sv_search;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentSearchBinding.inflate(inflater,container,false);
-        View view =binding.getRoot();
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         initUI();
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
@@ -54,8 +61,8 @@ public class SearchFragment extends Fragment {
                 productSearchAdapter.setData(productSearches);
             }
         });
-        sv_search = view.findViewById(R.id.sv_fragment_search);
-        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        binding.svFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchProducts(query);
@@ -69,23 +76,50 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        sp_sort = view.findViewById(R.id.sp_sort_fragment_search);
         sort();
-
-        sp_brand = view.findViewById(R.id.sp_brand_fragment_search);
         Brand();
+        type();
+    }
 
-        return view;
+    private void type() {
+        type = new ArrayList<>();
+        type.add("Type");
+        type.add(TypeProduct.Laptop.name());
+        type.add(TypeProduct.Smartphone.name());
+        adaptertype = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, type);
+        binding.spTypeFragmentSearch.setAdapter(adaptertype);
+
+        binding.spTypeFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        searchViewModel.typeProduct();
+                        break;
+                    case 1:
+                        searchViewModel.typeProduct(TypeProduct.Laptop.name());
+                        break;
+                    case 2:
+                        searchViewModel.typeProduct(TypeProduct.Smartphone.name());
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void sort() {
         sort = new ArrayList<>();
-        sort.add("Sắp xếp theo");
-        sort.add("Sắp xếp theo giá tăng dần");
-        sort.add("Sắp xếp theo giá giảm dần");
+        sort.add("Sort");
+        sort.add("Sort by price (asc)");
+        sort.add("Sort bu price (desc)");
         adapterSort = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sort);
-        sp_sort.setAdapter(adapterSort);
-        sp_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spSortFragmentSearch.setAdapter(adapterSort);
+        binding.spSortFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
@@ -107,9 +141,8 @@ public class SearchFragment extends Fragment {
         });
     }
 
-
     private void initUI() {
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         binding.rcvSearch.setLayoutManager(linearLayoutManager);
         productSearchAdapter = new ProductSearchAdapter(getContext(), new IRecyclerViewOnClick() {
             @Override
@@ -123,19 +156,20 @@ public class SearchFragment extends Fragment {
 
         binding.rcvSearch.setAdapter(productSearchAdapter);
     }
+
     private void Brand() {
         adapterBrand = new ArrayAdapter<>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        sp_brand.setAdapter(adapterBrand);
+        binding.spBrandFragmentSearch.setAdapter(adapterBrand);
         searchViewModel.getBrandListLiveData().observe(getViewLifecycleOwner(), brandList -> {
             adapterBrand.clear();
             adapterBrand.addAll(brandList);
 
         });
-        sp_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spBrandFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedBrand = (String) adapterBrand.getItem(i);
-                if (!selectedBrand.equals("Hãng")) {
+                if (!selectedBrand.equals("Brand")) {
                     searchViewModel.fetchProductByBrand(selectedBrand);
                 } else {
                     searchViewModel.fetchAllProducts();
@@ -149,9 +183,10 @@ public class SearchFragment extends Fragment {
         });
 
     }
-    private void searchProducts(String keyword) {
-        searchViewModel.fetchAllProducts();
 
+    private void searchProducts(String keyword) {
+        //Nếu muốn search all
+        //searchViewModel.fetchAllProducts();
         searchViewModel.getListProductSearchLiveData().observe(getViewLifecycleOwner(), new Observer<List<ProductSearch>>() {
             @Override
             public void onChanged(List<ProductSearch> productList) {
@@ -166,6 +201,5 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-
 
 }

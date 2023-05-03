@@ -50,9 +50,9 @@ public class HistoryAdapter extends ListAdapter<History, HistoryAdapter.HistoryV
             Glide.with(itemView.getContext()).load(history.getImage()).into(itemBinding.imgHistory);
             itemBinding.tvBrandHistory.setText(history.getBrand());
             itemBinding.tvNameHistory.setText(history.getName());
-            itemBinding.tvPriceHistory.setText(String.format("Price: %s", history.getPrice()));
+            itemBinding.tvPriceHistory.setText(String.format("Price: %s VND", history.getPrice()));
             itemBinding.tvQuantityHistory.setText(String.format("Quantity: %s", history.getQuantity()));
-            itemBinding.tvTotalHistory.setText(String.format("Total: %s", history.getTotalMoney()));
+            itemBinding.tvTotalHistory.setText(String.format("Total: %s VND", history.getTotalMoney()));
             itemBinding.tvTimeToBuyHistory.setText(String.format("Time to buy: %s", history.getTimeToBuy()));
             itemBinding.btnRepurchase.setOnClickListener(view -> iClickButtonHistory.onClickRepurchaseButton(history.getProductID()));
         }

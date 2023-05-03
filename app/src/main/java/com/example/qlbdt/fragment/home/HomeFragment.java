@@ -51,40 +51,19 @@ public class HomeFragment extends Fragment {
         initAction();
     }
 
-    private void initAction() {
-        binding.tvSeeMore1.setOnClickListener(view -> {
-            //TODO: Chuyển hướng đến trang điện thoại
-        });
-
-        binding.tvSeeMore2.setOnClickListener(view -> {
-            //TODO: Chuyển hướng đến trang Laptop
-        });
-
-        smartphoneAdapter.setOnClickItem(this::handlePhoneSelect);
-        laptopAdapter.setOnClickItem(this::handlePhoneSelect);
-    }
-
-    private void handlePhoneSelect(HomeProduct homeProduct) {
-        HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
-                HomeFragmentDirections.actionHomeFragmentToProductDetailFragment();
-        action.setDocumentPath(homeProduct.getId());
-        Navigation.findNavController(requireView()).navigate(action);
-    }
-
     private void initViewModel() {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getListHomeProductLiveData().observe(requireActivity(), productHomes -> {
             if (productHomes.size() == 0) {
                 progressDialog.show();
             } else {
-                progressDialog.dismiss();
                 List<HomeProduct> listSmartphone = new ArrayList<>();
                 List<HomeProduct> listLaptop = new ArrayList<>();
                 for (HomeProduct p : productHomes) {
-                    if (p.getType().equals("Smartphone") && listSmartphone.size() < 5) {
+                    if (p.getType().equals(TypeProduct.Smartphone.toString()) && listSmartphone.size() < 5) {
                         listSmartphone.add(p);
                     }
-                    if (p.getType().equals("Laptop") && listLaptop.size() < 5) {
+                    if (p.getType().equals(TypeProduct.Laptop.toString()) && listLaptop.size() < 5) {
                         listLaptop.add(p);
                     }
                     if (listSmartphone.size() == 5 && listLaptop.size() == 5) {
@@ -93,6 +72,7 @@ public class HomeFragment extends Fragment {
                 }
                 smartphoneAdapter.submitList(listSmartphone);
                 laptopAdapter.submitList(listLaptop);
+                progressDialog.dismiss();
             }
         });
     }
@@ -126,6 +106,25 @@ public class HomeFragment extends Fragment {
         binding.circleIndicator.setViewPager(binding.viewpager);
         photoAdapter.registerDataSetObserver(binding.circleIndicator.getDataSetObserver());
         autoSlideImages();
+    }
+
+    private void initAction() {
+        binding.tvSeeMore1.setOnClickListener(this::handleGoToSearch);
+        binding.tvSeeMore2.setOnClickListener(this::handleGoToSearch);
+
+        smartphoneAdapter.setOnClickItem(this::handleProductSelect);
+        laptopAdapter.setOnClickItem(this::handleProductSelect);
+    }
+
+    private void handleGoToSearch(View view) {
+        Navigation.findNavController(view).navigate(R.id.searchFragment);
+    }
+
+    private void handleProductSelect(HomeProduct homeProduct) {
+        HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
+                HomeFragmentDirections.actionHomeFragmentToProductDetailFragment();
+        action.setDocumentPath(homeProduct.getId());
+        Navigation.findNavController(requireView()).navigate(action);
     }
 
     private List<Photo> getListPhoto() {

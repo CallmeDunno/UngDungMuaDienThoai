@@ -137,4 +137,5 @@ public class LoginViewModel extends ViewModel {
         userDatabase = new UserDatabase(context);
         userDatabase.clearCurrentUser();
     }
+
 }
