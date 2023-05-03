@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".fragment.account.AccountFragment"
-    android:background="@color/white">
+    tools:context=".fragment.account.AccountFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +18,8 @@
             android:id="@+id/avatar_QA"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@drawable/bg_circle_tutor"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/bg_circle_tutor" />
 
         <View
             android:layout_width="match_parent"
@@ -55,12 +55,12 @@
             android:id="@+id/txtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meo Meo"
-            android:textSize="16sp"
-            android:textColor="@color/black"
             android:layout_weight="1"
+            android:background="@null"
             android:gravity="end"
-            android:background="@null"/>
+            android:text="Meo Meo"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
@@ -70,6 +70,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:background="@android:color/darker_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,12 +98,12 @@
             android:id="@+id/txtSDT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="end"
             android:text="Meo Meo"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:background="@null"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
@@ -125,7 +126,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_person"/>
+            android:src="@drawable/ic_person" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,12 +140,12 @@
             android:id="@+id/txtDOB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="end"
             android:text="Meo Meo"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:background="@null"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
@@ -181,12 +182,12 @@
             android:id="@+id/txtAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="end"
             android:text="Meo Meo"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:background="@null"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
@@ -197,58 +198,65 @@
         android:layout_marginRight="15dp"
         android:background="@android:color/darker_gray" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btnEdit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/btn_selector"
             android:drawableStart="@drawable/ic_edit"
             android:gravity="center"
             android:padding="10dp"
-            android:textAllCaps="false"
             android:text="Sửa thông tin"
+            android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="90dp"
+            android:visibility="invisible">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ll_button"
-        android:visibility="gone">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnHuy"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textAllCaps="false"
-            android:text="Hủy"
-            android:textColor="@color/black"
-            android:textSize="18sp"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLuu"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/color_main"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textAllCaps="false"
-            android:text="Lưu"
-            android:textColor="@color/black"
-            android:textSize="18sp"/>
+            <Button
+                android:id="@+id/btnHuy"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector2"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Hủy"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnLuu"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Lưu"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>
