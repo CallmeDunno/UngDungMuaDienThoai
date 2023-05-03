@@ -43,7 +43,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
         }
         Glide.with(context).load(productSearch.getImage()).into(holder.itemBinding.imagesearch);
         holder.itemBinding.tvSearchPhone.setText(productSearch.getName());
-        holder.itemBinding.tvSearchPrice.setText(productSearch.getPrice());
+        holder.itemBinding.tvSearchPrice.setText(String.format("%s VND", productSearch.getPrice()));
         holder.itemBinding.cvFragmentSearch.setOnClickListener(view -> iRecyclerViewOnClick.onClickItem(productSearch));
     }
 

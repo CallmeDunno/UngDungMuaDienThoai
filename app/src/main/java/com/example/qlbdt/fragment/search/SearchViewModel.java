@@ -54,7 +54,7 @@ public class SearchViewModel extends ViewModel {
                         }
                         brandList.addAll(brandSet);
                         Collections.sort(brandList);
-                        brandList.add(0, "Hãng");
+                        brandList.add(0, "Brand");
                         brandListLiveData.setValue(brandList);
                     } else {
                         Log.e("SearchViewModel", "Error fetching brand list", task.getException());
@@ -145,7 +145,6 @@ public class SearchViewModel extends ViewModel {
                 });
     }
 
-
     public void sortProductListByAscendingPrice() {
         List<ProductSearch> sortedList = new ArrayList<>(listProductSearch);
         Collections.sort(sortedList, new Comparator<ProductSearch>() {
@@ -184,16 +183,17 @@ public class SearchViewModel extends ViewModel {
         listProductSearchLiveData.setValue(sortedList);
     }
 
-    public void typelaptop() {
+    public void typeProduct(String type) {
         List<ProductSearch> productList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Laptop")
+                .whereEqualTo("type", type)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc : task.getResult()) {
                             String id = doc.getId();
+                            Log.e("Dunno", id);
                             String name = doc.toObject(ProductSearch.class).getName();
                             String price = doc.toObject(ProductSearch.class).getPrice();
                             String image = doc.toObject(ProductSearch.class).getImage();
@@ -204,12 +204,13 @@ public class SearchViewModel extends ViewModel {
                         Log.e("SearchViewModel", "Error fetching product list by brand", task.getException());
                     }
                 });
+        listProductSearchLiveData.setValue(productList);
     }
-    public void typesmartphone() {
+
+    public void typeProduct() {
         List<ProductSearch> productList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
