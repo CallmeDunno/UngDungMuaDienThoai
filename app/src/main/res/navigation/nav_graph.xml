@@ -51,10 +51,6 @@
         <action
             android:id="@+id/action_searchFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
-        <argument
-            android:name="typeProduct"
-            app:argType="string"
-            android:defaultValue="None" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"

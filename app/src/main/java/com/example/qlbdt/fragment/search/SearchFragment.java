@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -16,6 +18,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.databinding.FragmentSearchBinding;
+import com.example.qlbdt.fragment.home.TypeProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ import java.util.List;
  * Tiến Dũng
  * MVVM + Firebase
  * Thiết kế giao diện
- * */
+ */
 
 public class SearchFragment extends Fragment {
 
@@ -32,16 +35,21 @@ public class SearchFragment extends Fragment {
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
     private Spinner sp_sort, sp_brand;
-    private ArrayList<String> sort, brand,type;
-    private  ArrayAdapter adapterSort, adapterBrand,adaptertype;
+    private ArrayList<String> sort, brand, type;
+    private ArrayAdapter adapterSort, adapterBrand, adaptertype;
     private SearchView sv_search;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentSearchBinding.inflate(inflater,container,false);
-        View view =binding.getRoot();
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         initUI();
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
@@ -53,6 +61,7 @@ public class SearchFragment extends Fragment {
                 productSearchAdapter.setData(productSearches);
             }
         });
+
         binding.svFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -69,30 +78,29 @@ public class SearchFragment extends Fragment {
 
         sort();
         Brand();
-        type(getArguments());
-
-        return view;
+        type();
     }
 
-    private void type(Bundle arguments) {
-        String strType = SearchFragmentArgs.fromBundle(arguments).getTypeProduct();
+    private void type() {
         type = new ArrayList<>();
-        type.add("loại");
-        type.add("Máy Tính");
-        type.add("Điện Thoại");
+        type.add("Type");
+        type.add(TypeProduct.Laptop.name());
+        type.add(TypeProduct.Smartphone.name());
         adaptertype = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, type);
         binding.spTypeFragmentSearch.setAdapter(adaptertype);
+
         binding.spTypeFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
+                        searchViewModel.typeProduct();
                         break;
                     case 1:
-                        searchViewModel.typelaptop();
+                        searchViewModel.typeProduct(TypeProduct.Laptop.name());
                         break;
                     case 2:
-                        searchViewModel.typesmartphone();
+                        searchViewModel.typeProduct(TypeProduct.Smartphone.name());
                         break;
                 }
             }
@@ -104,12 +112,11 @@ public class SearchFragment extends Fragment {
         });
     }
 
-
     private void sort() {
         sort = new ArrayList<>();
-        sort.add("Sắp xếp theo");
-        sort.add("Sắp xếp theo giá tăng dần");
-        sort.add("Sắp xếp theo giá giảm dần");
+        sort.add("Sort");
+        sort.add("Sort by price (asc)");
+        sort.add("Sort bu price (desc)");
         adapterSort = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sort);
         binding.spSortFragmentSearch.setAdapter(adapterSort);
         binding.spSortFragmentSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -134,9 +141,8 @@ public class SearchFragment extends Fragment {
         });
     }
 
-
     private void initUI() {
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         binding.rcvSearch.setLayoutManager(linearLayoutManager);
         productSearchAdapter = new ProductSearchAdapter(getContext(), new IRecyclerViewOnClick() {
             @Override
@@ -150,6 +156,7 @@ public class SearchFragment extends Fragment {
 
         binding.rcvSearch.setAdapter(productSearchAdapter);
     }
+
     private void Brand() {
         adapterBrand = new ArrayAdapter<>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         binding.spBrandFragmentSearch.setAdapter(adapterBrand);
@@ -162,7 +169,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedBrand = (String) adapterBrand.getItem(i);
-                if (!selectedBrand.equals("Hãng")) {
+                if (!selectedBrand.equals("Brand")) {
                     searchViewModel.fetchProductByBrand(selectedBrand);
                 } else {
                     searchViewModel.fetchAllProducts();
@@ -176,6 +183,7 @@ public class SearchFragment extends Fragment {
         });
 
     }
+
     private void searchProducts(String keyword) {
         //Nếu muốn search all
         //searchViewModel.fetchAllProducts();
@@ -192,11 +200,6 @@ public class SearchFragment extends Fragment {
                 productSearchAdapter.setData(filteredList);
             }
         });
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-
     }
 
 }
