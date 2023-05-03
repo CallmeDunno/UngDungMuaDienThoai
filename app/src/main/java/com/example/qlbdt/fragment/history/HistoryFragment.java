@@ -1,6 +1,5 @@
 package com.example.qlbdt.fragment.history;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,6 @@ public class HistoryFragment extends Fragment {
     private HistoryAdapter historyAdapter;
     private HistoryViewModel historyViewModel;
     private FragmentHistoryBinding binding;
-    private ProgressDialog progressDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,25 +62,20 @@ public class HistoryFragment extends Fragment {
 
     private void initViewModel() {
         historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
-        String userID = SplashScreenActivity.userDatabase.getString("username", "");
+        String userID = SplashScreenActivity.userDatabase.getString("currentUser", "");
         historyViewModel.setUserID(userID);
         historyViewModel.getLstHistoryLiveData().observe(requireActivity(), new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
-                if (histories.size() == 0){
-                    progressDialog.show();
-                } else {
+                if (histories.size() != 0){
                     Collections.sort(histories, new History.SortByDateTime());
                     historyAdapter.submitList(histories);
-                    progressDialog.dismiss();
                 }
             }
         });
     }
 
     private void initView() {
-        progressDialog = new ProgressDialog(requireContext());
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         binding.rcvHistory.setLayoutManager(linearLayoutManager);
 

@@ -32,9 +32,9 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void initAction() {
         new Handler().postDelayed(() -> {
-            String username = userDatabase.getString("username", null);
-            if (username != null){
-                Toast.makeText(SplashScreenActivity.this, "Welcome, " + username, Toast.LENGTH_SHORT).show();
+            String currentUser = userDatabase.getString("currentUser", null);
+            if (currentUser != null){
+                Toast.makeText(SplashScreenActivity.this, "Welcome, " + currentUser, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
             } else {
                 startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));

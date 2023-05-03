@@ -24,17 +24,16 @@
         </activity>
         <activity
             android:name=".activity.SplashScreenActivity"
-            android:exported="false">
-
-        </activity>
-        <activity
-            android:name=".activity.HomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:exported="false" >
         </activity>
     </application>
 

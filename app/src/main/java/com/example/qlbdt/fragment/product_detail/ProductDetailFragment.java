@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,7 +136,7 @@ public class ProductDetailFragment extends Fragment {
         });
 
         btn_yes.setOnClickListener(view -> {
-            String userID = SplashScreenActivity.userDatabase.getString("username", "");
+            String userID = SplashScreenActivity.userDatabase.getString("currentUser", "");
             int quantity = Integer.parseInt(tv_quantity.getText().toString().trim());
             String status = productDetailViewModel.pushHistory(userID, homeProduct, quantity);
             dialog.dismiss();
