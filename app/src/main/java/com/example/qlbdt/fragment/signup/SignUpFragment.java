@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,88 +105,74 @@ public class SignUpFragment extends Fragment {
         String address = binding.edtAddress.getText().toString().trim();
         String password = binding.edtPassword.getText().toString().trim();
         String repassword = binding.edtRepassword.getText().toString().trim();
+        if(isValidated(email, password, phonenumber, address, dob))
+        {
         if(password.contentEquals(repassword)) {
-            loginViewModel.setUser(email, phonenumber, dob, address, password);
-
             Map<String, Object> user = new HashMap<>();
             user.put("email", email);
             user.put("password", password);
             user.put("phonenumber", phonenumber);
-            user.put("dob", dob);
+            user.put("DateOfBirth", dob);
             user.put("address", address);
-            loginViewModel.getUser().observe(this, new Observer<User>() {
-                @Override
-                public void onChanged(User user) {
-                    if(isValidated(user)) {
-                        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
-                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                    @Override
-                                    public void onSuccess(AuthResult authResult) {
-                                        firestore.collection("Users")
-                                                .add(user)
-                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                    @Override
-                                                    public void onSuccess(DocumentReference documentReference) {
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(getActivity(), "Signup successfully", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                                        startActivity(intent);
-                                                        getActivity().finish();
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(getActivity(), "Signup failed", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    } else {
-                        Toast.makeText(getActivity(), "Check your information", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            firestore.collection("Users")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getActivity(), "Signup successfully", Toast.LENGTH_SHORT).show();
+                                            loginViewModel.setSignUpUser(getContext(), email, password);
+                                            Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                            startActivity(intent);
+                                            getActivity().finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getActivity(), "Signup failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    });
         }
-        else {
-            binding.edtRepassword.setError("invalid");
+                else {
+                    binding.edtRepassword.setError("invalid");
+                }
         }
         progressDialog.dismiss();
     }
-    private boolean isValidated(User user) {
-        if(TextUtils.isEmpty(user.getEmail())) {
+    private boolean isValidated(String email, String password, String phonenumber, String address, String dob) {
+        if(TextUtils.isEmpty(email)) {
             binding.edtEmail.setError("Email is empty");
             return false;
         }
-        if(TextUtils.isEmpty(user.getPassword())) {
+        if(TextUtils.isEmpty(password)) {
             binding.edtPassword.setError("Password is empty");
             return false;
         }
-        if(TextUtils.isEmpty(user.getPhonenumber())) {
+        if(TextUtils.isEmpty(phonenumber)) {
             binding.edtPhonenumber.setError("Phonenumber is empty");
             return false;
         }
-        if(TextUtils.isEmpty(user.getAddress())) {
+        if(TextUtils.isEmpty(address)) {
             binding.edtAddress.setError("Address is empty");
             return false;
         }
-        if(TextUtils.isEmpty(user.getDateOfBirth())) {
+        if(TextUtils.isEmpty(dob)) {
             binding.txtDOB.setError("DOB is empty");
             return false;
         }
-        if(!user.isEmailValid()) {
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.edtEmail.setError("Email is invalid");
             return false;
         }
-        if(!user.isPasswordLengthGreaterThan5()) {
+        if(password.length() < 6) {
             binding.edtPassword.setError("Password is invalid");
             return false;
         }

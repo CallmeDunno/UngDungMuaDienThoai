@@ -19,23 +19,24 @@ public class UserDatabase {
         gson = new Gson();
     }
 
+    //Lưu tên người dùng đăng nhập
     public void saveUserNames(ArrayList<String> users) {
         SharedPreferences.Editor editor = userDatabase.edit();
         editor.putString("username", gson.toJson(users));
         editor.apply();
     }
 
-    public void setCurrentUser(User user) {
+
+    //Lưu tên của người dùng hiện tại
+    public void saveCurrentUserName(String Useremail) {
         SharedPreferences.Editor editor = userDatabase.edit();
-        String JsonUser = gson.toJson(user);
-        editor.putString("user", JsonUser);
+        editor.putString("currentUser", Useremail);
         editor.apply();
     }
 
-    public User getCurrentUser() {
-        SharedPreferences.Editor editor = userDatabase.edit();
-        User user = gson.fromJson("user", User.class);
-        return user;
+    public String getCurrentUserName() {
+        String Useremail = userDatabase.getString("currentUser", null);
+        return Useremail;
     }
 
     public ArrayList<String> getUserNamesList() {
@@ -45,6 +46,12 @@ public class UserDatabase {
 
         if (userList != null) return userList;
         else return new ArrayList<>();
+    }
+
+    public void clearCurrentUser() {
+        SharedPreferences.Editor editor = userDatabase.edit();
+        editor.putString("currentUser", null);
+        editor.apply();
     }
 
 }

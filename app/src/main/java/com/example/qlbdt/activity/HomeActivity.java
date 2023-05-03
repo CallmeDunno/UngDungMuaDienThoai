@@ -3,6 +3,7 @@ package com.example.qlbdt.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,17 +15,24 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.database.UserDatabase;
 import com.example.qlbdt.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private NavController navController;
-
+    private UserDatabase userDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        userDatabase = new UserDatabase(this);
+        if(userDatabase.getCurrentUserName() == null) {
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        } else {
+            Log.d("oam", userDatabase.getCurrentUserName());
+        }
 
         setSupportActionBar(binding.navToolbar);
 
