@@ -13,13 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.qlbdt.R;
 import com.example.qlbdt.database.UserDatabase;
 import com.example.qlbdt.databinding.FragmentAccountBinding;
-import com.example.qlbdt.fragment.login.LoginViewModel;
 import com.example.qlbdt.fragment.login.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +34,7 @@ import java.util.Map;
 
 /**
  * Tiến Dũng
- * */
+ */
 
 public class AccountFragment extends Fragment {
 
@@ -54,6 +51,7 @@ public class AccountFragment extends Fragment {
 
     Calendar c;
     String id;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -117,66 +115,68 @@ public class AccountFragment extends Fragment {
             }
         });
     }
-     private void initData() {
-        progressDialog.show();
 
-         firestore.collection("Users")
-                 .whereEqualTo("email", userDatabase.getCurrentUserName())
-                 .get()
-                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                     @Override
-                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                         if(task.isSuccessful()) {
-                             for (QueryDocumentSnapshot doc : task.getResult()) {
-                                 String email = doc.toObject(User.class).getEmail();
-                                 String phonenumber = doc.toObject(User.class).getPhonenumber();
-                                 String dob = doc.toObject(User.class).getDateOfBirth();
-                                 String address = doc.toObject(User.class).getAddress();
-                                 users.add(new User(email, phonenumber, dob, address));
-                                 id = doc.getId();
-                                 Log.d("oam", doc.getId());
-                             }
-                             Log.d("oam", String.valueOf(users.isEmpty()));
-                             if(fbUser.getPhotoUrl() != null) {
-                                 Glide.with(getContext()).load(fbUser.getPhotoUrl()).into(binding.avatarQA);
-                             }
-                             initView(users.get(0));
-                             progressDialog.dismiss();
-                         } else {
-                             Log.d("oam-failed", "null");
-                         }
-                     }
-                 });
-     }
-     private void updateUser(String Useremail, String Userphonenumber, String Userdob, String Useraddress) {
-         Map<String, Object> user = new HashMap<>();
-         user.put("email", Useremail);
-         user.put("phonenumber", Userphonenumber);
-         user.put("DateOfBirth", Userdob);
-         user.put("address", Useraddress);
+    private void initData() {
+        progressDialog.show();
+        users.clear();
+        firestore.collection("Users")
+                .whereEqualTo("email", userDatabase.getCurrentUserName())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                String email = doc.toObject(User.class).getEmail();
+                                String phonenumber = doc.toObject(User.class).getPhonenumber();
+                                String dob = doc.toObject(User.class).getDateOfBirth();
+                                String address = doc.toObject(User.class).getAddress();
+                                users.add(new User(email, phonenumber, dob, address));
+                                id = doc.getId();
+                                Log.d("oam", doc.getId());
+                            }
+                            Log.d("oam", String.valueOf(users.isEmpty()));
+                            if (fbUser.getPhotoUrl() != null) {
+                                Glide.with(getContext()).load(fbUser.getPhotoUrl()).into(binding.avatarQA);
+                            }
+                            initView(users.get(0));
+                            progressDialog.dismiss();
+                        } else {
+                            Log.d("oam-failed", "null");
+                        }
+                    }
+                });
+    }
+
+    private void updateUser(String Useremail, String Userphonenumber, String Userdob, String Useraddress) {
+        Map<String, Object> user = new HashMap<>();
+        user.put("email", Useremail);
+        user.put("phonenumber", Userphonenumber);
+        user.put("DateOfBirth", Userdob);
+        user.put("address", Useraddress);
         firestore.collection("Users")
                 .document(id)
                 .update(user)
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
-     }
+    }
 
-     private void setEditable(boolean editable) {
+    private void setEditable(boolean editable) {
         binding.txtDOB.setEnabled(editable);
         binding.txtAddress.setEnabled(editable);
         binding.txtSDT.setEnabled(editable);
-     }
+    }
 
-     private void initView(User currentuser) {
-         binding.txtEmail.setText(currentuser.getEmail());
-         binding.txtDOB.setText(currentuser.getDateOfBirth());
-         binding.txtAddress.setText(currentuser.getAddress());
-         binding.txtSDT.setText(currentuser.getPhonenumber());
-     }
+    private void initView(User currentuser) {
+        binding.txtEmail.setText(currentuser.getEmail());
+        binding.txtDOB.setText(currentuser.getDateOfBirth());
+        binding.txtAddress.setText(currentuser.getAddress());
+        binding.txtSDT.setText(currentuser.getPhonenumber());
+    }
 
 }

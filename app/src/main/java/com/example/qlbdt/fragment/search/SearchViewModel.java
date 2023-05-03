@@ -193,7 +193,6 @@ public class SearchViewModel extends ViewModel {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc : task.getResult()) {
                             String id = doc.getId();
-                            Log.e("Dunno", id);
                             String name = doc.toObject(ProductSearch.class).getName();
                             String price = doc.toObject(ProductSearch.class).getPrice();
                             String image = doc.toObject(ProductSearch.class).getImage();
