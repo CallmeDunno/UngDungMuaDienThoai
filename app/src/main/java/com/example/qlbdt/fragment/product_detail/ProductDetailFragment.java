@@ -1,7 +1,5 @@
 package com.example.qlbdt.fragment.product_detail;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -27,14 +25,9 @@ import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
 import com.example.qlbdt.activity.SplashScreenActivity;
 import com.example.qlbdt.databinding.FragmentProductDetailBinding;
-import com.example.qlbdt.fragment.basket.Basket;
-import com.example.qlbdt.fragment.basket.BasketDatabase;
 import com.example.qlbdt.fragment.history.History;
 import com.example.qlbdt.fragment.home.HomeProduct;
-import com.example.qlbdt.other.FCMSend;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.example.qlbdt.other.FCM;
 
 import java.text.MessageFormat;
 
@@ -158,19 +151,13 @@ public class ProductDetailFragment extends Fragment {
             int quantity = Integer.parseInt(tv_quantity.getText().toString().trim());
             if (key.equals("Buy")) {
                 productDetailViewModel.pushHistory(userID, homeProduct, quantity);
+                Toast.makeText(requireContext(), "Buy products successfully! ", Toast.LENGTH_SHORT).show();
             } else {
-                Basket basket = new Basket(homeProduct.getId(),
-                        userID,
-                        homeProduct.getName(),
-                        homeProduct.getPrice(),
-                        quantity,
-                        homeProduct.getImage(),
-                        homeProduct.getBrand());
-                BasketDatabase.getInstance(requireContext()).basketDao().InsertBasket(basket);
-                Toast.makeText(requireContext(), "Add to your cart successfully!", Toast.LENGTH_SHORT).show();
+                productDetailViewModel.addToCart(requireContext(), userID, homeProduct, quantity);
+                Toast.makeText(requireContext(), "Add products to your cart successfully!", Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();
-            FCM();
+            FCM.FCM(requireContext());
         });
 
         btn_no.setOnClickListener(view -> dialog.dismiss());
@@ -178,23 +165,5 @@ public class ProductDetailFragment extends Fragment {
         dialog.show();
     }
 
-    private void FCM(){
-        // getToken
-        FirebaseMessaging.getInstance().getToken()
-            .addOnCompleteListener(new OnCompleteListener<String>() {
-                @Override
-                public void onComplete(@NonNull Task<String> task) {
-                    if (!task.isSuccessful()) {
-                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                        return;
-                    }
-                    // Get new FCM registration token
-                    String token = task.getResult();
-                    //Send
-                    String title = "Thông báo";
-                    String message = "Mua hàng thành công";
-                    FCMSend.pushNotification(view.getContext(),token,title,message);
-                }
-            });
-    }
+
 }

@@ -2,8 +2,6 @@ package com.example.qlbdt.fragment.basket;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +10,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.qlbdt.R;
 import com.example.qlbdt.activity.SplashScreenActivity;
 import com.example.qlbdt.databinding.FragmentBasketBinding;
 import com.example.qlbdt.fragment.home.HomeProduct;
 import com.example.qlbdt.fragment.product_detail.ProductDetailViewModel;
-import com.example.qlbdt.other.Notification;
+import com.example.qlbdt.other.FCM;
 
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,12 +35,14 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     private ProductDetailViewModel productDetailViewModel;
     private BasketAdapter basketAdapter;
     private FragmentBasketBinding binding;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentBasketBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -68,12 +65,13 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
             String userID = SplashScreenActivity.userDatabase.getString("currentUser", "");
             List<Basket> baskets = BasketDatabase.getInstance(requireContext()).basketDao().findBasketWithEmail(userID);
-            for (Basket b : baskets){
+            for (Basket b : baskets) {
                 HomeProduct homeProduct = new HomeProduct(b.getId(), b.getBasketname(), b.getPrice(), b.getBasketimg(), b.getBasketbrandName());
                 productDetailViewModel.pushHistory(userID, homeProduct, b.getNumberOrder());
                 viewmodel.Deletebasket(b);
             }
             Toast.makeText(requireContext(), "Buy successfully", Toast.LENGTH_SHORT).show();
+            FCM.FCM(requireContext());
         });
         dialog.setNegativeButton("No", (dialogInterface, i) -> {
 
@@ -85,17 +83,29 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     @SuppressLint("SetTextI18n")
     private void initRecycleView() {
         binding.listviewgiohang.setLayoutManager(new LinearLayoutManager(getActivity()));
-        basketAdapter = new BasketAdapter(getContext(), this);
+        basketAdapter = new BasketAdapter(getContext(), this, new IClickItemBasket() {
+            @Override
+            public void onClickItemBasket(String id) {
+                handleSelectItem(id);
+            }
+        });
         binding.listviewgiohang.setAdapter(basketAdapter);
-        List<Basket> baskets= BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
-        if(baskets.size() == 0){
+        List<Basket> baskets = BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
+        if (baskets.size() == 0) {
             binding.txttongtien.setText("O VND");
-        }
-        else{
-            basketAdapter.setBasketlist(baskets);;
+        } else {
+            basketAdapter.setBasketlist(baskets);
+            ;
             EvenUltil(baskets);
         }
 
+    }
+
+    private void handleSelectItem(String id) {
+        BasketFragmentDirections.ActionBasketFragmentToProductDetailFragment action =
+                BasketFragmentDirections.actionBasketFragmentToProductDetailFragment();
+        action.setDocumentPath(id);
+        Navigation.findNavController(requireView()).navigate(action);
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,7 +115,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         viewmodel = new ViewModelProvider(this).get(BasketViewmodel.class);
         viewmodel.getListofbasketobserver().observe(getViewLifecycleOwner(), baskets -> {
 
-            if (baskets==null) {
+            if (baskets == null) {
                 binding.txttongtien.setText("O VND");
             } else {
                 basketAdapter.setBasketlist(baskets);
@@ -124,30 +134,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         binding.txttongtien.setText(String.format("%sVND", decimalFormat.format(tongtien)));
     }
 
-    //TODO: KHÔNG XÓA 2 HÀM BÊN DƯỚI
-    private void SendNoti(String name) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_logo_app);
-        String content = "Chúc mừng bạn đã mua thành công điện thoại " + name;
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(getActivity(), Notification.CHANNEL_ID)
-                .setContentTitle("Thông báo")
-                .setContentText(content)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
-                .setSmallIcon(R.drawable.ic_smartphone)
-                .setLargeIcon(bitmap);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getActivity());
-
-        notificationManager.notify(GetTimeNoti(), notification.build());
-
-    }
-
-    //gửi noti nhiều lần
-    private int GetTimeNoti() {
-        return (int) new Date().getTime();
-    }
-
     @Override
-
     public void btntangclick(Basket basket) {
 
         int sl = basket.getNumberOrder();
@@ -169,7 +156,6 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
 
 
     @Override
-
     public void btngiamclick(Basket basket) {
 
         int sl = basket.getNumberOrder();
@@ -200,15 +186,15 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         });
         builder.show();
     }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onResume() {
         super.onResume();
-        List<Basket> baskets= BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
-        if(baskets.size() == 0){
+        List<Basket> baskets = BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
+        if (baskets.size() == 0) {
             binding.txttongtien.setText("O VND");
-        }
-        else{
+        } else {
             basketAdapter.setBasketlist(baskets);
             EvenUltil(baskets);
         }
