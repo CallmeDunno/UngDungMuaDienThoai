@@ -1,5 +1,7 @@
 package com.example.qlbdt.fragment.product_detail;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -29,6 +31,10 @@ import com.example.qlbdt.fragment.basket.Basket;
 import com.example.qlbdt.fragment.basket.BasketDatabase;
 import com.example.qlbdt.fragment.history.History;
 import com.example.qlbdt.fragment.home.HomeProduct;
+import com.example.qlbdt.other.FCMSend;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.MessageFormat;
 
@@ -43,11 +49,13 @@ public class ProductDetailFragment extends Fragment {
     private ProgressDialog progressDialog;
     private ProductDetailViewModel productDetailViewModel;
     private HomeProduct homeProduct = null;
+    private View view;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
+        view = binding.getRoot();
         return binding.getRoot();
     }
 
@@ -162,10 +170,31 @@ public class ProductDetailFragment extends Fragment {
                 Toast.makeText(requireContext(), "Add to your cart successfully!", Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();
+            FCM();
         });
 
         btn_no.setOnClickListener(view -> dialog.dismiss());
         
         dialog.show();
+    }
+
+    private void FCM(){
+        // getToken
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+                    // Get new FCM registration token
+                    String token = task.getResult();
+                    //Send
+                    String title = "Thông báo";
+                    String message = "Mua hàng thành công";
+                    FCMSend.pushNotification(view.getContext(),token,title,message);
+                }
+            });
     }
 }
