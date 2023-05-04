@@ -19,7 +19,7 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
     private final Context context;
     private List<Basket> baskets;
     private final HandleBasketClick click;
-    private IClickItemBasket iClickItemBasket;
+    private final IClickItemBasket iClickItemBasket;
 
     public BasketAdapter(Context context, HandleBasketClick click, IClickItemBasket iClickItemBasket){
         this.context=context;
@@ -27,7 +27,7 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
         this.iClickItemBasket = iClickItemBasket;
     }
     @SuppressLint("NotifyDataSetChanged")
-    public void setBasketlist(List<Basket> baskets){
+    public void setBasketList(List<Basket> baskets){
         this.baskets=baskets;
         notifyDataSetChanged();
     }
@@ -41,16 +41,12 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Glide.with(context).load(this.baskets.get(position).getBasketimg()).into(holder.binding.imagegiohang);
-        holder.binding.imagegiohang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                iClickItemBasket.onClickItemBasket(baskets.get(position).getId());
-            }
-        });
-        holder.binding.tenspgh.setText(this.baskets.get(position).getBasketname());
+        Glide.with(context).load(this.baskets.get(position).getBasketImg()).into(holder.binding.imagegiohang);
+        holder.binding.imagegiohang.setOnClickListener(view -> iClickItemBasket.onClickItemBasket(baskets.get(position).getId()));
+        holder.binding.tenspgh.setText(this.baskets.get(position).getBasketName());
+        holder.binding.tvBrandCart.setText(this.baskets.get(position).getBrandName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.binding.giagh.setText(decimalFormat.format(this.baskets.get(position).getBasketprice()) + "Đ");
+        holder.binding.giagh.setText(decimalFormat.format(this.baskets.get(position).getBasketPrice()) + "Đ");
         holder.binding.btnvalue.setText(String.valueOf(this.baskets.get(position).getNumberOrder()));
         int sl = Integer.parseInt(holder.binding.btnvalue.getText().toString());
         if(sl >= 10){
@@ -62,9 +58,9 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
             holder.binding.btntangsp.setVisibility(View.VISIBLE);
             holder.binding.btgiamsp.setVisibility(View.VISIBLE);
         }
-        holder.binding.btgiamsp.setOnClickListener(view -> click.btngiamclick(baskets.get(position)));
-        holder.binding.btntangsp.setOnClickListener(view -> click.btntangclick(baskets.get(position)));
-        holder.binding.btndelete.setOnClickListener(view -> click.btnxoaclick(baskets.get(position)));
+        holder.binding.btgiamsp.setOnClickListener(view -> click.btnLuiClick(baskets.get(position)));
+        holder.binding.btntangsp.setOnClickListener(view -> click.btnTangClick(baskets.get(position)));
+        holder.binding.btndelete.setOnClickListener(view -> click.btnXoaClick(baskets.get(position)));
 
     }
 
@@ -81,17 +77,14 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
         public MyViewHolder(@NonNull ItemRcvBasketFragmentBinding binding){
             super(binding.getRoot());
             this.binding=binding;
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            binding.getRoot().setOnClickListener(view -> {
 
-                }
             });
         }
     }
     public interface HandleBasketClick{
-        void btntangclick(Basket basket);
-        void btngiamclick(Basket basket);
-        void btnxoaclick(Basket basket);
+        void btnTangClick(Basket basket);
+        void btnLuiClick(Basket basket);
+        void btnXoaClick(Basket basket);
     }
 }
