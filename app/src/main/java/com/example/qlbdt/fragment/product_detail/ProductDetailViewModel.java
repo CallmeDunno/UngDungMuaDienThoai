@@ -1,10 +1,13 @@
 package com.example.qlbdt.fragment.product_detail;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qlbdt.fragment.basket.Basket;
+import com.example.qlbdt.fragment.basket.BasketDatabase;
 import com.example.qlbdt.fragment.history.History;
 import com.example.qlbdt.fragment.home.HomeProduct;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -17,7 +20,6 @@ import java.util.Objects;
 public class ProductDetailViewModel extends ViewModel {
     private final MutableLiveData<HomeProduct> productHomeMutableLiveData;
     private String documentPath;
-    private String status = "";
     private HomeProduct homeProduct;
 
     public ProductDetailViewModel() {
@@ -87,13 +89,25 @@ public class ProductDetailViewModel extends ViewModel {
         db.collection("Histories")
                 .add(history)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) Log.d("ProductDetail", "Push histories: Done");
-                    else Log.e("ProductDetail", "Push histories fail");
+                    if (task.isSuccessful()){
+                        Log.d("ProductDetail", "Push histories: Done");
+                    } else {
+                        Log.e("ProductDetail", "Push histories fail");
+                    }
                 })
-                .addOnFailureListener(e -> Log.e("ProductDetail", e.getMessage()));
+                .addOnFailureListener(e -> {
+                    Log.e("ProductDetail", e.getMessage());
+                });
     }
 
-    public void addToCart(String userID, HomeProduct homeProduct, int quantity){
-
+    public void addToCart(Context context, String userID, HomeProduct homeProduct, int quantity){
+        Basket basket = new Basket(homeProduct.getId(),
+                userID,
+                homeProduct.getName(),
+                homeProduct.getPrice(),
+                quantity,
+                homeProduct.getImage(),
+                homeProduct.getBrand());
+        BasketDatabase.getInstance(context).basketDao().InsertBasket(basket);
     }
 }

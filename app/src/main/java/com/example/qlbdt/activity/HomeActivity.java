@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
             Log.d("oam", userDatabase.getCurrentUserName());
         }
 
-        //setSupportActionBar(binding.navToolbar);
+        setSupportActionBar(binding.navToolbar);
 
         initView();
         initAction();
