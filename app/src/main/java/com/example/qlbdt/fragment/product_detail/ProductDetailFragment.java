@@ -1,5 +1,7 @@
 package com.example.qlbdt.fragment.product_detail;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -14,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +29,10 @@ import com.example.qlbdt.R;
 import com.example.qlbdt.activity.SplashScreenActivity;
 import com.example.qlbdt.databinding.FragmentProductDetailBinding;
 import com.example.qlbdt.fragment.home.HomeProduct;
+import com.example.qlbdt.other.FCMSend;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.MessageFormat;
 
@@ -40,11 +47,13 @@ public class ProductDetailFragment extends Fragment {
     private ProgressDialog progressDialog;
     private ProductDetailViewModel productDetailViewModel;
     private HomeProduct homeProduct = null;
+    private View view;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
+        view = binding.getRoot();
         return binding.getRoot();
     }
 
@@ -141,9 +150,30 @@ public class ProductDetailFragment extends Fragment {
             int quantity = Integer.parseInt(tv_quantity.getText().toString().trim());
             String status = productDetailViewModel.pushHistory(userID, homeProduct, quantity);
             dialog.dismiss();
+            FCM();
         });
 
         btn_no.setOnClickListener(view -> dialog.dismiss());
         dialog.show();
+    }
+
+    private void FCM(){
+        // getToken
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+                    // Get new FCM registration token
+                    String token = task.getResult();
+                    //Send
+                    String title = "Thông báo";
+                    String message = "Mua hàng thành công";
+                    FCMSend.pushNotification(view.getContext(),token,title,message);
+                }
+            });
     }
 }

@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.navToolbar);
+        //setSupportActionBar(binding.navToolbar);
 
         initView();
         initAction();
