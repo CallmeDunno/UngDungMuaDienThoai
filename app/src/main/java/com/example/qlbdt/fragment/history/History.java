@@ -46,6 +46,12 @@ public class History implements Serializable {
         this.timeToBuy = new DateTime(date, time);
     }
 
+    public History(String price, int quantity){
+        this.price = new Price(price);
+        this.quantity = quantity;
+        this.totalMoney = this.price.toLong() * quantity;
+    }
+
     public String getUserID() {
         return userID;
     }

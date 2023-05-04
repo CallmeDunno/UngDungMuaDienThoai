@@ -4,31 +4,42 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"id","userId"})
-public class Basket {
-    @ColumnInfo @NonNull
-    public String  id;
-    @ColumnInfo @NonNull
-    public String userId;
+import com.example.qlbdt.object.Price;
 
+@Entity(primaryKeys = {"id", "userId"})
+public class Basket {
+    @ColumnInfo
+    @NonNull
+    public String id;
+    @ColumnInfo
+    @NonNull
+    public String userId;
     public String Basketname;
     public long Basketprice;
     public int numberOrder;
     public String Basketimg;
     public String BasketbrandName;
-    public String color;
-    public String orderTime;
 
-    public Basket(@NonNull String id, @NonNull String userId, String basketname, long basketprice, int numberOrder, String basketimg, String basketbrandName, String color, String orderTime) {
+    public String price; //đơn giá
+
+    public Basket(@NonNull String id,
+                  @NonNull String userId,
+                  String basketname,
+                  String basketprice,
+                  int numberOrder,
+                  String basketimg,
+                  String basketbrandName) {
         this.id = id;
         this.userId = userId;
-        Basketname = basketname;
-        Basketprice = basketprice;
+        this.Basketname = basketname;
+
+        this.price = basketprice;
+        Price p = new Price(basketprice);
+        this.Basketprice = p.toLong() * numberOrder;
+
         this.numberOrder = numberOrder;
-        Basketimg = basketimg;
-        BasketbrandName = basketbrandName;
-        this.color = color;
-        this.orderTime = orderTime;
+        this.Basketimg = basketimg;
+        this.BasketbrandName = basketbrandName;
     }
 
     public Basket() {
@@ -92,19 +103,11 @@ public class Basket {
         BasketbrandName = basketbrandName;
     }
 
-    public String getColor() {
-        return color;
+    public String getPrice() {
+        return price;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(String orderTime) {
-        this.orderTime = orderTime;
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

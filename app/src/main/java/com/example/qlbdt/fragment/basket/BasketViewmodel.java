@@ -28,6 +28,7 @@ public class BasketViewmodel extends AndroidViewModel {
         else {
             listofbasket.postValue(null);
         }
+        listofbasket.setValue(basketList);
     }
     public void Insertbasket(Basket basket){
         basketdatabase.basketDao().InsertBasket(basket);

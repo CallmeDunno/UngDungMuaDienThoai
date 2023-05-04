@@ -13,7 +13,6 @@ public class ProductSearch {
     private String color;
     private String cpu;
     private String description;
-    private int quantity;
     private String ram;
     private String releaseTime;
     private String rom;
@@ -24,7 +23,7 @@ public class ProductSearch {
         // Required empty constructor for Firestore serialization
     }
 
-    public ProductSearch(String id, String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
+    public ProductSearch(String id, String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, String ram, String releaseTime, String rom, String type, String weight) {
         this.id = id;
         this.name = name;
         this.price = String.valueOf(new Price(price));
@@ -35,7 +34,6 @@ public class ProductSearch {
         this.color = color;
         this.cpu = cpu;
         this.description = description;
-        this.quantity = quantity;
         this.ram = ram;
         this.releaseTime = releaseTime;
         this.rom = rom;
@@ -128,14 +126,6 @@ public class ProductSearch {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getRam() {
