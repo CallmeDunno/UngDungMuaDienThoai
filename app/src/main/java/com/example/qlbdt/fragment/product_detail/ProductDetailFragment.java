@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,9 @@ import com.bumptech.glide.Glide;
 import com.example.qlbdt.R;
 import com.example.qlbdt.activity.SplashScreenActivity;
 import com.example.qlbdt.databinding.FragmentProductDetailBinding;
+import com.example.qlbdt.fragment.basket.Basket;
+import com.example.qlbdt.fragment.basket.BasketDatabase;
+import com.example.qlbdt.fragment.history.History;
 import com.example.qlbdt.fragment.home.HomeProduct;
 
 import java.text.MessageFormat;
@@ -92,21 +96,17 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void handleButtonAddToCart(View view) {
-        showDialogAddToCart();
+        showDialog("Add");
     }
 
     private void handleButtonBuy(View view) {
-        showDialogBuy();
+        showDialog("Buy");
     }
 
-    private void showDialogAddToCart() {
-
-    }
-
-    private void showDialogBuy() {
+    private void showDialog(String key) {
         Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_buy_pd);
+        dialog.setContentView(R.layout.dialog_pd);
         dialog.setCanceledOnTouchOutside(false);
         Window window = dialog.getWindow();
         if (window == null) {
@@ -120,12 +120,21 @@ public class ProductDetailFragment extends Fragment {
         ImageView img_minus = dialog.findViewById(R.id.img_minus);
         ImageView img_plus = dialog.findViewById(R.id.img_plus);
         TextView tv_quantity = dialog.findViewById(R.id.tv_quantity);
+        TextView tv_message = dialog.findViewById(R.id.tv_message);
+        TextView tv_total_money = dialog.findViewById(R.id.tv_total_money);
+
+        if (key.equals("Buy")) tv_message.setText("Are you sure you will buy it?");
+        else tv_message.setText("Are you sure you will add it to your cart?");
+
+        History history = new History(homeProduct.getPrice(), 1);
+        tv_total_money.setText(String.format("Total money: %d VND", history.getTotalMoney()));
 
         img_minus.setOnClickListener(view -> {
             int quantity = Integer.parseInt(tv_quantity.getText().toString().trim());
-            if (quantity > 1){
+            if (quantity > 1) {
                 quantity--;
                 tv_quantity.setText(MessageFormat.format("{0}", quantity));
+                tv_total_money.setText(String.format("Total money: %d VND", history.getTotalMoney() * quantity));
             }
         });
 
@@ -133,16 +142,30 @@ public class ProductDetailFragment extends Fragment {
             int quantity = Integer.parseInt(tv_quantity.getText().toString().trim());
             quantity++;
             tv_quantity.setText(MessageFormat.format("{0}", quantity));
+            tv_total_money.setText(String.format("Total money: %d VND", history.getTotalMoney() * quantity));
         });
 
         btn_yes.setOnClickListener(view -> {
             String userID = SplashScreenActivity.userDatabase.getString("currentUser", "");
             int quantity = Integer.parseInt(tv_quantity.getText().toString().trim());
-            String status = productDetailViewModel.pushHistory(userID, homeProduct, quantity);
+            if (key.equals("Buy")) {
+                productDetailViewModel.pushHistory(userID, homeProduct, quantity);
+            } else {
+                Basket basket = new Basket(homeProduct.getId(),
+                        userID,
+                        homeProduct.getName(),
+                        homeProduct.getPrice(),
+                        quantity,
+                        homeProduct.getImage(),
+                        homeProduct.getBrand());
+                BasketDatabase.getInstance(requireContext()).basketDao().InsertBasket(basket);
+                Toast.makeText(requireContext(), "Add to your cart successfully!", Toast.LENGTH_SHORT).show();
+            }
             dialog.dismiss();
         });
 
         btn_no.setOnClickListener(view -> dialog.dismiss());
+        
         dialog.show();
     }
 }

@@ -18,7 +18,6 @@ public final class HomeProduct implements Serializable {
     private String color;
     private String cpu;
     private String description;
-    private int quantity;
     private String ram;
     private String releaseTime;
     private String rom;
@@ -28,7 +27,21 @@ public final class HomeProduct implements Serializable {
     public HomeProduct() {
     }
 
-    public HomeProduct(String id, String name, String price, String image, String OS, String battery, String brand, String color, String cpu, String description, int quantity, String ram, String releaseTime, String rom, String type, String weight) {
+    public HomeProduct(String id,
+                       String name,
+                       String price,
+                       String image,
+                       String OS,
+                       String battery,
+                       String brand,
+                       String color,
+                       String cpu,
+                       String description,
+                       String ram,
+                       String releaseTime,
+                       String rom,
+                       String type,
+                       String weight) {
         this.id = id;
         this.name = name;
         this.price = new Price(price);
@@ -39,7 +52,6 @@ public final class HomeProduct implements Serializable {
         this.color = color;
         this.cpu = cpu;
         this.description = description;
-        this.quantity = quantity;
         this.ram = ram;
         this.releaseTime = releaseTime;
         this.rom = rom;
@@ -47,11 +59,16 @@ public final class HomeProduct implements Serializable {
         this.weight = weight;
     }
 
-    public HomeProduct(String name, String price, String imageProduct, String type) {
+    public HomeProduct(String id,
+                       String name,
+                       String price,
+                       String image,
+                       String brand) {
+        this.id = id;
         this.name = name;
         this.price = new Price(price);
-        this.image = imageProduct;
-        this.type = type;
+        this.image = image;
+        this.brand = brand;
     }
 
     public String getName() {
@@ -124,14 +141,6 @@ public final class HomeProduct implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getRam() {
