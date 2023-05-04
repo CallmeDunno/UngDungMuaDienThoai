@@ -3,9 +3,9 @@ package com.example.qlbdt.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -14,17 +14,24 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.database.UserDatabase;
 import com.example.qlbdt.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private NavController navController;
-
+    private UserDatabase userDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        userDatabase = new UserDatabase(this);
+        if(userDatabase.getCurrentUserName() == null) {
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        } else {
+            Log.d("oam", userDatabase.getCurrentUserName());
+        }
 
         //setSupportActionBar(binding.navToolbar);
 
@@ -46,21 +53,16 @@ public class HomeActivity extends AppCompatActivity {
         dialog.setMessage("Are you sure?");
         dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
             SharedPreferences.Editor edit = SplashScreenActivity.userDatabase.edit();
-            edit.remove("username");
+            edit.remove("currentUser");
             edit.apply();
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         });
         dialog.setNegativeButton("No", (dialogInterface, i) -> {});
         dialog.show();
-
     }
 
     private void initView() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(HomeActivity.this, binding.navDrawer, binding.navToolbar, R.string.open_drawer, R.string.close_drawer);
-        binding.navDrawer.addDrawerListener(toggle);
-        toggle.syncState();
-
         //region  new
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         navController = navHostFragment.getNavController();

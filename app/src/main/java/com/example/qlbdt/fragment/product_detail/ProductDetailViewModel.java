@@ -69,8 +69,7 @@ public class ProductDetailViewModel extends ViewModel {
         initData();
     }
 
-    public String pushHistory(String userID, HomeProduct homeProduct, int quantity) {
-
+    public void pushHistory(String userID, HomeProduct homeProduct, int quantity) {
         Calendar now = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String datetimeCurr = simpleDateFormat.format(now.getTime());
@@ -88,10 +87,13 @@ public class ProductDetailViewModel extends ViewModel {
         db.collection("Histories")
                 .add(history)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) status = "Done";
-                    else status = "Fail";
+                    if (task.isSuccessful()) Log.d("ProductDetail", "Push histories: Done");
+                    else Log.e("ProductDetail", "Push histories fail");
                 })
-                .addOnFailureListener(e -> status = e.getMessage());
-        return status;
+                .addOnFailureListener(e -> Log.e("ProductDetail", e.getMessage()));
+    }
+
+    public void addToCart(String userID, HomeProduct homeProduct, int quantity){
+
     }
 }

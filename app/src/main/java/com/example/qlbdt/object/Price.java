@@ -2,7 +2,9 @@ package com.example.qlbdt.object;
 
 import androidx.annotation.NonNull;
 
-public class Price implements Comparable<Price>{
+import java.io.Serializable;
+
+public class Price implements Comparable<Price>, Serializable {
 
     private final int millions;
     private final int thousands;

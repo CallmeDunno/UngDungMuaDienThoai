@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#F8F4F4">
 
         <TextView
             android:id="@+id/tv_brand_history"
@@ -29,6 +30,7 @@
             android:background="@color/black" />
 
         <RelativeLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -119,7 +121,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="6dp">
 
             <Button
                 android:id="@+id/btn_repurchase"
@@ -129,7 +131,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/btn_selector"
                 android:text="@string/Repurchase"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
 
         </RelativeLayout>
 

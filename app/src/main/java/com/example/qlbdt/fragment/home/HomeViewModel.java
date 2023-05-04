@@ -38,14 +38,13 @@ public class HomeViewModel extends ViewModel {
                             String color = doc.toObject(HomeProduct.class).getColor();
                             String cpu = doc.toObject(HomeProduct.class).getCpu();
                             String description = doc.toObject(HomeProduct.class).getDescription();
-                            int quantity = doc.toObject(HomeProduct.class).getQuantity();
                             String ram = doc.toObject(HomeProduct.class).getRam();
                             String releaseTime = doc.toObject(HomeProduct.class).getReleaseTime();
                             String rom = doc.toObject(HomeProduct.class).getRom();
                             String type = doc.toObject(HomeProduct.class).getType();
                             String weight = doc.toObject(HomeProduct.class).getWeight();
 
-                            listHomeProduct.add(new HomeProduct(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
+                            listHomeProduct.add(new HomeProduct(id, name, price, image, os, battery, brand, color, cpu, description, ram, releaseTime, rom, type, weight));
                         }
                         Collections.shuffle(listHomeProduct);
                         listHomeProductLiveData.postValue(listHomeProduct);

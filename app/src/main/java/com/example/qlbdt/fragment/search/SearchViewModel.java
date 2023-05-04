@@ -54,7 +54,7 @@ public class SearchViewModel extends ViewModel {
                         }
                         brandList.addAll(brandSet);
                         Collections.sort(brandList);
-                        brandList.add(0, "Hãng");
+                        brandList.add(0, "Brand");
                         brandListLiveData.setValue(brandList);
                     } else {
                         Log.e("SearchViewModel", "Error fetching brand list", task.getException());
@@ -82,14 +82,13 @@ public class SearchViewModel extends ViewModel {
                                 String color = doc.toObject(HomeProduct.class).getColor();
                                 String cpu = doc.toObject(HomeProduct.class).getCpu();
                                 String description = doc.toObject(HomeProduct.class).getDescription();
-                                int quantity = doc.toObject(HomeProduct.class).getQuantity();
                                 String ram = doc.toObject(HomeProduct.class).getRam();
                                 String releaseTime = doc.toObject(HomeProduct.class).getReleaseTime();
                                 String rom = doc.toObject(HomeProduct.class).getRom();
                                 String type = doc.toObject(HomeProduct.class).getType();
                                 String weight = doc.toObject(HomeProduct.class).getWeight();
 
-                                listProductSearch.add(new ProductSearch(id, name, price, image, os, battery, brand, color, cpu, description, quantity, ram, releaseTime, rom, type, weight));
+                                listProductSearch.add(new ProductSearch(id, name, price, image, os, battery, brand, color, cpu, description, ram, releaseTime, rom, type, weight));
                             }
                             listProductSearchLiveData.postValue(listProductSearch);
                         }
@@ -145,7 +144,6 @@ public class SearchViewModel extends ViewModel {
                 });
     }
 
-
     public void sortProductListByAscendingPrice() {
         List<ProductSearch> sortedList = new ArrayList<>(listProductSearch);
         Collections.sort(sortedList, new Comparator<ProductSearch>() {
@@ -184,11 +182,11 @@ public class SearchViewModel extends ViewModel {
         listProductSearchLiveData.setValue(sortedList);
     }
 
-    public void typelaptop() {
+    public void typeProduct(String type) {
         List<ProductSearch> productList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Laptop")
+                .whereEqualTo("type", type)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -204,12 +202,13 @@ public class SearchViewModel extends ViewModel {
                         Log.e("SearchViewModel", "Error fetching product list by brand", task.getException());
                     }
                 });
+        listProductSearchLiveData.setValue(productList);
     }
-    public void typesmartphone() {
+
+    public void typeProduct() {
         List<ProductSearch> productList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
-                .whereEqualTo("type", "Smartphone")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

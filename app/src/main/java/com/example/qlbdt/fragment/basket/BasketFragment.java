@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +19,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.qlbdt.R;
+import com.example.qlbdt.activity.SplashScreenActivity;
 import com.example.qlbdt.databinding.FragmentBasketBinding;
+import com.example.qlbdt.fragment.home.HomeProduct;
+import com.example.qlbdt.fragment.product_detail.ProductDetailViewModel;
 import com.example.qlbdt.other.Notification;
 
 import java.text.DecimalFormat;
@@ -32,16 +36,14 @@ import java.util.List;
  */
 
 public class BasketFragment extends Fragment implements BasketAdapter.HandleBasketClick {
-    //Hello
     private BasketViewmodel viewmodel;
+    private ProductDetailViewModel productDetailViewModel;
     private BasketAdapter basketAdapter;
-
     private FragmentBasketBinding binding;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentBasketBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
     @Override
@@ -49,14 +51,37 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         super.onViewCreated(view, savedInstanceState);
         initViewModel();
         initRecycleView();
+        initAction();
+
+    }
+
+    private void initAction() {
         binding.btnttgiohang.setOnClickListener(view1 -> {
-
-        });
-        binding.btnttmuahang.setOnClickListener(view12 -> {
-
-
+            showDialog();
         });
     }
+
+    private void showDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(requireContext());
+        dialog.setTitle("Notification");
+        dialog.setMessage("Are you sure?");
+        dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+            String userID = SplashScreenActivity.userDatabase.getString("currentUser", "");
+            List<Basket> baskets = BasketDatabase.getInstance(requireContext()).basketDao().findBasketWithEmail(userID);
+            for (Basket b : baskets){
+                HomeProduct homeProduct = new HomeProduct(b.getId(), b.getBasketname(), b.getPrice(), b.getBasketimg(), b.getBasketbrandName());
+                productDetailViewModel.pushHistory(userID, homeProduct, b.getNumberOrder());
+                viewmodel.Deletebasket(b);
+            }
+            Toast.makeText(requireContext(), "Buy successfully", Toast.LENGTH_SHORT).show();
+        });
+        dialog.setNegativeButton("No", (dialogInterface, i) -> {
+
+        });
+        dialog.show();
+    }
+
+
     @SuppressLint("SetTextI18n")
     private void initRecycleView() {
         binding.listviewgiohang.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -64,14 +89,10 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         binding.listviewgiohang.setAdapter(basketAdapter);
         List<Basket> baskets= BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
         if(baskets.size() == 0){
-            binding.thongbaogiohang.setVisibility(View.VISIBLE);
-            binding.listviewgiohang.setVisibility(View.INVISIBLE);
             binding.txttongtien.setText("O VND");
         }
         else{
-            basketAdapter.setBasketlist(baskets);
-            binding.thongbaogiohang.setVisibility(View.INVISIBLE);
-            binding.listviewgiohang.setVisibility(View.VISIBLE);
+            basketAdapter.setBasketlist(baskets);;
             EvenUltil(baskets);
         }
 
@@ -79,22 +100,17 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
 
     @SuppressLint("SetTextI18n")
     private void initViewModel() {
+        productDetailViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
+
         viewmodel = new ViewModelProvider(this).get(BasketViewmodel.class);
-        //  viewmodel.Insertbasket(new Basket(4,"Kiski",2000,"1.png",2));
         viewmodel.getListofbasketobserver().observe(getViewLifecycleOwner(), baskets -> {
 
             if (baskets==null) {
-                binding.thongbaogiohang.setVisibility(View.VISIBLE);
-                binding.listviewgiohang.setVisibility(View.INVISIBLE);
                 binding.txttongtien.setText("O VND");
             } else {
                 basketAdapter.setBasketlist(baskets);
-                binding.thongbaogiohang.setVisibility(View.INVISIBLE);
-                binding.listviewgiohang.setVisibility(View.VISIBLE);
                 EvenUltil(baskets);
-
             }
-
 
         });
     }
@@ -190,14 +206,10 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         super.onResume();
         List<Basket> baskets= BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
         if(baskets.size() == 0){
-            binding.thongbaogiohang.setVisibility(View.VISIBLE);
-            binding.listviewgiohang.setVisibility(View.INVISIBLE);
             binding.txttongtien.setText("O VND");
         }
         else{
             basketAdapter.setBasketlist(baskets);
-            binding.thongbaogiohang.setVisibility(View.INVISIBLE);
-            binding.listviewgiohang.setVisibility(View.VISIBLE);
             EvenUltil(baskets);
         }
 

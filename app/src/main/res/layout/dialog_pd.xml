@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
     android:background="@drawable/bg_white_border_gray_corner_16">
@@ -78,12 +78,26 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tv_total_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure?"
+        android:text=""
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:gravity="center" />
+
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textSize="20sp"
         android:gravity="center" />
 
