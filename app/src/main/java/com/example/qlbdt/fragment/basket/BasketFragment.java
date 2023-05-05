@@ -24,7 +24,7 @@ import com.example.qlbdt.other.FCM;
 import java.text.DecimalFormat;
 import java.util.List;
 public class BasketFragment extends Fragment implements BasketAdapter.HandleBasketClick {
-    private basketViewModel viewModel;
+    private BasketViewModel viewModel;
     private ProductDetailViewModel productDetailViewModel;
     private BasketAdapter basketAdapter;
     private FragmentBasketBinding binding;
@@ -98,7 +98,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     private void initViewModel() {
         productDetailViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
 
-        viewModel = new ViewModelProvider(this).get(basketViewModel.class);
+        viewModel = new ViewModelProvider(this).get(BasketViewModel.class);
         viewModel.getListBasketObserver().observe(getViewLifecycleOwner(), baskets -> {
 
             if (baskets == null) {

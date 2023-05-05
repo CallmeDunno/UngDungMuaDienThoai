@@ -9,11 +9,11 @@ import com.example.qlbdt.activity.SplashScreenActivity;
 
 import java.util.List;
 
-public class basketViewModel extends AndroidViewModel {
+public class BasketViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Basket>> listBasket;
     private final BasketDatabase basketdatabase;
 
-    public basketViewModel(Application application){
+    public BasketViewModel(Application application){
         super(application);
         listBasket =new MutableLiveData<>();
         basketdatabase=BasketDatabase.getInstance(getApplication().getApplicationContext());
