@@ -35,12 +35,12 @@ public class BasketViewModel extends AndroidViewModel {
     }
 
     public void UpdateBasket(Basket basket) {
-        basketdatabase.basketDao().UpdateBasket(basket);
+        basketdatabase.basketDao().updateBasket(basket);
         getAllBasket();
     }
 
     public void DeleteBasket(Basket basket) {
-        basketdatabase.basketDao().DeleteBasket(basket);
+        basketdatabase.basketDao().deleteBasket(basket);
         getAllBasket();
     }
 }

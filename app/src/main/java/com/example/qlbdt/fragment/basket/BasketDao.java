@@ -15,13 +15,13 @@ public interface BasketDao {
     List<Basket> getAllBasket();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void InsertBasket(Basket basket);
+    void insertBasket(Basket basket);
 
     @Update
-    void UpdateBasket(Basket basket);
+    void updateBasket(Basket basket);
 
     @Delete
-    void DeleteBasket(Basket basket);
+    void deleteBasket(Basket basket);
 
     @Query("SELECT * FROM Basket WHERE userId LIKE :email ")
     List<Basket> findBasketWithEmail(String email);

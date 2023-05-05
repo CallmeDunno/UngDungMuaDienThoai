@@ -108,6 +108,6 @@ public class ProductDetailViewModel extends ViewModel {
                 quantity,
                 homeProduct.getImage(),
                 homeProduct.getBrand());
-        BasketDatabase.getInstance(context).basketDao().InsertBasket(basket);
+        BasketDatabase.getInstance(context).basketDao().insertBasket(basket);
     }
 }
