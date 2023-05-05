@@ -3,9 +3,11 @@ package com.example.qlbdt.fragment.login;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,16 +41,22 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogInFragment extends Fragment {
-    FragmentLogInBinding binding;
-    LoginViewModel loginViewModel;
-    FirebaseAuth mAuth;
-    ProgressDialog progressDialog;
-    ArrayList<String> userNames = new ArrayList<>();
-    UserDatabase userDatabase;
+    private FragmentLogInBinding binding;
+    private LoginViewModel loginViewModel;
+    private FirebaseAuth mAuth;
+    private ProgressDialog progressDialog;
+    private ArrayList<String> userNames = new ArrayList<>();
+    private UserDatabase userDatabase;
+    private FirebaseFirestore firestore;
     private GoogleSignInClient client;
 
     @Override
@@ -57,10 +65,12 @@ public class LogInFragment extends Fragment {
         binding = FragmentLogInBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(getActivity());
         userDatabase = new UserDatabase(getContext());
         userNames = userDatabase.getUserNamesList();
@@ -100,6 +110,7 @@ public class LogInFragment extends Fragment {
         fragmentTransaction.replace(R.id.frame_layout_login, fragment);
         fragmentTransaction.commit();
     }
+
     private void initData() {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
     }
@@ -109,7 +120,7 @@ public class LogInFragment extends Fragment {
         String email = binding.edtEmail.getText().toString().trim();
         String password = binding.edtPassword.getText().toString().trim();
 
-        if(isValidated(email, password)) {
+        if (isValidated(email, password)) {
             progressDialog.show();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -133,61 +144,30 @@ public class LogInFragment extends Fragment {
     }
 
     private boolean isValidated(String email, String password) {
-        if(TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(email)) {
             binding.edtEmail.setError("Email is empty");
             return false;
         }
-        if(TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(password)) {
             binding.edtPassword.setError("Password is empty");
             return false;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.edtEmail.setError("Email is invalid");
             return false;
         }
-        if(password.length() < 6) {
+        if (password.length() < 6) {
             binding.edtPassword.setError("Password is invalid");
             return false;
         }
         return true;
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 123) {
-//            if (resultCode == RESULT_OK) {
-//                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//                try {
-//                    GoogleSignInAccount account = task.getResult(ApiException.class);
-//                    AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-//                    mAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                        @Override
-//                        public void onSuccess(AuthResult authResult) {
-//                            if (task.isSuccessful()) {
-//                                startActivity(new Intent(requireContext(), HomeActivity.class));
-//                                Toast.makeText(getContext(), "successfully", Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//
-//                } catch (ApiException e) {
-//                    Log.d("oam", e.getMessage());
-//                }
-//            } else {
-//
-//            }
-//        }
-//    }
-
-
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-        if(result.getResultCode() == RESULT_OK) {
+        if (result.getResultCode() == RESULT_OK) {
             Intent data = result.getData();
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
+            try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 auth(account.getIdToken());
                 progressDialog.dismiss();
@@ -198,19 +178,15 @@ public class LogInFragment extends Fragment {
             Toast.makeText(getActivity(), "failed", Toast.LENGTH_SHORT).show();
         }
     });
+
     private void auth(String token) {
         initData();
         AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
-                    if(task.isSuccessful()) {
-                        loginViewModel.setGoogleUser(getContext(), task.getResult().getUser().getEmail(),
-                                task.getResult().getUser().getPhoneNumber());
-                        Toast.makeText(getContext(), "successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getActivity(), HomeActivity.class));
-                        getActivity().finish();
-                    }
-                    else {
+                    if (task.isSuccessful()) {
+                        setGoogleUser(task.getResult().getUser().getEmail(), task.getResult().getUser().getPhoneNumber());
+                    } else {
                         Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -218,8 +194,46 @@ public class LogInFragment extends Fragment {
 
 
     private void loginByGoogle() {
-            progressDialog.show();
-            Intent i = client.getSignInIntent();
-            activityResultLauncher.launch(i);
+        progressDialog.show();
+        Intent i = client.getSignInIntent();
+        activityResultLauncher.launch(i);
+    }
+
+    public void setGoogleUser(String Useremail, String Userphonenumber) {
+        firestore.collection("Users")
+                .whereEqualTo("email", Useremail)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        int k = 0;
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            k++;
+                        }
+                        if (k == 0) {
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("email", Useremail);
+                            user.put("phoneNumber", Userphonenumber);
+                            user.put("dateOfBirth", "");
+                            user.put("address", "");
+                            firestore.collection("Users")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(getContext(), "successfully", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getActivity(), HomeActivity.class));
+                                            getActivity().finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), "fail", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                        userDatabase.saveCurrentUserName(Useremail);
+                    }
+                });
     }
 }
