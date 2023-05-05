@@ -3,7 +3,7 @@ package com.example.qlbdt.object;
 public class Photo {
     private int resourceId;
 
-    public Photo(int resourceId){
+    public Photo(int resourceId) {
         this.resourceId = resourceId;
     }
 

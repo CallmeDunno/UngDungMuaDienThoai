@@ -29,14 +29,14 @@ public class Price implements Comparable<Price>, Serializable {
     @NonNull
     @Override
     public String toString() {
-        if (thousands < 100) return millions+".0"+thousands+"."+inits+"00";
-        return millions+"."+thousands+"."+inits+"00";
+        if (thousands < 100) return millions + ".0" + thousands + "." + inits + "00";
+        return millions + "." + thousands + "." + inits + "00";
     }
 
-    public Long toLong(){
+    public Long toLong() {
         String price = "";
-        if (thousands < 100)    price = millions+"0"+thousands+""+inits+"00";
-        else                    price = millions+""+thousands+""+inits+"00";
+        if (thousands < 100) price = millions + "0" + thousands + "" + inits + "00";
+        else price = millions + "" + thousands + "" + inits + "00";
         return Long.parseLong(price);
     }
 }

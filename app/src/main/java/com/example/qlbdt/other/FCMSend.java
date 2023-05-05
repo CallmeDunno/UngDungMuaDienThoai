@@ -20,39 +20,40 @@ import java.util.Map;
 public class FCMSend {
     private static String BASE_URL = "https://fcm.googleapis.com/fcm/send";
     public static String SERVER_KEY = "AAAAQG75FiQ:APA91bEKG7v81Aq_RPGZcjPyDItLM5oZBcWeUzwh7-FnmttyZ43Cyo__hwGfLq6OVx-V4NFHErgNtQadmif2y4lJyPTH9AHe8GyLXZmM3lqebaGCrZGG9yi27gLi-dzvuBw7nMTrVWX5";
-    public static void pushNotification(Context context, String token, String title, String message){
+
+    public static void pushNotification(Context context, String token, String title, String message) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         RequestQueue queue = Volley.newRequestQueue(context);
-        try{
+        try {
             JSONObject json = new JSONObject();
-            json.put("to",token);
+            json.put("to", token);
             JSONObject notification = new JSONObject();
-            notification.put("title",title);
-            notification.put("body",message);
-            json.put("notification",notification);
+            notification.put("title", title);
+            notification.put("body", message);
+            json.put("notification", notification);
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL, json, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    System.out.println("FCM:"+response);
+                    System.out.println("FCM:" + response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("ErroFCM:" + error);
                 }
-            }){
+            }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String,String> params = new HashMap();
-                    params.put("Content-Type","application/json");
-                    params.put("Authorization","key="+SERVER_KEY);
+                    Map<String, String> params = new HashMap();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "key=" + SERVER_KEY);
                     return params;
                 }
             };
             queue.add(jsonObjectRequest);
-        }catch(JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

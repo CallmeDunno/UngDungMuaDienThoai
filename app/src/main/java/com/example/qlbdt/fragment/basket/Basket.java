@@ -19,7 +19,6 @@ public class Basket {
     public int numberOrder;
     public String basketImg;
     public String brandName;
-
     public String price; //đơn giá
 
     public Basket(@NonNull String id,

@@ -15,7 +15,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listviewgiohang"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
@@ -34,7 +34,7 @@
             android:layout_weight="5"
             android:gravity="center"
             android:text="@string/total"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/black"
             android:textSize="24sp"
             tools:ignore="NestedWeights" />
 
@@ -47,7 +47,7 @@
             android:layout_weight="5"
             android:gravity="center"
             android:text="@string/_0_vnd"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/black"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -55,14 +55,18 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
         android:layout_margin="8dp"
+        android:layout_weight="0.5"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btnttgiohang"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_selector"
             android:text="@string/basket_checkout"
             tools:ignore="VisualLintButtonSize,TouchTargetSizeCheck" />
 

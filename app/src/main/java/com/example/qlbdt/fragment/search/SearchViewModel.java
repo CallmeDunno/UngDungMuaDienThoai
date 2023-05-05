@@ -70,7 +70,7 @@ public class SearchViewModel extends ViewModel {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot doc : task.getResult()) {
                                 String id = doc.getId();
                                 String name = doc.toObject(HomeProduct.class).getName();

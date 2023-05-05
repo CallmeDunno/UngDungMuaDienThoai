@@ -9,7 +9,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HistoryViewModel extends ViewModel {
     private MutableLiveData<List<History>> lstHistoryLiveData;
     private List<History> lstHistory;
@@ -27,7 +26,7 @@ public class HistoryViewModel extends ViewModel {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()){
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             History history = document.toObject(History.class);
                             lstHistory.add(history);
                         }

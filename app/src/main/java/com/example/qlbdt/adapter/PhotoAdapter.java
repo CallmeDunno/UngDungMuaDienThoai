@@ -16,35 +16,31 @@ import com.example.qlbdt.object.Photo;
 import java.util.List;
 
 public class PhotoAdapter extends PagerAdapter {
-
-    private HomeFragment mContext;
-    private List<Photo> mListPhoto;
+    private final HomeFragment mContext;
+    private final List<Photo> mListPhoto;
 
     public PhotoAdapter(HomeFragment mContext, List<Photo> mListPhoto) {
         this.mContext = mContext;
         this.mListPhoto = mListPhoto;
     }
 
-
-
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_photo_tuan, container, false);
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_photo, container, false);
         ImageView imgPhoto = view.findViewById(R.id.tuan_img_photo);
 
-        Photo photo = mListPhoto.get(position); // Khai báo
-        if (photo != null){                     // Nếu photo != null thì sẽ set ảnh cho ImageView
-            Glide.with(mContext).load(photo.getResourceId()).into(imgPhoto);    // Sử dụng Glide để load ảnh lên ImageView
+        Photo photo = mListPhoto.get(position);
+        if (photo != null) {
+            Glide.with(mContext).load(photo.getResourceId()).into(imgPhoto);
         }
-        // Add view to viewgroup
         container.addView(view);
         return view;
     }
 
     @Override
     public int getCount() {
-        if (mListPhoto != null){
+        if (mListPhoto != null) {
             return mListPhoto.size();
         }
         return 0;
@@ -57,7 +53,6 @@ public class PhotoAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        // Remove View
         container.removeView((View) object);
     }
 }

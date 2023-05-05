@@ -46,29 +46,29 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:padding="8dp"
                 android:text="@string/TitleHomeFragment"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:padding="8dp"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_margin="8dp"
-                android:background="@drawable/bg_white_corner_16">
+                android:background="@drawable/bg_white_corner_16"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
                     android:text="@string/Smartphone"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textStyle="bold" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -94,20 +94,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_margin="8dp"
-                android:background="@drawable/bg_white_corner_16">
+                android:background="@drawable/bg_white_corner_16"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
                     android:text="@string/Laptop"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_pc"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ứng dụng mua điện thoại</string>
+    <string name="app_name">Technology Product Order Application</string>
 
     <string name="open_drawer">Open Navigation Drawer </string>
     <string name="close_drawer">Close Navigation Drawer</string>
@@ -33,6 +33,14 @@
     <string name="TotalMoney">Total money</string>
     <string name="TimeToBuy">Time to Buy</string>
     <string name="Repurchase">Repurchase</string>
+
+    <string name="Email">Email</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="DayOfBirth">Day of birth</string>
+    <string name="Address">Address</string>
+    <string name="Edit">Edit</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Save">Save</string>
 
     <string name="the_basket_is_empty">The Basket is Empty</string>
     <string name="total">Total:</string>

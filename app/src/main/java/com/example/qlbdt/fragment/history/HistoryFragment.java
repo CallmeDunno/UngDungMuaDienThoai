@@ -19,21 +19,11 @@ import com.example.qlbdt.databinding.FragmentHistoryBinding;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Sơn
- * MVVM + Firebase
- * Thiết kế giao diện
- *
- * - Làm lại cái class object History
- * - Giao diện sửa lại
- * - Sử dụng View Binding
- * */
-
 public class HistoryFragment extends Fragment {
-
     private HistoryAdapter historyAdapter;
     private HistoryViewModel historyViewModel;
     private FragmentHistoryBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,7 +57,7 @@ public class HistoryFragment extends Fragment {
         historyViewModel.getLstHistoryLiveData().observe(requireActivity(), new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
-                if (histories.size() != 0){
+                if (histories.size() != 0) {
                     Collections.sort(histories, new History.SortByDateTime());
                     historyAdapter.submitList(histories);
                 }

@@ -161,7 +161,7 @@ public class ProductDetailFragment extends Fragment {
         });
 
         btn_no.setOnClickListener(view -> dialog.dismiss());
-        
+
         dialog.show();
     }
 

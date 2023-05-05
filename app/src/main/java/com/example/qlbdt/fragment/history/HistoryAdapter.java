@@ -27,14 +27,13 @@ public class HistoryAdapter extends ListAdapter<History, HistoryAdapter.HistoryV
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        if (getItem(position) == null){
+        if (getItem(position) == null) {
             return;
         }
-        Log.d("Dunno", "onBindViewHolder: " + position);
         holder.bindData(getItem(position), iClickButtonHistory);
     }
 
-    public void setClickButtonHistory(IClickButtonHistory iClickButtonHistory){
+    public void setClickButtonHistory(IClickButtonHistory iClickButtonHistory) {
         this.iClickButtonHistory = iClickButtonHistory;
     }
 
@@ -46,7 +45,7 @@ public class HistoryAdapter extends ListAdapter<History, HistoryAdapter.HistoryV
             this.itemBinding = itemBinding;
         }
 
-        public void bindData(History history, IClickButtonHistory iClickButtonHistory){
+        public void bindData(History history, IClickButtonHistory iClickButtonHistory) {
             Glide.with(itemView.getContext()).load(history.getImage()).into(itemBinding.imgHistory);
             itemBinding.tvBrandHistory.setText(history.getBrand());
             itemBinding.tvNameHistory.setText(history.getName());

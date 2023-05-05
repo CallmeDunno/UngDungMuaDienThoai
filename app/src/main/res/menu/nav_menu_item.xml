@@ -1,67 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
-
         <item
             android:id="@+id/homeFragment"
             android:icon="@drawable/ic_home"
             android:title="@string/Home" />
-
         <item
             android:id="@+id/searchFragment"
             android:icon="@drawable/ic_search"
             android:title="@string/Search" />
-
     </group>
 
     <item android:title="@string/MyInformation">
-
         <menu>
-
             <group android:checkableBehavior="single">
-
                 <item
                     android:id="@+id/accountFragment"
                     android:icon="@drawable/ic_person"
                     android:title="@string/Account" />
-
                 <item
                     android:id="@+id/basketFragment"
                     android:icon="@drawable/ic_shopping_basket"
                     android:title="@string/Cart" />
-
                 <item
                     android:id="@+id/historyFragment"
                     android:icon="@drawable/ic_history"
                     android:title="@string/History" />
-
             </group>
-
         </menu>
-
     </item>
 
     <item android:title="@string/Contact">
-
         <menu>
-
             <group android:checkableBehavior="single">
-
                 <item
                     android:id="@+id/supportFragment"
                     android:icon="@drawable/ic_support"
                     android:title="@string/Support" />
-
                 <item
                     android:id="@+id/logout"
-                    android:title="Log out"
-                    android:icon="@drawable/ic_exit_to_app" />
-
+                    android:icon="@drawable/ic_exit_to_app"
+                    android:title="Log out" />
             </group>
-
         </menu>
-
     </item>
-
 </menu>

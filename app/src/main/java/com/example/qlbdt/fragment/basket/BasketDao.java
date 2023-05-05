@@ -13,12 +13,16 @@ import java.util.List;
 public interface BasketDao {
     @Query("Select * from Basket")
     List<Basket> getAllBasket();
-    @Insert(onConflict = OnConflictStrategy.REPLACE)//Insert gio hang
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void InsertBasket(Basket basket);
+
     @Update
     void UpdateBasket(Basket basket);
+
     @Delete
     void DeleteBasket(Basket basket);
+
     @Query("SELECT * FROM Basket WHERE userId LIKE :email ")
     List<Basket> findBasketWithEmail(String email);
 
