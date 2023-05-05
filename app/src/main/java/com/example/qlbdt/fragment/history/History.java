@@ -130,7 +130,7 @@ public class History implements Serializable {
     public static class SortByDateTime implements Comparator<History> {
         @Override
         public int compare(History h1, History h2) {
-            return h1.timeToBuy.compareTo(h2.timeToBuy);
+            return h1.timeToBuy.toString().compareTo(h2.timeToBuy.toString());
         }
     }
 

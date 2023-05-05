@@ -11,15 +11,15 @@ import java.util.List;
 
 @Dao
 public interface BasketDao {
-    @Query("Select * from Basket")
-    List<Basket> getAllBasket();
-    @Insert(onConflict = OnConflictStrategy.REPLACE)//Insert gio hang
+    @Query("Select * from Basket WHERE userId LIKE :email")
+    List<Basket> getAllBasket(String email);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void InsertBasket(Basket basket);
     @Update
     void UpdateBasket(Basket basket);
     @Delete
     void DeleteBasket(Basket basket);
-    @Query("SELECT * FROM Basket WHERE userId LIKE :email ")
+    @Query("SELECT * FROM Basket WHERE userId LIKE :email")
     List<Basket> findBasketWithEmail(String email);
 
 }

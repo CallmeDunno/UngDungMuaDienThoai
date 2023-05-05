@@ -35,6 +35,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     private ProductDetailViewModel productDetailViewModel;
     private BasketAdapter basketAdapter;
     private FragmentBasketBinding binding;
+    private final String currentUser = SplashScreenActivity.userDatabase.getString("currentUser", "");
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -47,9 +48,8 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViewModel();
-        initRecycleView();
+        initRecycleView(currentUser);
         initAction();
-
     }
 
     private void initAction() {
@@ -81,7 +81,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
 
 
     @SuppressLint("SetTextI18n")
-    private void initRecycleView() {
+    private void initRecycleView(String currentUser) {
         binding.listviewgiohang.setLayoutManager(new LinearLayoutManager(getActivity()));
         basketAdapter = new BasketAdapter(getContext(), this, new IClickItemBasket() {
             @Override
@@ -90,12 +90,11 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
             }
         });
         binding.listviewgiohang.setAdapter(basketAdapter);
-        List<Basket> baskets = BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
+        List<Basket> baskets = BasketDatabase.getInstance(getActivity()).basketDao().findBasketWithEmail(currentUser);
         if (baskets.size() == 0) {
             binding.txttongtien.setText("O VND");
         } else {
             basketAdapter.setBasketlist(baskets);
-            ;
             EvenUltil(baskets);
         }
 
@@ -191,7 +190,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     @Override
     public void onResume() {
         super.onResume();
-        List<Basket> baskets = BasketDatabase.getInstance(getActivity()).basketDao().getAllBasket();
+        List<Basket> baskets = BasketDatabase.getInstance(getActivity()).basketDao().findBasketWithEmail(currentUser);
         if (baskets.size() == 0) {
             binding.txttongtien.setText("O VND");
         } else {

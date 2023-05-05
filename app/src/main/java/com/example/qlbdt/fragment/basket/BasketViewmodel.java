@@ -5,6 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.qlbdt.activity.SplashScreenActivity;
+
 import java.util.List;
 
 public class BasketViewmodel extends AndroidViewModel {
@@ -21,7 +23,8 @@ public class BasketViewmodel extends AndroidViewModel {
         return listofbasket;
     }
     public void Getallbasket(){
-        List<Basket> basketList= basketdatabase.basketDao().getAllBasket();
+        String user = SplashScreenActivity.userDatabase.getString("currentUser", "");
+        List<Basket> basketList= basketdatabase.basketDao().findBasketWithEmail(user);
         if(basketList.size()>0){
             listofbasket.postValue(basketList);
         }

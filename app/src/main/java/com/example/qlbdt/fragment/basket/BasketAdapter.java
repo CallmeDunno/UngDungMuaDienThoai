@@ -42,12 +42,8 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
     @Override
     public void onBindViewHolder(@NonNull BasketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(this.baskets.get(position).getBasketimg()).into(holder.binding.imagegiohang);
-        holder.binding.imagegiohang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                iClickItemBasket.onClickItemBasket(baskets.get(position).getId());
-            }
-        });
+        holder.binding.imagegiohang.setOnClickListener(view -> iClickItemBasket.onClickItemBasket(baskets.get(position).getId()));
+        holder.binding.tvBrandCart.setText(baskets.get(position).getBasketbrandName());
         holder.binding.tenspgh.setText(this.baskets.get(position).getBasketname());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.binding.giagh.setText(decimalFormat.format(this.baskets.get(position).getBasketprice()) + "Đ");

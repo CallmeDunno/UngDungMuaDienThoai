@@ -28,8 +28,15 @@ public class HistoryViewModel extends ViewModel {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()){
-                            History history = document.toObject(History.class);
-                            lstHistory.add(history);
+                            String uID = document.toObject(History.class).getUserID();
+                            String pID = document.toObject(History.class).getProductID();
+                            String price = document.toObject(History.class).getPrice();
+                            String image = document.toObject(History.class).getImage();
+                            String name = document.toObject(History.class).getName();
+                            String brand = document.toObject(History.class).getBrand();
+                            int quantity = document.toObject(History.class).getQuantity();
+                            String timeToBuy = document.toObject(History.class).getTimeToBuy();
+                            lstHistory.add(new History(uID, pID, price, image, name, brand, quantity, timeToBuy));
                         }
                         lstHistoryLiveData.postValue(lstHistory);
                     }
