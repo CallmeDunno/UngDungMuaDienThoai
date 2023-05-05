@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9">
+        android:layout_weight="8.5">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listviewgiohang"
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:text="@string/total"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             tools:ignore="NestedWeights" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:text="@string/_0_vnd"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:layout_weight="0.5"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <Button
