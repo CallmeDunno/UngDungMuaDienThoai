@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {Basket.class},version = 1)
 public abstract class BasketDatabase extends RoomDatabase {
-    private static final String DATABASE_NAME="newBasketdatabase";
+    private static final String DATABASE_NAME="newBasket-database";
     private volatile static BasketDatabase instance;
     public static synchronized BasketDatabase getInstance(Context context)
     {

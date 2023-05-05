@@ -14,32 +14,32 @@ public class Basket {
     @ColumnInfo
     @NonNull
     public String userId;
-    public String Basketname;
-    public long Basketprice;
+    public String basketName;
+    public long basketPrice;
     public int numberOrder;
-    public String Basketimg;
-    public String BasketbrandName;
+    public String basketImg;
+    public String brandName;
 
     public String price; //đơn giá
 
     public Basket(@NonNull String id,
                   @NonNull String userId,
-                  String basketname,
-                  String basketprice,
+                  String basketName,
+                  String basketPrice,
                   int numberOrder,
-                  String basketimg,
-                  String basketbrandName) {
+                  String basketImg,
+                  String brandName) {
         this.id = id;
         this.userId = userId;
-        this.Basketname = basketname;
+        this.basketName = basketName;
 
-        this.price = basketprice;
-        Price p = new Price(basketprice);
-        this.Basketprice = p.toLong() * numberOrder;
+        this.price = basketPrice;
+        Price p = new Price(basketPrice);
+        this.basketPrice = p.toLong() * numberOrder;
 
         this.numberOrder = numberOrder;
-        this.Basketimg = basketimg;
-        this.BasketbrandName = basketbrandName;
+        this.basketImg = basketImg;
+        this.brandName = brandName;
     }
 
     public Basket() {
@@ -54,29 +54,16 @@ public class Basket {
         this.id = id;
     }
 
-    @NonNull
-    public String getUserId() {
-        return userId;
+    public String getBasketName() {
+        return basketName;
     }
 
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
+    public long getBasketPrice() {
+        return basketPrice;
     }
 
-    public String getBasketname() {
-        return Basketname;
-    }
-
-    public void setBasketname(String basketname) {
-        Basketname = basketname;
-    }
-
-    public long getBasketprice() {
-        return Basketprice;
-    }
-
-    public void setBasketprice(long basketprice) {
-        Basketprice = basketprice;
+    public void setBasketPrice(long basketPrice) {
+        this.basketPrice = basketPrice;
     }
 
     public int getNumberOrder() {
@@ -87,20 +74,12 @@ public class Basket {
         this.numberOrder = numberOrder;
     }
 
-    public String getBasketimg() {
-        return Basketimg;
+    public String getBasketImg() {
+        return basketImg;
     }
 
-    public void setBasketimg(String basketimg) {
-        Basketimg = basketimg;
-    }
-
-    public String getBasketbrandName() {
-        return BasketbrandName;
-    }
-
-    public void setBasketbrandName(String basketbrandName) {
-        BasketbrandName = basketbrandName;
+    public String getBrandName() {
+        return brandName;
     }
 
     public String getPrice() {
