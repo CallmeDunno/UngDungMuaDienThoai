@@ -67,7 +67,6 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/textviewname"
-                android:textColor="@android:color/holo_red_dark"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/tenspgh"
                 app:layout_constraintStart_toStartOf="@+id/tenspgh"

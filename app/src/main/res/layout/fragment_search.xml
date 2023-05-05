@@ -36,25 +36,25 @@
             <Spinner
                 android:id="@+id/sp_sort_fragment_search"
                 android:layout_width="0dp"
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
 
             <Spinner
                 android:id="@+id/sp_brand_fragment_search"
                 android:layout_width="0dp"
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
 
             <Spinner
                 android:id="@+id/sp_type_fragment_search"
                 android:layout_width="0dp"
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
 
         </LinearLayout>
 

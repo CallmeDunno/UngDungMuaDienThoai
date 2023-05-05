@@ -12,7 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class FCM {
-    public static void FCM(Context context){
+    public static void FCM(Context context) {
         // getToken
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -27,7 +27,7 @@ public class FCM {
                         //Send
                         String title = "Notification";
                         String message = "You was bought te product successfully!";
-                        FCMSend.pushNotification(context,token,title,message);
+                        FCMSend.pushNotification(context, token, title, message);
                     }
                 });
     }

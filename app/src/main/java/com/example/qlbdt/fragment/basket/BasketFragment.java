@@ -23,6 +23,7 @@ import com.example.qlbdt.other.FCM;
 
 import java.text.DecimalFormat;
 import java.util.List;
+
 public class BasketFragment extends Fragment implements BasketAdapter.HandleBasketClick {
     private BasketViewModel viewModel;
     private ProductDetailViewModel productDetailViewModel;
@@ -43,7 +44,6 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
         initViewModel();
         initRecycleView(currentUser);
         initAction();
-
     }
 
     private void initAction() {
@@ -117,7 +117,7 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
             total += baskets.get(i).getBasketPrice();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        binding.txttongtien.setText(String.format("%sVND", decimalFormat.format(total)));
+        binding.txttongtien.setText(String.format("%s VND", decimalFormat.format(total)));
     }
 
     @Override
@@ -162,7 +162,6 @@ public class BasketFragment extends Fragment implements BasketAdapter.HandleBask
     }
 
     @Override
-
     public void btnXoaClick(Basket basket) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Delete Basket");

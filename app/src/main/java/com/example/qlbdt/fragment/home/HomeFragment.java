@@ -25,10 +25,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Dungx
- */
-
 public class HomeFragment extends Fragment {
     private List<Photo> mListPhoto;
     private Timer mTimer;
@@ -142,7 +138,6 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // Khởi tạo timer
         if (mTimer == null) {
             mTimer = new Timer();
         }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,16 +33,13 @@ public class SearchFragment extends Fragment {
     private ProductSearchAdapter productSearchAdapter;
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
-    private Spinner sp_sort, sp_brand;
     private ArrayList<String> sort, brand, type;
     private ArrayAdapter adapterSort, adapterBrand, adaptertype;
-    private SearchView sv_search;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 

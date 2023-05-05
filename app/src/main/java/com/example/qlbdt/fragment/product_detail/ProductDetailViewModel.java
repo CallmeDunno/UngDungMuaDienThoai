@@ -89,7 +89,7 @@ public class ProductDetailViewModel extends ViewModel {
         db.collection("Histories")
                 .add(history)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Log.d("ProductDetail", "Push histories: Done");
                     } else {
                         Log.e("ProductDetail", "Push histories fail");
@@ -100,7 +100,7 @@ public class ProductDetailViewModel extends ViewModel {
                 });
     }
 
-    public void addToCart(Context context, String userID, HomeProduct homeProduct, int quantity){
+    public void addToCart(Context context, String userID, HomeProduct homeProduct, int quantity) {
         Basket basket = new Basket(homeProduct.getId(),
                 userID,
                 homeProduct.getName(),

@@ -1,11 +1,12 @@
 package com.example.qlbdt.activity;
 
-
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.qlbdt.R;
 import com.example.qlbdt.fragment.login.LogInFragment;
 
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         replaceFragment(new LogInFragment());
     }
+
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

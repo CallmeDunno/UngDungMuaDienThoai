@@ -3,7 +3,6 @@ package com.example.qlbdt.database;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.qlbdt.fragment.login.User;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
@@ -41,7 +40,8 @@ public class UserDatabase {
 
     public ArrayList<String> getUserNamesList() {
         String userString = userDatabase.getString("username", null);
-        Type userListType = new TypeToken<ArrayList<String>>(){}.getType();
+        Type userListType = new TypeToken<ArrayList<String>>() {
+        }.getType();
         ArrayList<String> userList = gson.fromJson(userString, userListType);
 
         if (userList != null) return userList;

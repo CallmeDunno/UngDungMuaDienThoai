@@ -15,22 +15,24 @@ import com.example.qlbdt.databinding.ItemRcvBasketFragmentBinding;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>{
+public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHolder> {
     private final Context context;
     private List<Basket> baskets;
     private final HandleBasketClick click;
     private final IClickItemBasket iClickItemBasket;
 
-    public BasketAdapter(Context context, HandleBasketClick click, IClickItemBasket iClickItemBasket){
-        this.context=context;
-        this.click=click;
+    public BasketAdapter(Context context, HandleBasketClick click, IClickItemBasket iClickItemBasket) {
+        this.context = context;
+        this.click = click;
         this.iClickItemBasket = iClickItemBasket;
     }
+
     @SuppressLint("NotifyDataSetChanged")
-    public void setBasketList(List<Basket> baskets){
-        this.baskets=baskets;
+    public void setBasketList(List<Basket> baskets) {
+        this.baskets = baskets;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,12 +51,12 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
         holder.binding.giagh.setText(decimalFormat.format(this.baskets.get(position).getBasketPrice()) + "Đ");
         holder.binding.btnvalue.setText(String.valueOf(this.baskets.get(position).getNumberOrder()));
         int sl = Integer.parseInt(holder.binding.btnvalue.getText().toString());
-        if(sl >= 10){
+        if (sl >= 10) {
             holder.binding.btntangsp.setVisibility(View.INVISIBLE);
             holder.binding.btgiamsp.setVisibility(View.VISIBLE);
-        }else if(sl <=1){
+        } else if (sl <= 1) {
             holder.binding.btgiamsp.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
             holder.binding.btntangsp.setVisibility(View.VISIBLE);
             holder.binding.btgiamsp.setVisibility(View.VISIBLE);
         }
@@ -66,25 +68,29 @@ public class BasketAdapter  extends RecyclerView.Adapter<BasketAdapter.MyViewHol
 
     @Override
     public int getItemCount() {
-        if(baskets ==null || baskets.size()==0)
+        if (baskets == null || baskets.size() == 0)
             return 0;
         else
             return baskets.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         private final ItemRcvBasketFragmentBinding binding;
-        public MyViewHolder(@NonNull ItemRcvBasketFragmentBinding binding){
+
+        public MyViewHolder(@NonNull ItemRcvBasketFragmentBinding binding) {
             super(binding.getRoot());
-            this.binding=binding;
+            this.binding = binding;
             binding.getRoot().setOnClickListener(view -> {
 
             });
         }
     }
-    public interface HandleBasketClick{
+
+    public interface HandleBasketClick {
         void btnTangClick(Basket basket);
+
         void btnLuiClick(Basket basket);
+
         void btnXoaClick(Basket basket);
     }
 }

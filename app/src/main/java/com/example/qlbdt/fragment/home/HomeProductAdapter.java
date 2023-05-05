@@ -12,6 +12,7 @@ import com.example.qlbdt.databinding.ItemRcvHomeBinding;
 
 public class HomeProductAdapter extends ListAdapter<HomeProduct, HomeProductAdapter.HomeProductViewHolder> {
     private IClickHomeProduct iClickHomeProduct;
+
     public HomeProductAdapter() {
         super(HomeProduct.HOME_PRODUCT_DIFF_UTIL);
     }
@@ -38,6 +39,7 @@ public class HomeProductAdapter extends ListAdapter<HomeProduct, HomeProductAdap
     public static class HomeProductViewHolder extends RecyclerView.ViewHolder {
         private final ItemRcvHomeBinding itemBinding;
         private HomeProduct homeProduct = null;
+
         public HomeProductViewHolder(@NonNull ItemRcvHomeBinding itemBinding,
                                      final IClickHomeProduct iClickHomeProduct) {
             super(itemBinding.getRoot());

@@ -21,15 +21,18 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private NavController navController;
     private UserDatabase userDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         userDatabase = new UserDatabase(this);
-        if(userDatabase.getCurrentUserName() == null) {
+        if (userDatabase.getCurrentUserName() == null) {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         } else {
+            String currentUser = SplashScreenActivity.userDatabase.getString("currentUser", null);
+            Toast.makeText(HomeActivity.this, "Welcome, " + currentUser, Toast.LENGTH_SHORT).show();
             Log.d("oam", userDatabase.getCurrentUserName());
         }
 
@@ -41,7 +44,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initAction() {
         binding.navView.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(menuItem -> {
-            Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
             showExitDialog();
             return false;
         });
@@ -58,7 +60,8 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         });
-        dialog.setNegativeButton("No", (dialogInterface, i) -> {});
+        dialog.setNegativeButton("No", (dialogInterface, i) -> {
+        });
         dialog.show();
     }
 
