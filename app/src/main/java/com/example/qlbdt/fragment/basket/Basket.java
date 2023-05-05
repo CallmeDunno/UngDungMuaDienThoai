@@ -10,16 +10,16 @@ import com.example.qlbdt.object.Price;
 public class Basket {
     @ColumnInfo
     @NonNull
-    public String id;
+    private String id;
     @ColumnInfo
     @NonNull
-    public String userId;
-    public String basketName;
-    public long basketPrice;
-    public int numberOrder;
-    public String basketImg;
-    public String brandName;
-    public String price; //đơn giá
+    private String userId;
+    private String basketName;
+    private long basketPrice;
+    private int numberOrder;
+    private String basketImg;
+    private String brandName;
+    private String price; //đơn giá
 
     public Basket(@NonNull String id,
                   @NonNull String userId,
@@ -87,5 +87,26 @@ public class Basket {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    @NonNull
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(@NonNull String userId) {
+        this.userId = userId;
+    }
+
+    public void setBasketName(String basketName) {
+        this.basketName = basketName;
+    }
+
+    public void setBasketImg(String basketImg) {
+        this.basketImg = basketImg;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 }
