@@ -205,25 +205,6 @@ public class SearchViewModel extends ViewModel {
         listProductSearchLiveData.setValue(productList);
     }
 
-    public void typeProduct() {
-        List<ProductSearch> productList = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Products")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot doc : task.getResult()) {
-                            String id = doc.getId();
-                            String name = doc.toObject(ProductSearch.class).getName();
-                            String price = doc.toObject(ProductSearch.class).getPrice();
-                            String image = doc.toObject(ProductSearch.class).getImage();
-                            productList.add(new ProductSearch(id, name, price, image));
-                        }
-                        listProductSearchLiveData.postValue(productList);
-                    } else {
-                        Log.e("SearchViewModel", "Error fetching product list by brand", task.getException());
-                    }
-                });
-    }
+
 
 }

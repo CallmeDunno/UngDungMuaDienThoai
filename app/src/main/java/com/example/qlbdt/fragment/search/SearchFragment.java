@@ -90,7 +90,7 @@ public class SearchFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        searchViewModel.typeProduct();
+                        searchViewModel.fetchAllProducts();
                         break;
                     case 1:
                         searchViewModel.typeProduct(TypeProduct.Laptop.name());
@@ -140,14 +140,11 @@ public class SearchFragment extends Fragment {
     private void initUI() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         binding.rcvSearch.setLayoutManager(linearLayoutManager);
-        productSearchAdapter = new ProductSearchAdapter(getContext(), new IRecyclerViewOnClick() {
-            @Override
-            public void onClickItem(ProductSearch productSearch) {
-                SearchFragmentDirections.ActionSearchFragmentToProductDetailFragment action =
-                        SearchFragmentDirections.actionSearchFragmentToProductDetailFragment();
-                action.setDocumentPath(productSearch.getId());
-                Navigation.findNavController(requireView()).navigate(action);
-            }
+        productSearchAdapter = new ProductSearchAdapter(getContext(), productSearch -> {
+            SearchFragmentDirections.ActionSearchFragmentToProductDetailFragment action =
+                    SearchFragmentDirections.actionSearchFragmentToProductDetailFragment();
+            action.setDocumentPath(productSearch.getId());
+            Navigation.findNavController(requireView()).navigate(action);
         });
 
         binding.rcvSearch.setAdapter(productSearchAdapter);
@@ -181,20 +178,15 @@ public class SearchFragment extends Fragment {
     }
 
     private void searchProducts(String keyword) {
-        //Nếu muốn search all
-        //searchViewModel.fetchAllProducts();
-        searchViewModel.getListProductSearchLiveData().observe(getViewLifecycleOwner(), new Observer<List<ProductSearch>>() {
-            @Override
-            public void onChanged(List<ProductSearch> productList) {
-                List<ProductSearch> filteredList = new ArrayList<>();
-                for (ProductSearch product : productList) {
-                    if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                        filteredList.add(product);
-                    }
+        searchViewModel.getListProductSearchLiveData().observe(getViewLifecycleOwner(), productList -> {
+            List<ProductSearch> filteredList = new ArrayList<>();
+            for (ProductSearch product : productList) {
+                if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                    filteredList.add(product);
                 }
-
-                productSearchAdapter.setData(filteredList);
             }
+
+            productSearchAdapter.setData(filteredList);
         });
     }
 
