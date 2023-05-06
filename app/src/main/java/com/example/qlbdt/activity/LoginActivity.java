@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.qlbdt.R;
-import com.example.qlbdt.fragment.login.LogInFragment;
+import com.example.qlbdt.fragment.login.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        replaceFragment(new LogInFragment());
+        replaceFragment(new LoginFragment());
     }
 
     private void replaceFragment(Fragment fragment) {

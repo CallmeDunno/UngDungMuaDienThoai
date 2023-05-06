@@ -9,7 +9,6 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,20 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qlbdt.R;
 import com.example.qlbdt.activity.HomeActivity;
 import com.example.qlbdt.databinding.FragmentSignUpBinding;
-import com.example.qlbdt.fragment.login.LogInFragment;
+import com.example.qlbdt.fragment.login.LoginFragment;
 import com.example.qlbdt.fragment.login.LoginViewModel;
-import com.example.qlbdt.fragment.login.User;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -49,7 +42,6 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentSignUpBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -60,32 +52,14 @@ public class SignUpFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(getActivity());
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                replaceFragment(new LogInFragment());
-            }
-        });
+        binding.btnBack.setOnClickListener(view13 -> replaceFragment(new LoginFragment()));
 
-        binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signup();
-            }
-        });
+        binding.btnSignUp.setOnClickListener(view12 -> signup());
 
-        binding.txtDOB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                c = Calendar.getInstance();
-                DatePickerDialog bdDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        binding.txtDOB.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
-                    }
-                }, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
-                bdDialog.show();
-            }
+        binding.txtDOB.setOnClickListener(view1 -> {
+            c = Calendar.getInstance();
+            DatePickerDialog bdDialog = new DatePickerDialog(requireContext(), (view11, year, month, dayOfMonth) -> binding.txtDOB.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year)), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
+            bdDialog.show();
         });
     }
 
@@ -117,31 +91,20 @@ public class SignUpFragment extends Fragment {
                 user.put("dateOfBirth", dob);
                 user.put("address", address);
                 mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                firestore.collection("Users")
-                                        .add(user)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                progressDialog.dismiss();
-                                                Toast.makeText(getActivity(), "Signup successfully", Toast.LENGTH_SHORT).show();
-                                                loginViewModel.setSignUpUser(getContext(), email, password);
-                                                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                                startActivity(intent);
-                                                getActivity().finish();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                progressDialog.dismiss();
-                                                Toast.makeText(getActivity(), "Signup failed", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        });
+                        .addOnSuccessListener(authResult -> firestore.collection("Users")
+                                .add(user)
+                                .addOnSuccessListener(documentReference -> {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getActivity(), "Signup successfully", Toast.LENGTH_SHORT).show();
+                                    loginViewModel.setSignUpUser(getContext(), email, password);
+                                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                })
+                                .addOnFailureListener(e -> {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getActivity(), "Signup failed", Toast.LENGTH_SHORT).show();
+                                }));
             } else {
                 binding.edtRepassword.setError("invalid");
             }
@@ -159,7 +122,7 @@ public class SignUpFragment extends Fragment {
             return false;
         }
         if (TextUtils.isEmpty(phonenumber)) {
-            binding.edtPhonenumber.setError("Phonenumber is empty");
+            binding.edtPhonenumber.setError("PhoneNumber is empty");
             return false;
         }
         if (TextUtils.isEmpty(address)) {

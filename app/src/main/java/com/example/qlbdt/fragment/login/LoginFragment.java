@@ -3,11 +3,9 @@ package com.example.qlbdt.fragment.login;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LogInFragment extends Fragment {
+public class LoginFragment extends Fragment {
     private FragmentLogInBinding binding;
     private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth;

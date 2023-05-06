@@ -3,7 +3,6 @@ package com.example.qlbdt.fragment.account;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,10 @@ import com.bumptech.glide.Glide;
 import com.example.qlbdt.database.UserDatabase;
 import com.example.qlbdt.databinding.FragmentAccountBinding;
 import com.example.qlbdt.fragment.login.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,54 +56,42 @@ public class AccountFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         fbUser = mAuth.getCurrentUser();
         firestore = FirebaseFirestore.getInstance();
-        userDatabase = new UserDatabase(getContext());
+        userDatabase = new UserDatabase(requireContext());
         progressDialog = new ProgressDialog(getContext());
         setEditable(false);
         binding.txtEmail.setEnabled(false);
         initData();
 
-        binding.txtDOB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                c = Calendar.getInstance();
-                DatePickerDialog bdDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        binding.txtDOB.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
-                    }
-                }, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
-                bdDialog.show();
-            }
+        binding.txtDOB.setOnClickListener(view1 -> {
+            c = Calendar.getInstance();
+            DatePickerDialog bdDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view1, int year, int month, int dayOfMonth) {
+                    binding.txtDOB.setText(String.format("%d/%d/%d", dayOfMonth, month, year));
+                }
+            }, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
+            bdDialog.show();
         });
-        binding.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setEditable(true);
-                binding.btnEdit.setVisibility(View.INVISIBLE);
-                binding.llButton.setVisibility(View.VISIBLE);
-            }
+        binding.btnEdit.setOnClickListener(view12 -> {
+            setEditable(true);
+            binding.btnEdit.setVisibility(View.INVISIBLE);
+            binding.llButton.setVisibility(View.VISIBLE);
         });
-        binding.btnHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.llButton.setVisibility(View.INVISIBLE);
-                binding.btnEdit.setVisibility(View.VISIBLE);
-                setEditable(false);
-                initView(users.get(0));
-            }
+        binding.btnHuy.setOnClickListener(view13 -> {
+            binding.llButton.setVisibility(View.INVISIBLE);
+            binding.btnEdit.setVisibility(View.VISIBLE);
+            setEditable(false);
+            initView(users.get(0));
         });
-        binding.btnLuu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String useremail = binding.txtEmail.getText().toString().trim();
-                String userphonenumber = binding.txtSDT.getText().toString().trim();
-                String userdob = binding.txtDOB.getText().toString().trim();
-                String useraddress = binding.txtAddress.getText().toString().trim();
-                updateUser(useremail, userphonenumber, userdob, useraddress);
-                binding.llButton.setVisibility(View.INVISIBLE);
-                binding.btnEdit.setVisibility(View.VISIBLE);
-                setEditable(false);
-            }
+        binding.btnLuu.setOnClickListener(view14 -> {
+            String useremail = binding.txtEmail.getText().toString().trim();
+            String userphonenumber = binding.txtSDT.getText().toString().trim();
+            String userdob = binding.txtDOB.getText().toString().trim();
+            String useraddress = binding.txtAddress.getText().toString().trim();
+            updateUser(useremail, userphonenumber, userdob, useraddress);
+            binding.llButton.setVisibility(View.INVISIBLE);
+            binding.btnEdit.setVisibility(View.VISIBLE);
+            setEditable(false);
         });
     }
 
@@ -117,26 +101,23 @@ public class AccountFragment extends Fragment {
         firestore.collection("Users")
                 .whereEqualTo("email", userDatabase.getCurrentUserName())
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot doc : task.getResult()) {
-                                String email = doc.toObject(User.class).getEmail();
-                                String phonenumber = doc.toObject(User.class).getPhoneNumber();
-                                String dob = doc.toObject(User.class).getDateOfBirth();
-                                String address = doc.toObject(User.class).getAddress();
-                                users.add(new User(email, phonenumber, dob, address));
-                                id = doc.getId();
-                            }
-                            if (fbUser.getPhotoUrl() != null) {
-                                Glide.with(getContext()).load(fbUser.getPhotoUrl()).into(binding.avatarQA);
-                            }
-                            initView(users.get(0));
-                            progressDialog.dismiss();
-                        } else {
-                            Toast.makeText(getContext(), "fail", Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String email = doc.toObject(User.class).getEmail();
+                            String phonenumber = doc.toObject(User.class).getPhoneNumber();
+                            String dob = doc.toObject(User.class).getDateOfBirth();
+                            String address = doc.toObject(User.class).getAddress();
+                            users.add(new User(email, phonenumber, dob, address));
+                            id = doc.getId();
                         }
+                        if (fbUser.getPhotoUrl() != null) {
+                            Glide.with(requireContext()).load(fbUser.getPhotoUrl()).into(binding.avatarQA);
+                        }
+                        initView(users.get(0));
+                        progressDialog.dismiss();
+                    } else {
+                        Toast.makeText(getContext(), "fail", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

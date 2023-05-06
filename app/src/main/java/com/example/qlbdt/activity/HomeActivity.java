@@ -27,6 +27,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        handleLogin();
+
+        setSupportActionBar(binding.navToolbar);
+
+        initView();
+        initAction();
+    }
+
+    private void handleLogin() {
         userDatabase = new UserDatabase(this);
         if (userDatabase.getCurrentUserName() == null) {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
@@ -35,11 +45,6 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(HomeActivity.this, "Welcome, " + currentUser, Toast.LENGTH_SHORT).show();
             Log.d("oam", userDatabase.getCurrentUserName());
         }
-
-        setSupportActionBar(binding.navToolbar);
-
-        initView();
-        initAction();
     }
 
     private void initAction() {
