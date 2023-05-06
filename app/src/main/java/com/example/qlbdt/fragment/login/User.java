@@ -4,45 +4,19 @@ import android.util.Patterns;
 
 public class User {
     private String email;
-    private String phonenumber;
-    private String DateOfBirth;
+    private String phoneNumber;
+    private String dateOfBirth;
     private String address;
     private String password;
 
     public User() {
     }
 
-    public User(String email, String password) {
+    public User(String email, String phoneNumber, String dateOfBirth, String address) {
         this.email = email;
-        this.password = password;
-    }
-
-    public User(String email) {
-        this.email = email;
-    }
-
-    public User(String email, String phonenumber, String dateOfBirth, String address, String password) {
-        this.email = email;
-        this.phonenumber = phonenumber;
-        DateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.password = password;
-    }
-
-
-    public User(String email, String phonenumber, String dateOfBirth, String address) {
-        this.email = email;
-        this.phonenumber = phonenumber;
-        this.DateOfBirth = dateOfBirth;
-        this.address = address;
-    }
-
-    public String getDateOfBirth() {
-        return DateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        DateOfBirth = dateOfBirth;
     }
 
     public String getEmail() {
@@ -53,20 +27,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
@@ -77,21 +51,20 @@ public class User {
         this.address = address;
     }
 
-    public boolean isEmailValid() {
-        return Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches();
+    public String getPassword() {
+        return password;
     }
 
-
-    public boolean isPasswordLengthGreaterThan5() {
-        return getPassword().length() > 6;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", phonenumber='" + phonenumber + '\'' +
-                ", DateOfBirth='" + DateOfBirth + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

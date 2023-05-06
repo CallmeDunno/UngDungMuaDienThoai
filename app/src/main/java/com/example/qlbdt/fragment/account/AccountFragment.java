@@ -37,15 +37,15 @@ import java.util.Map;
  */
 
 public class AccountFragment extends Fragment {
-    FragmentAccountBinding binding;
-    List<User> users = new ArrayList<>();
-    ProgressDialog progressDialog;
-    UserDatabase userDatabase;
-    FirebaseAuth mAuth;
-    FirebaseUser fbUser;
-    FirebaseFirestore firestore;
-    Calendar c;
-    String id;
+    private FragmentAccountBinding binding;
+    private List<User> users = new ArrayList<>();
+    private ProgressDialog progressDialog;
+    private UserDatabase userDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser fbUser;
+    private FirebaseFirestore firestore;
+    private Calendar c;
+    private String id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -123,21 +123,19 @@ public class AccountFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot doc : task.getResult()) {
                                 String email = doc.toObject(User.class).getEmail();
-                                String phonenumber = doc.toObject(User.class).getPhonenumber();
+                                String phonenumber = doc.toObject(User.class).getPhoneNumber();
                                 String dob = doc.toObject(User.class).getDateOfBirth();
                                 String address = doc.toObject(User.class).getAddress();
                                 users.add(new User(email, phonenumber, dob, address));
                                 id = doc.getId();
-                                Log.d("oam", doc.getId());
                             }
-                            Log.d("oam", String.valueOf(users.isEmpty()));
                             if (fbUser.getPhotoUrl() != null) {
                                 Glide.with(getContext()).load(fbUser.getPhotoUrl()).into(binding.avatarQA);
                             }
                             initView(users.get(0));
                             progressDialog.dismiss();
                         } else {
-                            Log.d("oam-failed", "null");
+                            Toast.makeText(getContext(), "fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -146,17 +144,17 @@ public class AccountFragment extends Fragment {
     private void updateUser(String Useremail, String Userphonenumber, String Userdob, String Useraddress) {
         Map<String, Object> user = new HashMap<>();
         user.put("email", Useremail);
-        user.put("phonenumber", Userphonenumber);
-        user.put("DateOfBirth", Userdob);
+        user.put("phoneNumber", Userphonenumber);
+        user.put("dateOfBirth", Userdob);
         user.put("address", Useraddress);
         firestore.collection("Users")
                 .document(id)
                 .update(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Update successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Update fail", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -171,7 +169,7 @@ public class AccountFragment extends Fragment {
         binding.txtEmail.setText(currentuser.getEmail());
         binding.txtDOB.setText(currentuser.getDateOfBirth());
         binding.txtAddress.setText(currentuser.getAddress());
-        binding.txtSDT.setText(currentuser.getPhonenumber());
+        binding.txtSDT.setText(currentuser.getPhoneNumber());
     }
 
 }
