@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
-        android:name="com.example.qlbdt.fragment.SupportFragment"
+        android:name="com.example.qlbdt.fragment.support.SupportFragment"
         android:label="@string/Support"
         tools:layout="@layout/fragment_support" />
     <fragment

@@ -42,6 +42,8 @@
     <string name="Cancel">Cancel</string>
     <string name="Save">Save</string>
 
+    <string name="TitleSupport">If you have problems while using this application, please contact us immediately for timely support!</string>
+
     <string name="the_basket_is_empty">The Basket is Empty</string>
     <string name="total">Total:</string>
     <string name="_0_vnd">0 VND</string>
