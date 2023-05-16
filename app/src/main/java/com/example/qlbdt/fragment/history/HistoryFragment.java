@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +16,6 @@ import com.example.qlbdt.activity.SplashScreenActivity;
 import com.example.qlbdt.databinding.FragmentHistoryBinding;
 
 import java.util.Collections;
-import java.util.List;
 
 public class HistoryFragment extends Fragment {
     private HistoryAdapter historyAdapter;
@@ -25,7 +23,7 @@ public class HistoryFragment extends Fragment {
     private FragmentHistoryBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -53,14 +51,10 @@ public class HistoryFragment extends Fragment {
     private void initViewModel() {
         historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
         String userID = SplashScreenActivity.userDatabase.getString("currentUser", "");
-        historyViewModel.setUserID(userID);
-        historyViewModel.getLstHistoryLiveData().observe(requireActivity(), new Observer<List<History>>() {
-            @Override
-            public void onChanged(List<History> histories) {
-                if (histories.size() != 0) {
-                    Collections.sort(histories, new History.SortByDateTime());
-                    historyAdapter.submitList(histories);
-                }
+        historyViewModel.getListHistory(userID).observe(requireActivity(), histories -> {
+            if (histories.size() != 0) {
+                Collections.sort(histories, new History.SortByDateTime());
+                historyAdapter.submitList(histories);
             }
         });
     }

@@ -61,9 +61,8 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void initData(Bundle arguments) {
-        initViewModel();
         String path = ProductDetailFragmentArgs.fromBundle(arguments).getDocumentPath();
-        productDetailViewModel.setDocumentPath(path);
+        initViewModel(path);
     }
 
     private void initAction() {
@@ -71,9 +70,9 @@ public class ProductDetailFragment extends Fragment {
         binding.btnAddCartProductDetail.setOnClickListener(this::handleButtonAddToCart);
     }
 
-    private void initViewModel() {
+    private void initViewModel(String documentPath) {
         productDetailViewModel = new ViewModelProvider((ViewModelStoreOwner) requireContext()).get(ProductDetailViewModel.class);
-        productDetailViewModel.getProductHomeMutableLiveData().observe(getViewLifecycleOwner(), homeProduct -> {
+        productDetailViewModel.getProductHomeMutableLiveData(documentPath).observe(getViewLifecycleOwner(), homeProduct -> {
             if (homeProduct.getId() != null) {
                 this.homeProduct = homeProduct;
                 Glide.with(requireContext()).load(homeProduct.getImage()).into(binding.imgProductDetail);

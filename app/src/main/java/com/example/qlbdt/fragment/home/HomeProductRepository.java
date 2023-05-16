@@ -1,7 +1,6 @@
 package com.example.qlbdt.fragment.home;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -10,17 +9,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class HomeViewModel extends ViewModel {
+public class HomeProductRepository {
+
     private final MutableLiveData<List<HomeProduct>> listHomeProductLiveData;
     private List<HomeProduct> listHomeProduct;
 
-    public HomeViewModel() {
+    public HomeProductRepository() {
         listHomeProductLiveData = new MutableLiveData<>();
-
-        initData();
     }
 
-    public void initData() {
+    public MutableLiveData<List<HomeProduct>> getListHomeProductLiveData() {
+        setListHomeProductLiveData();
+        return listHomeProductLiveData;
+    }
+
+    private void setListHomeProductLiveData(){
         listHomeProduct = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Products")
@@ -53,7 +56,4 @@ public class HomeViewModel extends ViewModel {
         listHomeProductLiveData.setValue(listHomeProduct);
     }
 
-    public MutableLiveData<List<HomeProduct>> getListHomeProductLiveData() {
-        return listHomeProductLiveData;
-    }
 }

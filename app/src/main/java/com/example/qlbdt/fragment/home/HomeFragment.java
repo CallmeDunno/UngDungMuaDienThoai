@@ -48,8 +48,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViewModel() {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getListHomeProductLiveData().observe(requireActivity(), productHomes -> {
+        HomeProductViewModel homeProductViewModel = new ViewModelProvider(this).get(HomeProductViewModel.class);
+        homeProductViewModel.getListHomeProductLiveData().observe(requireActivity(), productHomes -> {
             if (productHomes.size() == 0) {
                 progressDialog.show();
             } else {
